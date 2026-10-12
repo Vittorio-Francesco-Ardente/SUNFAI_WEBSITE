@@ -192,43 +192,6 @@ export function LeCerPage({ locale }: { locale: Locale }) {
         </div>
       </SectionPanel>
 
-      {/* Riferimenti normativi + "Lo sapevi?" (the page's one mascot) */}
-      <SectionPanel data-section="norme" tone="paper" preset="soft" family="leaf" mirror inner={false}>
-        <div className="container-x relative z-[2] py-[clamp(48px,6vw,88px)] grid gap-5 lg:grid-cols-12">
-          <div className="reveal card flex gap-4 p-6 sm:p-8 lg:col-span-6">
-            <Scale className="size-7 shrink-0 text-orange-text" aria-hidden />
-            <div>
-              <p className="font-display text-[1.15rem] font-extrabold tracking-[-0.02em] text-ink">{p.norme.title}</p>
-              <p className="t-body mt-2 !text-[16px]">{p.norme.text}</p>
-            </div>
-          </div>
-          <div className="reveal flex items-end gap-4 lg:col-span-6">
-            <Mascot pose="04-idea-pointing" alt={d.common.ui.mascotAlt} className="shrink-0" />
-            <div className="speech speech--tail-left mb-10">
-              <p className="text-[13px] font-semibold uppercase tracking-[0.1em] text-leaf-text">{p.tip.eyebrow}</p>
-              <p className="mt-1">{p.tip.text}</p>
-            </div>
-          </div>
-        </div>
-      </SectionPanel>
-
-      {/* FAQ */}
-      <SectionPanel data-section="faq" tone="mint" preset="corner" family="leaf" id="faq" inner={false}>
-        <div className="container-x relative z-[2] py-[clamp(48px,6vw,88px)] grid gap-10 lg:grid-cols-12">
-          <div className="reveal lg:col-span-4">
-            <Eyebrow>{p.faq.eyebrow}</Eyebrow>
-            <Headline text={p.faq.title} size="h2s" className="mt-5" />
-            <p className="t-body mt-4">{p.faq.text}</p>
-            <ButtonLink href="/contatti/" locale={locale} variant="outline" className="mt-6 max-sm:w-full">
-              {p.faq.cta}
-            </ButtonLink>
-          </div>
-          <div className="reveal lg:col-span-8">
-            <Faq items={p.faq.items} />
-          </div>
-        </div>
-      </SectionPanel>
-
       <CtaBand title={p.ctaBand.title}>
         <ButtonLink href="/#verifica" locale={locale} size="lg">
           {p.ctaBand.cta}

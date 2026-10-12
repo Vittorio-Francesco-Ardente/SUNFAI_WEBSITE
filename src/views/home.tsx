@@ -77,6 +77,7 @@ export function HomePage({ locale }: { locale: Locale }) {
         tone="mint"
         data-section="map"
         id="configurazioni"
+        className="scroll-mt-20"
         phoneUnit={1.4}
         bg={
           <>
@@ -103,20 +104,6 @@ export function HomePage({ locale }: { locale: Locale }) {
         </div>
       </CanvasPanel>
 
-      {/* Homepage: one short discovery junction instead of repeating Team, Riconoscimenti and Press.
-          The complete galleries and articles belong to their corresponding thematic pages. */}
-      <CanvasPanel tone="paper" data-section="scopri" bg={<Ripple at={{ x: 1, y: 0 }} family="leaf" core={0.03} widths={[0.03, 0.03]} bands={2} />}>
-        <div className={`container-x relative z-[2] ${PAD}`}>
-          <Eyebrow upper tone="leaf">SUN-FAI da vicino</Eyebrow>
-          <Headline text="Le persone, i passi avanti, la nostra storia" size="h2s" className="mt-5 max-w-[18ch]" />
-          <p className="t-lead mt-5 max-w-[52rem]">Scopri chi rende possibile la nostra comunità e ripercorri gli obiettivi raggiunti insieme.</p>
-          <div className="mt-7 flex flex-wrap gap-3">
-            <ButtonLink href="/team/" locale={locale} variant="dark">Scopri il team</ButtonLink>
-            <ButtonLink href="/riconoscimenti/" locale={locale} variant="outline">La nostra storia</ButtonLink>
-          </div>
-        </div>
-      </CanvasPanel>
-
       {/* 12 · Dalla comunità (social) — mint, leaf fan bottom-right */}
       <CanvasPanel
         tone="mint"
@@ -139,33 +126,6 @@ export function HomePage({ locale }: { locale: Locale }) {
           <SocialFeed t={h.social} ui={d.common.ui} locale={locale} />
           <div className="mt-7 flex justify-center">
             <TextLink href="/notizie/" locale={locale}>{h.social.all}</TextLink>
-          </div>
-        </div>
-      </CanvasPanel>
-
-      {/* 14 · I prossimi eventi — paper, sun fan bottom-left, the Memphis scene */}
-      <CanvasPanel
-        tone="paper"
-        data-section="eventi"
-        id="eventi"
-        phoneUnit={1.3}
-        bg={
-          <>
-            <Ripple at={{ x: 0, y: 1 }} family="sun" core={0.04} widths={[0.09, 0.08, 0.07, 0.07]} fan={{ count: 6, from: 2, to: 88 }} />
-            <Ripple at={{ x: 1, y: 0 }} family="peach" core={0.022} widths={[0.05, 0.05]} bands={2} />
-          </>
-        }
-      >
-        <div className={`container-x relative z-[2] grid items-center gap-8 md:grid-cols-2 ${PAD}`}>
-          <Img src="/scenes/scene-10-workshop-energia-solare.webp" alt={h.events.sceneAlt} sizes="(max-width: 767px) 90vw, 40vw" className="aspect-[4/3] h-auto w-full rounded-[28px] bg-white object-contain p-4" />
-          <div>
-            <Eyebrow upper>{h.events.eyebrow}</Eyebrow>
-            <Headline text={h.events.title} size="h2s" className="mt-5" />
-            <p className="mt-5 flex items-center gap-3 font-display text-[1.2rem] font-bold tracking-[-0.02em] text-ink">
-              <CalendarDays className="size-6 text-orange-text" aria-hidden />
-              {h.events.empty}
-            </p>
-            <p className="t-body mt-3">{h.events.follow}</p>
           </div>
         </div>
       </CanvasPanel>

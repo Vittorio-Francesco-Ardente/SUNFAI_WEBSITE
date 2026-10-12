@@ -34,6 +34,7 @@ export function MemberVisual({
   usePose = false,
   backdrop,
   priority,
+  eager = false,
   framing = "card",
   photoComing,
 }: {
@@ -42,6 +43,7 @@ export function MemberVisual({
   usePose?: boolean;
   backdrop?: Backdrop;
   priority?: boolean;
+  eager?: boolean;
   framing?: "card" | "feature" | "avatar";
   photoComing: string;
 }) {
@@ -60,6 +62,7 @@ export function MemberVisual({
               alt={photoComing === "" ? "" : `${m.name}`}
               sizes={sizes}
               priority={priority}
+              eager={eager}
               className="absolute bottom-0 left-1/2 h-full w-auto max-w-none -translate-x-1/2 select-none object-contain object-bottom"
               draggable={false}
             />

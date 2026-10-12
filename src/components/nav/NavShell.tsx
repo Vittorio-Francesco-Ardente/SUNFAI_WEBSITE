@@ -131,6 +131,15 @@ export function NavShell({ t, locale }: { t: NavLabels; locale: Locale }) {
       return;
     }
     setDockReading(false);
+    if (window.location.hash) {
+      const targetId = decodeURIComponent(window.location.hash.slice(1));
+      window.requestAnimationFrame(() => {
+        window.requestAnimationFrame(() => {
+          document.getElementById(targetId)?.scrollIntoView({ behavior: "auto", block: "start" });
+        });
+      });
+      return;
+    }
     window.scrollTo({ top: 0, left: 0, behavior: "auto" });
     document.getElementById("contenuto")?.focus?.({ preventScroll: true });
   }, [pathname]);

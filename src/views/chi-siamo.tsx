@@ -87,12 +87,10 @@ export function ChiSiamoPage({ locale }: { locale: Locale }) {
               <Marked text={p.sito.text} />
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-              <ButtonLink href={documentUrl("statuto")} variant="outline" icon="external">
-                <FileText aria-hidden className="mr-[-.2em]" />
+              <ButtonLink href={documentUrl("statuto")} variant="outline" icon={false}>
                 {p.sito.statuto + inIt}
               </ButtonLink>
-              <ButtonLink href={documentUrl("regolamento")} variant="outline" icon="external">
-                <FileText aria-hidden className="mr-[-.2em]" />
+              <ButtonLink href={documentUrl("regolamento")} variant="outline" icon={false}>
                 {p.sito.regolamento + inIt}
               </ButtonLink>
             </div>
@@ -163,19 +161,24 @@ export function ChiSiamoPage({ locale }: { locale: Locale }) {
               <Headline text={p.territorio.title} size="h3" className="mt-4 !text-[clamp(1.35rem,1rem+1.2vw,1.9rem)]" />
             </div>
           </div>
-          <ul className="mt-5 flex flex-wrap gap-2" aria-label={p.territorio.eyebrow}>
-            {configurations.flatMap((c) => c.comuni).map((n) => (
-              <li key={n} className="pill !bg-card !text-[14px] shadow-[inset_0_0_0_1px_var(--color-hairline)]">
-                {n}
-              </li>
+          <div className="mt-5 grid gap-3 sm:grid-cols-2" aria-label={p.territorio.eyebrow}>
+            {configurations.map((config) => (
+              <div key={config.code} className="card min-w-0 p-4 sm:p-5">
+                <p className="font-display text-[15px] font-extrabold text-ink">{config.code}</p>
+                <ul className="mt-3 flex flex-wrap gap-2">
+                  {config.comuni.map((name) => (
+                    <li key={name} className="pill !bg-mint !text-[13px]">{name}</li>
+                  ))}
+                </ul>
+              </div>
             ))}
-            <li>
-              <Link href={lhref(locale, "/#configurazioni")} className="tlink ml-1 text-[15px]">
-                <span>{p.territorio.mapCta}</span>
-                <ArrowRight aria-hidden />
-              </Link>
-            </li>
-          </ul>
+          </div>
+          <div className="mt-5">
+            <Link href={lhref(locale, "/#configurazioni")} className="tlink text-[15px]">
+              <span>{p.territorio.mapCta}</span>
+              <ArrowRight aria-hidden />
+            </Link>
+          </div>
         </div>
       </SectionPanel>
 

@@ -45,7 +45,6 @@ export function Footer({ d, locale }: { d: Dict; locale: Locale }) {
         { label: f.cosaSono, href: "/le-cer/" },
         { label: f.configurazioni, href: "/#configurazioni" },
         { label: f.verifica, href: "/#verifica" },
-        { label: f.faq, href: "/le-cer/#faq" },
       ],
     },
     {

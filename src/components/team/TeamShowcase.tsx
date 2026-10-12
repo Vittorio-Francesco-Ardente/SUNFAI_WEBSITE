@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useCallback, useRef, useState, type KeyboardEvent, type PointerEvent } from "react";
+import { useCallback, useEffect, useRef, useState, type KeyboardEvent, type PointerEvent } from "react";
 import { AnimatePresence, LayoutGroup, motion, useReducedMotion } from "motion/react";
 import { ArrowLeft, ArrowRight, Quote } from "lucide-react";
 import { Eyebrow, GhostNumeral, Headline, type Tagname } from "@/components/ui/primitives";
@@ -10,6 +10,8 @@ import { EASE_OUT_SOFT, SPRING_LAYOUT, pad2 } from "@/lib/motion";
 import { MemberVisual, type MemberLite } from "./MemberVisual";
 import { MemberLinkedIn } from "./MemberLinkedIn";
 import type { Dict } from "@/content/dict";
+import media from "@/content/media.generated.json";
+import { asset } from "@/lib/asset";
 
 /**
  * "Le persone dietro l'energia." — CONCEPT_3 (target), CONCEPT_2 (art direction), CONCEPT_4 (initials).
@@ -20,6 +22,22 @@ import type { Dict } from "@/content/dict";
  * V3 (16.4): this IS the whole team — no grid of members anywhere. Optional group switch (pills, 44 px) filters what
  * the carousel cycles through: "Tutti · Consiglio di Amministrazione · Team operativo".
  */
+// Small optimized images are fetched in advance, preventing blanks when a member
+// moves from the thumbnails to the featured slot (while keeping the original motion).
+const warmedTeamPhotos = new Set<string>();
+function warmTeamPhoto(src?: string) {
+  if (!src || typeof window === "undefined" || warmedTeamPhotos.has(src)) return;
+  warmedTeamPhotos.add(src);
+  const entry = (media as Record<string, { widths: number[] }>)[src];
+  const best = entry?.widths.find((w) => w >= 640) ?? entry?.widths.at(-1);
+  const url = best ? `/img${src.replace(/\.[a-z]+$/i, "")}-${best}.webp` : src;
+  const preload = new window.Image();
+  preload.decoding = "async";
+  preload.src = asset(url);
+  // Keep a reference until loading finishes; decoding happens off the main thread.
+  void preload.decode?.().catch(() => { warmedTeamPhotos.delete(src); });
+}
+
 export function TeamShowcase({
   members: all,
   t,
@@ -47,6 +65,16 @@ export function TeamShowcase({
   const reduce = useReducedMotion();
   const go = useCallback((i: number) => setIndex(((i % total) + total) % total), [total]);
   const startX = useRef<number | null>(null);
+
+  useEffect(() => {
+    // Warm the people already visible plus upcoming neighbours; the existing
+    // popLayout / layoutId animations and their timings remain unchanged.
+    for (let offset = 0; offset < Math.min(total, 7); offset++) {
+      const member = members[(index + offset) % total];
+      warmTeamPhoto(member.photo);
+      warmTeamPhoto(member.pose);
+    }
+  }, [index, members, total]);
 
   const onKey = (e: KeyboardEvent) => {
     if (e.key === "ArrowRight") (e.preventDefault(), go(index + 1));
@@ -89,7 +117,7 @@ export function TeamShowcase({
               transition={reduce ? { duration: 0 } : SPRING_LAYOUT}
               className="hover-card relative aspect-[1/0.92] overflow-hidden rounded-[32px] lg:aspect-[1/0.98] lg:rounded-[var(--radius-feature)]"
             >
-              <MemberVisual m={featured} framing="feature" sizes="(max-width: 1023px) calc(100vw - 40px), 40vw" photoComing={t.photoComing} priority={index === initial} />
+              <MemberVisual m={featured} framing="feature" sizes="(max-width: 1023px) calc(100vw - 40px), 40vw" photoComing={t.photoComing} priority={index === initial} eager />
               <MemberLinkedIn href={featured.linkedin} name={featured.name} className="absolute right-4 top-4 z-[4]" />
             </motion.div>
             {featured.quote ? (
@@ -172,7 +200,7 @@ export function TeamShowcase({
                   aria-label={`${m.name}, ${m.group === "board" ? m.roleLine : m.groupLabel}`}
                 >
                   <motion.div layoutId={`m-${m.slug}`} transition={reduce ? { duration: 0 } : SPRING_LAYOUT} className="relative aspect-[1/1.05] w-full overflow-hidden">
-                    <MemberVisual m={m} usePose={!!m.pose} sizes="(max-width: 767px) 40vw, 14vw" photoComing={t.photoComing} />
+                    <MemberVisual m={m} usePose={!!m.pose} sizes="(max-width: 767px) 40vw, 14vw" photoComing={t.photoComing} eager />
                   </motion.div>
                   <span className="flex flex-1 flex-col gap-2 p-3.5">
                     <span className="flex items-start justify-between gap-2">
