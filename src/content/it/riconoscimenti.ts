@@ -37,7 +37,7 @@ export const riconoscimenti = {
   memory: {
     eyebrow: "Riconoscimenti",
     title: "La stanza dei *ricordi*",
-    lead: "I momenti che ci hanno portato fin qui. Trascina, usa le frecce o tocca una carta.",
+    lead: "I momenti che ci hanno portato fin qui, in una galleria di immagini in movimento. Sfoglia i traguardi con le frecce.",
     region: "La stanza dei ricordi",
     live: "Ricordo {n} di {total}: {title}",
     prev: "Ricordo precedente",

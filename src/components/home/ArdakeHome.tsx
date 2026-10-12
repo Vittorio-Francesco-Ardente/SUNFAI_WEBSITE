@@ -33,7 +33,7 @@ export function ArdakeHome({ d, phone, phoneAlt, replay, locale }: { d: Dict["ho
       <div className="container-x relative z-[2] py-[clamp(48px,6vw,88px)] lg:grid lg:grid-cols-12 lg:gap-10">
         <div className="lg:col-span-6">
           <Eyebrow>{d.eyebrow}</Eyebrow>
-          <PrecisioneTitle id="home-ardake-title" title={d.srTitle} replay={replay} className="mt-6 w-[min(100%,620px)] min-w-[280px]" />
+          <PrecisioneTitle id="home-ardake-title" title={d.srTitle} replay={replay} className="mt-6 w-full min-w-0 max-w-[620px]" />
           <p className="reveal mt-6 font-display text-[clamp(1.5rem,1.1rem+1.4vw,2.4rem)] font-extrabold leading-[1.05] tracking-[-0.035em] text-ink">{d.lead}</p>
           <p className="t-lead reveal mt-3">{d.text}</p>
           <ul className="reveal-stagger mt-8 grid grid-cols-2 gap-3 sm:gap-4">

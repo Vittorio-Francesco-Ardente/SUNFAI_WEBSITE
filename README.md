@@ -1,3 +1,5 @@
+> **Revisione responsive — 12 ottobre 2026.** Corrette le sezioni sticky, la gestione del touch scroll, header sui formati intermedi, dimensionamento mobile di Ardaké. La “Stanza dei ricordi” ora usa `TiltedGridHero` fornito nel messaggio, senza vecchio percorso 3D e senza etichette sulle foto. Si veda [CORREZIONI_MOBILE_E_SCROLL.md](CORREZIONI_MOBILE_E_SCROLL.md).
+
 # SUN-FAI — sito V2
 
 Sito della **Comunità Energetica SUN-FAI Società Cooperativa** (Dalmine, BG), costruito dalle prompt pack V2 in `prompt-packs/` (concept = aspetto, demo = struttura e testi, pack = regole).

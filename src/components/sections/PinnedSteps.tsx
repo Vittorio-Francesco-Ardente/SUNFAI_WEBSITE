@@ -15,7 +15,7 @@ export type Step = { title: string; text: string; image?: string; alt?: string; 
 export function PinnedSteps({ steps, progressLabel, tone = "orange", numbered = true }: { steps: readonly Step[]; progressLabel: string; tone?: "orange" | "leaf"; numbered?: boolean }) {
   const [pin, setPin] = useState(false);
   useEffect(() => {
-    const mq = matchMedia("(min-width: 1024px) and (prefers-reduced-motion: no-preference)");
+    const mq = matchMedia("(min-width: 1024px) and (min-height: 670px) and (prefers-reduced-motion: no-preference)");
     const set = () => setPin(mq.matches && !/[?&]test/.test(location.search));
     set();
     mq.addEventListener("change", set);
@@ -64,8 +64,8 @@ function Pinned({ steps, progressLabel, tone, numbered }: { steps: readonly Step
   const color = tone === "leaf" ? "#478A2B" : "#F26722";
   const hasImages = steps.some((s) => s.image);
   return (
-    <div ref={ref} style={{ height: `${Math.max(150, steps.length * 45)}vh` }} className="relative">
-      <div className="sticky top-[12vh] grid min-h-[70vh] items-center gap-12 lg:grid-cols-12">
+    <div ref={ref} style={{ height: `${Math.max(220, steps.length * 75)}vh` }} className="relative">
+      <div className="sticky top-[clamp(78px,10vh,118px)] grid min-h-[min(73vh,710px)] items-center gap-8 lg:grid-cols-12 lg:gap-12">
         <div className="lg:col-span-5">
           <svg viewBox="0 0 100 56" className="w-[150px]" aria-hidden>
             <path d={`M6 50 A${r} ${r} 0 0 1 94 50`} fill="none" stroke="rgb(5 42 34 / .1)" strokeWidth="9" strokeLinecap="round" />
@@ -100,7 +100,7 @@ function Pinned({ steps, progressLabel, tone, numbered }: { steps: readonly Step
         </div>
         <div className="relative lg:col-span-7">
           {hasImages ? (
-            <div className="card relative aspect-[4/3] overflow-hidden bg-[#fcfbf7] p-8">
+            <div className="card relative mx-auto aspect-[4/3] max-h-[min(62vh,570px)] w-full max-w-[760px] overflow-hidden bg-[#fcfbf7] p-8">
               <AnimatePresence mode="popLayout" initial={false}>
                 <motion.div key={active} className="absolute inset-8" initial={{ opacity: 0, scale: 0.98 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.45, ease: EASE_OUT_SOFT }}>
                   {steps[active].image ? <Img src={steps[active].image!} alt={steps[active].alt ?? ""} sizes="50vw" className="h-full w-full object-contain" /> : null}
@@ -108,7 +108,7 @@ function Pinned({ steps, progressLabel, tone, numbered }: { steps: readonly Step
               </AnimatePresence>
             </div>
           ) : (
-            <div className="relative grid aspect-[4/3] place-items-center">
+            <div className="relative grid aspect-[4/3] max-h-[min(62vh,570px)] place-items-center">
               <AnimatePresence mode="popLayout" initial={false}>
                 <motion.p key={active} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.45, ease: EASE_OUT_SOFT }} className="font-display text-[clamp(8rem,6rem+8vw,16rem)] font-extrabold leading-none tracking-[-0.06em]" style={{ color }}>
                   0{active + 1}

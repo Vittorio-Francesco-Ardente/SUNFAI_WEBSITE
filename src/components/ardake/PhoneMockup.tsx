@@ -19,7 +19,7 @@ export function PhoneMockup({ t, label, variant = "dashboard", className }: { t:
   const pct = Math.round(tot.sharedRatio * 100);
   const app = variant === "app";
   return (
-    <div role="img" aria-label={label} className={cn("relative aspect-[9/19] w-[270px] rounded-[46px] bg-[#9a9890] p-[3px] shadow-[0_40px_60px_-30px_rgb(5_42_34/.45)]", className)}>
+    <div role="img" aria-label={label} className={cn("relative aspect-[9/19] w-[min(270px,100%)] rounded-[46px] bg-[#9a9890] p-[3px] shadow-[0_40px_60px_-30px_rgb(5_42_34/.45)]", className)}>
       {/* titanium frame: flat bands, no gradient */}
       <div aria-hidden="true" className="h-full rounded-[43px] bg-[#1c1d1f] p-[8px]">
         <div className="relative flex h-full flex-col overflow-hidden rounded-[36px] bg-white">

@@ -20,8 +20,7 @@ export const riconoscimentiMeta = (locale: Locale) => {
 };
 
 /**
- * /riconoscimenti, V3: cream hero (Andrea Zonca on a corner sun) → premio → the memory room (mint panel, CSS 3D,
- * 16.9) → traguardi → squeeze → press → join/contact. Panels separated by paper gaps.
+ * /riconoscimenti, V3: cream hero (Andrea Zonca on a corner sun) → premio → the memory room (mint panel, curved visual image gallery) → traguardi → squeeze → press → join/contact. Panels separated by paper gaps.
  */
 export function RiconoscimentiPage({ locale }: { locale: Locale }) {
   const d = getDict(locale);
@@ -100,7 +99,6 @@ export function RiconoscimentiPage({ locale }: { locale: Locale }) {
                 {r.memory.eyebrow}
               </Eyebrow>
               <Headline text={r.memory.title} className="mx-auto mt-5" />
-              <p className="t-lead mx-auto mt-4 max-w-[36rem]">{r.memory.lead}</p>
             </div>
             <div className="mt-8">
               <MemoryRoom
@@ -108,7 +106,6 @@ export function RiconoscimentiPage({ locale }: { locale: Locale }) {
                 labels={{ region: r.memory.region, live: r.memory.live, prev: r.memory.prev, next: r.memory.next, open: r.memory.open, loading: r.memory.loading, yearUnknown: r.yearUnknown }}
               />
             </div>
-            <p className="t-meta mt-6 text-center">{r.memory.placeholderNote}</p>
           </div>
         </div>
       </SectionPanel>

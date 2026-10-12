@@ -214,7 +214,7 @@ function TopBar({
     >
       <div className="container-x flex h-full items-center gap-4 xl:gap-6">
         <Logo locale={locale} t={t} />
-        <nav aria-label={t.navMain} className="hidden flex-1 justify-center lg:flex">
+        <nav aria-label={t.navMain} className="hidden min-w-0 flex-1 justify-center 2xl:flex">
           <ul className="flex items-center gap-3 xl:gap-7">
             {items.main.map((it) => {
               const active = isActive(pathname, it.href);
@@ -238,17 +238,17 @@ function TopBar({
           </ul>
         </nav>
         <div className="ml-auto flex items-center gap-2.5 lg:ml-0">
-          <div className="hidden lg:block">
+          <div className="hidden xl:block">
             <LangSwitch locale={locale} pathname={pathname} t={t} />
           </div>
           <Link
             href={lhref(locale, items.contact.href)}
-            className="btn btn--outline btn--sm hidden xl:inline-flex"
+            className="btn btn--outline btn--sm hidden 2xl:inline-flex"
             aria-current={isActive(pathname, items.contact.href) ? "page" : undefined}
           >
             {t.contattaci}
           </Link>
-          <Link href={lhref(locale, items.join.href)} className="btn btn--primary btn--sm hidden lg:inline-flex" aria-current={isActive(pathname, items.join.href) ? "page" : undefined}>
+          <Link href={lhref(locale, items.join.href)} className="btn btn--primary btn--sm hidden xl:inline-flex" aria-current={isActive(pathname, items.join.href) ? "page" : undefined}>
             {t.diventaSocio}
             <ArrowRight aria-hidden strokeWidth={2.2} />
           </Link>
@@ -257,7 +257,7 @@ function TopBar({
             onClick={onMenu}
             aria-haspopup="dialog"
             aria-expanded={menuOpen}
-            className="btn btn--light btn--sm gap-2 !px-4 lg:hidden"
+            className="btn btn--light btn--sm gap-2 !px-4 2xl:hidden"
           >
             <MenuIcon aria-hidden strokeWidth={2.1} />
             {t.menu}

@@ -352,7 +352,7 @@ html.js:not(.sf-noloader) .hero-scope { --hd: 1550ms; }
    ===================================================================== */
 .canvas-panel {
   --u: 100cqw;
-  position: relative; isolation: isolate; overflow: hidden; container-type: inline-size;
+  position: relative; isolation: isolate; overflow: clip; container-type: inline-size;
   background: var(--panel-bg); border-radius: clamp(28px, 3vw, 44px);
   margin: 0 clamp(8px, 1.2vw, 16px) clamp(10px, 1.2vw, 16px);
 }
@@ -398,5 +398,40 @@ html.js:not(.sf-noloader) .hero-scope { --hd: 1550ms; }
 .mini-canvas > .rp { z-index: -1; }
 .cp-stage { height: var(--sm-h); }
 @media (min-width: 1024px) { .cp-stage { height: auto; } }
-/* memory room reflection (16.9): the mask is the only functional fade allowed; it is not a colour gradient */
-.mr-refl { transform: scaleY(-1); opacity: .18; filter: blur(1.5px); -webkit-mask-image: linear-gradient(to top, #000 0%, transparent 38%); mask-image: linear-gradient(to top, #000 0%, transparent 38%); }
+/* The memory room now uses the horizontal curved, image-based gallery; keep its surface simple. */
+.memory-band { background: #f8faf4; border: 1px solid rgb(5 42 34 / .1); }
+/* Clip, unlike overflow:hidden, does not establish a scroll container: sticky sections can follow the document. */
+@supports not (overflow: clip) { .canvas-panel { overflow: visible; } .cp-bg { overflow: hidden; border-radius: inherit; } }
+
+
+/* -------------------------------------------------------------------
+   SUN-FAI responsive stability adjustments (2026-10-12)
+   Mobile Safari/Chrome: avoid scroll-linked opacity and position changes
+   during native touch scrolling. The unanimated end state remains visible.
+   Desktop pointer devices retain the editorial reveal choreography.
+   ------------------------------------------------------------------- */
+@media (max-width: 1023.98px), (hover: none) {
+  .reveal, .reveal-stagger > *, .rise, .grow-geo {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .canvas-panel .cp-mascot { animation: none !important; }
+}
+@media (max-width: 767.98px) {
+  .canvas-panel, .canvas-panel > .container-x { min-width: 0; }
+  .canvas-panel .container-x > :is(div, article, section) { min-width: 0; }
+  .eyebrow { min-width: 0; overflow-wrap: anywhere; }
+  .t-hero, .t-h1, .t-h2, .t-h2s, .t-sub { max-width: 100%; }
+  .t-hero { font-size: clamp(2.45rem, 1.08rem + 6vw, 4.3rem); }
+  .t-h1 { font-size: clamp(2.3rem, 1.2rem + 5vw, 4.3rem); }
+  /* Slightly more room for characters with wide Italian or Bergamasque strings. */
+  .hl-anim .hl-line { clip-path: inset(-.24em -.35em -.32em -.24em); }
+  .hl-line > span { white-space: normal; overflow-wrap: break-word; }
+  .rail { scroll-snap-type: x proximity; }
+}
+@media (max-width: 359.98px) {
+  .t-hero { font-size: clamp(2.2rem, 1rem + 6vw, 2.8rem); }
+  .t-h2 { font-size: clamp(1.9rem, 1.2rem + 3vw, 2.3rem); }
+  .paper-round { width: 44px; height: 44px; }
+}
