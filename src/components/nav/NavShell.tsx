@@ -82,7 +82,7 @@ export function NavShell({ t, locale }: { t: NavLabels; locale: Locale }) {
   const past = useScrolledPast();
   const [sheet, setSheet] = useState(false);
   const [atTop8, setAtTop8] = useState(true);
-  const [dockReading, setDockReading] = useState(false);
+  const [dockVisible, setDockVisible] = useState(false);
   const dockScroll = useRef(initialDockScrollState());
   const items = buildItems(t);
   useKeyboardFlag();
@@ -91,12 +91,13 @@ export function NavShell({ t, locale }: { t: NavLabels; locale: Locale }) {
   useEffect(() => {
     let frame = 0;
     dockScroll.current = initialDockScrollState(window.scrollY);
+    setDockVisible(dockScroll.current.visible);
     const measure = () => {
       frame = 0;
       const y = window.scrollY;
       setAtTop8(y < 8);
       const next = nextDockScrollState(dockScroll.current, y);
-      if (next.hidden !== dockScroll.current.hidden) setDockReading(next.hidden);
+      if (next.visible !== dockScroll.current.visible) setDockVisible(next.visible);
       dockScroll.current = next;
     };
     const onScroll = () => { if (!frame) frame = window.requestAnimationFrame(measure); };
@@ -121,7 +122,7 @@ export function NavShell({ t, locale }: { t: NavLabels; locale: Locale }) {
       return;
     }
     dockScroll.current = initialDockScrollState(window.scrollY);
-    setDockReading(false);
+    setDockVisible(dockScroll.current.visible);
     if (window.location.hash) {
       const targetId = decodeURIComponent(window.location.hash.slice(1));
       window.requestAnimationFrame(() => {
@@ -140,8 +141,8 @@ export function NavShell({ t, locale }: { t: NavLabels; locale: Locale }) {
   return (
     <>
       <TopBar t={t} locale={locale} pathname={pathname} items={items} hidden={past} solid={!atTop8} onMenu={() => setSheet(true)} menuOpen={sheet} />
-      <DesktopDock t={t} locale={locale} pathname={pathname} items={items} visible={past && !sheet && !dockReading} />
-      <MobileDock t={t} locale={locale} pathname={pathname} items={items} visible={past && !sheet && !dockReading} onMore={() => setSheet(true)} moreOpen={sheet} />
+      <DesktopDock t={t} locale={locale} pathname={pathname} items={items} visible={dockVisible && !sheet} />
+      <MobileDock t={t} locale={locale} pathname={pathname} items={items} visible={dockVisible && !sheet} onMore={() => setSheet(true)} moreOpen={sheet} />
       <MenuSheet t={t} locale={locale} pathname={pathname} items={items} open={sheet} onClose={close} />
     </>
   );
@@ -455,7 +456,6 @@ function DockItem({ item, locale, active, mouseX }: { item: Item; locale: Locale
         </motion.span>
       </Link>
       <Tooltip show={tip} label={item.label} />
-      {active ? <span aria-hidden className="absolute -bottom-[7px] left-1/2 size-[5px] -translate-x-1/2 rounded-full bg-orange" /> : null}
     </motion.div>
   );
 }
@@ -509,7 +509,6 @@ function MobileDock({
                   >
                     {Icon ? <Icon className="size-[22px]" strokeWidth={1.9} aria-hidden /> : <SunMark className="size-[24px]" />}
                   </Link>
-                  {active ? <span aria-hidden className="absolute -bottom-[6px] left-1/2 size-[5px] -translate-x-1/2 rounded-full bg-orange" /> : null}
                 </span>
               );
             })}
