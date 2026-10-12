@@ -8,6 +8,7 @@ import { Eyebrow, GhostNumeral, Headline, type Tagname } from "@/components/ui/p
 import { lhref, type Locale } from "@/lib/i18n";
 import { EASE_OUT_SOFT, SPRING_LAYOUT, pad2 } from "@/lib/motion";
 import { MemberVisual, type MemberLite } from "./MemberVisual";
+import { MemberLinkedIn } from "./MemberLinkedIn";
 import type { Dict } from "@/content/dict";
 
 /**
@@ -89,6 +90,7 @@ export function TeamShowcase({
               className="hover-card relative aspect-[1/0.92] overflow-hidden rounded-[32px] lg:aspect-[1/0.98] lg:rounded-[var(--radius-feature)]"
             >
               <MemberVisual m={featured} framing="feature" sizes="(max-width: 1023px) calc(100vw - 40px), 40vw" photoComing={t.photoComing} priority={index === initial} />
+              <MemberLinkedIn href={featured.linkedin} name={featured.name} className="absolute right-4 top-4 z-[4]" />
             </motion.div>
             {featured.quote ? (
               <figure className="absolute -left-2 -top-4 max-w-[15rem] rounded-[20px] bg-white/90 p-4 shadow-[var(--shadow-soft)] lg:-left-6 lg:-top-6">
@@ -162,7 +164,7 @@ export function TeamShowcase({
         <ul className={`rail rail--small min-w-0 pb-2 md:[--rail-item:calc((100%-36px)/4)] lg:col-span-7 lg:col-start-6 ${filters ? "lg:row-start-3" : "lg:row-start-2"} lg:mx-0 lg:grid lg:grid-cols-4 lg:gap-3.5 lg:self-end lg:overflow-visible lg:px-0`}>
           <AnimatePresence mode="popLayout" initial={false}>
             {next4.map((m) => (
-              <motion.li key={m.slug} layout={!reduce} initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, scale: 0.96 }} transition={{ duration: 0.35, ease: EASE_OUT_SOFT }}>
+              <motion.li key={m.slug} className="relative" layout={!reduce} initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, scale: 0.96 }} transition={{ duration: 0.35, ease: EASE_OUT_SOFT }}>
                 <button
                   type="button"
                   onClick={() => go(members.indexOf(m))}
@@ -186,6 +188,7 @@ export function TeamShowcase({
                     <span className="pill mt-auto self-start !text-[13px]">{m.tags[0]}</span>
                   </span>
                 </button>
+                <MemberLinkedIn href={m.linkedin} name={m.name} className="absolute right-2 top-2 z-[4] !size-9" />
               </motion.li>
             ))}
           </AnimatePresence>

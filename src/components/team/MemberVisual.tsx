@@ -16,6 +16,7 @@ export type MemberLite = {
   roleLine: string;
   tags: string[];
   photo?: string;
+  linkedin?: string;
   pose?: string;
   backdrop: Backdrop;
   quote?: string;

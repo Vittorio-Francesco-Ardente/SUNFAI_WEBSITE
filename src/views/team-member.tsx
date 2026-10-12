@@ -15,6 +15,7 @@ import { MemberVisual } from "@/components/team/MemberVisual";
 import { SIDE_CUT_SINK } from "@/lib/people";
 import { ProfileGallery, type Slide } from "@/components/team/ProfileGallery";
 import { TeamRail } from "@/components/team/TeamRail";
+import { MemberLinkedIn } from "@/components/team/MemberLinkedIn";
 
 export const memberParams = () => team.map((m) => ({ slug: m.slug }));
 
@@ -147,7 +148,10 @@ export function MemberPage({ locale, slug }: { locale: Locale; slug: string }) {
             <GhostNumeral n={pad2(i + 1)} className="!right-[-30%] top-14 max-lg:!right-0 !text-[rgb(242_106_27/.1)]" />
             <Eyebrow className="relative mt-5">{g.label}</Eyebrow>
             <Headline text={`${m.firstName}|*${m.lastName}*`} as="h1" size="h1" className="is-in relative mt-4 !text-[clamp(3rem,1rem+6.6vw,7.4rem)] [text-wrap:balance]" />
-            <p className="relative mt-4 font-display text-[clamp(1.15rem,1rem+.5vw,1.45rem)] font-bold tracking-[-0.02em] text-ink">{m.group === "board" ? m.roleLine : g.lead}</p>
+            <div className="relative mt-4 flex min-w-0 flex-wrap items-center gap-3">
+              <p className="font-display text-[clamp(1.15rem,1rem+.5vw,1.45rem)] font-bold tracking-[-0.02em] text-ink">{m.group === "board" ? m.roleLine : g.lead}</p>
+              <MemberLinkedIn href={m.linkedin} name={m.name} />
+            </div>
             <p className="t-lead relative mt-2 max-w-[40rem]">{lead}</p>
             <div className="mt-8 hidden lg:block">{details}</div>
           </div>

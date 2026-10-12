@@ -19,6 +19,7 @@ export function toLite(m: Member, d: Dict, locale: Locale): MemberLite {
     roleLine: m.group === "board" ? `${g.label} · ${role}` : g.label,
     tags: m.focus?.length ? m.focus : [...g.tags],
     photo: m.photo,
+    linkedin: m.linkedin,
     pose: m.pose,
     backdrop: m.backdrop,
     quote: m.quote ? (locale === "lmo" ? (m.quote.lmo ?? m.quote.it) : m.quote.it) : undefined,

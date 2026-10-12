@@ -1,3 +1,5 @@
+> **Revisione V14**: correzione badge numerati, nove link LinkedIn, nuovo ritratto di Benedetta Petrò. Vedere `MODIFICHE_E_TEST_V14.md`.
+
 > **SUN-FAI · Revisione V11 (12 ottobre 2026).** Migliorie cumulative responsive e di interazione. Le nuove modifiche e i controlli sono documentati in [`MODIFICHE_E_TEST_V11.md`](MODIFICHE_E_TEST_V11.md). La Stanza dei ricordi ora è una galleria fotografica curva manuale (nessuna libreria 3D); la mappa geografica usa un iframe OSM con fallback locale; l’animazione “Ardaké” è disponibile anche su smartphone.
 
 > **Versione V8** · Correzioni rendering, Giorgio, galleria manuale e crediti creatore. Dettagli in `MODIFICHE_E_TEST_V8.md`.

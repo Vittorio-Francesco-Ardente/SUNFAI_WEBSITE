@@ -3,6 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { lhref, type Locale } from "@/lib/i18n";
 import { cn } from "@/lib/cn";
 import { MemberVisual, type MemberLite } from "./MemberVisual";
+import { MemberLinkedIn } from "./MemberLinkedIn";
 
 /** CONCEPT_3 small card: backdrop + cut-out (or initials), name on 2 lines, role, pill, arrow. Hover: lift, person rises, orange underline. */
 export function MemberCard({
@@ -23,7 +24,8 @@ export function MemberCard({
   className?: string;
 }) {
   return (
-    <Link href={lhref(locale, `/team/${m.slug}/`)} className={cn("card hover-card flex h-full flex-col overflow-hidden !rounded-[22px]", className)}>
+    <div className={cn("relative h-full min-w-0", className)}>
+      <Link href={lhref(locale, `/team/${m.slug}/`)} className="card hover-card flex h-full flex-col overflow-hidden !rounded-[22px]">
       <span className={cn("relative block w-full overflow-hidden", size === "lg" ? "aspect-[1/1.08]" : "aspect-[1/1.05]")}>
         <MemberVisual m={m} usePose={usePose} sizes={sizes} photoComing={photoComing} />
       </span>
@@ -46,6 +48,8 @@ export function MemberCard({
           ))}
         </span>
       </span>
-    </Link>
+      </Link>
+      <MemberLinkedIn href={m.linkedin} name={m.name} className="absolute right-2 top-2 z-[3] !size-10" />
+    </div>
   );
 }
