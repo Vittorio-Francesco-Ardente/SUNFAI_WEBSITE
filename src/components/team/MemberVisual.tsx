@@ -1,6 +1,7 @@
 import { MemberBackdrop } from "@/components/geometry/shapes";
 import { Img } from "@/components/ui/Img";
 import { cn } from "@/lib/cn";
+import { asset } from "@/lib/asset";
 import { SIDE_CUT_SINK } from "@/lib/people";
 import type { Backdrop } from "@/content/team";
 
@@ -57,15 +58,29 @@ export function MemberVisual({
       {src ? (
         <div className="absolute inset-x-0 bottom-0" style={{ height: `${frame / (1 - sink)}%`, transform: sink ? `translateY(${sink * 100}%)` : undefined }}>
           <div className="hc-person h-full w-full">
-            <Img
-              src={src}
-              alt={photoComing === "" ? "" : `${m.name}`}
-              sizes={sizes}
-              priority={priority}
-              eager={eager}
-              className="absolute bottom-0 left-1/2 h-full w-auto max-w-none -translate-x-1/2 select-none object-contain object-bottom"
-              draggable={false}
-            />
+            {m.slug === "giorgio-venezia" ? (
+              // Original source: stable cached URL on both sides of the motion
+              // handoff; generated srcSet variants caused intermittent blanks.
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={asset(src)}
+                alt={photoComing === "" ? "" : m.name}
+                loading="eager"
+                decoding="async"
+                className="absolute bottom-0 left-1/2 h-full w-auto max-w-none -translate-x-1/2 select-none object-contain object-bottom"
+                draggable={false}
+              />
+            ) : (
+              <Img
+                src={src}
+                alt={photoComing === "" ? "" : `${m.name}`}
+                sizes={sizes}
+                priority={priority}
+                eager={eager}
+                className="absolute bottom-0 left-1/2 h-full w-auto max-w-none -translate-x-1/2 select-none object-contain object-bottom"
+                draggable={false}
+              />
+            )}
           </div>
         </div>
       ) : (
