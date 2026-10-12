@@ -32,7 +32,6 @@ export function HomeHero({ d, locale }: { d: Dict["home"]["hero"]; locale: Local
             fan={{ count: 13, from: 6, to: 174, inset: 0.06, colors: FAN13 }}
             seg={{ r0: 0.372, r1: 0.428, from: 4, to: 176, count: 16 }}
           />
-          <Ripple at={{ x: 0.98, y: 0 }} atSm={{ x: 1, y: 0 }} scaleSm={0.8} family="leaf" core={0.05} widths={[0.035, 0.04, 0.03]} invert bands={3} coreColor="#E7F0D8" />
           <Ripple at={{ x: 0, y: 1 }} hideSm family="peach" core={0.05} widths={[0.04, 0.035, 0.03]} bands={3} />
           <QuarterDisc corner="tl" r={0.05} fill="#F5C335" className="max-md:hidden" />
 
