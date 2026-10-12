@@ -1,7 +1,5 @@
 import { CalendarDays } from "lucide-react";
 import { getDict } from "@/content/dict";
-import { teamLite } from "@/content/team-lite";
-import { milestoneItems } from "@/content/milestones";
 import { pageMeta } from "@/lib/meta";
 import type { Locale } from "@/lib/i18n";
 import { ButtonLink, Eyebrow, Headline, TextLink } from "@/components/ui/primitives";
@@ -16,8 +14,6 @@ import { TrePassaggi } from "@/components/home/TrePassaggi";
 import { ArdakeHome } from "@/components/home/ArdakeHome";
 import { VerificaForm } from "@/components/home/Verifica";
 import { ConfigMap } from "@/components/home/ConfigMap";
-import { TeamShowcase } from "@/components/team/TeamShowcase";
-import { AwardsSqueeze } from "@/components/awards/AwardsSqueeze";
 import { SocialFeed } from "@/components/social/SocialFeed";
 import { Faq } from "@/components/sections/Faq";
 import { JoinContact } from "@/components/sections/JoinContact";
@@ -39,8 +35,6 @@ const PAD = "py-[clamp(48px,6vw,88px)]";
 export function HomePage({ locale }: { locale: Locale }) {
   const d = getDict(locale);
   const h = d.home;
-  const members = teamLite(d, locale);
-  const items = milestoneItems(d);
   const alt = (name: string) => d.common.ui.personAlt.replace("{name}", name);
 
   return (
@@ -110,75 +104,17 @@ export function HomePage({ locale }: { locale: Locale }) {
         </div>
       </CanvasPanel>
 
-      {/* 9 · Team (CONCEPT_3) — paper, a small leaf ripple top-right */}
-      <CanvasPanel tone="paper" data-section="team" bg={<Ripple at={{ x: 1, y: 0 }} family="leaf" core={0.03} widths={[0.03, 0.03]} bands={2} />}>
+      {/* Homepage: one short discovery junction instead of repeating Team, Riconoscimenti and Press.
+          The complete galleries and articles belong to their corresponding thematic pages. */}
+      <CanvasPanel tone="paper" data-section="scopri" bg={<Ripple at={{ x: 1, y: 0 }} family="leaf" core={0.03} widths={[0.03, 0.03]} bands={2} />}>
         <div className={`container-x relative z-[2] ${PAD}`}>
-          <TeamShowcase members={members} t={{ ...d.team.section, title: h.team.title, body: h.team.body }} locale={locale} />
-        </div>
-      </CanvasPanel>
-
-      {/* 10 · Riconoscimenti — cream, sun fan on the bottom-right corner */}
-      <CanvasPanel
-        tone="cream"
-        data-section="riconoscimenti"
-        phoneUnit={1.3}
-        bg={
-          <>
-            <Ripple at={{ x: 1, y: 1 }} family="sun" core={0.06} widths={[0.09, 0.07, 0.07, 0.07]} fan={{ count: 7, from: 92, to: 178 }} />
-            <Ripple at={{ x: 0, y: 0 }} family="leaf" core={0.03} widths={[0.03, 0.03]} bands={2} />
-          </>
-        }
-      >
-        <div className={`container-x relative z-[2] ${PAD}`}>
-          <div className="mb-10 grid gap-6 lg:grid-cols-12 lg:items-end">
-            <div className="lg:col-span-8">
-              <Eyebrow upper>{h.awards.eyebrow}</Eyebrow>
-              <Headline text={h.awards.title} className="mt-5" />
-            </div>
-            <div className="flex flex-wrap gap-x-6 gap-y-3 lg:col-span-4 lg:justify-end">
-              <ButtonLink href="/riconoscimenti/" locale={locale} variant="outline">
-                {h.awards.cta}
-              </ButtonLink>
-              <TextLink href="/riconoscimenti/#stanza-dei-ricordi" locale={locale}>
-                {h.awards.memory}
-              </TextLink>
-            </div>
+          <Eyebrow upper tone="leaf">SUN-FAI da vicino</Eyebrow>
+          <Headline text="Le persone, i passi avanti, la nostra storia" size="h2s" className="mt-5 max-w-[18ch]" />
+          <p className="t-lead mt-5 max-w-[52rem]">Scopri chi rende possibile la nostra comunità e ripercorri gli obiettivi raggiunti insieme.</p>
+          <div className="mt-7 flex flex-wrap gap-3">
+            <ButtonLink href="/team/" locale={locale} variant="dark">Scopri il team</ButtonLink>
+            <ButtonLink href="/riconoscimenti/" locale={locale} variant="outline">La nostra storia</ButtonLink>
           </div>
-          <AwardsSqueeze items={items} t={d.riconoscimenti.squeeze} locale={locale} yearUnknown={d.riconoscimenti.yearUnknown} height="h-[520px]" phoneLimit={3} />
-        </div>
-      </CanvasPanel>
-
-      {/* 11 · Dicono di noi — paper, peach top-right, pale leaf bottom-left */}
-      <CanvasPanel
-        tone="paper"
-        data-section="press"
-        bg={
-          <>
-            <Ripple at={{ x: 1, y: 0 }} family="peach" core={0.05} widths={[0.05, 0.05, 0.05]} bands={3} />
-            <Ripple at={{ x: 0, y: 1 }} family="leafPale" core={0.06} widths={[0.04, 0.04]} />
-            <Confetto at={{ x: 0.55, y: 0.1 }} r={0.01} fill="#4B8B2F" ring hideSm />
-          </>
-        }
-      >
-        <div className={`container-x relative z-[2] ${PAD}`}>
-          <Eyebrow upper>{h.press.eyebrow}</Eyebrow>
-          <Headline text={h.press.title} className="mt-5" />
-          <ul className="rail rail--to-grid mt-10 pb-2 md:gap-4" style={{ ["--cols" as string]: 3 }}>
-            {h.press.items.map((p, i) => (
-              <li key={p.title} className="reveal">
-                <article className="card hover-card relative flex h-full flex-col overflow-hidden p-6 sm:p-7">
-                  <Badge n={([1, 2, 4] as const)[i]} className="absolute right-0 top-0 w-24 rounded-tr-[var(--radius-card)]" />
-                  <h3 lang="it" className="t-h3 pr-16">
-                    {p.title}
-                  </h3>
-                  <p lang="it" className="t-body mt-3 flex-1 !text-[16px]">
-                    {p.text}
-                  </p>
-                  <p className="mt-5 text-[14px] font-semibold text-orange-text">{p.source}</p>
-                </article>
-              </li>
-            ))}
-          </ul>
         </div>
       </CanvasPanel>
 

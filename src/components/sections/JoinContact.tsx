@@ -1,7 +1,7 @@
 import { ArrowRight, ChevronRight, Mail, MapPin } from "lucide-react";
 import Link from "next/link";
 import { ButtonLink, Eyebrow, Headline, TextLink } from "@/components/ui/primitives";
-import { CanvasPanel, HalfDisc, Person, Ripple } from "@/components/canvas/Canvas";
+import { CanvasPanel, HalfDisc, Ripple } from "@/components/canvas/Canvas";
 import { InstagramIcon, LinkedinIcon } from "@/components/ui/SocialIcons";
 import { asset } from "@/lib/asset";
 import { lhref, type Locale } from "@/lib/i18n";
@@ -17,13 +17,11 @@ const ROW = "flex min-h-12 items-center gap-3 rounded-2xl bg-card px-4 py-2 font
  * stands under the content on the panel's bottom edge.
  */
 export function JoinContact({ d, locale, personAlt }: { d: Dict["common"]["joinContact"]; locale: Locale; personAlt: string }) {
-  const joinAlt = personAlt.replace("{name}", "Andrea Belotti");
-  const contactAlt = personAlt.replace("{name}", "Simone Mazzoleni");
   return (
     <div data-section="join-contact" className="mx-[clamp(8px,1.2vw,16px)] mb-[clamp(10px,1.2vw,16px)] grid gap-[clamp(10px,1.2vw,16px)] lg:grid-cols-2">
       <CanvasPanel
         tone="peach"
-        className="!m-0 flex flex-col"
+        className="!m-0 flex flex-col justify-center"
         phoneUnit={1.5}
         bg={
           <>
@@ -32,7 +30,7 @@ export function JoinContact({ d, locale, personAlt }: { d: Dict["common"]["joinC
           </>
         }
       >
-        <div className="relative z-[2] p-7 sm:p-10 lg:p-12 lg:pr-[46%] xl:pr-[44%]">
+        <div className="relative z-[2] mx-auto w-full max-w-[750px] p-7 sm:p-10 lg:p-12">
           <Eyebrow>{d.joinEyebrow}</Eyebrow>
           <Headline text={d.joinTitle} size="h2s" className="mt-5" />
           <p className="t-body mt-4 !text-ink/80">{d.joinText}</p>
@@ -54,14 +52,11 @@ export function JoinContact({ d, locale, personAlt }: { d: Dict["common"]["joinC
             </TextLink>
           </div>
         </div>
-        <div className="relative mt-auto h-[clamp(260px,78cqw,380px)] lg:static lg:h-0">
-          <Person src="/people/andrea-belotti.webp" alt={joinAlt} sizes="(max-width: 1023px) 70vw, 22vw" className="right-[6%] h-[125%] translate-y-[27%] lg:right-[1%] lg:h-[min(68%,540px)]" />
-        </div>
       </CanvasPanel>
 
       <CanvasPanel
         tone="mint"
-        className="!m-0 flex flex-col"
+        className="!m-0 flex flex-col justify-center"
         phoneUnit={1.5}
         bg={
           <>
@@ -71,7 +66,7 @@ export function JoinContact({ d, locale, personAlt }: { d: Dict["common"]["joinC
           </>
         }
       >
-        <div className="relative z-[2] p-7 sm:p-10 lg:p-12 lg:pr-[46%] xl:pr-[44%]">
+        <div className="relative z-[2] mx-auto w-full max-w-[750px] p-7 sm:p-10 lg:p-12">
           <Eyebrow tone="leaf">{d.contactEyebrow}</Eyebrow>
           <Headline text={d.contactTitle} size="h2s" className="mt-5" />
           <p className="t-body mt-4">{d.contactText}</p>
@@ -110,9 +105,6 @@ export function JoinContact({ d, locale, personAlt }: { d: Dict["common"]["joinC
           <ButtonLink href="/contatti/" locale={locale} variant="dark" className="mt-7 max-sm:w-full">
             {d.contactCta}
           </ButtonLink>
-        </div>
-        <div className="relative mt-auto h-[clamp(260px,78cqw,380px)] lg:static lg:h-0">
-          <Person src="/people/simone-mazzoleni.webp" alt={contactAlt} sizes="(max-width: 1023px) 70vw, 22vw" className="right-[6%] h-[120%] translate-y-[22%] lg:right-[1%] lg:h-[min(66%,520px)]" />
         </div>
       </CanvasPanel>
     </div>

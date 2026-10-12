@@ -176,7 +176,7 @@ export function CosaFacciamoPage({ locale }: { locale: Locale }) {
             <Headline text={p.percorso.title} className="mt-5" />
           </div>
           <div className="mt-10">
-            <PinnedSteps steps={p.percorso.steps.map((s) => ({ title: s.t, text: s.d }))} progressLabel={p.percorso.progress} />
+            <PinnedSteps steps={p.percorso.steps.map((s, i) => ({ title: s.t, text: s.d, image: ["/scenes/scene-01-consulenza-laptop.webp", "/scenes/scene-08-progettazione-impianto.webp", "/scenes/scene-05-teamwork-ufficio.webp", "/scenes/scene-06-installazione-inverter.webp", "/scenes/scene-03-monitoraggio-analytics.webp"][i], alt: s.t }))} progressLabel={p.percorso.progress} />
           </div>
         </div>
       </SectionPanel>

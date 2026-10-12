@@ -67,7 +67,6 @@ function Pinned({ steps, progressLabel, tone, numbered }: { steps: readonly Step
   const r = 44;
   const c = Math.PI * r; // half arc (sun-like)
   const color = tone === "leaf" ? "#478A2B" : "#F26722";
-  const hasImages = steps.some((s) => s.image);
   return (
     <div ref={ref} style={{ height: `${Math.max(220, steps.length * 75)}vh` }} className="relative">
       <div className="sticky top-[clamp(78px,10vh,118px)] grid min-h-[min(73vh,710px)] items-center gap-8 lg:grid-cols-12 lg:gap-12">
@@ -104,23 +103,20 @@ function Pinned({ steps, progressLabel, tone, numbered }: { steps: readonly Step
           </ol>
         </div>
         <div className="relative lg:col-span-7">
-          {hasImages ? (
-            <div className="card relative mx-auto aspect-[4/3] max-h-[min(62vh,570px)] w-full max-w-[760px] overflow-hidden bg-[#fcfbf7] p-8">
-              <AnimatePresence mode="popLayout" initial={false}>
-                <motion.div key={active} className="absolute inset-8" initial={{ opacity: 0, scale: 0.98 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.45, ease: EASE_OUT_SOFT }}>
-                  {steps[active].image ? <Img src={steps[active].image!} alt={steps[active].alt ?? ""} sizes="50vw" className="h-full w-full object-contain" /> : null}
+          <article className="card relative mx-auto flex w-full max-w-[760px] flex-col overflow-hidden bg-[#fcfbf7] shadow-[0_16px_45px_-35px_rgba(5,42,34,.28)]">
+            <div className="relative flex h-[clamp(230px,30vw,390px)] items-center justify-center overflow-hidden border-b border-[var(--color-hairline)] bg-[#fcfbf7] p-5 lg:p-8">
+              <AnimatePresence mode="wait" initial={false}>
+                <motion.div key={`visual-${active}`} className="absolute inset-5 lg:inset-8" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2, ease: EASE_OUT_SOFT }}>
+                  {steps[active].image ? <Img src={steps[active].image!} alt={steps[active].alt ?? steps[active].title} sizes="(min-width:1024px) 46vw, 85vw" className="h-full w-full object-contain" /> : <div className="flex h-full items-center justify-center rounded-2xl bg-mint text-center font-display text-3xl font-bold text-ink">{steps[active].title}</div>}
                 </motion.div>
               </AnimatePresence>
             </div>
-          ) : (
-            <div className="relative grid aspect-[4/3] max-h-[min(62vh,570px)] place-items-center">
-              <AnimatePresence mode="popLayout" initial={false}>
-                <motion.p key={active} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.45, ease: EASE_OUT_SOFT }} className="font-display text-[clamp(8rem,6rem+8vw,16rem)] font-extrabold leading-none tracking-[-0.06em]" style={{ color }}>
-                  0{active + 1}
-                </motion.p>
-              </AnimatePresence>
+            <div className="min-w-0 p-5 lg:p-8">
+              <span className="text-[13px] font-bold uppercase tracking-[.08em] text-orange-text">{String(active + 1).padStart(2, "0")} / {String(steps.length).padStart(2, "0")}</span>
+              <h3 className="mt-2 font-display text-[clamp(1.35rem,1.1rem+1vw,1.85rem)] font-extrabold leading-tight text-ink">{steps[active].title}</h3>
+              <p className="mt-2 max-w-[58ch] text-[16px] leading-relaxed text-slate">{steps[active].text}</p>
             </div>
-          )}
+          </article>
         </div>
       </div>
     </div>

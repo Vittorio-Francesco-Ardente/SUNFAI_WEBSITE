@@ -135,7 +135,7 @@ export function DiventaSocioPage({ locale }: { locale: Locale }) {
             <Headline text={s.steps.title} className="mt-5" />
           </div>
           <div className="mt-10">
-            <PinnedSteps steps={s.steps.items.map((x) => ({ title: x.t, text: x.d }))} progressLabel={s.steps.progress} />
+            <PinnedSteps steps={s.steps.items.map((x, i) => ({ title: x.t, text: x.d, image: ["/scenes/scene-01-consulenza-laptop.webp", "/scenes/scene-04-famiglia-casa-solare.webp", "/scenes/scene-07-supporto-videochiamata.webp", "/scenes/scene-03-monitoraggio-analytics.webp", "/scenes/scene-05-teamwork-ufficio.webp"][i % 5], alt: x.t }))} progressLabel={s.steps.progress} />
           </div>
           <div className="reveal card relative mx-auto mt-10 max-w-[44rem] overflow-hidden p-7">
             <Badge n={3} className="absolute right-0 top-0 w-20 rounded-tr-[var(--radius-card)]" />

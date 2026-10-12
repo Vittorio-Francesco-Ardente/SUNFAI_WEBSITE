@@ -129,9 +129,6 @@ export function MemoryRoom({ items, labels }: { items: Memory[]; labels: Labels 
       </div>
       <div className="mt-5 flex flex-wrap items-center justify-center gap-3 pb-2 sm:gap-4">
         <button type="button" data-memory-prev onClick={() => move(-1)} aria-label={labels.prev} className="paper-round shrink-0"><ArrowLeft aria-hidden /></button>
-        <span className="min-w-[78px] text-center font-display text-[17px] font-bold tabular-nums text-ink">
-          {String(active + 1).padStart(2, "0")} <span className="text-slate">/ {String(count).padStart(2, "0")}</span>
-        </span>
         <button type="button" data-memory-next onClick={() => move(1)} aria-label={labels.next} className="paper-round paper-round--dark shrink-0"><ArrowRight aria-hidden /></button>
         <span className="inline-flex items-center gap-1.5 text-[13px] font-medium text-slate sm:ml-3"><Hand aria-hidden className="size-4" /> Trascina per sfogliare</span>
       </div>

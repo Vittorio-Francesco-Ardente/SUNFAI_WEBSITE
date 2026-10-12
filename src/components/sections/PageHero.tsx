@@ -35,7 +35,7 @@ export function PageHero({
   /** the panel's ripples (16.1 per-page map) */
   bg: ReactNode;
   person?: { src: string; alt: string; height?: string; /** portraits cropped flat on their sides: sink them below the panel edge, e.g. "translate-y-[30%]" */ sink?: string };
-  mascot?: { src: string; alt: string };
+  mascot?: { src: string; alt: string; centeredInRipple?: boolean };
   /** a non-person visual for the free column (e.g. the Le CER frame) */
   visual?: ReactNode;
   side?: "left" | "right";
@@ -83,7 +83,13 @@ export function PageHero({
       {mascot ? (
         <div className="cp-stage relative lg:static" style={{ "--sm-h": "clamp(230px, 65cqw, 320px)" } as CSSProperties}>
           {/* The *wrapper* owns centring; the mascot's bob animation cannot override its translateX. */}
-          <div className={cn("absolute bottom-[22px] left-1/2 z-[2] -translate-x-1/2 lg:bottom-[14%]", left ? "lg:left-[24%]" : "lg:left-[76%]")}>
+          <div className={cn(
+            "absolute bottom-[22px] left-1/2 z-[2] -translate-x-1/2",
+            mascot.centeredInRipple
+              ? "lg:bottom-auto lg:top-[56%] lg:-translate-y-1/2 lg:left-[76%]"
+              : "lg:bottom-[14%] lg:left-[76%]",
+            !mascot.centeredInRipple && left && "lg:left-[24%]",
+          )}>
             <CreatorEasterEgg className="block">
               <PanelMascot src={mascot.src} alt={mascot.alt} className="!relative !bottom-auto !left-auto block w-[clamp(185px,56cqw,250px)] lg:w-[clamp(245px,24cqw,335px)]" />
             </CreatorEasterEgg>

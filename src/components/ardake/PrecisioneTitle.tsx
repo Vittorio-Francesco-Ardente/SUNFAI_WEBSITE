@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useId, useRef, useState, type CSSProperties } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import { RotateCcw } from "lucide-react";
 import GEO from "@/lib/ardake-geometry.json";
 import { cn } from "@/lib/cn";
@@ -65,16 +65,13 @@ export function PrecisioneTitle({ title, replay, className, id }: { title: strin
   const renderRef = useRef<((t: number) => void) | null>(null);
   const raf = useRef(0);
   const [played, setPlayed] = useState(false);
-  const [mobilePlaying, setMobilePlaying] = useState(false);
-  const [mobileCycle, setMobileCycle] = useState(0);
-  const mobileRef = useRef<HTMLHeadingElement>(null);
   const uid = `p${useId().replace(/[^a-zA-Z0-9]/g, "")}`;
 
   const play = () => {
     const render = renderRef.current;
     if (!render) return;
     cancelAnimationFrame(raf.current);
-    const reduce = matchMedia("(prefers-reduced-motion: reduce), (hover: none), (max-width: 1023px)").matches;
+    const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduce) {
       render(FINAL);
       setPlayed(true);
@@ -100,25 +97,9 @@ export function PrecisioneTitle({ title, replay, className, id }: { title: strin
     raf.current = requestAnimationFrame(tick);
   };
 
-  // Touch devices: time-based glyph entrance with a fully legible HTML fallback.
-  // Never animate the mask on mobile WebKit: its repaint can leave letters blank.
-  useEffect(() => {
-    const el = mobileRef.current;
-    if (!el) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const io = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) {
-        setMobilePlaying(true);
-        io.disconnect();
-      }
-    }, { threshold: 0.25 });
-    io.observe(el);
-    return () => io.disconnect();
-  }, []);
-
   useEffect(() => {
     const svg = svgRef.current;
-    if (!svg || window.innerWidth < 1024) return;
+    if (!svg) return;
     const q = <T extends Element>(s: string) => svg.querySelector(s) as T;
     const eye = geo.pupil;
     const maskCircle = q<SVGCircleElement>("[data-mask-circle]");
@@ -182,7 +163,7 @@ export function PrecisioneTitle({ title, replay, className, id }: { title: strin
     (window as unknown as { renderPrecisioneAt?: (t: number) => void }).renderPrecisioneAt = render; // ?test frame-by-frame screenshots
 
     const test = /[?&]test/.test(location.search);
-    const reduce = matchMedia("(prefers-reduced-motion: reduce), (hover: none), (max-width: 1023px)").matches || (navigator.hardwareConcurrency ?? 8) <= 4;
+    const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (test || reduce) {
       render(FINAL);
       setPlayed(!test);
@@ -208,16 +189,10 @@ export function PrecisioneTitle({ title, replay, className, id }: { title: strin
 
   return (
     <div className={cn("relative", className)}>
-      {/* The mobile heading is still animated, but uses lightweight, always-readable text glyphs.
-          Its stagger mirrors the desktop reveal without the expensive Safari SVG masking. */}
-      <h2 id={id} ref={mobileRef} aria-label={title} className={`ardake-mobile-title font-display text-[clamp(3rem,13vw,5.4rem)] font-extrabold leading-[1.08] tracking-[-0.055em] text-ink lg:sr-only ${mobilePlaying ? "is-playing" : ""}`}>
-        {Array.from(title).map((letter, i) => (
-          <span key={`${mobileCycle}-${i}`} aria-hidden="true" className="ardake-mobile-letter" style={{ "--glyph-index": i } as CSSProperties}>{letter}</span>
-        ))}
-        <span key={`dot-${mobileCycle}`} aria-hidden="true" className="ardake-mobile-letter text-orange" style={{ "--glyph-index": title.length } as CSSProperties}>.</span>
-      </h2>
-      {replay && mobilePlaying && <button type="button" onClick={() => setMobileCycle((v) => v + 1)} className="tlink tlink--ink mt-2 text-[15px] lg:hidden"><span>{replay}</span><RotateCcw aria-hidden /></button>}
-      <svg ref={svgRef} viewBox={`${VB.x} ${VB.y} ${VB.w} ${VB.h}`} aria-hidden="true" className="hidden h-auto w-full overflow-visible lg:block">
+      {/* Same vector lettering + pupil/outline/reveal animation at every breakpoint.
+          The static fallback inside the SVG remains readable if Safari pauses its mask repaint. */}
+      <h2 id={id} className="sr-only">{title}</h2>
+      <svg ref={svgRef} viewBox={`${VB.x} ${VB.y} ${VB.w} ${VB.h}`} aria-hidden="true" className="block h-auto w-full min-w-0 overflow-visible">
         <defs>
           <mask id={`${uid}-reveal`} maskUnits="userSpaceOnUse" x={-200} y={-200} width={1200} height={800}>
             <rect x={-200} y={-200} width={1200} height={800} fill="black" />
@@ -231,6 +206,7 @@ export function PrecisioneTitle({ title, replay, className, id }: { title: strin
         <path data-counter-measure d={geo.counter} fill="none" />
         {geo.glyphs.map((g) => (
           <g key={g.id} data-glyph={g.id}>
+            <path data-always-visible d={g.d} fill={g.fill} fillOpacity={0.62} />
             <path data-outline d={g.d} fill="none" stroke={g.fill} strokeWidth={2.2} strokeLinejoin="round" strokeLinecap="round" style={{ opacity: 0 }} />
             <path data-fill d={g.d} fill={g.fill} mask={`url(#${uid}-reveal)`} />
           </g>

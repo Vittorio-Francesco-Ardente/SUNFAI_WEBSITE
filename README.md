@@ -62,3 +62,7 @@ Il token Instagram long-lived scade dopo 60 giorni: rinnovalo con `GET https://g
 - Nessun dato inventato: i dati demo sono etichettati "Dati dimostrativi"; ciò che manca è in **`TODO_SUNFAI.md`**.
 
 Font self-hosted (OFL): Plus Jakarta Sans, Inter, Fredoka (titolo "Precisione"). Licenze in `src/app/fonts/`.
+
+
+### Revisione V13
+Navbar tablet completa, lettering Ardaké vettoriale animato anche sui touch, Giorgio tablet, rimozione ritratti nelle due card finali e mascotte Le CER centrata. Dettagli in `MODIFICHE_E_TEST_V13.md`.

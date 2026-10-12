@@ -176,13 +176,18 @@ export function GiorgioProvider({ g, locale, tour, children }: { g: G; locale: L
 
   // Only smartphones get the compact floating guide. Tablet/desktop keeps the existing layout.
   const phone = vw.w < 768;
+  const tablet = vw.w >= 768 && vw.w < 1200;
   const compact = phone;
-  const dock = phone ? 18 : 112;
-  const stage = phone ? { w: vw.w, h: 240 } : STAGE;
+  const dock = phone ? 18 : tablet ? 24 : 112;
+  const stage = phone ? { w: vw.w, h: 240 } : tablet ? { w: 184, h: 262 } : STAGE;
   const right = true;
-  const x = phone ? 0 : Math.max(12, vw.w - stage.w - 24);
+  const x = phone ? 0 : Math.max(12, vw.w - stage.w - (tablet ? 18 : 24));
   const anchorTop = rect ? rect.top + 40 : vw.h - stage.h - dock;
-  const y = phone ? Math.max(0, vw.h - stage.h - dock) : Math.max(96, Math.min(anchorTop, vw.h - stage.h - dock));
+  const y = phone
+    ? Math.max(0, vw.h - stage.h - dock)
+    : tablet
+      ? Math.max(88, Math.min(anchorTop, vw.h - Math.max(430, stage.h) - dock))
+      : Math.max(96, Math.min(anchorTop, vw.h - stage.h - dock));
   const open = s.mode !== "idle" && s.topic;
   const ctx: Ctx = { explain, start: () => go(0), label: (t) => g.open.replace("{topic}", g.topics[t].title), startLabel: g.tourStart, tour: !!tour };
 
@@ -213,8 +218,10 @@ export function GiorgioProvider({ g, locale, tour, children }: { g: G; locale: L
               animate={{ opacity: 1, transition: { duration: 0.2 } }}
               className={
                 compact
-                  ? `pointer-events-auto absolute inset-x-3 bottom-0 w-[calc(100%-24px)] overflow-y-auto rounded-[24px] bg-card p-4 shadow-[0_0_0_1px_var(--color-hairline),var(--shadow-lift)] ${mobileMinimized ? "!h-[72px] overflow-hidden" : "max-h-[min(37dvh,255px)]"}`
-                  : "pointer-events-auto absolute right-[calc(100%-8px)] top-4 max-h-[75vh] w-[min(380px,calc(100vw-310px))] overflow-y-auto rounded-[24px] bg-card p-5 shadow-[0_0_0_1px_var(--color-hairline),var(--shadow-lift)]"
+                  ? `pointer-events-auto absolute inset-x-3 bottom-0 w-[calc(100%-24px)] overflow-x-clip overflow-y-auto rounded-[24px] bg-card p-4 shadow-[0_0_0_1px_var(--color-hairline),var(--shadow-lift)] ${mobileMinimized ? "!h-[72px] overflow-hidden" : "max-h-[min(37dvh,255px)]"}`
+                  : tablet
+                    ? "pointer-events-auto absolute right-[calc(100%-10px)] top-0 max-h-[min(60dvh,430px)] w-[min(400px,calc(100vw-240px))] min-w-0 overflow-x-clip overflow-y-auto overscroll-contain rounded-[24px] bg-card p-5 shadow-[0_0_0_1px_var(--color-hairline),var(--shadow-lift)]"
+                    : "pointer-events-auto absolute right-[calc(100%-8px)] top-4 max-h-[75vh] w-[min(380px,calc(100vw-310px))] overflow-x-clip overflow-y-auto rounded-[24px] bg-card p-5 shadow-[0_0_0_1px_var(--color-hairline),var(--shadow-lift)]"
               }
             >
               {!compact ? <span aria-hidden className={phone ? "absolute -bottom-[7px] right-[70px] size-4 rotate-45 bg-card" : "absolute -right-[7px] top-10 size-4 rotate-45 bg-card"} /> : null}
@@ -249,12 +256,12 @@ export function GiorgioProvider({ g, locale, tour, children }: { g: G; locale: L
                       ))}
                     </span>
                   </div>
-                  <div className="mt-3 flex items-center gap-2">
+                  <div className="mt-3 flex min-w-0 flex-wrap items-center gap-2">
                     <button type="button" onClick={() => go(s.step - 1)} disabled={s.step === 0} className="btn btn--outline btn--sm disabled:opacity-40">
                       <ArrowLeft aria-hidden strokeWidth={2.2} />
                       {g.tourBack}
                     </button>
-                    <button type="button" onClick={() => go(s.step + 1)} className="btn btn--dark btn--sm flex-1">
+                    <button type="button" onClick={() => go(s.step + 1)} className="btn btn--dark btn--sm min-w-[110px] flex-1">
                       {s.step + 1 === s.total ? g.tourDone : g.tourNext}
                       <ArrowRight aria-hidden strokeWidth={2.2} />
                     </button>

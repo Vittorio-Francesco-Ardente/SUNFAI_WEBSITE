@@ -280,17 +280,17 @@ function TopBar({
           </ul>
         </nav>
         <div className="ml-auto flex items-center gap-2.5 lg:ml-0">
-          <div className="hidden xl:block">
+          <div className="hidden md:block">
             <LangSwitch locale={locale} pathname={pathname} t={t} />
           </div>
           <Link
             href={lhref(locale, items.contact.href)}
-            className="btn btn--outline btn--sm hidden 2xl:inline-flex"
+            className="btn btn--outline btn--sm hidden md:inline-flex"
             aria-current={isActive(pathname, items.contact.href) ? "page" : undefined}
           >
             {t.contattaci}
           </Link>
-          <Link href={lhref(locale, items.join.href)} className="btn btn--primary btn--sm hidden xl:inline-flex" aria-current={isActive(pathname, items.join.href) ? "page" : undefined}>
+          <Link href={lhref(locale, items.join.href)} className="btn btn--primary btn--sm hidden md:inline-flex" aria-current={isActive(pathname, items.join.href) ? "page" : undefined}>
             {t.diventaSocio}
             <ArrowRight aria-hidden strokeWidth={2.2} />
           </Link>
@@ -299,13 +299,30 @@ function TopBar({
             onClick={onMenu}
             aria-haspopup="dialog"
             aria-expanded={menuOpen}
-            className="btn btn--light btn--sm gap-2 !px-4 2xl:hidden"
+            className="btn btn--light btn--sm gap-2 !px-4 md:hidden"
           >
             <MenuIcon aria-hidden strokeWidth={2.1} />
             {t.menu}
           </button>
         </div>
       </div>
+      {/* Tablet navigation uses the same seven destinations as desktop, not a menu-only header.
+          The second row preserves legible spacing from 768 to 1535px. */}
+      <nav aria-label={t.navMain} className="hidden md:flex 2xl:hidden min-h-[48px] w-full items-center justify-center border-t border-ink/10 px-4">
+        <ul className="mx-auto flex w-full max-w-[1110px] items-center justify-between gap-2">
+          {items.main.map((it) => {
+            const active = isActive(pathname, it.href);
+            return (
+              <li key={it.key} className="min-w-0">
+                <Link href={lhref(locale, it.href)} aria-current={active ? "page" : undefined}
+                  className={cn("relative flex h-11 items-center justify-center whitespace-nowrap px-1 font-medium text-[clamp(11px,1.18vw,15px)] text-ink transition-colors hover:text-orange-text", active && "!font-bold !text-orange-text after:absolute after:bottom-1 after:inset-x-1 after:h-0.5 after:rounded-full after:bg-orange")}>
+                  {it.label}
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+      </nav>
     </header>
   );
 }
@@ -337,7 +354,7 @@ function DesktopDock({ t, locale, pathname, items, visible }: { t: NavLabels; lo
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: reduce ? 0 : 20 }}
           transition={{ duration: 0.28, ease: EASE_OUT_SOFT }}
-          className="pointer-events-none fixed inset-x-0 bottom-[calc(24px+var(--safe-b))] z-50 hidden justify-center lg:flex"
+          className="pointer-events-none fixed inset-x-0 bottom-[calc(24px+var(--safe-b))] z-50 hidden justify-center 2xl:flex"
         >
           <div
             onMouseMove={(e) => canHover && !reduce && mouseX.set(e.clientX)}
@@ -479,7 +496,7 @@ function MobileDock({
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 12 }}
           transition={{ duration: 0.26, ease: EASE_OUT_SOFT }}
-          className="dock-mobile lg:hidden"
+          className="dock-mobile md:hidden"
         >
           <div className="mx-auto flex h-full max-w-[480px] items-center justify-between gap-1 rounded-full bg-dock px-2 shadow-[0_0_0_1px_var(--color-hairline),var(--shadow-lift)]">
             {list.map((it) => {

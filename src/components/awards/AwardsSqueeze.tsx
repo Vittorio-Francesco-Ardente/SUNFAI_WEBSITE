@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useCallback, useRef, useState, type KeyboardEvent, type PointerEvent } from "react";
+import { useCallback, useEffect, useRef, useState, type KeyboardEvent, type PointerEvent } from "react";
 import { motion, useReducedMotion } from "motion/react";
 import { ArrowLeft, ArrowRight, ArrowUpRight, Trophy } from "lucide-react";
 import { Badge } from "@/components/geometry/shapes";
@@ -23,6 +23,15 @@ export function AwardsSqueeze({ items, t, locale, yearUnknown, height = "h-[560p
   const reduce = useReducedMotion();
   const go = useCallback((i: number) => setIndex((i + items.length) % items.length), [items.length]);
   const startX = useRef<number | null>(null);
+  const hoverTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const cancelHover = useCallback(() => { if (hoverTimer.current) clearTimeout(hoverTimer.current); hoverTimer.current = null; }, []);
+  useEffect(() => cancelHover, [cancelHover]);
+  const onCardHover = (i: number) => {
+    cancelHover();
+    if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+      hoverTimer.current = setTimeout(() => go(i), 130);
+    }
+  };
   const onKey = (e: KeyboardEvent) => {
     if (e.key === "ArrowRight") (e.preventDefault(), go(index + 1));
     if (e.key === "ArrowLeft") (e.preventDefault(), go(index - 1));
@@ -47,6 +56,7 @@ export function AwardsSqueeze({ items, t, locale, yearUnknown, height = "h-[560p
         onKeyDown={onKey}
         onPointerDown={onDown}
         onPointerUp={onUp}
+        onPointerLeave={cancelHover}
         className={cn("hidden touch-pan-y select-none gap-2.5 rounded-[var(--radius-feature)] md:flex lg:gap-3", height)}
       >
         {items.map((m, i) => {
@@ -54,6 +64,7 @@ export function AwardsSqueeze({ items, t, locale, yearUnknown, height = "h-[560p
           return (
             <motion.div
               key={m.id}
+              onPointerEnter={(e) => { if (e.pointerType === "mouse") onCardHover(i); }}
               className={cn("relative min-w-11 overflow-hidden rounded-[28px]", active ? "card" : "bg-paper-2 shadow-[inset_0_0_0_1px_var(--color-hairline)]")}
               style={{ flexBasis: 0 }}
               initial={false}

@@ -488,3 +488,25 @@ html.js:not(.sf-noloader) .hero-scope { --hd: 1550ms; }
 @media (prefers-reduced-motion: reduce) {
   .ardake-mobile-title.is-playing .ardake-mobile-letter { animation: none !important; opacity: 1 !important; transform: none !important; }
 }
+
+/* Focus mode: no competing navigation while Giorgio's explanation is open.
+   Visibility preserves document geometry to avoid layout shifts. */
+html[data-giorgio-open="true"] [data-topbar],
+html[data-giorgio-open="true"] [data-dock] {
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* V13: tablet navigation with the same destinations as desktop. A two-row
+   layout prevents label collisions at 768–1535px, keeps the header readable
+   and correctly offsets first-page artwork. */
+@media (min-width: 768px) and (max-width: 1535.98px) {
+  :root { --topbar-h: 116px; --tb: calc(116px + var(--safe-t, 0px)); }
+  .topbar { height: calc(116px + var(--safe-t, 0px)) !important; }
+  .topbar > .container-x { height: 68px !important; }
+  .topbar[data-hidden="true"] { opacity: 1 !important; transform: none !important; pointer-events: auto !important; }
+  .topbar > nav { height: 48px; }
+}
+/* Avoid a browser-level horizontal scrollbar when Giorgio is open. */
+html[data-giorgio-open="true"] { overflow-x: clip; }
