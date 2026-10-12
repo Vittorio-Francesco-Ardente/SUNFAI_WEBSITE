@@ -76,8 +76,7 @@ export function MemoryRoom({ items, labels }: { items: Memory[]; labels: Labels 
       </p>
 
       <div className="relative overflow-hidden rounded-[28px] border border-[var(--color-hairline)] bg-white/70 px-3 py-5 shadow-[var(--shadow-soft)] sm:px-4 sm:py-6 lg:px-6 lg:py-7">
-        <div aria-hidden className="pointer-events-none absolute inset-y-0 left-0 z-[1] w-8 bg-[linear-gradient(to_right,rgba(250,247,240,.98),rgba(250,247,240,0))] sm:w-14" />
-        <div aria-hidden className="pointer-events-none absolute inset-y-0 right-0 z-[1] w-8 bg-[linear-gradient(to_left,rgba(250,247,240,.98),rgba(250,247,240,0))] sm:w-14" />
+        {/* Crop the rail inside the rounded panel without background gradients. */}
 
         <div
           ref={railRef}
