@@ -1,3 +1,5 @@
+"use client";
+
 import type { CSSProperties } from "react";
 import manifest from "@/content/media.generated.json";
 import { asset } from "@/lib/asset";
