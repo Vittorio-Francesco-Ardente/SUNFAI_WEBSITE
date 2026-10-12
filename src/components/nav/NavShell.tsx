@@ -26,6 +26,7 @@ import { asset } from "@/lib/asset";
 import { cn } from "@/lib/cn";
 import { lhref, localeMeta, rememberLocale, switchLocalePath, unlocalized, type Locale } from "@/lib/i18n";
 import { useKeyboardFlag, useLowEndFlag } from "@/lib/use-media";
+import { initialDockScrollState, nextDockScrollState } from "@/lib/dock-scroll";
 import { EASE_OUT_SOFT } from "@/lib/motion";
 import { site, social } from "@/lib/site";
 import type { Dict } from "@/content/dict";
@@ -82,32 +83,21 @@ export function NavShell({ t, locale }: { t: NavLabels; locale: Locale }) {
   const [sheet, setSheet] = useState(false);
   const [atTop8, setAtTop8] = useState(true);
   const [dockReading, setDockReading] = useState(false);
-  const lastScrollY = useRef(0);
-  const dockScrollIntent = useRef(0);
+  const dockScroll = useRef(initialDockScrollState());
   const items = buildItems(t);
   useKeyboardFlag();
   useLowEndFlag();
 
   useEffect(() => {
     let frame = 0;
-    lastScrollY.current = window.scrollY;
+    dockScroll.current = initialDockScrollState(window.scrollY);
     const measure = () => {
       frame = 0;
       const y = window.scrollY;
-      const delta = y - lastScrollY.current;
       setAtTop8(y < 8);
-      // Keep reading content visible on every device: the floating dock retracts
-      // when scrolling down and returns when scrolling up (not only on phones).
-      if (y < 140) {
-        dockScrollIntent.current = 0;
-        setDockReading(false);
-      } else if (Math.abs(delta) > 1) {
-        if (Math.sign(delta) !== Math.sign(dockScrollIntent.current)) dockScrollIntent.current = 0;
-        dockScrollIntent.current = Math.max(-48, Math.min(48, dockScrollIntent.current + delta));
-        if (dockScrollIntent.current < -20) setDockReading(false);
-        else if (y > 230 && dockScrollIntent.current > 30) setDockReading(true);
-      }
-      lastScrollY.current = y;
+      const next = nextDockScrollState(dockScroll.current, y);
+      if (next.hidden !== dockScroll.current.hidden) setDockReading(next.hidden);
+      dockScroll.current = next;
     };
     const onScroll = () => { if (!frame) frame = window.requestAnimationFrame(measure); };
     measure();
@@ -130,6 +120,7 @@ export function NavShell({ t, locale }: { t: NavLabels; locale: Locale }) {
       firstPath.current = false;
       return;
     }
+    dockScroll.current = initialDockScrollState(window.scrollY);
     setDockReading(false);
     if (window.location.hash) {
       const targetId = decodeURIComponent(window.location.hash.slice(1));
