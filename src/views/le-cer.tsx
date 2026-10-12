@@ -49,7 +49,7 @@ export function LeCerPage({ locale }: { locale: Locale }) {
             <Ripple at={{ x: 0.76, y: 0.56 }} hideSm family="leaf" startR={0.17} widths={[0.025, 0.025, 0.03]} />
             <Ripple at={{ x: 0.76, y: 0.56 }} hideSm family="leafPale" core={0.15} widths={[0.012]} bands={1} />
             <Ripple at={{ x: 1, y: 0.85 }} atSm={{ x: 1, y: 0.8 }} hideLg family="leaf" core={0.08} widths={[0.06, 0.05, 0.05]} bands={3} />
-            <Ripple at={{ x: 0, y: 0 }} family="sun" core={0.04} widths={[0.035, 0.03]} bands={2} />
+            <Ripple at={{ x: 0, y: 0 }} hideSm family="sun" core={0.04} widths={[0.035, 0.03]} bands={2} />
             <Ripple at={{ x: 0, y: 1 }} family="peach" core={0.035} widths={[0.03, 0.03]} bands={2} />
           </>
         }

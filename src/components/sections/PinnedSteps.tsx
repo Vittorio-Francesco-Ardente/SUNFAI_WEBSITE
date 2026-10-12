@@ -55,9 +55,14 @@ function Pinned({ steps, progressLabel, tone, numbered }: { steps: readonly Step
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] });
   const [active, setActive] = useState(0);
   const [p, setP] = useState(0);
+  const lastP = useRef(-1);
   useMotionValueEvent(scrollYProgress, "change", (v) => {
-    setP(v);
-    setActive(Math.min(steps.length - 1, Math.floor(v * steps.length * 0.999)));
+    if (Math.abs(v - lastP.current) > .025 || v <= 0 || v >= 1) {
+      lastP.current = v;
+      setP(v);
+    }
+    const next = Math.min(steps.length - 1, Math.floor(v * steps.length * 0.999));
+    setActive((previous) => previous === next ? previous : next);
   });
   const r = 44;
   const c = Math.PI * r; // half arc (sun-like)

@@ -1,3 +1,5 @@
+> **Versione V8** · Correzioni rendering, Giorgio, galleria manuale e crediti creatore. Dettagli in `MODIFICHE_E_TEST_V8.md`.
+
 > **Revisione responsive — 12 ottobre 2026.** Corrette le sezioni sticky, la gestione del touch scroll, header sui formati intermedi, dimensionamento mobile di Ardaké. La “Stanza dei ricordi” ora usa `TiltedGridHero` fornito nel messaggio, senza vecchio percorso 3D e senza etichette sulle foto. Si veda [CORREZIONI_MOBILE_E_SCROLL.md](CORREZIONI_MOBILE_E_SCROLL.md).
 
 # SUN-FAI — sito V2

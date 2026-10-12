@@ -71,7 +71,7 @@ export function PrecisioneTitle({ title, replay, className, id }: { title: strin
     const render = renderRef.current;
     if (!render) return;
     cancelAnimationFrame(raf.current);
-    const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const reduce = matchMedia("(prefers-reduced-motion: reduce), (hover: none), (max-width: 1023px)").matches;
     if (reduce) {
       render(FINAL);
       setPlayed(true);
@@ -86,7 +86,7 @@ export function PrecisioneTitle({ title, replay, className, id }: { title: strin
     document.addEventListener("visibilitychange", onVis);
     const tick = (now: number) => {
       if (!t0) t0 = now;
-      const t = (now - t0) / 1000;
+      const t = ((now - t0) / 1000) * 1.8;
       render(Math.min(t, DURATION));
       if (t < DURATION) raf.current = requestAnimationFrame(tick);
       else {
@@ -163,7 +163,7 @@ export function PrecisioneTitle({ title, replay, className, id }: { title: strin
     (window as unknown as { renderPrecisioneAt?: (t: number) => void }).renderPrecisioneAt = render; // ?test frame-by-frame screenshots
 
     const test = /[?&]test/.test(location.search);
-    const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const reduce = matchMedia("(prefers-reduced-motion: reduce), (hover: none), (max-width: 1023px)").matches || (navigator.hardwareConcurrency ?? 8) <= 4;
     if (test || reduce) {
       render(FINAL);
       setPlayed(!test);

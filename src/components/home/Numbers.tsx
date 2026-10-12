@@ -1,6 +1,7 @@
 import { Eyebrow, Headline } from "@/components/ui/primitives";
 import { CanvasPanel, Confetto, HalfDisc, PanelMascot, Ripple } from "@/components/canvas/Canvas";
 import { CountUp } from "@/components/ui/CountUp";
+import { CreatorEasterEgg } from "@/components/people/CreatorEasterEgg";
 import { LiveEnergy } from "./LiveEnergy";
 import type { Dict } from "@/content/dict";
 
@@ -84,10 +85,14 @@ export function Numbers({ d, ui, mascotAlt }: { d: Dict["home"]["numbers"]; ui: 
       </div>
       {/* Mobile: reserve a real, centred stage below the statistics (never behind the fixed dock). */}
       <div className="relative z-[2] flex h-[clamp(300px,80vw,380px)] items-end justify-center pb-[calc(var(--dock-space)+12px)] lg:hidden">
-        <PanelMascot src="/mascot/mascot-06-cheering.webp" alt={mascotAlt} className="!relative !bottom-auto !right-auto w-[clamp(190px,53vw,250px)]" />
+        <CreatorEasterEgg className="block w-[clamp(190px,53vw,250px)]">
+          <PanelMascot src="/mascot/mascot-06-cheering.webp" alt={mascotAlt} className="!relative !bottom-auto !right-auto w-full" />
+        </CreatorEasterEgg>
       </div>
       {/* Desktop: preserve the original right-hand illustration arrangement. */}
-      <PanelMascot src="/mascot/mascot-06-cheering.webp" alt="" className="!hidden lg:!block bottom-[7%] right-[9%] w-[clamp(230px,24cqw,340px)]" />
+      <CreatorEasterEgg className="!hidden lg:!block absolute bottom-[7%] right-[9%] w-[clamp(230px,24cqw,340px)]">
+        <PanelMascot src="/mascot/mascot-06-cheering.webp" alt={mascotAlt} className="!relative !bottom-auto w-full" />
+      </CreatorEasterEgg>
     </CanvasPanel>
   );
 }

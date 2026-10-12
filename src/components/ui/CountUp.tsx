@@ -18,7 +18,7 @@ export function CountUp({ value, decimals = 0, className }: { value: number; dec
   const last = useRef(0);
 
   const run = (ms: number) => {
-    if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (matchMedia("(prefers-reduced-motion: reduce), (hover: none), (max-width: 767px)").matches) return;
     const t0 = performance.now();
     last.current = Date.now();
     const tick = (now: number) => {
@@ -31,7 +31,7 @@ export function CountUp({ value, decimals = 0, className }: { value: number; dec
 
   useEffect(() => {
     const el = ref.current;
-    if (!el || matchMedia("(prefers-reduced-motion: reduce)").matches || /[?&]test/.test(location.search)) return;
+    if (!el || matchMedia("(prefers-reduced-motion: reduce), (hover: none), (max-width: 767px)").matches || /[?&]test/.test(location.search)) return;
     let started = false;
     const io = new IntersectionObserver(
       ([e]) => {

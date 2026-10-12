@@ -76,7 +76,7 @@ export function GiorgioProvider({ g, locale, tour, children }: { g: G; locale: L
       const body = kind === "skip" ? g.skipBody : g.doneBody;
       setS((cur) => ({ ...cur, mode: "outro", step: -1, topic: { title, body }, topicKey: kind === "skip" ? "outro-skip" : "outro" }));
       window.clearTimeout(outroTimer.current);
-      outroTimer.current = window.setTimeout(() => setS(IDLE), reduce ? 3500 : 5500);
+      outroTimer.current = window.setTimeout(() => setS(IDLE), kind === "skip" ? 7600 : 5800);
     },
     [g, tour, reduce],
   );
@@ -103,6 +103,7 @@ export function GiorgioProvider({ g, locale, tour, children }: { g: G; locale: L
       cur.el?.focus?.();
       setS(IDLE);
     }
+    if (cur.mode === "outro") setS(IDLE);
   }, [outro]);
 
   const explain = useCallback((topic: TopicKey, el: HTMLElement | null) => {
@@ -127,22 +128,26 @@ export function GiorgioProvider({ g, locale, tour, children }: { g: G; locale: L
     return () => window.removeEventListener("scroll", onScroll);
   }, [tour, go]);
 
-  // follow the anchor while open (Giorgio stays next to his section when the user scrolls)
+  // A single animation-frame update PER SCROLL/RESIZE event. Never re-render React at 60fps.
   useEffect(() => {
-    const size = () => setVw({ w: innerWidth, h: innerHeight });
+    const size = () => setVw((old) => old.w === innerWidth && old.h === innerHeight ? old : { w: innerWidth, h: innerHeight });
     size();
-    window.addEventListener("resize", size);
+    window.addEventListener("resize", size, { passive: true });
     return () => window.removeEventListener("resize", size);
   }, []);
   useEffect(() => {
-    if (!s.el || (s.mode !== "tour" && s.mode !== "single")) return;
+    if (!s.el || (s.mode !== "tour" && s.mode !== "single")) { setRect(null); return; }
     let raf = 0;
-    const loop = () => {
-      setRect(s.el!.getBoundingClientRect());
-      raf = requestAnimationFrame(loop);
+    const measure = () => {
+      raf = 0;
+      const r = s.el!.getBoundingClientRect();
+      setRect((old) => old && Math.abs(old.top - r.top) < 2 && Math.abs(old.left - r.left) < 2 ? old : r);
     };
-    loop();
-    return () => cancelAnimationFrame(raf);
+    const schedule = () => { if (!raf) raf = requestAnimationFrame(measure); };
+    schedule();
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule, { passive: true });
+    return () => { cancelAnimationFrame(raf); window.removeEventListener("scroll", schedule); window.removeEventListener("resize", schedule); };
   }, [s.el, s.mode]);
 
   // focus + keys
@@ -160,13 +165,15 @@ export function GiorgioProvider({ g, locale, tour, children }: { g: G; locale: L
 
   useEffect(() => () => window.clearTimeout(outroTimer.current), []);
 
-  const phone = vw.w < 768;
-  const dock = phone ? 96 : 112;
-  const stage = phone ? { w: 180, h: 240 } : STAGE;
-  const right = s.side === "right";
-  const x = phone ? vw.w - stage.w - 8 : right ? vw.w - stage.w - 24 : 24;
+  const phone = vw.w < 1024;
+  const compact = vw.h < 700 || vw.w < 410;
+  const dock = phone ? 100 : 112;
+  const stage = compact ? { w: vw.w, h: vw.h } : phone ? { w: 180, h: 240 } : STAGE;
+  // Pin to the right edge so the portrait can never be cropped off the LEFT edge.
+  const right = true;
+  const x = compact ? 0 : Math.max(12, vw.w - stage.w - (phone ? 12 : 24));
   const anchorTop = rect ? rect.top + 40 : vw.h - stage.h - dock;
-  const y = phone ? vw.h - stage.h - dock : Math.max(96, Math.min(anchorTop, vw.h - stage.h - dock));
+  const y = compact ? 0 : phone ? Math.max(0, vw.h - stage.h - dock) : Math.max(96, Math.min(anchorTop, vw.h - stage.h - dock));
   const open = s.mode !== "idle" && s.topic;
   const ctx: Ctx = { explain, start: () => go(0), label: (t) => g.open.replace("{topic}", g.topics[t].title), startLabel: g.tourStart, tour: !!tour };
 
@@ -180,11 +187,11 @@ export function GiorgioProvider({ g, locale, tour, children }: { g: G; locale: L
         {open ? (
           <motion.div
             key="giorgio"
-            className="pointer-events-none fixed left-0 top-0 z-[45]"
-            initial={reduce ? { opacity: 0, x, y } : { opacity: 1, x, y: vw.h }}
+            className="pointer-events-none fixed left-0 top-0 z-[75]"
+            initial={{ opacity: 0, x, y }}
             animate={{ opacity: 1, x, y, rotate: 0 }}
-            exit={reduce ? { opacity: 0 } : { y: vw.h + 40, transition: { duration: 0.4, ease: EASE_OUT_SOFT } }}
-            transition={reduce ? { duration: 0.15 } : { type: "spring", stiffness: 170, damping: 24 }}
+            exit={{ opacity: 0, transition: { duration: 0.16 } }}
+            transition={{ duration: reduce ? 0.1 : 0.26, ease: EASE_OUT_SOFT }}
             style={{ width: stage.w, height: stage.h }}
           >
             {/* the speech panel sits on the inner side (phones: above him) and never on top of him */}
@@ -193,16 +200,22 @@ export function GiorgioProvider({ g, locale, tour, children }: { g: G; locale: L
               aria-modal="false"
               aria-labelledby="giorgio-title"
               key={s.topicKey}
-              initial={{ opacity: 0, scale: reduce ? 1 : 0.94 }}
-              animate={{ opacity: 1, scale: 1, transition: { delay: reduce ? 0 : 0.2, duration: 0.26 } }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1, transition: { duration: 0.2 } }}
               className={
-                phone
-                  ? "pointer-events-auto absolute bottom-[calc(100%+8px)] right-0 w-[min(calc(100vw-24px),380px)] rounded-[24px] bg-card p-5 shadow-[0_0_0_1px_var(--color-hairline),var(--shadow-lift)]"
-                  : `pointer-events-auto absolute top-4 w-[380px] rounded-[24px] bg-card p-5 shadow-[0_0_0_1px_var(--color-hairline),var(--shadow-lift)] ${right ? "right-[calc(100%-8px)]" : "left-[calc(100%-8px)]"}`
+                compact
+                  ? "pointer-events-auto absolute left-1/2 top-1/2 max-h-[min(78dvh,550px)] w-[min(calc(100vw-28px),430px)] overflow-y-auto rounded-[24px] bg-card p-5 shadow-[0_0_0_1px_var(--color-hairline),var(--shadow-lift)] sm:p-6"
+                  : phone
+                    ? "pointer-events-auto absolute bottom-[calc(100%+8px)] right-0 max-h-[min(64dvh,510px)] w-[min(calc(100vw-24px),380px)] overflow-y-auto rounded-[24px] bg-card p-5 shadow-[0_0_0_1px_var(--color-hairline),var(--shadow-lift)]"
+                    : "pointer-events-auto absolute right-[calc(100%-8px)] top-4 max-h-[75vh] w-[min(380px,calc(100vw-310px))] overflow-y-auto rounded-[24px] bg-card p-5 shadow-[0_0_0_1px_var(--color-hairline),var(--shadow-lift)]"
               }
+              style={compact ? { translate: "-50% -50%" } : undefined}
             >
-              <span aria-hidden className={phone ? "absolute -bottom-[7px] right-[70px] size-4 rotate-45 bg-card" : `absolute top-10 size-4 rotate-45 bg-card ${right ? "-right-[7px]" : "-left-[7px]"}`} />
-              <p className="text-[13px] font-semibold text-leaf-text">{g.eyebrow}</p>
+              {!compact ? <span aria-hidden className={phone ? "absolute -bottom-[7px] right-[70px] size-4 rotate-45 bg-card" : "absolute -right-[7px] top-10 size-4 rotate-45 bg-card"} /> : null}
+              <div className="mb-1 flex items-center gap-2">
+                {compact ? <Img src={presenters.giorgioGuide} alt="" sizes="44px" className="size-11 rounded-full bg-[#FDEFC4] object-cover object-top" /> : null}
+                <p className="text-[13px] font-semibold text-leaf-text">{g.eyebrow}</p>
+              </div>
               <h2 id="giorgio-title" ref={titleRef} tabIndex={-1} className="mt-1 font-display text-[1.3rem] font-extrabold tracking-[-0.025em] text-ink outline-none">
                 {s.topic!.title}
               </h2>
@@ -247,11 +260,13 @@ export function GiorgioProvider({ g, locale, tour, children }: { g: G; locale: L
                     <X aria-hidden />
                   </button>
                 </div>
+              ) : s.mode === "outro" ? (
+                <button type="button" onClick={close} className="btn btn--outline btn--sm mt-4">{g.close}</button>
               ) : null}
             </motion.div>
 
             {/* stage: a sun disc behind him and a COMPLETE ground pill in front of the photo's bottom edge */}
-            <div aria-hidden className="absolute inset-0">
+            {!compact ? <div aria-hidden className="absolute inset-0">
               <svg viewBox="0 0 260 346" className="absolute inset-0 h-full w-full">
                 <circle cx="130" cy="150" r="112" fill="#FDEFC4" />
                 <circle cx="130" cy="150" r="70" fill="#FE9845" />
@@ -266,7 +281,7 @@ export function GiorgioProvider({ g, locale, tour, children }: { g: G; locale: L
               </motion.div>
               <span className="absolute inset-x-[4%] bottom-0 h-[34px] rounded-full bg-[#4B8B2F]" />
               <span className="absolute inset-x-[16%] bottom-[10px] h-[10px] rounded-full bg-[#B9D68F]" />
-            </div>
+            </div> : null}
           </motion.div>
         ) : null}
       </AnimatePresence>

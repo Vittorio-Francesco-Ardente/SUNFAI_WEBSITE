@@ -23,7 +23,7 @@ export function HomeHero({ d, locale }: { d: Dict["home"]["hero"]; locale: Local
       bg={
         <>
           <Ripple
-            at={{ x: 0.715, y: 1 }}
+            at={{ x: 0.845, y: 1 }}
             atSm={{ x: 0.5, y: 1 }}
             scaleSm={0.92}
             family="sun"
@@ -74,7 +74,7 @@ export function HomeHero({ d, locale }: { d: Dict["home"]["hero"]; locale: Local
           alt={d.peopleAlt}
           priority
           sizes="(max-width: 1023px) 110vw, 56vw"
-          className="left-1/2 w-[112%] -translate-x-1/2 sm:w-[92%] md:w-[78%] lg:left-[71.5%] lg:w-[55%]"
+          className="left-1/2 w-[112%] -translate-x-1/2 sm:w-[92%] md:w-[78%] lg:left-[76%] lg:w-[55%]"
         />
       </div>
     </CanvasPanel>

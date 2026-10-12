@@ -27,7 +27,6 @@ export function JoinContact({ d, locale, personAlt }: { d: Dict["common"]["joinC
         phoneUnit={1.5}
         bg={
           <>
-            <Ripple at={{ x: 0, y: 1 }} family="peach" core={0.06} widths={[0.1, 0.07, 0.07, 0.08]} fan={{ count: 7, from: 2, to: 88 }} />
             <Ripple at={{ x: 1, y: 0 }} family="leaf" core={0.03} widths={[0.03, 0.03]} bands={2} />
             <Ripple at={{ x: 1, y: 1 }} family="sun" core={0.06} widths={[0.06, 0.05, 0.05]} bands={3} hideSm />
           </>

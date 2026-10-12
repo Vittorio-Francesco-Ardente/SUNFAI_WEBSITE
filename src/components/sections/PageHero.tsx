@@ -1,6 +1,7 @@
 import type { CSSProperties, ReactNode } from "react";
 import { Eyebrow, Headline } from "@/components/ui/primitives";
 import { CanvasPanel, PanelMascot, Person } from "@/components/canvas/Canvas";
+import { CreatorEasterEgg } from "@/components/people/CreatorEasterEgg";
 import type { Tone } from "@/lib/ripples";
 import { cn } from "@/lib/cn";
 
@@ -83,7 +84,9 @@ export function PageHero({
         <div className="cp-stage relative lg:static" style={{ "--sm-h": "clamp(230px, 65cqw, 320px)" } as CSSProperties}>
           {/* The *wrapper* owns centring; the mascot's bob animation cannot override its translateX. */}
           <div className={cn("absolute bottom-[22px] left-1/2 z-[2] -translate-x-1/2 lg:bottom-[14%]", left ? "lg:left-[24%]" : "lg:left-[76%]")}>
-            <PanelMascot src={mascot.src} alt={mascot.alt} className="!relative !bottom-auto !left-auto block w-[clamp(185px,56cqw,250px)] lg:w-[clamp(245px,24cqw,335px)]" />
+            <CreatorEasterEgg className="block">
+              <PanelMascot src={mascot.src} alt={mascot.alt} className="!relative !bottom-auto !left-auto block w-[clamp(185px,56cqw,250px)] lg:w-[clamp(245px,24cqw,335px)]" />
+            </CreatorEasterEgg>
           </div>
         </div>
       ) : null}

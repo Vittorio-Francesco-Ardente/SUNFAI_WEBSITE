@@ -238,7 +238,7 @@ export const ardake = {
       },
       "energia-condivisa": {
         title: "Energia condivisa",
-        body: "È l'energia rinnovabile prodotta in eccesso da alcuni soci e consumata, nella stessa fascia oraria, da altri soci della comunità. È su questa energia che il GSE riconosce gli incentivi.",
+        body: "Immagina due soci collegati alla stessa cabina primaria: uno immette in rete energia solare che non usa, mentre l'altro ne consuma nello stesso intervallo di 15 minuti. La quantità che coincide è l’energia condivisa, su cui vengono calcolati gli incentivi del GSE.",
       },
       incentivi: {
         title: "Dove vanno gli incentivi?",

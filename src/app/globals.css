@@ -435,3 +435,38 @@ html.js:not(.sf-noloader) .hero-scope { --hd: 1550ms; }
   .t-h2 { font-size: clamp(1.9rem, 1.2rem + 3vw, 2.3rem); }
   .paper-round { width: 44px; height: 44px; }
 }
+
+/* V8 – deterministic editorial animation, no half-revealed headings on Safari/slow devices. */
+.hl-anim .hl-line { clip-path: none !important; overflow: visible !important; }
+.hl-anim .hl-line > span, .hl-anim .dot {
+  animation: none !important;
+  transform: none !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+/* Backgrounds and photographs start in their final state; this also preserves Tailwind transforms. */
+.canvas-panel .cp-person,
+.canvas-panel .rp > path,
+.canvas-panel .rp > .rp-fan { animation: none !important; animation-play-state: running !important; }
+/* A transparent topbar makes page art overlap the logo and controls. Keep it opaque. */
+.topbar { background: var(--color-paper, #faf7f0) !important; backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important; box-shadow: 0 1px 0 var(--color-hairline) !important; }
+@media (max-width: 1023.98px) {
+  .cp-first { margin-top: 0 !important; padding-top: 0 !important; }
+  .enter, .enter-rise, .enter-scale, .enter-seg { animation: none !important; opacity: 1 !important; transform: none !important; }
+}
+@media (min-width: 1024px) {
+  .enter, .enter-rise { animation-duration: .35s !important; animation-delay: 0s !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .enter, .enter-rise, .enter-scale, .enter-seg { animation: none !important; opacity: 1 !important; }
+}
+
+/* View-linked opacity makes headings/cards half-visible when users scroll fast.
+   Prefer a stable finished layout to a fragile animation on all devices. */
+.reveal, .reveal-stagger > *, .rise, .grow-geo,
+[data-parallax="slow"], [data-parallax="fast"], [data-parallax="spin"] {
+  animation: none !important;
+  opacity: 1 !important;
+  transform: none !important;
+}

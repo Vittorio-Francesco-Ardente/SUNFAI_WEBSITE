@@ -41,8 +41,8 @@ export function MemoryRoom({ items, labels }: { items: Memory[]; labels: Labels 
   const count = items.length;
 
   const move = useCallback((direction: number) => {
-    if (!count) return;
-    setActive((previous) => (previous + direction % count + count) % count);
+    if (count <= 0) return;
+    setActive((previous) => (previous + direction + count) % count);
   }, [count]);
 
   const onPointerDown = (event: PointerEvent<HTMLDivElement>) => {
@@ -96,6 +96,11 @@ export function MemoryRoom({ items, labels }: { items: Memory[]; labels: Labels 
         className="relative isolate mx-auto h-[265px] w-full cursor-grab select-none overflow-hidden rounded-[26px] border border-ink/10 bg-[#f9fbf6] shadow-[0_10px_30px_-26px_rgb(5_42_34/.3)] outline-offset-4 active:cursor-grabbing sm:h-[340px] sm:rounded-[30px] lg:h-[460px] lg:rounded-[36px]"
         style={{ perspective: "1100px", touchAction: "pan-y", ['--memory-step' as string]: "clamp(185px, 26vw, 354px)" }}
       >
+        {/* Always-clickable arrows inside the gallery, separate from the swipe surface. */}
+        <div className="pointer-events-none absolute inset-x-3 top-1/2 z-[30] flex -translate-y-1/2 items-center justify-between sm:inset-x-5">
+          <button type="button" data-memory-prev onPointerDown={(e) => e.stopPropagation()} onPointerUp={(e) => e.stopPropagation()} onClick={(e) => { e.stopPropagation(); move(-1); }} aria-label={labels.prev} className="paper-round pointer-events-auto !size-10 shadow-md sm:!size-12"><ArrowLeft aria-hidden /></button>
+          <button type="button" data-memory-next onPointerDown={(e) => e.stopPropagation()} onPointerUp={(e) => e.stopPropagation()} onClick={(e) => { e.stopPropagation(); move(1); }} aria-label={labels.next} className="paper-round paper-round--dark pointer-events-auto !size-10 shadow-md sm:!size-12"><ArrowRight aria-hidden /></button>
+        </div>
         {items.map((item, i) => {
           let distance = i - active;
           if (distance > count / 2) distance -= count;
@@ -118,7 +123,7 @@ export function MemoryRoom({ items, labels }: { items: Memory[]; labels: Labels 
               data-memory-image={item.id}
               key={item.id}
               aria-hidden={i !== active}
-              className="absolute aspect-[1.35] w-[min(65vw,390px)] overflow-hidden rounded-[18px] border-[3px] border-white bg-white shadow-[0_14px_30px_-22px_rgb(5_42_34/.32)] transition-[transform,opacity] duration-500 ease-[cubic-bezier(.22,1,.36,1)] motion-reduce:transition-none sm:aspect-[1.55] sm:w-[min(45vw,395px)] lg:aspect-[1.57] lg:w-[min(31vw,420px)]"
+              className="absolute aspect-[1.35] w-[min(65vw,390px)] overflow-hidden rounded-[18px] border-[3px] border-white bg-white shadow-[0_14px_30px_-22px_rgb(5_42_34/.32)] transition-[transform,opacity] duration-300 ease-[cubic-bezier(.22,1,.36,1)] motion-reduce:transition-none sm:aspect-[1.55] sm:w-[min(45vw,395px)] lg:aspect-[1.57] lg:w-[min(31vw,420px)]"
               style={photoStyle}
             >
               <Img src={item.image} alt={i === active ? item.alt : ""} sizes="(min-width: 1024px) 420px, (min-width: 640px) 45vw, 65vw" className="h-full w-full object-cover" draggable={false} />
@@ -127,11 +132,11 @@ export function MemoryRoom({ items, labels }: { items: Memory[]; labels: Labels 
         })}
       </div>
       <div className="mt-5 flex flex-wrap items-center justify-center gap-3 sm:gap-4">
-        <button type="button" onClick={() => move(-1)} aria-label={labels.prev} className="paper-round"><ArrowLeft aria-hidden /></button>
+        <button type="button" data-memory-prev onClick={() => move(-1)} aria-label={labels.prev} className="paper-round"><ArrowLeft aria-hidden /></button>
         <span className="min-w-[78px] text-center font-display text-[17px] font-bold tabular-nums text-ink">
           {String(active + 1).padStart(2, "0")} <span className="text-slate">/ {String(count).padStart(2, "0")}</span>
         </span>
-        <button type="button" onClick={() => move(1)} aria-label={labels.next} className="paper-round paper-round--dark"><ArrowRight aria-hidden /></button>
+        <button type="button" data-memory-next onClick={() => move(1)} aria-label={labels.next} className="paper-round paper-round--dark"><ArrowRight aria-hidden /></button>
         <span className="inline-flex items-center gap-1.5 text-[13px] font-medium text-slate sm:ml-3"><Hand aria-hidden className="size-4" /> Trascina per sfogliare</span>
       </div>
       <ol className="sr-only">
