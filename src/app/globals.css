@@ -257,44 +257,31 @@
 @media print { [data-topbar], [data-dock], #sf-loader, footer .seam { display: none !important; } }
 
 /* =====================================================================
-   Intro loader (pack 09) — ≈ 2.2 s, CSS only. Skipped via html.sf-noloader (preflight script).
+   SUN-FAI P02 canvas intro (V33): the user-provided animation.
+   No legacy CSS animation should override its DOM canvas host.
    ===================================================================== */
-#sf-loader { position: fixed; inset: 0; z-index: 100; overflow: hidden; animation: none !important; background: transparent !important; }
-.sf-noloader #sf-loader, .sf-loader-done #sf-loader { display: none; }
-#sf-loader .ld-backdrop {
-  position: absolute;
+#sf-loader-shell {
+  position: fixed;
   inset: 0;
-  background-color: #fffaf0;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 100% 100%;
-  opacity: 0;
-  animation: sf-ld-backdrop-in .45s var(--ease-out-soft) forwards;
+  z-index: 99;
+  background: #FBF8F1;
+  pointer-events: none;
 }
-@keyframes sf-ld-backdrop-in { to { opacity: 1; } }
-#sf-loader .ld-center { position: absolute; inset: 0; display: grid; place-content: center; justify-items: center; gap: 14px;
-  animation: sf-ld-center-out .5s var(--ease-in-out-soft) 1.7s forwards; }
-#sf-loader .ld-mark { width: 96px; height: 96px; overflow: visible; }
-@media (max-width: 767.98px) { #sf-loader .ld-mark { width: 72px; height: 72px; } }
-#sf-loader .mark-ground { opacity: 0; animation: sf-ld-fade-up .3s var(--ease-out-soft) .2s forwards; }
-#sf-loader .mark-sun { transform-box: fill-box; transform-origin: center; transform: scale(.8); opacity: 0;
-  animation: sf-ld-sun .3s var(--ease-out-soft) .3s forwards; }
-#sf-loader .mark-rays path { opacity: 0; transform-box: fill-box; transform-origin: center; transform: scale(.94);
-  animation: sf-ld-ray .25s var(--ease-out-soft) calc(.55s + var(--i) * 35ms) forwards; }
-#sf-loader .ld-word { display: block; width: min(220px, 56vw); aspect-ratio: 594 / 270; overflow: hidden; opacity: 0; filter: blur(6px);
-  animation: sf-ld-word .6s var(--ease-out-soft) .7s forwards; }
-#sf-loader .ld-word img { width: calc(100% * 939 / 594); max-width: none; height: auto; margin-left: calc(-100% * 345 / 594); }
-#sf-loader .ld-tag { font: 500 13px/1 var(--font-sans); letter-spacing: .2em; text-transform: uppercase; color: var(--color-slate);
-  opacity: 0; animation: sf-ld-fade-up .5s var(--ease-out-soft) 1s forwards; }
-@keyframes sf-ld-center-out { to { opacity: 0; transform: scale(1.04); } }
-@keyframes sf-ld-out { to { opacity: 0; visibility: hidden; pointer-events: none; } }
-@keyframes sf-ld-fade-up { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
-@keyframes sf-ld-sun { to { opacity: 1; transform: scale(1); } }
-@keyframes sf-ld-ray { to { opacity: 1; transform: scale(1); } }
-@keyframes sf-ld-word { to { opacity: 1; filter: blur(0); } }
-@media (prefers-reduced-motion: reduce) { #sf-loader { display: none; } }
-/* P02 canvas loader override: the real visuals live in a shadow-root script. Keep the legacy selectors inert. */
-#sf-loader .ld-backdrop, #sf-loader .ld-center { display: none !important; }
+#sf-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  overflow: hidden;
+  animation: none !important;
+  background: transparent !important;
+}
+.sf-noloader #sf-loader-shell,
+.sf-loader-done #sf-loader-shell,
+.sf-noloader #sf-loader,
+.sf-loader-done #sf-loader { display: none !important; }
+@media (prefers-reduced-motion: reduce) {
+  #sf-loader-shell, #sf-loader { display: none !important; }
+}
 
 /* ---------- small extras ---------- */
 .btn .btn-arrow { transition: transform .25s var(--ease-out-soft); }

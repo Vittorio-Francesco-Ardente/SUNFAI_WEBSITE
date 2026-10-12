@@ -1,18 +1,21 @@
 import { asset } from "@/lib/asset";
 
 /**
- * SUN-FAI intro loader (P02 prototype supplied by the user).
- * The actual loader is the canvas/shadow-root implementation contained in
- * `public/loader/sf-loader-p02.js`; it auto-starts unless the preflight adds
- * `html.sf-noloader`.
+ * P02 SUN-FAI canvas intro (the user-provided loader prototype, not the old CSS sequence).
+ * The server-rendered shell prevents the underlying page flashing before the script starts.
+ * The independent canvas host is created and removed by the P02 engine, outside React.
  */
 export function Loader({ tagline: _tagline }: { tagline: string }) {
   return (
     <>
-      <script src={asset("/loader/sf-loader-p02.js")} defer />
-      <noscript>
-        <style>{"#sf-loader{display:none!important}"}</style>
-      </noscript>
+      <div id="sf-loader-shell" aria-hidden="true" />
+      <script src={asset("/loader/sf-loader-p02-v33.js")} defer />
+      <script
+        dangerouslySetInnerHTML={{
+          __html:
+            "(function(){window.addEventListener('load',function(){setTimeout(function(){if(!window.SFLoader){document.documentElement.classList.add('sf-loader-done')}},5200)},{once:true})})();",
+        }}
+      />
     </>
   );
 }
