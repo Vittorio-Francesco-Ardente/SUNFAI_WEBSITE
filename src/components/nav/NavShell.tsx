@@ -81,15 +81,46 @@ export function NavShell({ t, locale }: { t: NavLabels; locale: Locale }) {
   const past = useScrolledPast();
   const [sheet, setSheet] = useState(false);
   const [atTop8, setAtTop8] = useState(true);
+  const [dockReading, setDockReading] = useState(false);
+  const lastScrollY = useRef(0);
+  const dockScrollIntent = useRef(0);
   const items = buildItems(t);
   useKeyboardFlag();
   useLowEndFlag();
 
   useEffect(() => {
-    const onScroll = () => setAtTop8(window.scrollY < 8);
-    onScroll();
+    let frame = 0;
+    lastScrollY.current = window.scrollY;
+    const measure = () => {
+      frame = 0;
+      const y = window.scrollY;
+      const delta = y - lastScrollY.current;
+      setAtTop8(y < 8);
+      if (window.innerWidth < 768) {
+        if (y < 140) {
+          dockScrollIntent.current = 0;
+          setDockReading(false);
+        } else if (Math.abs(delta) > 1) {
+          if (Math.sign(delta) !== Math.sign(dockScrollIntent.current)) dockScrollIntent.current = 0;
+          dockScrollIntent.current = Math.max(-48, Math.min(48, dockScrollIntent.current + delta));
+          if (dockScrollIntent.current < -20) setDockReading(false);
+          else if (y > 230 && dockScrollIntent.current > 30) setDockReading(true);
+        }
+      } else {
+        dockScrollIntent.current = 0;
+        setDockReading(false);
+      }
+      lastScrollY.current = y;
+    };
+    const onScroll = () => { if (!frame) frame = window.requestAnimationFrame(measure); };
+    measure();
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    window.addEventListener("resize", onScroll, { passive: true });
+    return () => {
+      window.cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
   }, []);
 
   useEffect(() => {
@@ -102,6 +133,7 @@ export function NavShell({ t, locale }: { t: NavLabels; locale: Locale }) {
       firstPath.current = false;
       return;
     }
+    setDockReading(false);
     window.scrollTo({ top: 0, left: 0, behavior: "auto" });
     document.getElementById("contenuto")?.focus?.({ preventScroll: true });
   }, [pathname]);
@@ -112,7 +144,7 @@ export function NavShell({ t, locale }: { t: NavLabels; locale: Locale }) {
     <>
       <TopBar t={t} locale={locale} pathname={pathname} items={items} hidden={past} solid={!atTop8} onMenu={() => setSheet(true)} menuOpen={sheet} />
       <DesktopDock t={t} locale={locale} pathname={pathname} items={items} visible={past && !sheet} />
-      <MobileDock t={t} locale={locale} pathname={pathname} items={items} visible={past && !sheet} onMore={() => setSheet(true)} moreOpen={sheet} />
+      <MobileDock t={t} locale={locale} pathname={pathname} items={items} visible={past && !sheet && !dockReading} onMore={() => setSheet(true)} moreOpen={sheet} />
       <MenuSheet t={t} locale={locale} pathname={pathname} items={items} open={sheet} onClose={close} />
     </>
   );

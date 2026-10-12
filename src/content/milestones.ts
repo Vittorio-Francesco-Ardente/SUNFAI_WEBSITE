@@ -4,7 +4,6 @@ import type { SqueezeItem } from "@/components/awards/AwardsSqueeze";
 
 /** Localized milestone records with their placeholder image (chronological). */
 export function milestoneItems(d: Dict): SqueezeItem[] {
-  const alts = d.riconoscimenti.imageAlts as Record<string, string>;
   return d.riconoscimenti.milestones.map((m) => ({
     id: m.id,
     year: m.year,
@@ -14,6 +13,6 @@ export function milestoneItems(d: Dict): SqueezeItem[] {
     caption: m.caption,
     href: m.href,
     image: milestoneImage[m.id],
-    alt: alts[m.id] ?? "",
+    alt: `Fotografia d’archivio SUN-FAI a corredo del traguardo ${m.title}`,
   }));
 }

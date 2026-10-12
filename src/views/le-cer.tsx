@@ -84,7 +84,7 @@ export function LeCerPage({ locale }: { locale: Locale }) {
           </div>
           <div className="mt-10 grid gap-5 lg:grid-cols-12">
             <figure className="reveal card relative overflow-hidden p-6 sm:p-9 lg:col-span-7">
-              <Badge n={2} className="absolute right-0 top-0 w-24 rounded-tr-[var(--radius-card)]" />
+              <Badge n={2} className="absolute right-0 top-0 hidden w-20 rounded-tr-[var(--radius-card)] md:block md:w-24" />
               <Quote className="size-7 text-orange-text" aria-hidden />
               <figcaption className="mt-3 text-[15px] font-semibold text-slate">
                 {p.cosaSono.intro} {inIt}

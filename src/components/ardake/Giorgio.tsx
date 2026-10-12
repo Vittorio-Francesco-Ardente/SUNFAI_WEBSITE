@@ -167,10 +167,17 @@ export function GiorgioProvider({ g, locale, tour, children }: { g: G; locale: L
   useEffect(() => () => window.clearTimeout(outroTimer.current), []);
   useEffect(() => setMobileMinimized(false), [s.topicKey]);
 
+  // The mobile dock and header must not compete with Giorgio's explanation.
+  // This is deliberately a CSS media-query state: desktop and tablet are untouched.
+  useEffect(() => {
+    document.documentElement.dataset.giorgioOpen = s.mode !== "idle" ? "true" : "false";
+    return () => { delete document.documentElement.dataset.giorgioOpen; };
+  }, [s.mode]);
+
   // Only smartphones get the compact floating guide. Tablet/desktop keeps the existing layout.
   const phone = vw.w < 768;
   const compact = phone;
-  const dock = phone ? 104 : 112;
+  const dock = phone ? 18 : 112;
   const stage = phone ? { w: vw.w, h: 240 } : STAGE;
   const right = true;
   const x = phone ? 0 : Math.max(12, vw.w - stage.w - 24);
@@ -206,7 +213,7 @@ export function GiorgioProvider({ g, locale, tour, children }: { g: G; locale: L
               animate={{ opacity: 1, transition: { duration: 0.2 } }}
               className={
                 compact
-                  ? `pointer-events-auto absolute inset-x-3 bottom-0 w-[calc(100%-24px)] overflow-y-auto rounded-[24px] bg-card p-4 shadow-[0_0_0_1px_var(--color-hairline),var(--shadow-lift)] ${mobileMinimized ? "!h-[72px] overflow-hidden" : "max-h-[min(40dvh,310px)]"}`
+                  ? `pointer-events-auto absolute inset-x-3 bottom-0 w-[calc(100%-24px)] overflow-y-auto rounded-[24px] bg-card p-4 shadow-[0_0_0_1px_var(--color-hairline),var(--shadow-lift)] ${mobileMinimized ? "!h-[72px] overflow-hidden" : "max-h-[min(37dvh,255px)]"}`
                   : "pointer-events-auto absolute right-[calc(100%-8px)] top-4 max-h-[75vh] w-[min(380px,calc(100vw-310px))] overflow-y-auto rounded-[24px] bg-card p-5 shadow-[0_0_0_1px_var(--color-hairline),var(--shadow-lift)]"
               }
             >

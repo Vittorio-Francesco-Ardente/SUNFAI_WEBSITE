@@ -86,7 +86,7 @@ export function ArdakePage({ locale }: { locale: Locale }) {
           <div className="grid gap-8 lg:grid-cols-12 lg:items-end">
             <div className="lg:col-span-7">
               <Eyebrow>{a.cosaFa.eyebrow}</Eyebrow>
-              <PrecisioneTitle id="ardake-precisione" title="Ardaké" replay={d.common.ui.replay} className="mt-6 w-[min(100%,720px)] min-w-[280px]" />
+              <PrecisioneTitle id="ardake-precisione" title="Ardaké" replay={d.common.ui.replay} className="mt-6 w-[min(100%,720px)] min-w-0 lg:min-w-[280px]" />
             </div>
             <div className="reveal lg:col-span-5">
               <Headline text={a.cosaFa.title} size="h2s" tone="leaf" />

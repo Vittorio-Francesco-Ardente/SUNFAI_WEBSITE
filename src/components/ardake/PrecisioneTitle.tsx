@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useId, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState, type CSSProperties } from "react";
 import { RotateCcw } from "lucide-react";
 import GEO from "@/lib/ardake-geometry.json";
 import { cn } from "@/lib/cn";
@@ -65,6 +65,9 @@ export function PrecisioneTitle({ title, replay, className, id }: { title: strin
   const renderRef = useRef<((t: number) => void) | null>(null);
   const raf = useRef(0);
   const [played, setPlayed] = useState(false);
+  const [mobilePlaying, setMobilePlaying] = useState(false);
+  const [mobileCycle, setMobileCycle] = useState(0);
+  const mobileRef = useRef<HTMLHeadingElement>(null);
   const uid = `p${useId().replace(/[^a-zA-Z0-9]/g, "")}`;
 
   const play = () => {
@@ -96,6 +99,22 @@ export function PrecisioneTitle({ title, replay, className, id }: { title: strin
     };
     raf.current = requestAnimationFrame(tick);
   };
+
+  // Touch devices: time-based glyph entrance with a fully legible HTML fallback.
+  // Never animate the mask on mobile WebKit: its repaint can leave letters blank.
+  useEffect(() => {
+    const el = mobileRef.current;
+    if (!el) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const io = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        setMobilePlaying(true);
+        io.disconnect();
+      }
+    }, { threshold: 0.25 });
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
 
   useEffect(() => {
     const svg = svgRef.current;
@@ -189,11 +208,15 @@ export function PrecisioneTitle({ title, replay, className, id }: { title: strin
 
   return (
     <div className={cn("relative", className)}>
-      {/* Render real text below desktop breakpoint: Safari/WebKit may fail SVG masks and leave the title blank. */}
-      <h2 id={id} className="font-display text-[clamp(3rem,13vw,5.4rem)] font-extrabold leading-[1.08] tracking-[-0.055em] text-ink lg:sr-only">
-        {title}
-        <span className="text-orange">.</span>
+      {/* The mobile heading is still animated, but uses lightweight, always-readable text glyphs.
+          Its stagger mirrors the desktop reveal without the expensive Safari SVG masking. */}
+      <h2 id={id} ref={mobileRef} aria-label={title} className={`ardake-mobile-title font-display text-[clamp(3rem,13vw,5.4rem)] font-extrabold leading-[1.08] tracking-[-0.055em] text-ink lg:sr-only ${mobilePlaying ? "is-playing" : ""}`}>
+        {Array.from(title).map((letter, i) => (
+          <span key={`${mobileCycle}-${i}`} aria-hidden="true" className="ardake-mobile-letter" style={{ "--glyph-index": i } as CSSProperties}>{letter}</span>
+        ))}
+        <span key={`dot-${mobileCycle}`} aria-hidden="true" className="ardake-mobile-letter text-orange" style={{ "--glyph-index": title.length } as CSSProperties}>.</span>
       </h2>
+      {replay && mobilePlaying && <button type="button" onClick={() => setMobileCycle((v) => v + 1)} className="tlink tlink--ink mt-2 text-[15px] lg:hidden"><span>{replay}</span><RotateCcw aria-hidden /></button>}
       <svg ref={svgRef} viewBox={`${VB.x} ${VB.y} ${VB.w} ${VB.h}`} aria-hidden="true" className="hidden h-auto w-full overflow-visible lg:block">
         <defs>
           <mask id={`${uid}-reveal`} maskUnits="userSpaceOnUse" x={-200} y={-200} width={1200} height={800}>

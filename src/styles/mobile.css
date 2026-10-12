@@ -115,3 +115,15 @@ input:not([type="checkbox"]):not([type="radio"]):not([type="range"]), select, te
 /* ---------- Expensive effects ---------- */
 @media (prefers-reduced-transparency: reduce) { .topbar[data-solid=true] { backdrop-filter: none; background: var(--color-paper, #FAF7F0); } }
 .low-end .topbar[data-solid=true] { backdrop-filter: none; background: rgb(250 247 240 / .96); }   /* set .low-end on <html> when hardwareConcurrency <= 4 */
+
+/* When Giorgio is explaining on a phone, remove both navigation bars without
+   changing document flow. His own panel remains closable and keyboard accessible. */
+@media (max-width: 767.98px) {
+  html[data-giorgio-open="true"] [data-topbar],
+  html[data-giorgio-open="true"] .dock-mobile {
+    visibility: hidden !important;
+    pointer-events: none !important;
+    opacity: 0 !important;
+    transition: opacity .15s ease, visibility .15s !important;
+  }
+}

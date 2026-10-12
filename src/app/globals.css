@@ -470,3 +470,21 @@ html.js:not(.sf-noloader) .hero-scope { --hd: 1550ms; }
   opacity: 1 !important;
   transform: none !important;
 }
+
+/* Ardaké mobile letter animation: reliable on iOS and low-powered devices.
+   Start at 70% opacity instead of hiding the headline, so slow frames never show blank glyphs. */
+@media (max-width: 1023.98px) {
+  .ardake-mobile-title { white-space: nowrap; max-width: 100%; font-size: clamp(2.35rem, 10.5vw, 4.65rem); }
+  .ardake-mobile-letter { display: inline-block; opacity: 1; transform: none; }
+  .ardake-mobile-title.is-playing .ardake-mobile-letter {
+    animation: ardake-mobile-reveal 620ms cubic-bezier(.17,.8,.26,1) both;
+    animation-delay: calc(var(--glyph-index) * 67ms);
+  }
+  @keyframes ardake-mobile-reveal {
+    from { opacity: .7; transform: translateY(10px) scale(.96); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ardake-mobile-title.is-playing .ardake-mobile-letter { animation: none !important; opacity: 1 !important; transform: none !important; }
+}

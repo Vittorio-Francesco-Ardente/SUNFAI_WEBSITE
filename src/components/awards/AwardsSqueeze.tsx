@@ -115,19 +115,22 @@ export function AwardsSqueeze({ items, t, locale, yearUnknown, height = "h-[560p
         </div>
       </div>
 
-      {/* Phones: vertical list */}
-      <ol className="grid gap-3 md:hidden" aria-label={t.region}>
+      {/* Smartphone: photographic milestone cards with separate content; ornaments never cover text. */}
+      <ol className="grid gap-4 pb-3 md:hidden" aria-label={t.region}>
         {items.slice(0, phoneLimit ?? items.length).map((m, i) => (
-          <li key={m.id} className="card relative overflow-hidden">
-            <Badge n={(((i % 4) + 1) as 1 | 2 | 3 | 4)} className="absolute right-0 top-0 z-[1] w-16 rounded-tr-[var(--radius-card)]" />
-            <div className="grid grid-cols-[96px_1fr] gap-4 p-3">
-              <Img src={m.image} alt={m.alt} sizes="96px" className="aspect-square h-auto w-full rounded-[16px] object-cover" />
-              <div className="py-1 pr-10">
-                <p className="text-[13px] font-semibold text-orange-text">{m.label}</p>
-                <h3 className="mt-1 font-display text-[1.1rem] font-extrabold leading-tight tracking-[-0.02em] text-ink">{m.title}</h3>
-                <p className="mt-1 text-[15px] leading-snug text-slate">{m.caption}</p>
+          <li key={m.id} className="card min-w-0 overflow-hidden">
+            <article className="min-w-0">
+              <div className="relative overflow-hidden bg-paper-2">
+                <Img src={m.image} alt={m.alt} sizes="(max-width: 767px) 90vw, 180px" className="aspect-[16/9] h-auto w-full object-cover" />
+                <span className="absolute bottom-3 left-3 rounded-full bg-ink px-3 py-1 text-[12px] font-extrabold tabular-nums text-white">{String(i + 1).padStart(2, "0")}</span>
               </div>
-            </div>
+              <div className="min-w-0 px-5 pb-6 pt-5 sm:px-6">
+                <p className="text-[13px] font-semibold leading-snug text-orange-text">{m.label}</p>
+                <h3 className="mt-2 break-words font-display text-[clamp(1.15rem,5vw,1.5rem)] font-extrabold leading-tight tracking-[-0.025em] text-ink">{m.title}</h3>
+                <p className="mt-3 text-[16px] leading-relaxed text-slate">{m.caption}</p>
+                {m.href ? <Link href={lhref(locale, m.href)} className="tlink mt-3"><span>{t.more}</span><ArrowUpRight aria-hidden /></Link> : null}
+              </div>
+            </article>
           </li>
         ))}
       </ol>

@@ -4,6 +4,7 @@ import { PrecisioneTitle } from "@/components/ardake/PrecisioneTitle";
 import { PhoneMockup } from "@/components/ardake/PhoneMockup";
 import { CanvasPanel, PanelPerson, Ripple } from "@/components/canvas/Canvas";
 import { presenters } from "@/content/team";
+import { Img } from "@/components/ui/Img";
 import type { Locale } from "@/lib/i18n";
 import type { Dict } from "@/content/dict";
 
@@ -61,20 +62,29 @@ export function ArdakeHome({ d, phone, phoneAlt, replay, locale }: { d: Dict["ho
           </div>
           <p className="mt-4 text-[14px] text-slate">{d.madeBy}</p>
         </div>
-        {/* phone: desktop floats in the right column; phones = its own block before Giorgio's stage */}
-        <div className="relative mt-10 flex justify-center lg:col-span-6 lg:mt-0 lg:block">
-          <div className="origin-top scale-[.8] sm:scale-90 lg:absolute lg:left-[14%] lg:top-[3%] lg:origin-top-left lg:-rotate-[6deg] lg:scale-[.92] xl:scale-100">
+        {/* Desktop: retain the concept's original floating phone composition. */}
+        <div className="relative hidden lg:col-span-6 lg:block">
+          <div className="absolute left-[14%] top-[3%] w-[270px] origin-top-left -rotate-[6deg] scale-[.92] xl:scale-100">
             <PhoneMockup t={phone} label={phoneAlt} variant="dashboard" />
           </div>
         </div>
       </div>
-      <PanelPerson
-        src={presenters.giorgioPalmUp}
-        alt={d.giorgioAlt}
-        sizes="(max-width: 1023px) 80vw, 32vw"
-        smH="clamp(260px, 80cqw, 400px)"
-        lgClass="lg:left-auto lg:right-[1%] lg:h-[min(62%,620px)]"
-      />
+
+      {/* Mobile: phone and presenter share ONE stage. No empty block between them. */}
+      <div className="relative mx-auto mt-3 h-[clamp(350px,108vw,480px)] w-full max-w-[550px] overflow-hidden lg:hidden">
+        <div className="absolute left-[4%] top-[0%] z-[1] w-[270px] origin-top-left -rotate-[7deg] scale-[.58] min-[400px]:scale-[.67] sm:left-[9%] sm:scale-[.75]">
+          <PhoneMockup t={phone} label={phoneAlt} variant="dashboard" />
+        </div>
+        <Img src={presenters.giorgioPalmUp} alt={d.giorgioAlt} draggable={false} sizes="(max-width: 639px) 64vw, 48vw" className="pointer-events-none absolute bottom-0 right-[-9%] z-[2] h-[76%] w-auto max-w-none object-contain object-bottom sm:right-[0%] sm:h-[82%]" />
+      </div>
+      <div className="hidden lg:contents">
+        <PanelPerson
+          src={presenters.giorgioPalmUp}
+          alt={d.giorgioAlt}
+          sizes="32vw"
+          lgClass="lg:left-auto lg:right-[1%] lg:h-[min(62%,620px)]"
+        />
+      </div>
     </CanvasPanel>
   );
 }

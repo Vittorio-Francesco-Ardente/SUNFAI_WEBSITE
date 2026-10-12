@@ -26,15 +26,15 @@ export function PinnedSteps({ steps, progressLabel, tone = "orange", numbered = 
 
 function List({ steps, tone, numbered }: { steps: readonly Step[]; tone: string; numbered: boolean }) {
   return (
-    <ol className="relative grid gap-6 pl-12 before:absolute before:bottom-6 before:left-[19px] before:top-4 before:w-[2px] before:rounded before:bg-ink/10">
+    <ol className="relative grid gap-4 md:gap-6 md:pl-12 before:hidden before:absolute before:bottom-6 before:left-[19px] before:top-4 before:w-[2px] before:rounded before:bg-ink/10 md:before:block">
       {steps.map((s, i) => (
-        <li key={s.title} className="reveal relative">
-          <span className={cn("absolute -left-12 top-0 grid size-10 place-items-center rounded-full font-display text-[15px] font-extrabold text-white", tone === "leaf" ? "bg-logo-green" : "bg-orange-btn")}>
+        <li key={s.title} className="reveal relative min-w-0">
+          <span className={cn("absolute left-3 top-3 z-[3] grid size-10 place-items-center rounded-full border-[3px] border-white font-display text-[15px] font-extrabold text-white shadow-sm md:-left-12 md:top-0 md:border-0", tone === "leaf" ? "bg-logo-green" : "bg-orange-btn")}>
             {numbered ? i + 1 : ""}
           </span>
-          <div className="card overflow-hidden">
+          <div className="card min-w-0 overflow-hidden">
             {s.image ? (
-              <div className="border-b border-[var(--color-hairline)] bg-[#fcfbf7] p-4">
+              <div className="border-b border-[var(--color-hairline)] bg-[#fcfbf7] px-4 pb-4 pt-12 md:p-4">
                 <Img src={s.image} alt={s.alt ?? ""} sizes="(max-width: 1023px) 85vw, 40vw" className="mx-auto aspect-[4/3] h-auto w-full max-w-[420px] object-contain" />
               </div>
             ) : null}
