@@ -128,6 +128,12 @@ export const home = {
     approx: "Posizioni indicative.",
     attribution: "© OpenStreetMap · OpenFreeMap",
     legendLabel: "Legenda",
+    overview: "Panoramica",
+    geographic: "Mappa geografica",
+    approxArea: "Provincia di Bergamo · posizioni indicative",
+    affectedTowns: "Comuni interessati",
+    tileFailure: "Cartografia non disponibile. Usa la panoramica o riprova.",
+    retry: "Riprova",
   },
   team: {
     eyebrow: "Il nostro team",

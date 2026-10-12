@@ -99,7 +99,7 @@ export function PrecisioneTitle({ title, replay, className, id }: { title: strin
 
   useEffect(() => {
     const svg = svgRef.current;
-    if (!svg) return;
+    if (!svg || window.innerWidth < 1024) return;
     const q = <T extends Element>(s: string) => svg.querySelector(s) as T;
     const eye = geo.pupil;
     const maskCircle = q<SVGCircleElement>("[data-mask-circle]");
@@ -189,10 +189,12 @@ export function PrecisioneTitle({ title, replay, className, id }: { title: strin
 
   return (
     <div className={cn("relative", className)}>
-      <h2 id={id} className="sr-only">
+      {/* Render real text below desktop breakpoint: Safari/WebKit may fail SVG masks and leave the title blank. */}
+      <h2 id={id} className="font-display text-[clamp(3rem,13vw,5.4rem)] font-extrabold leading-[1.08] tracking-[-0.055em] text-ink lg:sr-only">
         {title}
+        <span className="text-orange">.</span>
       </h2>
-      <svg ref={svgRef} viewBox={`${VB.x} ${VB.y} ${VB.w} ${VB.h}`} aria-hidden="true" className="block h-auto w-full overflow-visible">
+      <svg ref={svgRef} viewBox={`${VB.x} ${VB.y} ${VB.w} ${VB.h}`} aria-hidden="true" className="hidden h-auto w-full overflow-visible lg:block">
         <defs>
           <mask id={`${uid}-reveal`} maskUnits="userSpaceOnUse" x={-200} y={-200} width={1200} height={800}>
             <rect x={-200} y={-200} width={1200} height={800} fill="black" />

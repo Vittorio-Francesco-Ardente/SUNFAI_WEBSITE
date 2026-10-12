@@ -5,78 +5,66 @@ import * as maplibregl from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import { configurations } from "@/lib/configurations";
 import { asset } from "@/lib/asset";
-import type { Dict } from "@/content/dict";
 
 maplibregl.setWorkerUrl(asset("/vendor/maplibre-gl-worker.mjs"));
 
-/** Interactive map centred on the selected configuration; markers use the configuration centres instead of noisy duplicate comune pins. */
-export function ConfigMapGL({
-  statusColor,
-  labels,
-  selected,
-  onSelect,
-}: {
-  statusColor: Record<string, string>;
-  labels: Dict["home"]["map"];
+/** Actual geographic base map. The parent preserves an interactive static fallback on network failure. */
+export function ConfigMapGL({ selected, onSelect, onReady, onFailure }: {
   selected: string;
   onSelect: (code: string) => void;
+  onReady: () => void;
+  onFailure: () => void;
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const mapRef = useRef<maplibregl.Map | null>(null);
-  const markersRef = useRef<maplibregl.Marker[]>([]);
+  const readyRef = useRef(false);
+  const latest = useRef({ onSelect, onReady, onFailure });
+  useEffect(() => { latest.current = { onSelect, onReady, onFailure }; }, [onSelect, onReady, onFailure]);
 
   useEffect(() => {
-    if (!ref.current || mapRef.current) return;
+    if (!ref.current) return;
     const map = new maplibregl.Map({
       container: ref.current,
-      style: "https://tiles.openfreemap.org/styles/positron/style.json",
-      center: [9.598, 45.638],
-      zoom: 10.9,
-      cooperativeGestures: true,
-      attributionControl: { compact: true },
+      style: {
+        version: 8,
+        sources: { osm: { type: "raster", tiles: ["https://tile.openstreetmap.org/{z}/{x}/{y}.png"], tileSize: 256, attribution: "© OpenStreetMap contributors" } },
+        layers: [{ id: "osm", type: "raster", source: "osm" }],
+      },
+      center: [9.60, 45.64], zoom: 11,
+      attributionControl: { compact: true }, cooperativeGestures: true,
     });
-    map.addControl(new maplibregl.NavigationControl({ showCompass: false }), "top-right");
     mapRef.current = map;
-
+    map.addControl(new maplibregl.NavigationControl({ showCompass: false }), "top-right");
+    const timer = window.setTimeout(() => { if (!readyRef.current) latest.current.onFailure(); }, 10000);
+    const fail = () => { if (!readyRef.current) latest.current.onFailure(); };
+    map.on("error", fail);
+    map.once("load", () => {
+      // Require tiles (not just the style) to render before hiding the safe schematic.
+      map.once("idle", () => { readyRef.current = true; window.clearTimeout(timer); latest.current.onReady(); });
+    });
+    const markers: maplibregl.Marker[] = [];
     for (const c of configurations) {
       if (!c.center) continue;
-      const el = document.createElement("button");
-      el.type = "button";
-      el.setAttribute("aria-label", `${c.code} · ${labels.legend[c.status]}`);
-      el.style.cssText = `width:26px;height:26px;border-radius:999px;background:${statusColor[c.status]};border:4px solid #fff;box-shadow:0 4px 12px rgb(5 42 34/.22);cursor:pointer;transition:transform .2s, box-shadow .2s`;
-      el.onmouseenter = () => {
-        el.style.transform = "scale(1.08)";
-        el.style.boxShadow = "0 8px 18px rgb(5 42 34/.26)";
-      };
-      el.onmouseleave = () => {
-        el.style.transform = "";
-        el.style.boxShadow = "0 4px 12px rgb(5 42 34/.22)";
-      };
-      el.onclick = () => onSelect(c.code);
-      const popup = new maplibregl.Popup({ offset: 16, closeButton: false }).setHTML(
-        `<strong>${c.code}</strong><br/>${labels.legend[c.status]}<br/>${labels.comuni}: ${c.comuni.join(", ")}`,
-      );
-      const marker = new maplibregl.Marker({ element: el }).setLngLat(c.center).setPopup(popup).addTo(map);
-      markersRef.current.push(marker);
+      const node = document.createElement("button");
+      node.type = "button";
+      node.setAttribute("aria-label", `${c.code}: ${c.comuni.join(", ")}`);
+      node.style.cssText = "width:32px;height:32px;border-radius:50%;border:4px solid white;background:#478A2B;box-shadow:0 2px 9px #052a2260;cursor:pointer";
+      node.addEventListener("click", () => latest.current.onSelect(c.code));
+      markers.push(new maplibregl.Marker({ element: node }).setLngLat(c.center).addTo(map));
     }
-
     return () => {
-      markersRef.current.forEach((m) => m.remove());
-      markersRef.current = [];
+      window.clearTimeout(timer);
+      markers.forEach((m) => m.remove());
       map.remove();
       mapRef.current = null;
     };
-  }, [labels, onSelect, statusColor]);
+  }, []);
 
   useEffect(() => {
-    const map = mapRef.current;
-    if (!map) return;
-    const current = configurations.find((c) => c.code === selected && c.center);
-    if (!current?.center) return;
-    map.flyTo({ center: current.center, zoom: 11.4, speed: 0.8, essential: true });
-    const marker = markersRef.current[configurations.findIndex((c) => c.code === selected)];
-    marker?.togglePopup();
+    const c = configurations.find((item) => item.code === selected);
+    if (c?.center && mapRef.current) {
+      mapRef.current.easeTo({ center: c.center, zoom: 11.5, duration: 350 });
+    }
   }, [selected]);
-
-  return <div ref={ref} className="absolute inset-0" />;
+  return <div ref={ref} className="absolute inset-0" aria-label="Mappa geografica delle configurazioni SUN-FAI" />;
 }

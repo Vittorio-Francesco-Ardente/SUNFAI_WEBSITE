@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { createContext, useCallback, useContext, useEffect, useRef, useState, type ReactNode } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import { ArrowLeft, ArrowRight, Route, X } from "lucide-react";
+import { ArrowLeft, ArrowRight, ChevronDown, ChevronUp, Route, X } from "lucide-react";
 import { Img } from "@/components/ui/Img";
 import { lhref, type Locale } from "@/lib/i18n";
 import { EASE_OUT_SOFT } from "@/lib/motion";
@@ -47,6 +47,7 @@ const STAGE = { w: 260, h: 346 };
 export function GiorgioProvider({ g, locale, tour, children }: { g: G; locale: Locale; /** enables the guided tour on this page */ tour?: string; topics?: TopicKey[]; greeting?: boolean; children: ReactNode }) {
   const [s, setS] = useState<State>(IDLE);
   const [rect, setRect] = useState<DOMRect | null>(null);
+  const [mobileMinimized, setMobileMinimized] = useState(false);
   const [vw, setVw] = useState({ w: 1440, h: 900 });
   const reduce = useReducedMotion();
   const titleRef = useRef<HTMLHeadingElement>(null);
@@ -164,16 +165,17 @@ export function GiorgioProvider({ g, locale, tour, children }: { g: G; locale: L
   }, [s.mode, s.step, s.topicKey, close, go]);
 
   useEffect(() => () => window.clearTimeout(outroTimer.current), []);
+  useEffect(() => setMobileMinimized(false), [s.topicKey]);
 
-  const phone = vw.w < 1024;
-  const compact = vw.h < 700 || vw.w < 410;
-  const dock = phone ? 100 : 112;
-  const stage = compact ? { w: vw.w, h: vw.h } : phone ? { w: 180, h: 240 } : STAGE;
-  // Pin to the right edge so the portrait can never be cropped off the LEFT edge.
+  // Only smartphones get the compact floating guide. Tablet/desktop keeps the existing layout.
+  const phone = vw.w < 768;
+  const compact = phone;
+  const dock = phone ? 104 : 112;
+  const stage = phone ? { w: vw.w, h: 240 } : STAGE;
   const right = true;
-  const x = compact ? 0 : Math.max(12, vw.w - stage.w - (phone ? 12 : 24));
+  const x = phone ? 0 : Math.max(12, vw.w - stage.w - 24);
   const anchorTop = rect ? rect.top + 40 : vw.h - stage.h - dock;
-  const y = compact ? 0 : phone ? Math.max(0, vw.h - stage.h - dock) : Math.max(96, Math.min(anchorTop, vw.h - stage.h - dock));
+  const y = phone ? Math.max(0, vw.h - stage.h - dock) : Math.max(96, Math.min(anchorTop, vw.h - stage.h - dock));
   const open = s.mode !== "idle" && s.topic;
   const ctx: Ctx = { explain, start: () => go(0), label: (t) => g.open.replace("{topic}", g.topics[t].title), startLabel: g.tourStart, tour: !!tour };
 
@@ -204,22 +206,25 @@ export function GiorgioProvider({ g, locale, tour, children }: { g: G; locale: L
               animate={{ opacity: 1, transition: { duration: 0.2 } }}
               className={
                 compact
-                  ? "pointer-events-auto absolute left-1/2 top-1/2 max-h-[min(78dvh,550px)] w-[min(calc(100vw-28px),430px)] overflow-y-auto rounded-[24px] bg-card p-5 shadow-[0_0_0_1px_var(--color-hairline),var(--shadow-lift)] sm:p-6"
-                  : phone
-                    ? "pointer-events-auto absolute bottom-[calc(100%+8px)] right-0 max-h-[min(64dvh,510px)] w-[min(calc(100vw-24px),380px)] overflow-y-auto rounded-[24px] bg-card p-5 shadow-[0_0_0_1px_var(--color-hairline),var(--shadow-lift)]"
-                    : "pointer-events-auto absolute right-[calc(100%-8px)] top-4 max-h-[75vh] w-[min(380px,calc(100vw-310px))] overflow-y-auto rounded-[24px] bg-card p-5 shadow-[0_0_0_1px_var(--color-hairline),var(--shadow-lift)]"
+                  ? `pointer-events-auto absolute inset-x-3 bottom-0 w-[calc(100%-24px)] overflow-y-auto rounded-[24px] bg-card p-4 shadow-[0_0_0_1px_var(--color-hairline),var(--shadow-lift)] ${mobileMinimized ? "!h-[72px] overflow-hidden" : "max-h-[min(40dvh,310px)]"}`
+                  : "pointer-events-auto absolute right-[calc(100%-8px)] top-4 max-h-[75vh] w-[min(380px,calc(100vw-310px))] overflow-y-auto rounded-[24px] bg-card p-5 shadow-[0_0_0_1px_var(--color-hairline),var(--shadow-lift)]"
               }
-              style={compact ? { translate: "-50% -50%" } : undefined}
             >
               {!compact ? <span aria-hidden className={phone ? "absolute -bottom-[7px] right-[70px] size-4 rotate-45 bg-card" : "absolute -right-[7px] top-10 size-4 rotate-45 bg-card"} /> : null}
               <div className="mb-1 flex items-center gap-2">
-                {compact ? <Img src={presenters.giorgioGuide} alt="" sizes="44px" className="size-11 rounded-full bg-[#FDEFC4] object-cover object-top" /> : null}
-                <p className="text-[13px] font-semibold text-leaf-text">{g.eyebrow}</p>
+                {compact ? <Img src={presenters.giorgioGuide} alt="" sizes="42px" className="size-10 shrink-0 rounded-full bg-[#FDEFC4] object-cover object-top" /> : null}
+                <p className="min-w-0 flex-1 text-[13px] font-semibold text-leaf-text">{compact && mobileMinimized ? s.topic!.title : g.eyebrow}</p>
+                {compact && (
+                  <button type="button" onClick={() => setMobileMinimized((m) => !m)} aria-label={mobileMinimized ? "Espandi la spiegazione di Giorgio" : "Riduci la spiegazione di Giorgio"} aria-expanded={!mobileMinimized} className="grid size-10 shrink-0 place-items-center rounded-full bg-paper-2 text-ink">
+                    {mobileMinimized ? <ChevronUp className="size-5" aria-hidden /> : <ChevronDown className="size-5" aria-hidden />}
+                  </button>
+                )}
               </div>
+              <div hidden={compact && mobileMinimized}>
               <h2 id="giorgio-title" ref={titleRef} tabIndex={-1} className="mt-1 font-display text-[1.3rem] font-extrabold tracking-[-0.025em] text-ink outline-none">
                 {s.topic!.title}
               </h2>
-              <p className="mt-2 text-[16px] leading-relaxed text-ink/85">{s.topic!.body}</p>
+              <p className="mt-2 text-[15px] leading-relaxed text-ink/85 sm:text-[16px]">{s.topic!.body}</p>
               {s.topic!.more ? (
                 <Link href={lhref(locale, s.topic!.more)} className="tlink text-[15px]">
                   <span>{g.more}</span>
@@ -263,6 +268,7 @@ export function GiorgioProvider({ g, locale, tour, children }: { g: G; locale: L
               ) : s.mode === "outro" ? (
                 <button type="button" onClick={close} className="btn btn--outline btn--sm mt-4">{g.close}</button>
               ) : null}
+              </div>
             </motion.div>
 
             {/* stage: a sun disc behind him and a COMPLETE ground pill in front of the photo's bottom edge */}

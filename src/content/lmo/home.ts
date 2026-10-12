@@ -117,6 +117,12 @@ export const home: Dict["home"] = {
     approx: "Posissiù indicatìe.",
     attribution: "© OpenStreetMap · OpenFreeMap",
     legendLabel: "Legènda",
+    overview: "Panoràmica",
+    geographic: "Mapa geografica",
+    approxArea: "Provìnsa de Bèrghem · posissiù indicatìe",
+    affectedTowns: "Cümü interessàcc",
+    tileFailure: "La mapa geografica l’è mia disponìbel. Dòpera la panoràmica o pròa amò.",
+    retry: "Pròa amò",
   },
   team: {
     eyebrow: "La nòsta squadra",
