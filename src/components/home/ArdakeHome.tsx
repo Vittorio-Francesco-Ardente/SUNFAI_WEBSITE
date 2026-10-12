@@ -64,7 +64,7 @@ export function ArdakeHome({ d, phone, phoneAlt, replay, locale }: { d: Dict["ho
         </div>
         {/* Desktop: retain the concept's original floating phone composition. */}
         <div className="relative hidden lg:col-span-6 lg:block">
-          <div className="absolute left-[14%] top-[3%] w-[270px] origin-top-left -rotate-[6deg] scale-[.92] xl:scale-100">
+          <div className="absolute -left-[12%] top-[3%] w-[270px] origin-top-left -rotate-[6deg] scale-[.82] xl:-left-[6%] xl:scale-[.9] 2xl:left-[8%] 2xl:scale-100">
             <PhoneMockup t={phone} label={phoneAlt} variant="dashboard" />
           </div>
         </div>
@@ -82,7 +82,7 @@ export function ArdakeHome({ d, phone, phoneAlt, replay, locale }: { d: Dict["ho
           src={presenters.giorgioPalmUp}
           alt={d.giorgioAlt}
           sizes="32vw"
-          lgClass="lg:left-auto lg:right-[1%] lg:h-[min(62%,620px)]"
+          lgClass="lg:left-auto lg:right-[-3%] lg:h-[min(58%,580px)] xl:right-[0%] xl:h-[min(62%,620px)]"
         />
       </div>
     </CanvasPanel>

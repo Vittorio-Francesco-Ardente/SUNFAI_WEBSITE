@@ -306,10 +306,10 @@ function TopBar({
         solid && "bg-paper/92 shadow-[0_1px_0_var(--color-hairline),0_14px_32px_-28px_rgb(5_42_34/.45)] backdrop-blur-[14px]",
       )}
     >
-      <div className="container-x flex h-full items-center gap-4 xl:gap-6">
+      <div className="container-x flex h-full items-center gap-2 lg:gap-2.5 xl:gap-3 2xl:gap-5">
         <Logo locale={locale} t={t} />
-        <nav aria-label={t.navMain} className="hidden min-w-0 flex-1 justify-center 2xl:flex">
-          <ul className="flex items-center gap-3 xl:gap-7">
+        <nav aria-label={t.navMain} className="hidden min-w-0 flex-1 justify-center lg:flex">
+          <ul className="flex min-w-0 items-center gap-2 lg:gap-2 xl:gap-3 2xl:gap-6">
             {items.main.map((it) => {
               const active = isActive(pathname, it.href);
               return (
@@ -318,7 +318,7 @@ function TopBar({
                     href={lhref(locale, it.href)}
                     aria-current={active ? "page" : undefined}
                     className={cn(
-                      "relative inline-flex h-11 items-center whitespace-nowrap text-[15px] transition-colors xl:text-[16px] 2xl:text-[17px]",
+                      "relative inline-flex h-11 items-center whitespace-nowrap text-[12px] font-medium transition-colors xl:text-[13px] 2xl:text-[16px]",
                       active ? "font-semibold text-orange-text" : "font-medium text-ink/92 hover:text-ink",
                       "after:absolute after:inset-x-0 after:bottom-[3px] after:h-[2px] after:origin-left after:rounded-full after:bg-orange after:transition-transform after:duration-300",
                       active ? "after:scale-x-100" : "after:scale-x-0 hover:after:scale-x-100",
@@ -337,7 +337,7 @@ function TopBar({
           </div>
           <Link
             href={lhref(locale, items.contact.href)}
-            className="btn btn--outline btn--sm hidden md:inline-flex"
+            className="btn btn--outline btn--sm hidden md:inline-flex lg:hidden xl:inline-flex"
             aria-current={isActive(pathname, items.contact.href) ? "page" : undefined}
           >
             {t.contattaci}
@@ -358,9 +358,9 @@ function TopBar({
           </button>
         </div>
       </div>
-      {/* Tablet navigation uses the same seven destinations as desktop, not a menu-only header.
-          The second row preserves legible spacing from 768 to 1535px. */}
-      <nav aria-label={t.navMain} className="hidden md:flex 2xl:hidden min-h-[48px] w-full items-center justify-center border-t border-ink/10 px-4">
+      {/* Tablets in portrait retain all seven destinations in a second row when they cannot
+          fit legibly on one line. Landscape tablets use the same one-row navigation as desktop. */}
+      <nav aria-label={t.navMain} className="hidden md:flex lg:hidden min-h-[48px] w-full items-center justify-center border-t border-ink/10 px-4">
         <ul className="mx-auto flex w-full max-w-[1110px] items-center justify-between gap-2">
           {items.main.map((it) => {
             const active = isActive(pathname, it.href);
