@@ -287,7 +287,7 @@ export const pages: Dict["pages"] = {
     hero: {
       eyebrow: "Notìssie",
       title: "Cosa al süced in *cooperatìa*",
-      lead: "Configurassiù, Cümü, riconossimèncc. I novità piö frèsche m'i publica töte i setimane in sö Instagram e LinkedIn.",
+      lead: "Configurassiù, Cümü, riconossimèncc. I novità piö frèsche m'i publica töte i setimane in sö Instagram, LinkedIn e Facebook.",
       presenterAlt: "Andrea Belotti de la squadra SUN-FAI",
     },
     featured: "In evidènsa",

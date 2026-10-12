@@ -20,7 +20,7 @@ import {
   type LucideProps,
 } from "lucide-react";
 import { SunMark, CornerSunrise } from "@/components/geometry/shapes";
-import { InstagramIcon, LinkedinIcon } from "@/components/ui/SocialIcons";
+import { FacebookIcon, InstagramIcon, LinkedinIcon } from "@/components/ui/SocialIcons";
 import { Img } from "@/components/ui/Img";
 import { asset } from "@/lib/asset";
 import { cn } from "@/lib/cn";
@@ -96,19 +96,16 @@ export function NavShell({ t, locale }: { t: NavLabels; locale: Locale }) {
       const y = window.scrollY;
       const delta = y - lastScrollY.current;
       setAtTop8(y < 8);
-      if (window.innerWidth < 768) {
-        if (y < 140) {
-          dockScrollIntent.current = 0;
-          setDockReading(false);
-        } else if (Math.abs(delta) > 1) {
-          if (Math.sign(delta) !== Math.sign(dockScrollIntent.current)) dockScrollIntent.current = 0;
-          dockScrollIntent.current = Math.max(-48, Math.min(48, dockScrollIntent.current + delta));
-          if (dockScrollIntent.current < -20) setDockReading(false);
-          else if (y > 230 && dockScrollIntent.current > 30) setDockReading(true);
-        }
-      } else {
+      // Keep reading content visible on every device: the floating dock retracts
+      // when scrolling down and returns when scrolling up (not only on phones).
+      if (y < 140) {
         dockScrollIntent.current = 0;
         setDockReading(false);
+      } else if (Math.abs(delta) > 1) {
+        if (Math.sign(delta) !== Math.sign(dockScrollIntent.current)) dockScrollIntent.current = 0;
+        dockScrollIntent.current = Math.max(-48, Math.min(48, dockScrollIntent.current + delta));
+        if (dockScrollIntent.current < -20) setDockReading(false);
+        else if (y > 230 && dockScrollIntent.current > 30) setDockReading(true);
       }
       lastScrollY.current = y;
     };
@@ -143,7 +140,7 @@ export function NavShell({ t, locale }: { t: NavLabels; locale: Locale }) {
   return (
     <>
       <TopBar t={t} locale={locale} pathname={pathname} items={items} hidden={past} solid={!atTop8} onMenu={() => setSheet(true)} menuOpen={sheet} />
-      <DesktopDock t={t} locale={locale} pathname={pathname} items={items} visible={past && !sheet} />
+      <DesktopDock t={t} locale={locale} pathname={pathname} items={items} visible={past && !sheet && !dockReading} />
       <MobileDock t={t} locale={locale} pathname={pathname} items={items} visible={past && !sheet && !dockReading} onMore={() => setSheet(true)} moreOpen={sheet} />
       <MenuSheet t={t} locale={locale} pathname={pathname} items={items} open={sheet} onClose={close} />
     </>
@@ -354,12 +351,12 @@ function DesktopDock({ t, locale, pathname, items, visible }: { t: NavLabels; lo
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: reduce ? 0 : 20 }}
           transition={{ duration: 0.28, ease: EASE_OUT_SOFT }}
-          className="pointer-events-none fixed inset-x-0 bottom-[calc(24px+var(--safe-b))] z-50 hidden justify-center 2xl:flex"
+          className="pointer-events-none fixed inset-x-0 bottom-[calc(28px+var(--safe-b))] z-50 hidden justify-center 2xl:flex"
         >
           <div
             onMouseMove={(e) => canHover && !reduce && mouseX.set(e.clientX)}
             onMouseLeave={() => mouseX.set(Infinity)}
-            className="pointer-events-auto flex h-[64px] items-end gap-1.5 rounded-full bg-dock px-2.5 pb-[10px] shadow-[0_0_0_1px_var(--color-hairline),var(--shadow-lift)]"
+            className="pointer-events-auto flex h-[68px] items-center justify-center gap-1.5 rounded-full bg-dock px-3 py-2 shadow-[0_0_0_1px_var(--color-hairline),var(--shadow-lift)]"
           >
             {list.map((it) => (
               <DockItem key={it.key} item={it} locale={locale} active={isActive(pathname, it.href)} mouseX={mouseX} />
@@ -372,7 +369,7 @@ function DesktopDock({ t, locale, pathname, items, visible }: { t: NavLabels; lo
             <Link
               href={lhref(locale, items.join.href)}
               aria-current={isActive(pathname, items.join.href) ? "page" : undefined}
-              className="btn btn--primary btn--sm ml-1 self-center"
+              className="btn btn--primary btn--sm ml-1 !inline-flex !h-11 shrink-0 items-center justify-center whitespace-nowrap !px-5 !py-0 !leading-none"
             >
               {t.diventaSocio}
               <ArrowRight aria-hidden strokeWidth={2.2} />
@@ -677,6 +674,9 @@ function MenuSheet({ t, locale, pathname, items, open, onClose }: { t: NavLabels
                 </a>
                 <a href={social.linkedin.url} target="_blank" rel="noopener noreferrer" aria-label={social.linkedin.label} className="paper-round">
                   <LinkedinIcon className="size-[18px]" />
+                </a>
+                <a href={social.facebook.url} target="_blank" rel="noopener noreferrer" aria-label={social.facebook.label} className="paper-round">
+                  <FacebookIcon className="size-[18px]" />
                 </a>
               </div>
             </div>

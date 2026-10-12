@@ -3,7 +3,7 @@ import { ArrowRight, ArrowUpRight, ChevronDown, Mail } from "lucide-react";
 import { CanvasPanel, Confetto, PanelMascot, Ripple } from "@/components/canvas/Canvas";
 import { Headline } from "@/components/ui/primitives";
 import { Img } from "@/components/ui/Img";
-import { InstagramIcon, LinkedinIcon } from "@/components/ui/SocialIcons";
+import { FacebookIcon, InstagramIcon, LinkedinIcon } from "@/components/ui/SocialIcons";
 import { FooterLangSwitch } from "./FooterLangSwitch";
 import { lhref, type Locale } from "@/lib/i18n";
 import { documentUrl, site, social } from "@/lib/site";
@@ -132,6 +132,9 @@ export function Footer({ d, locale }: { d: Dict; locale: Locale }) {
                 </a>
                 <a href={social.linkedin.url} target="_blank" rel="noopener noreferrer" aria-label={social.linkedin.label} className="grid size-11 place-items-center rounded-full text-white shadow-[inset_0_0_0_1.5px_rgb(255_255_255/.6)] hover:bg-white/10">
                   <LinkedinIcon className="size-[18px]" />
+                </a>
+                <a href={social.facebook.url} target="_blank" rel="noopener noreferrer" aria-label={social.facebook.label} className="grid size-11 place-items-center rounded-full text-white shadow-[inset_0_0_0_1.5px_rgb(255_255_255/.6)] hover:bg-white/10">
+                  <FacebookIcon className="size-[18px]" />
                 </a>
                 <a href={`mailto:${site.email}`} aria-label={site.email} className="grid size-11 place-items-center rounded-full text-white shadow-[inset_0_0_0_1.5px_rgb(255_255_255/.6)] hover:bg-white/10">
                   <Mail className="size-[18px]" aria-hidden />

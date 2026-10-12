@@ -510,3 +510,30 @@ html[data-giorgio-open="true"] [data-dock] {
 }
 /* Avoid a browser-level horizontal scrollbar when Giorgio is open. */
 html[data-giorgio-open="true"] { overflow-x: clip; }
+
+/* Ardaké wordmark — return to a clean staggered entrance: hidden first, then fully visible.
+   No semi-transparent resting state. */
+.ardake-wordmark {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: flex-end;
+  gap: clamp(2px, 0.65vw, 10px);
+  line-height: .82;
+}
+.ardake-wordmark-letter {
+  display: inline-block;
+  font-family: var(--font-display), ui-sans-serif, system-ui, sans-serif;
+  font-size: clamp(3.15rem, 10.8vw, 7.9rem);
+  font-weight: 900;
+  letter-spacing: -0.065em;
+  transform-origin: 50% 100%;
+  will-change: transform, opacity;
+}
+@keyframes ardake-wordmark-pop {
+  from { opacity: 0; transform: translateY(18px) scale(.9); }
+  65% { opacity: 1; }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ardake-wordmark-letter { opacity: 1 !important; animation: none !important; transform: none !important; }
+}

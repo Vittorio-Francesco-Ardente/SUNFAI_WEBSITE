@@ -143,7 +143,7 @@ export function RiconoscimentiPage({ locale }: { locale: Locale }) {
             <Eyebrow>{r.squeeze.eyebrow}</Eyebrow>
             <Headline text={r.squeeze.title} tone="leaf" className="mt-5" />
           </div>
-          <AwardsSqueeze items={milestoneItems(d)} t={r.squeeze} locale={locale} yearUnknown={r.yearUnknown} height="h-[600px]" />
+          <AwardsSqueeze items={milestoneItems(d)} t={r.squeeze} locale={locale} yearUnknown={r.yearUnknown} height="h-[548px]" />
         </div>
       </SectionPanel>
 

@@ -11,7 +11,7 @@ import { Confetto, HalfDisc, PanelPerson, Ripple } from "@/components/canvas/Can
 import { PageHero } from "@/components/sections/PageHero";
 import { PinnedSteps } from "@/components/sections/PinnedSteps";
 import { JoinContact } from "@/components/sections/JoinContact";
-import { cn } from "@/lib/cn";
+import { OltreCarousel } from "@/components/cosa-facciamo/OltreCarousel";
 
 export const cosafacciamoMeta = (locale: Locale) => {
   const p = getDict(locale).pages.cosaFacciamo;
@@ -188,18 +188,9 @@ export function CosaFacciamoPage({ locale }: { locale: Locale }) {
             <Eyebrow>{p.oltre.eyebrow}</Eyebrow>
             <Headline text={p.oltre.title} className="mt-5" />
           </div>
-          <ul className="rail rail--to-grid mt-10 pb-2 md:gap-4" style={{ ["--cols" as string]: 3 }}>
-            {p.oltre.items.map((it, i) => (
-              <li key={it.text} className={cn("reveal", i >= 3 && "md:col-span-1")}>
-                <article className="card hover-card flex h-full flex-col overflow-hidden">
-                  <div className="overflow-hidden border-b border-[var(--color-hairline)] bg-[#fcfbf7] p-5">
-                    <Img src={OLTRE_SCENES[i]} alt={it.alt} sizes="(max-width: 767px) 84vw, 30vw" className="hc-scene aspect-[4/3] h-auto w-full object-contain" />
-                  </div>
-                  <p className="p-5 text-[16px] font-medium leading-relaxed text-ink sm:p-6">{it.text}</p>
-                </article>
-              </li>
-            ))}
-          </ul>
+          <div className="mt-10">
+            <OltreCarousel items={p.oltre.items.map((it, i) => ({ image: OLTRE_SCENES[i], alt: it.alt, text: it.text }))} />
+          </div>
           <div className="reveal mt-10 grid gap-6 lg:grid-cols-12 lg:items-center">
             <p className="t-lead lg:col-span-7">{p.oltre.general}</p>
             <div className="card p-6 lg:col-span-5">
