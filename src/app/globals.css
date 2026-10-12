@@ -259,8 +259,7 @@
 /* =====================================================================
    Intro loader (pack 09) — ≈ 2.2 s, CSS only. Skipped via html.sf-noloader (preflight script).
    ===================================================================== */
-#sf-loader { position: fixed; inset: 0; z-index: 100; background: var(--color-paper); overflow: hidden;
-  animation: sf-ld-out .5s var(--ease-in-out-soft) 1.7s forwards; }
+#sf-loader { position: fixed; inset: 0; z-index: 100; overflow: hidden; animation: none !important; background: transparent !important; }
 .sf-noloader #sf-loader, .sf-loader-done #sf-loader { display: none; }
 #sf-loader .ld-backdrop {
   position: absolute;
@@ -294,6 +293,8 @@
 @keyframes sf-ld-ray { to { opacity: 1; transform: scale(1); } }
 @keyframes sf-ld-word { to { opacity: 1; filter: blur(0); } }
 @media (prefers-reduced-motion: reduce) { #sf-loader { display: none; } }
+/* P02 canvas loader override: the real visuals live in a shadow-root script. Keep the legacy selectors inert. */
+#sf-loader .ld-backdrop, #sf-loader .ld-center { display: none !important; }
 
 /* ---------- small extras ---------- */
 .btn .btn-arrow { transition: transform .25s var(--ease-out-soft); }
