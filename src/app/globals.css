@@ -257,31 +257,24 @@
 @media print { [data-topbar], [data-dock], #sf-loader, footer .seam { display: none !important; } }
 
 /* =====================================================================
-   SUN-FAI P02 canvas intro (V33): the user-provided animation.
-   No legacy CSS animation should override its DOM canvas host.
+   SUN-FAI P02 loader V34: synchronous head bootstrap, SSR-owned fixed host.
+   The canvas itself is fully managed inside this host's shadow root.
    ===================================================================== */
-#sf-loader-shell {
-  position: fixed;
-  inset: 0;
-  z-index: 99;
-  background: #FBF8F1;
-  pointer-events: none;
-}
 #sf-loader {
   position: fixed;
   inset: 0;
-  z-index: 100;
+  z-index: 2147483000;
+  display: block;
+  width: 100%;
+  height: 100%;
   overflow: hidden;
-  animation: none !important;
-  background: transparent !important;
+  background: #FBF8F1;
+  contain: strict;
+  pointer-events: auto;
 }
-.sf-noloader #sf-loader-shell,
-.sf-loader-done #sf-loader-shell,
-.sf-noloader #sf-loader,
-.sf-loader-done #sf-loader { display: none !important; }
-@media (prefers-reduced-motion: reduce) {
-  #sf-loader-shell, #sf-loader { display: none !important; }
-}
+html.sf-noloader #sf-loader,
+html.sf-loader-done #sf-loader { display: none !important; }
+@media print { #sf-loader { display: none !important; } }
 
 /* ---------- small extras ---------- */
 .btn .btn-arrow { transition: transform .25s var(--ease-out-soft); }
