@@ -1,6 +1,6 @@
 import type { CSSProperties } from "react";
 import { ButtonLink, Eyebrow, Headline, TextLink } from "@/components/ui/primitives";
-import { CanvasPanel, Confetto, Person, RayFan, Ripple } from "@/components/canvas/Canvas";
+import { CanvasPanel, Person, RayFan, Ripple } from "@/components/canvas/Canvas";
 import { PhoneMockup } from "./PhoneMockup";
 import { InfoDot, TourStart } from "./Giorgio";
 import { presenters } from "@/content/team";
@@ -30,7 +30,7 @@ export function ArdakeHero({ a, locale }: { a: Dict["ardake"]; locale: Locale })
         <Ripple at={{ x: 1, y: 0.33 }} atSm={{ x: 1, y: 0.7 }} scaleSm={1.1} family="sunPale" core={0.115} coreColor="#FE9845" widths={[0.05]} bands={1} gap={0.01} seg={{ r0: 0.185, r1: 0.245, from: 92, to: 268, count: 14, colors: ["#FECF49", "#FE9845", "#C9E1A0", "#FECF49", "#F26A1B", "#DEE9BF"] }} />
         <Ripple at={{ x: 0.83, y: 1 }} hideSm family="sunPale" core={0.09} widths={[0.05, 0.05]} />
         <Ripple at={{ x: 0, y: 1 }} family="leaf" core={0.04} widths={[0.04, 0.04, 0.035]} fan={{ count: 6, from: 2, to: 88 }} />
-        <Confetto at={{ x: 0.08, y: 0.08 }} r={0.02 } fill="#F8B98A" hideSm />
+
       </>
     }
   >

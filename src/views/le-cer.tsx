@@ -1,16 +1,13 @@
-import { Building2, DoorOpen, Factory, HandHeart, House, PlugZap, Quote, Receipt, Scale } from "lucide-react";
+import { Building2, DoorOpen, Factory, HandHeart, House, PlugZap, Quote, Receipt } from "lucide-react";
 import { getDict } from "@/content/dict";
 import { pageMeta } from "@/lib/meta";
 import type { Locale } from "@/lib/i18n";
 import { ButtonLink, Eyebrow, Headline, TextLink } from "@/components/ui/primitives";
 import { Badge } from "@/components/geometry/shapes";
-import { Mascot } from "@/components/people/Mascot";
 import { SectionPanel } from "@/components/canvas/presets";
-import { Confetto, HalfDisc, Ripple } from "@/components/canvas/Canvas";
+import { Ripple } from "@/components/canvas/Canvas";
 import { PageHero, CtaBand } from "@/components/sections/PageHero";
 import { PinnedSteps } from "@/components/sections/PinnedSteps";
-import { SharedEnergyExplainer } from "@/components/sections/SharedEnergyExplainer";
-import { Faq } from "@/components/sections/Faq";
 import { GiorgioProvider, InfoDot } from "@/components/ardake/Giorgio";
 
 export const lecerMeta = (locale: Locale) => {
@@ -35,7 +32,7 @@ export function LeCerPage({ locale }: { locale: Locale }) {
         lead={p.hero.lead}
         actions={
           <>
-            <ButtonLink href="/#verifica" locale={locale} size="lg">
+            <ButtonLink href="/ardake/#verifica" locale={locale} size="lg">
               {p.hero.cta}
             </ButtonLink>
             <TextLink href="#come-funziona" className="self-center sm:self-auto">
@@ -55,25 +52,6 @@ export function LeCerPage({ locale }: { locale: Locale }) {
         }
         mascot={{ src: "/mascot/mascot-08-laptop.webp", alt: d.common.ui.mascotAlt, centeredInRipple: true }}
       />
-
-      {/* Le CER in SUN-FAI [SITO] */}
-      <SectionPanel data-section="in-sunfai" tone="mint" preset="content" family="leaf" inner={false}>
-        <div className="container-x relative z-[2] py-[clamp(48px,6vw,88px)] grid gap-10 lg:grid-cols-12">
-          <div className="reveal lg:col-span-5">
-            <Eyebrow>{p.inSunfai.eyebrow}</Eyebrow>
-            <p className="mt-6 font-display text-[clamp(1.5rem,1.1rem+1.4vw,2.4rem)] font-extrabold leading-[1.1] tracking-[-0.03em] text-ink">{p.inSunfai.soggetto}</p>
-          </div>
-          <div className="reveal grid gap-4 lg:col-span-7">
-            {p.inSunfai.paragraphs.map((t, i) => (
-              <p key={i} className="t-body">
-                {t}
-                {i === 1 ? <InfoDot topic="cabina-primaria" className="ml-2" /> : null}
-                {i === 3 ? <InfoDot topic="quarto-orario" className="ml-2" /> : null}
-              </p>
-            ))}
-          </div>
-        </div>
-      </SectionPanel>
 
       {/* Cosa sono le CER? — GSE definition (official quotation, stays in Italian) */}
       <SectionPanel data-section="cosa-sono" tone="cream" preset="soft" family="sun" inner={false}>
@@ -119,20 +97,6 @@ export function LeCerPage({ locale }: { locale: Locale }) {
           <div className="mt-10">
             <PinnedSteps steps={p.come.steps.map((s, i) => ({ title: s.title, text: s.text, image: STEP_SCENES[i], alt: s.alt, tag: s.role }))} progressLabel={d.pages.cosaFacciamo.percorso.progress} tone="leaf" />
           </div>
-        </div>
-      </SectionPanel>
-
-      {/* Conta l'ora in cui consumi — interactive explainer */}
-      <SectionPanel data-section="explainer" tone="mint" preset="frame" family="leaf" inner={false}>
-        <div className="container-x relative z-[2] py-[clamp(48px,6vw,88px)]">
-          <div className="reveal mb-8 grid gap-6 lg:grid-cols-12 lg:items-end">
-            <div className="lg:col-span-7">
-              <Eyebrow>{p.explainer.eyebrow}</Eyebrow>
-              <Headline text={p.explainer.title} className="mt-5" />
-            </div>
-            <p className="t-lead lg:col-span-5">{p.explainer.hint}</p>
-          </div>
-          <SharedEnergyExplainer t={p.explainer} />
         </div>
       </SectionPanel>
 
@@ -193,7 +157,7 @@ export function LeCerPage({ locale }: { locale: Locale }) {
       </SectionPanel>
 
       <CtaBand title={p.ctaBand.title}>
-        <ButtonLink href="/#verifica" locale={locale} size="lg">
+        <ButtonLink href="/ardake/#verifica" locale={locale} size="lg">
           {p.ctaBand.cta}
         </ButtonLink>
       </CtaBand>

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight, ChevronDown, Mail } from "lucide-react";
-import { CanvasPanel, Confetto, PanelMascot, Ripple } from "@/components/canvas/Canvas";
+import { CanvasPanel, PanelMascot, Ripple } from "@/components/canvas/Canvas";
 import { Headline } from "@/components/ui/primitives";
 import { Img } from "@/components/ui/Img";
 import { FacebookIcon, InstagramIcon, LinkedinIcon } from "@/components/ui/SocialIcons";
@@ -44,7 +44,7 @@ export function Footer({ d, locale }: { d: Dict; locale: Locale }) {
       links: [
         { label: f.cosaSono, href: "/le-cer/" },
         { label: f.configurazioni, href: "/#configurazioni" },
-        { label: f.verifica, href: "/#verifica" },
+        { label: f.verifica, href: "/ardake/#verifica" },
       ],
     },
     {
@@ -91,8 +91,8 @@ export function Footer({ d, locale }: { d: Dict; locale: Locale }) {
             <Ripple at={{ x: 1, y: 1 }} family="onLeaf" core={0.05} widths={[0.08, 0.08, 0.08, 0.08]} fan={{ count: 7, from: 92, to: 178, colors: ON_LEAF_FAN, bandColor: "#5E9638" }} />
             <Ripple at={{ x: 0, y: 0 }} family="onLeaf" core={0.03} widths={[0.03, 0.03]} bands={2} />
             <Ripple at={{ x: 1, y: 0 }} hideSm family="onLeaf" core={0.02} widths={[0.01]} bands={1} noCore seg={{ r0: 0.06, r1: 0.1, from: 182, to: 268, count: 7, colors: ["#FECF49", "#C9E1A0", "#FE9845"] }} />
-            <Confetto at={{ x: 0.74, y: 0.02 }} r={0.022} fill="#C9E1A0" hideSm />
-            <Confetto at={{ x: 0, y: 0.6 }} r={0.022} fill="#F26A1B" />
+
+
           </>
         }
       >

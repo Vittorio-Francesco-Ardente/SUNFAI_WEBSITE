@@ -1,6 +1,6 @@
 import type { CSSProperties } from "react";
 import { ButtonLink, Eyebrow, Headline, TextLink } from "@/components/ui/primitives";
-import { CanvasPanel, Confetto, DotGrid, HalfDisc, Person, QuarterDisc, Ripple } from "@/components/canvas/Canvas";
+import { CanvasPanel, HalfDisc, Person, QuarterDisc, Ripple } from "@/components/canvas/Canvas";
 import { presenters } from "@/content/team";
 import type { Dict } from "@/content/dict";
 import type { Locale } from "@/lib/i18n";
@@ -35,10 +35,7 @@ export function HomeHero({ d, locale }: { d: Dict["home"]["hero"]; locale: Local
           <Ripple at={{ x: 0.98, y: 0 }} atSm={{ x: 1, y: 0 }} scaleSm={0.8} family="leaf" core={0.05} widths={[0.035, 0.04, 0.03]} invert bands={3} coreColor="#E7F0D8" />
           <Ripple at={{ x: 0, y: 1 }} hideSm family="peach" core={0.05} widths={[0.04, 0.035, 0.03]} bands={3} />
           <QuarterDisc corner="tl" r={0.05} fill="#F5C335" className="max-md:hidden" />
-          <DotGrid at={{ x: 0.395, y: 0.15 }} />
-          <Confetto at={{ x: 0.672, y: 0.38 }} r={0.008} fill="#B9D68F" hideSm />
-          <Confetto at={{ x: 0.727, y: 0.42 }} r={0.0125} fill="#4B8B2F" ring hideSm />
-          <Confetto at={{ x: 0.814, y: 0.385 }} r={0.009} fill="#F26A1B" hideSm />
+
           <HalfDisc at={{ x: 0.4, y: 1 }} r={0.028} edge="bottom" fill="#F5C335" hideSm />
           <HalfDisc at={{ x: 1, y: 0.62 }} r={0.022} edge="right" fill="#F8B98A" hideSm />
         </>

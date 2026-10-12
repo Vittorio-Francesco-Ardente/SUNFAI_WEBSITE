@@ -9,7 +9,7 @@ import { lhref, type Locale } from "@/lib/i18n";
 import { pad2 } from "@/lib/motion";
 import { Eyebrow, GhostNumeral, Headline } from "@/components/ui/primitives";
 import { MemberBackdrop } from "@/components/geometry/shapes";
-import { CanvasPanel, Confetto, HalfDisc, Person, QuarterDisc, Ripple } from "@/components/canvas/Canvas";
+import { CanvasPanel, HalfDisc, Person, QuarterDisc, Ripple } from "@/components/canvas/Canvas";
 import { Img } from "@/components/ui/Img";
 import { MemberVisual } from "@/components/team/MemberVisual";
 import { SIDE_CUT_SINK } from "@/lib/people";
@@ -135,8 +135,8 @@ export function MemberPage({ locale, slug }: { locale: Locale; slug: string }) {
             <Ripple at={{ x: 1, y: 0 }} family="leaf" core={0.035} widths={[0.03, 0.03]} invert bands={2} coreColor="#E7F0D8" />
             <HalfDisc at={{ x: 0.6, y: 1 }} r={0.03} edge="bottom" fill="#F5C335" hideSm />
             <QuarterDisc corner="bl" r={0.06} fill="#4B8B2F" className="max-md:hidden" />
-            <Confetto at={{ x: 0, y: 0.12 }} r={0.03} fill="#4B8B2F" hideSm />
-            <Confetto at={{ x: 0.82, y: 0.06 }} r={0.008} fill="#F5C335" hideSm />
+
+
           </>
         }
       >

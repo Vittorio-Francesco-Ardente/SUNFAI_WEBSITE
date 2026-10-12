@@ -8,7 +8,7 @@ import { ButtonLink, Eyebrow, Headline, TextLink } from "@/components/ui/primiti
 import { Badge } from "@/components/geometry/shapes";
 import { Img } from "@/components/ui/Img";
 import { SectionPanel } from "@/components/canvas/presets";
-import { Confetto, HalfDisc, PanelPerson, Ripple } from "@/components/canvas/Canvas";
+import { HalfDisc, PanelPerson, Ripple } from "@/components/canvas/Canvas";
 import { PageHero } from "@/components/sections/PageHero";
 import { PinnedSteps } from "@/components/sections/PinnedSteps";
 import { JoinContact } from "@/components/sections/JoinContact";
@@ -49,7 +49,7 @@ export function CosaFacciamoPage({ locale }: { locale: Locale }) {
             <Ripple at={{ x: 1, y: 0.5 }} atSm={{ x: 1, y: 0.72 }} family="peach" core={0.12} widths={[0.12, 0.06, 0.07, 0.08]} fan={{ count: 10, from: 92, to: 268 }} scaleSm={1.3} />
             <Ripple at={{ x: 0, y: 1 }} family="sun" core={0.05} widths={[0.06, 0.05, 0.05]} bands={3} />
             <Ripple at={{ x: 0.6, y: 1 }} hideSm family="leaf" core={0.03} widths={[0.025, 0.025]} bands={2} />
-            <Confetto at={{ x: 0.52, y: 0.82 }} r={0.012} fill="#4B8B2F" ring hideSm />
+
           </>
         }
         person={{ src: "/people/poses/stefano-crivena--pose-gesture.webp", alt: p.hero.presenterAlt }}

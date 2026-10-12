@@ -1,18 +1,14 @@
-import { CalendarDays } from "lucide-react";
 import { getDict } from "@/content/dict";
 import { pageMeta } from "@/lib/meta";
 import type { Locale } from "@/lib/i18n";
 import { ButtonLink, Eyebrow, Headline, TextLink } from "@/components/ui/primitives";
-import { Badge } from "@/components/geometry/shapes";
-import { CanvasPanel, Confetto, HalfDisc, PanelPerson, QuarterDisc, Ripple } from "@/components/canvas/Canvas";
-import { Img } from "@/components/ui/Img";
+import { CanvasPanel, HalfDisc, QuarterDisc, Ripple } from "@/components/canvas/Canvas";
 import { HomeHero } from "@/components/home/HomeHero";
 import { Numbers } from "@/components/home/Numbers";
 import { PerChi } from "@/components/home/PerChi";
 import { About } from "@/components/home/About";
 import { TrePassaggi } from "@/components/home/TrePassaggi";
 import { ArdakeHome } from "@/components/home/ArdakeHome";
-import { VerificaForm } from "@/components/home/Verifica";
 import { ConfigMap } from "@/components/home/ConfigMap";
 import { SocialFeed } from "@/components/social/SocialFeed";
 import { JoinContact } from "@/components/sections/JoinContact";
@@ -26,10 +22,9 @@ const PAD = "py-[clamp(48px,6vw,88px)]";
 
 /**
  * Home, V3 (pack 16): a deck of canvas panels separated by paper gaps (no hills strips). Rhythm: paper hero →
- * solar numbers → mint per chi è → cream about → mint tre passaggi → paper Ardaké → peach verifica → mint map →
- * paper team → cream awards → paper press → mint social → cream FAQ → paper events → peach + mint join/contact →
- * leafDeep footer. People: hero group (Nicholas, Chiara, Simone) + 4 doors + Beatrice + Giorgio + Lorenzo + Alceste
- * + Andrea Belotti + Simone. Mascot ×3: numbers (cheering), tre passaggi (waving), footer (waving).
+ * solar numbers → per chi → about → tre passaggi → Ardaké → mappa delle configurazioni →
+ * social → join/contact. Le verifiche personali sono disponibili nella pagina Ardaké,
+ * nella quale resta il form dedicato, evitando un secondo pannello ridondante in home.
  */
 export function HomePage({ locale }: { locale: Locale }) {
   const d = getDict(locale);
@@ -44,33 +39,6 @@ export function HomePage({ locale }: { locale: Locale }) {
       <About d={h.about} locale={locale} />
       <TrePassaggi d={h.passaggi} locale={locale} mascotAlt={d.common.ui.mascotAlt} />
       <ArdakeHome d={h.ardake} phone={d.ardake.phone} phoneAlt={d.ardake.hero.phoneAlt} replay={d.common.ui.replay} locale={locale} />
-
-      {/* 7 · Verifica se puoi aderire — peach, peach fan bottom-left, Lorenzo on the right facing the form */}
-      <CanvasPanel
-        tone="peach"
-        data-section="verifica"
-        id="verifica"
-        phoneUnit={1.5}
-        bg={
-          <>
-            <Ripple at={{ x: 0, y: 1 }} family="peach" core={0.06} widths={[0.09, 0.07, 0.07, 0.08]} fan={{ count: 7, from: 2, to: 88 }} />
-            <Ripple at={{ x: 1, y: 0 }} family="leaf" core={0.035} widths={[0.03, 0.035]} bands={2} />
-            <Ripple at={{ x: 1, y: 1 }} hideSm family="sun" core={0.07} widths={[0.07, 0.05, 0.05]} bands={3} />
-          </>
-        }
-      >
-        <div className={`container-x relative z-[2] ${PAD}`}>
-          <div className="lg:w-[64%]">
-            <Eyebrow upper>{h.verifica.eyebrow}</Eyebrow>
-            <Headline text={h.verifica.title} className="mt-5" />
-            <p className="t-lead mt-5 max-w-[40rem]">{h.verifica.text}</p>
-            <div className="card mt-8 p-5 sm:p-7">
-              <VerificaForm t={h.verifica} legend={h.map.legend} locale={locale} />
-            </div>
-          </div>
-        </div>
-        <PanelPerson src="/people/lorenzo-ciresa.webp" alt={alt("Lorenzo Ciresa")} sizes="(max-width: 1023px) 80vw, 30vw" smClass="left-1/2 h-[130%] -translate-x-1/2 translate-y-[31%]" lgClass="lg:left-auto lg:right-[2%] lg:h-[min(100%,820px)] lg:translate-y-[31%]" />
-      </CanvasPanel>
 
       {/* 8 · Le nostre configurazioni (map) — mint, leaf ripple on the top-left corner */}
       <CanvasPanel

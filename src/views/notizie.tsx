@@ -8,7 +8,7 @@ import { ButtonLink, Eyebrow, Headline, TextLink } from "@/components/ui/primiti
 import { Badge } from "@/components/geometry/shapes";
 import { Img } from "@/components/ui/Img";
 import { SectionPanel } from "@/components/canvas/presets";
-import { Confetto, HalfDisc, Ripple } from "@/components/canvas/Canvas";
+import { HalfDisc, Ripple } from "@/components/canvas/Canvas";
 import { PageHero } from "@/components/sections/PageHero";
 import { SocialFeed } from "@/components/social/SocialFeed";
 import { JoinContact } from "@/components/sections/JoinContact";

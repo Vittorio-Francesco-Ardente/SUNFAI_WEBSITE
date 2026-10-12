@@ -8,7 +8,7 @@ import { documentUrl } from "@/lib/site";
 import { configurations } from "@/lib/configurations";
 import { ButtonLink, Eyebrow, Headline, Marked, TextLink } from "@/components/ui/primitives";
 import { Badge, CornerSunrise } from "@/components/geometry/shapes";
-import { Confetto, HalfDisc, Ripple } from "@/components/canvas/Canvas";
+import { HalfDisc, Ripple } from "@/components/canvas/Canvas";
 import { Img } from "@/components/ui/Img";
 import { SectionPanel } from "@/components/canvas/presets";
 import { PageHero } from "@/components/sections/PageHero";
@@ -50,7 +50,7 @@ export function ChiSiamoPage({ locale }: { locale: Locale }) {
             <Ripple at={{ x: 1, y: 0.42 }} atSm={{ x: 1, y: 0.7 }} family="leaf" core={0.13} widths={[0.12, 0.06, 0.06, 0.07]} fan={{ count: 11, from: 92, to: 268 }} scaleSm={1.3} />
             <Ripple at={{ x: 0, y: 0 }} family="sun" core={0.035} widths={[0.03, 0.03, 0.025]} bands={3} />
             <HalfDisc at={{ x: 0.5, y: 1 }} r={0.03} edge="bottom" fill="#F26A1B" hideSm />
-            <Confetto at={{ x: 0.56, y: 0.16 }} r={0.011} fill="#F5C335" ring hideSm />
+
           </>
         }
         person={{ src: "/people/poses/francesco-crivena--pose-pointing.webp", alt: p.hero.presenterAlt }}

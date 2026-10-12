@@ -9,7 +9,7 @@ import { configurations } from "@/lib/configurations";
 import { hourly, monthly, bestHours } from "@/lib/ardake/demo-data";
 import { ButtonLink, Eyebrow, Headline, TextLink } from "@/components/ui/primitives";
 import { Badge } from "@/components/geometry/shapes";
-import { CanvasPanel, Confetto, PanelPerson, Person, RayFan, Ripple } from "@/components/canvas/Canvas";
+import { CanvasPanel, PanelPerson, Person, RayFan, Ripple } from "@/components/canvas/Canvas";
 import { SectionPanel } from "@/components/canvas/presets";
 import { Img } from "@/components/ui/Img";
 import { PhoneMockup } from "@/components/ardake/PhoneMockup";
@@ -171,7 +171,7 @@ export function ArdakePage({ locale }: { locale: Locale }) {
               </li>
             ))}
           </ul>
-          <div className="card mt-6 p-5 sm:p-7">
+          <div id="verifica" className="card mt-6 scroll-mt-32 p-5 sm:p-7">
             <h3 className="t-h3 flex items-center gap-2">
               {a.seleziona.findTitle} <InfoDot topic="cabina-primaria" />
             </h3>
