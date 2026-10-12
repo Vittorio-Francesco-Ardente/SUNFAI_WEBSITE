@@ -19,6 +19,7 @@ export function HomeHero({ d, locale }: { d: Dict["home"]["hero"]; locale: Local
     <CanvasPanel
       tone="paper"
       data-section="hero"
+      data-home-hero
       className="hero-scope cp-first flex flex-col lg:block lg:min-h-[max(700px,min(58vw,calc(100svh-16px)))]"
       bg={
         <>

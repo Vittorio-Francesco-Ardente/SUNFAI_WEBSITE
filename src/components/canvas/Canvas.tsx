@@ -34,6 +34,7 @@ export function CanvasPanel({
   id?: string;
   "data-section"?: string;
   "data-tour-step"?: string;
+  "data-home-hero"?: boolean;
   "data-tour-order"?: number;
   "aria-label"?: string;
   "aria-labelledby"?: string;

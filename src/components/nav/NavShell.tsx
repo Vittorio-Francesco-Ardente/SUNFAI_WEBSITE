@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useCallback, useEffect, useRef, useState, type ComponentType, type ReactNode } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import { useCallback, useEffect, useRef, useState, type ComponentType, type MouseEvent, type ReactNode } from "react";
 import { AnimatePresence, motion, useMotionValue, useSpring, useTransform, type MotionValue } from "motion/react";
 import {
   ArrowRight,
@@ -150,8 +150,62 @@ export function NavShell({ t, locale }: { t: NavLabels; locale: Locale }) {
 
 /* ---------------------------------------------------------------- Logo */
 function Logo({ locale, t, onClick, className }: { locale: Locale; t: NavLabels; onClick?: () => void; className?: string }) {
+  const router = useRouter();
+  const path = usePathname() ?? "/";
+  const href = lhref(locale, "/");
+  const timer = useRef<number | null>(null);
+  const cleanup = useRef<number | null>(null);
+  const [returning, setReturning] = useState(false);
+
+  useEffect(() => () => {
+    if (timer.current !== null) window.clearTimeout(timer.current);
+    if (cleanup.current !== null) window.clearTimeout(cleanup.current);
+    document.documentElement.classList.remove("sf-logo-nav-home");
+  }, []);
+
+  // Keep the class until the destination has actually rendered, including on slow devices.
+  useEffect(() => {
+    if (!returning || !isActive(path, "/")) return;
+    if (cleanup.current !== null) window.clearTimeout(cleanup.current);
+    cleanup.current = window.setTimeout(() => {
+      setReturning(false);
+      document.documentElement.classList.remove("sf-logo-nav-home");
+      cleanup.current = null;
+    }, 460);
+  }, [path, returning]);
+
+  const goHome = (event: MouseEvent<HTMLAnchorElement>) => {
+    onClick?.();
+    // The same logo also appears in the menu sheet: closing the sheet unmounts
+    // this instance, so that link must use normal immediate navigation.
+    if (onClick) return;
+    // Leave browser-native modified clicks and external new-tab behavior intact.
+    if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce) return;
+    event.preventDefault();
+    if (timer.current !== null) window.clearTimeout(timer.current);
+    if (cleanup.current !== null) window.clearTimeout(cleanup.current);
+    setReturning(true);
+    const onHome = isActive(path, "/");
+    if (!onHome) document.documentElement.classList.add("sf-logo-nav-home");
+    timer.current = window.setTimeout(() => {
+      if (onHome) {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      } else {
+        router.push(href);
+      }
+      timer.current = null;
+    }, 160);
+    cleanup.current = window.setTimeout(() => {
+      setReturning(false);
+      document.documentElement.classList.remove("sf-logo-nav-home");
+      cleanup.current = null;
+    }, 2400);
+  };
+
   return (
-    <Link href={lhref(locale, "/")} aria-label={t.logoAria} onClick={onClick} className={cn("inline-flex min-h-11 shrink-0 items-center", className)}>
+    <Link href={href} aria-label={t.logoAria} onClick={goHome} data-returning={returning} className={cn("sf-home-logo relative inline-flex min-h-11 shrink-0 items-center", className)}>
       <Img src="/brand/sunfai-logo.png" alt="" sizes="200px" priority className="h-[30px] w-auto md:h-[34px] lg:h-[38px] xl:h-[42px] 2xl:h-[46px]" />
     </Link>
   );
