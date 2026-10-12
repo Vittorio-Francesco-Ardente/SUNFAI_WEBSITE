@@ -262,13 +262,17 @@
 #sf-loader { position: fixed; inset: 0; z-index: 100; background: var(--color-paper); overflow: hidden;
   animation: sf-ld-out .5s var(--ease-in-out-soft) 1.7s forwards; }
 .sf-noloader #sf-loader, .sf-loader-done #sf-loader { display: none; }
-#sf-loader .ld-corner { position: absolute; width: min(22vw, 300px); height: min(22vw, 300px); opacity: 0;
-  animation: sf-ld-corner .6s var(--ease-out-soft) var(--d, 0ms) forwards, sf-ld-corner-out .5s var(--ease-in-out-soft) 1.7s forwards; }
-@media (max-width: 767.98px) { #sf-loader .ld-corner { width: 34vw; height: 34vw; } }
-#sf-loader .ld-tl { left: 0; top: 0; --x: -24px; --y: -24px; }
-#sf-loader .ld-tr { right: 0; top: 0; --x: 24px; --y: -24px; }
-#sf-loader .ld-bl { left: 0; bottom: 0; --x: -24px; --y: 24px; }
-#sf-loader .ld-br { right: 0; bottom: 0; --x: 24px; --y: 24px; }
+#sf-loader .ld-backdrop {
+  position: absolute;
+  inset: 0;
+  background-color: #fffaf0;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%;
+  opacity: 0;
+  animation: sf-ld-backdrop-in .45s var(--ease-out-soft) forwards;
+}
+@keyframes sf-ld-backdrop-in { to { opacity: 1; } }
 #sf-loader .ld-center { position: absolute; inset: 0; display: grid; place-content: center; justify-items: center; gap: 14px;
   animation: sf-ld-center-out .5s var(--ease-in-out-soft) 1.7s forwards; }
 #sf-loader .ld-mark { width: 96px; height: 96px; overflow: visible; }
@@ -283,8 +287,6 @@
 #sf-loader .ld-word img { width: calc(100% * 939 / 594); max-width: none; height: auto; margin-left: calc(-100% * 345 / 594); }
 #sf-loader .ld-tag { font: 500 13px/1 var(--font-sans); letter-spacing: .2em; text-transform: uppercase; color: var(--color-slate);
   opacity: 0; animation: sf-ld-fade-up .5s var(--ease-out-soft) 1s forwards; }
-@keyframes sf-ld-corner { from { opacity: 0; transform: translate(var(--x), var(--y)); } to { opacity: 1; transform: none; } }
-@keyframes sf-ld-corner-out { from { opacity: 1; transform: none; } to { opacity: 0; transform: translate(calc(var(--x) * .66), calc(var(--y) * .66)); } }
 @keyframes sf-ld-center-out { to { opacity: 0; transform: scale(1.04); } }
 @keyframes sf-ld-out { to { opacity: 0; visibility: hidden; pointer-events: none; } }
 @keyframes sf-ld-fade-up { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
