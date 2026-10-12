@@ -15,7 +15,6 @@ import { ArdakeHome } from "@/components/home/ArdakeHome";
 import { VerificaForm } from "@/components/home/Verifica";
 import { ConfigMap } from "@/components/home/ConfigMap";
 import { SocialFeed } from "@/components/social/SocialFeed";
-import { Faq } from "@/components/sections/Faq";
 import { JoinContact } from "@/components/sections/JoinContact";
 
 export const homeMeta = (locale: Locale) => {
@@ -132,50 +131,16 @@ export function HomePage({ locale }: { locale: Locale }) {
         }
       >
         <div className={`container-x relative z-[2] ${PAD}`}>
-          <div className="mb-10 grid gap-6 lg:grid-cols-12 lg:items-end">
-            <div className="lg:col-span-7">
-              <Eyebrow upper tone="leaf">
-                {h.social.eyebrow}
-              </Eyebrow>
-              <Headline text={h.social.title} className="mt-5" />
-              <p className="t-lead mt-5">{h.social.text}</p>
-            </div>
-            <div className="lg:col-span-5 lg:text-right">
-              <TextLink href="/notizie/" locale={locale}>
-                {h.social.all}
-              </TextLink>
-            </div>
+          <div className="mb-10 text-center">
+            <Eyebrow upper tone="leaf" className="justify-center">{h.social.eyebrow}</Eyebrow>
+            <Headline text={h.social.title} className="mx-auto mt-5" />
+            <p className="t-lead mx-auto mt-5 max-w-[46rem]">{h.social.text}</p>
           </div>
           <SocialFeed t={h.social} ui={d.common.ui} locale={locale} />
-        </div>
-      </CanvasPanel>
-
-      {/* 13 · Domande rapide — cream, leaf fan on the right edge, Alceste (open hand) towards the answers */}
-      <CanvasPanel
-        tone="cream"
-        data-section="faq"
-        phoneUnit={1.5}
-        bg={
-          <>
-            <Ripple at={{ x: 1, y: 0.55 }} atSm={{ x: 1, y: 1 }} family="leaf" core={0.06} widths={[0.09, 0.07, 0.07, 0.08]} fan={{ count: 8, from: 95, to: 265 }} />
-            <Ripple at={{ x: 0, y: 0 }} family="peach" core={0.035} widths={[0.03, 0.03]} bands={2} />
-            <HalfDisc at={{ x: 0.3, y: 1 }} r={0.026} edge="bottom" fill="#F5C335" hideSm />
-          </>
-        }
-      >
-        <div className={`container-x relative z-[2] grid gap-10 lg:grid-cols-12 ${PAD}`}>
-          <div className="lg:col-span-7">
-            <Eyebrow upper>{h.faq.eyebrow}</Eyebrow>
-            <Headline text={h.faq.title} className="mt-5" />
-            <div className="mt-8">
-              <Faq items={h.faq.items} />
-            </div>
-            <TextLink href="/le-cer/#faq" locale={locale} className="mt-6">
-              {h.faq.all}
-            </TextLink>
+          <div className="mt-7 flex justify-center">
+            <TextLink href="/notizie/" locale={locale}>{h.social.all}</TextLink>
           </div>
         </div>
-        <PanelPerson src="/people/poses/alceste-persico--pose-open-hand.webp" alt={alt("Alceste Persico")} sizes="(max-width: 1023px) 80vw, 32vw" lgClass="lg:left-auto lg:right-[3%] lg:h-[min(74%,640px)]" />
       </CanvasPanel>
 
       {/* 14 · I prossimi eventi — paper, sun fan bottom-left, the Memphis scene */}

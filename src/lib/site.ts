@@ -38,8 +38,7 @@ export const social = {
     handle: "Comunità Energetica SUN-FAI",
     url: "https://www.linkedin.com/company/comunit%C3%A0-energetica-sun-fai-societ%C3%A0-cooperativa/",
   },
-  /** TODO_SUNFAI: Facebook page URL still to be confirmed → hidden until then. */
-  facebook: { label: "Facebook", handle: "SUN-FAI", url: null as string | null },
+  facebook: { label: "Facebook", handle: "Comunità Energetica Sun-Fai Società Cooperativa", url: "https://www.facebook.com/p/Comunit%C3%A0-Energetica-Sun-Fai-Societ%C3%A0-Cooperativa-61572671780301/" },
 } as const;
 
 /** Ardaké live API (client fetch; CORS must allow the site origin). Empty → build snapshot. */

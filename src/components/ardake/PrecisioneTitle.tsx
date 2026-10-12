@@ -71,9 +71,11 @@ export function PrecisioneTitle({ title, replay, className, id }: { title: strin
     const render = renderRef.current;
     if (!render) return;
     cancelAnimationFrame(raf.current);
+    svgRef.current?.querySelectorAll<SVGPathElement>("[data-static-fallback]").forEach((path) => { path.style.display = "none"; });
     const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduce) {
       render(FINAL);
+      svgRef.current?.querySelectorAll<SVGPathElement>("[data-static-fallback]").forEach((path) => { path.style.display = ""; });
       setPlayed(true);
       return;
     }
@@ -86,11 +88,12 @@ export function PrecisioneTitle({ title, replay, className, id }: { title: strin
     document.addEventListener("visibilitychange", onVis);
     const tick = (now: number) => {
       if (!t0) t0 = now;
-      const t = ((now - t0) / 1000) * 1.8;
+      const t = ((now - t0) / 1000) * 1.15;
       render(Math.min(t, DURATION));
       if (t < DURATION) raf.current = requestAnimationFrame(tick);
       else {
         document.removeEventListener("visibilitychange", onVis);
+        svgRef.current?.querySelectorAll<SVGPathElement>("[data-static-fallback]").forEach((path) => { path.style.display = ""; });
         setPlayed(true);
       }
     };
@@ -170,6 +173,7 @@ export function PrecisioneTitle({ title, replay, className, id }: { title: strin
       return;
     }
     render(0);
+    svg.querySelectorAll<SVGPathElement>("[data-static-fallback]").forEach((path) => { path.style.display = "none"; });
     const io = new IntersectionObserver(
       ([e]) => {
         if (e.isIntersecting) {
@@ -206,7 +210,8 @@ export function PrecisioneTitle({ title, replay, className, id }: { title: strin
         <path data-counter-measure d={geo.counter} fill="none" />
         {geo.glyphs.map((g) => (
           <g key={g.id} data-glyph={g.id}>
-            <path data-always-visible d={g.d} fill={g.fill} fillOpacity={0.62} />
+            {/* Only a no-JS / completed-animation fallback, never translucent beneath the reveal. */}
+            <path data-static-fallback d={g.d} fill={g.fill} />
             <path data-outline d={g.d} fill="none" stroke={g.fill} strokeWidth={2.2} strokeLinejoin="round" strokeLinecap="round" style={{ opacity: 0 }} />
             <path data-fill d={g.d} fill={g.fill} mask={`url(#${uid}-reveal)`} />
           </g>

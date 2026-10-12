@@ -12,8 +12,6 @@ import { Confetto, HalfDisc, Ripple } from "@/components/canvas/Canvas";
 import { PageHero } from "@/components/sections/PageHero";
 import { SocialFeed } from "@/components/social/SocialFeed";
 import { JoinContact } from "@/components/sections/JoinContact";
-import { InstagramIcon, LinkedinIcon } from "@/components/ui/SocialIcons";
-import { social } from "@/lib/site";
 
 export const notizieMeta = (locale: Locale) => {
   const p = getDict(locale).pages.notizie;
@@ -87,21 +85,9 @@ export function NotiziePage({ locale }: { locale: Locale }) {
 
       <SectionPanel data-section="social" tone="mint" preset="content" family="leaf" mirror inner={false}>
         <div className="container-x relative z-[2] py-[clamp(48px,6vw,88px)]">
-          <div className="reveal mb-10 grid gap-6 lg:grid-cols-12 lg:items-end">
-            <div className="lg:col-span-7">
-              <Eyebrow>{p.socialEyebrow}</Eyebrow>
-              <Headline text={p.socialTitle} className="mt-5" />
-            </div>
-            <div className="flex flex-wrap gap-3 lg:col-span-5 lg:justify-end">
-              <ButtonLink href={social.instagram.url} variant="dark" icon="external">
-                <InstagramIcon className="mr-[-.2em]" />
-                {social.instagram.label}
-              </ButtonLink>
-              <ButtonLink href={social.linkedin.url} variant="outline" icon="external">
-                <LinkedinIcon className="mr-[-.2em]" />
-                {social.linkedin.label}
-              </ButtonLink>
-            </div>
+          <div className="reveal mb-10 text-center">
+            <Eyebrow className="justify-center">{p.socialEyebrow}</Eyebrow>
+            <Headline text={p.socialTitle} className="mx-auto mt-5" />
           </div>
           <SocialFeed t={d.home.social} ui={d.common.ui} locale={locale} mode="latest-per-channel" />
         </div>
