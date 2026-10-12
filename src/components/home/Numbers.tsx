@@ -35,12 +35,12 @@ export function Numbers({ d, ui, mascotAlt }: { d: Dict["home"]["numbers"]; ui: 
         </>
       }
     >
-      <div className="container-x relative z-[2] py-[clamp(48px,6vw,84px)] max-lg:pb-[clamp(240px,62cqw,320px)]">
+      <div className="container-x relative z-[2] pt-[clamp(48px,6vw,84px)] pb-4 lg:pb-[clamp(48px,6vw,84px)]">
         <div className="lg:w-[66%]">
           <Eyebrow>{d.eyebrow}</Eyebrow>
           <Headline text={d.title} className="mt-4" />
           <p className="t-lead mt-4 max-w-[36rem] !text-ink/80">{d.lead}</p>
-          <dl className="reveal-stagger mt-8 grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-[minmax(0,.8fr)_minmax(0,1fr)_minmax(0,1fr)] md:grid-rows-2">
+          <dl className="reveal-stagger mt-8 grid min-w-0 grid-cols-2 gap-3 sm:gap-4 md:grid-cols-[minmax(0,.8fr)_minmax(0,1fr)_minmax(0,1fr)] md:grid-rows-2">
             <div className="col-span-2 flex flex-col justify-between rounded-[24px] bg-ink p-6 text-white md:col-span-1 md:row-span-2 md:p-7">
               <dt className="sr-only">{it.soci.label}</dt>
               <dd className={`${NUM} text-[clamp(3.6rem,2.4rem+4vw,6.4rem)] text-[#FF5A1F]`}>
@@ -51,10 +51,10 @@ export function Numbers({ d, ui, mascotAlt }: { d: Dict["home"]["numbers"]; ui: 
               </dd>
             </div>
             {white.map((s) => (
-              <div key={s.label} className="rounded-[24px] bg-white p-5 shadow-[0_18px_30px_-24px_rgb(5_42_34/.45)] sm:p-6">
+              <div key={s.label} className="min-w-0 rounded-[24px] bg-white p-4 shadow-[0_18px_30px_-24px_rgb(5_42_34/.45)] sm:p-6">
                 <span aria-hidden className={s.quarter ? "block size-[18px] rounded-tl-full" : "block size-[18px] rounded-full"} style={{ background: s.mark }} />
                 <dt className="sr-only">{s.label}</dt>
-                <dd className={`${NUM} mt-3 text-[clamp(2.1rem,1.6rem+1.4vw,3rem)] text-ink`}>
+                <dd className={`${NUM} mt-3 text-[clamp(1.9rem,6.5vw,3rem)] text-ink`}>
                   <CountUp value={s.v} />
                   {s.unit ? <span className="ml-1 text-[0.45em] font-bold tracking-[-0.02em]">{s.unit}</span> : null}
                 </dd>
@@ -63,18 +63,18 @@ export function Numbers({ d, ui, mascotAlt }: { d: Dict["home"]["numbers"]; ui: 
                 </dd>
               </div>
             ))}
-            <div className="rounded-[24px] bg-white p-5 shadow-[0_18px_30px_-24px_rgb(5_42_34/.45)] sm:p-6">
+            <div className="min-w-0 rounded-[24px] bg-white p-4 shadow-[0_18px_30px_-24px_rgb(5_42_34/.45)] sm:p-6">
               <span aria-hidden className="block size-[18px] rounded-full bg-[#B9D68F]" />
               <dt className="sr-only">{it.energy.label}</dt>
               <dd className="mt-3">
-                <LiveEnergy unit={it.energy.unit} liveLabel={ui.live} snapshotLabel={ui.snapshot} numberClass={`${NUM} text-[clamp(2.1rem,1.6rem+1.4vw,3rem)] text-ink`} />
+                <LiveEnergy unit={it.energy.unit} liveLabel={ui.live} snapshotLabel={ui.snapshot} numberClass={`${NUM} text-[clamp(1.9rem,6.5vw,3rem)] text-ink`} />
               </dd>
               <dd aria-hidden className="mt-1 text-[14px] font-medium leading-snug text-slate sm:text-[15px]">
                 {it.energy.label}
               </dd>
             </div>
           </dl>
-          <p className="mt-5 inline-flex flex-wrap items-baseline gap-x-2 rounded-full bg-ink px-5 py-2.5 text-[15px] font-semibold text-white">
+          <p className="mx-auto mt-6 flex w-full max-w-[34rem] flex-col items-center justify-center gap-1 rounded-[24px] bg-ink px-5 py-4 text-center text-[15px] font-semibold leading-snug text-white sm:flex-row sm:flex-wrap sm:gap-x-2 sm:rounded-full lg:mx-0 lg:w-fit lg:text-left">
             <span className="font-display text-[1.25rem] font-extrabold text-[#FECF49]">
               {it.anni.value} {it.anni.unit}
             </span>
@@ -82,7 +82,12 @@ export function Numbers({ d, ui, mascotAlt }: { d: Dict["home"]["numbers"]; ui: 
           </p>
         </div>
       </div>
-      <PanelMascot src="/mascot/mascot-06-cheering.webp" alt={mascotAlt} className="bottom-[4%] right-[10%] w-[clamp(180px,24cqw,340px)] max-lg:right-[6%] max-lg:bottom-[14px]" />
+      {/* Mobile: reserve a real, centred stage below the statistics (never behind the fixed dock). */}
+      <div className="relative z-[2] flex h-[clamp(300px,80vw,380px)] items-end justify-center pb-[calc(var(--dock-space)+12px)] lg:hidden">
+        <PanelMascot src="/mascot/mascot-06-cheering.webp" alt={mascotAlt} className="!relative !bottom-auto !right-auto w-[clamp(190px,53vw,250px)]" />
+      </div>
+      {/* Desktop: preserve the original right-hand illustration arrangement. */}
+      <PanelMascot src="/mascot/mascot-06-cheering.webp" alt="" className="!hidden lg:!block bottom-[7%] right-[9%] w-[clamp(230px,24cqw,340px)]" />
     </CanvasPanel>
   );
 }

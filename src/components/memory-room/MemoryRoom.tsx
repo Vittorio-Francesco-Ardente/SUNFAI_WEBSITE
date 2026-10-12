@@ -1,9 +1,8 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { useCallback, useRef, useState, type CSSProperties, type KeyboardEvent, type PointerEvent, type WheelEvent } from "react";
+import { ArrowLeft, ArrowRight, Hand } from "lucide-react";
 import { Img } from "@/components/ui/Img";
-import { cn } from "@/lib/cn";
 
 export type Memory = {
   id: string;
@@ -26,116 +25,117 @@ type Labels = {
   yearUnknown: string;
 };
 
+type DragStart = { x: number; y: number; pointerId: number };
+
 /**
- * SUN-FAI — "La stanza dei ricordi" must be moved by the user, not autoplayed.
- * A manual, scroll-snap photo rail driven by touch / trackpad / mouse drag and arrow buttons.
- * Uses the real attached event photos mapped to the milestones.
+ * La stanza dei ricordi: a USER-CONTROLLED curved photography wall.
+ * No timers, autoplay, scroll hijack or CSS keyframe movement.
+ * Change photos with arrows, swipe/drag, horizontal trackpad or keyboard.
+ * Preserve vertical page scrolling on touch devices.
  */
 export function MemoryRoom({ items, labels }: { items: Memory[]; labels: Labels }) {
-  const railRef = useRef<HTMLDivElement>(null);
-  const [index, setIndex] = useState(0);
-  const cards = useMemo(
-    () => items.map((m) => ({ ...m, src: m.image, yearLabel: m.year ?? labels.yearUnknown })),
-    [items, labels.yearUnknown],
-  );
+  const [active, setActive] = useState(0);
+  const start = useRef<DragStart | null>(null);
+  const wheelTravel = useRef(0);
+  const wheelLast = useRef(0);
+  const count = items.length;
 
-  useEffect(() => {
-    const el = railRef.current;
-    if (!el) return;
-    const update = () => {
-      const card = el.querySelector<HTMLElement>("[data-memory-card]");
-      if (!card) return;
-      const step = card.offsetWidth + 16;
-      if (step <= 0) return;
-      setIndex(Math.max(0, Math.min(cards.length - 1, Math.round(el.scrollLeft / step))));
-    };
-    update();
-    el.addEventListener("scroll", update, { passive: true });
-    window.addEventListener("resize", update);
-    return () => {
-      el.removeEventListener("scroll", update);
-      window.removeEventListener("resize", update);
-    };
-  }, [cards.length]);
+  const move = useCallback((direction: number) => {
+    if (!count) return;
+    setActive((previous) => (previous + direction % count + count) % count);
+  }, [count]);
 
-  const scrollByDir = (dir: -1 | 1) => {
-    const el = railRef.current;
-    if (!el) return;
-    const card = el.querySelector<HTMLElement>("[data-memory-card]");
-    const amount = (card?.offsetWidth ?? el.clientWidth * 0.72) + 16;
-    el.scrollBy({ left: dir * amount, behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+  const onPointerDown = (event: PointerEvent<HTMLDivElement>) => {
+    if (event.pointerType === "mouse" && event.button !== 0) return;
+    start.current = { x: event.clientX, y: event.clientY, pointerId: event.pointerId };
+  };
+  const onPointerUp = (event: PointerEvent<HTMLDivElement>) => {
+    const origin = start.current;
+    start.current = null;
+    if (!origin || origin.pointerId !== event.pointerId) return;
+    const dx = event.clientX - origin.x;
+    const dy = event.clientY - origin.y;
+    if (Math.abs(dx) > 42 && Math.abs(dx) > Math.abs(dy) * 1.2) move(dx < 0 ? 1 : -1);
+  };
+  const onWheel = (event: WheelEvent<HTMLDivElement>) => {
+    // Only a true horizontal gesture moves the gallery. Never steal vertical scrolling.
+    if (Math.abs(event.deltaX) <= Math.abs(event.deltaY) * 1.25) return;
+    const now = performance.now();
+    if (now - wheelLast.current > 380) wheelTravel.current = 0;
+    wheelLast.current = now;
+    wheelTravel.current += event.deltaX;
+    if (Math.abs(wheelTravel.current) >= 85) {
+      move(wheelTravel.current > 0 ? 1 : -1);
+      wheelTravel.current = 0;
+    }
+  };
+  const onKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
+    if (event.key === "ArrowRight") { event.preventDefault(); move(1); }
+    if (event.key === "ArrowLeft") { event.preventDefault(); move(-1); }
   };
 
-  if (!cards.length) return null;
+  if (!count) return null;
 
   return (
-    <section aria-label={labels.region} className="mx-auto w-full max-w-[1440px]">
+    <section className="mx-auto w-full max-w-[1440px]" aria-label={labels.region}>
       <p className="sr-only" aria-live="polite">
-        {labels.live.replace("{n}", String(index + 1)).replace("{total}", String(cards.length)).replace("{title}", cards[index]?.title ?? "")}
+        {labels.live.replace("{n}", String(active + 1)).replace("{total}", String(count)).replace("{title}", items[active].title)}
       </p>
-
-      <div className="relative overflow-hidden rounded-[28px] border border-[var(--color-hairline)] bg-white/70 px-3 py-5 shadow-[var(--shadow-soft)] sm:px-4 sm:py-6 lg:px-6 lg:py-7">
-        {/* Crop the rail inside the rounded panel without background gradients. */}
-
-        <div
-          ref={railRef}
-          className="flex snap-x snap-mandatory gap-4 overflow-x-auto px-1 pb-2 pt-1 no-scrollbar"
-          style={{ scrollPaddingInline: "max(4px, 1rem)" }}
-        >
-          {cards.map((m, i) => (
-            <article
-              key={m.id}
-              data-memory-card
-              className={cn(
-                "group relative shrink-0 snap-start overflow-hidden rounded-[24px] bg-[#fcfbf7] shadow-[0_0_0_1px_var(--color-hairline),var(--shadow-soft)]",
-                "w-[72vw] max-w-[320px] sm:w-[46vw] sm:max-w-[370px] lg:w-[29vw] lg:max-w-[380px] xl:w-[23vw]",
-                i % 4 === 1 ? "sm:translate-y-2" : i % 4 === 2 ? "sm:-translate-y-1" : "",
-              )}
+      <div
+        data-memory-manual="true"
+        data-memory-active={active}
+        role="region"
+        aria-label={labels.region}
+        aria-roledescription="galleria fotografica manuale"
+        tabIndex={0}
+        onPointerDown={onPointerDown}
+        onPointerUp={onPointerUp}
+        onPointerCancel={() => { start.current = null; }}
+        onWheel={onWheel}
+        onKeyDown={onKeyDown}
+        className="relative isolate mx-auto h-[265px] w-full cursor-grab select-none overflow-hidden rounded-[26px] border border-ink/10 bg-[#f9fbf6] shadow-[0_10px_30px_-26px_rgb(5_42_34/.3)] outline-offset-4 active:cursor-grabbing sm:h-[340px] sm:rounded-[30px] lg:h-[460px] lg:rounded-[36px]"
+        style={{ perspective: "1100px", touchAction: "pan-y", ['--memory-step' as string]: "clamp(185px, 26vw, 354px)" }}
+      >
+        {items.map((item, i) => {
+          let distance = i - active;
+          if (distance > count / 2) distance -= count;
+          if (distance < -count / 2) distance += count;
+          const delta = Math.abs(distance);
+          if (delta > 3) return null;
+          const tilt = distance === 0 ? 0 : distance < 0 ? Math.min(30, delta * 12) : -Math.min(30, delta * 12);
+          const visible = delta <= 2.5;
+          const photoStyle: CSSProperties = {
+            left: "50%",
+            top: "50%",
+            zIndex: 10 - delta,
+            opacity: visible ? 1 : 0,
+            transform: `translate(-50%, -50%) translateX(calc(var(--memory-step) * ${distance})) translateY(${delta * 5}px) rotateY(${tilt}deg) scale(${1 - delta * 0.085})`,
+            pointerEvents: "none",
+            backfaceVisibility: "hidden",
+          };
+          return (
+            <figure
+              data-memory-image={item.id}
+              key={item.id}
+              aria-hidden={i !== active}
+              className="absolute aspect-[1.35] w-[min(65vw,390px)] overflow-hidden rounded-[18px] border-[3px] border-white bg-white shadow-[0_14px_30px_-22px_rgb(5_42_34/.32)] transition-[transform,opacity] duration-500 ease-[cubic-bezier(.22,1,.36,1)] motion-reduce:transition-none sm:aspect-[1.55] sm:w-[min(45vw,395px)] lg:aspect-[1.57] lg:w-[min(31vw,420px)]"
+              style={photoStyle}
             >
-              <div className="relative aspect-[4/3] overflow-hidden rounded-[20px] m-2 sm:m-2.5">
-                <Img src={m.src} alt={m.alt} sizes="(min-width: 1280px) 22vw, (min-width: 1024px) 28vw, (min-width: 640px) 44vw, 72vw" className="h-full w-full object-cover" draggable={false} />
-              </div>
-              <div className="px-4 pb-4 pt-1 sm:px-5 sm:pb-5">
-                <div className="mb-2 flex flex-wrap items-center gap-2">
-                  <span className="rounded-full bg-ink px-3 py-1 text-[12px] font-semibold text-white">{m.yearLabel}</span>
-                  <span className="pill !max-w-full truncate">{m.label}</span>
-                </div>
-                <h3 className="font-display text-[1.1rem] font-extrabold leading-tight tracking-[-0.03em] text-ink sm:text-[1.22rem]">
-                  {m.title}
-                  <span className="dot">.</span>
-                </h3>
-                <p className="mt-2 line-clamp-3 text-[14px] leading-relaxed text-slate sm:text-[15px]">{m.caption}</p>
-              </div>
-            </article>
-          ))}
-        </div>
-
-        <div className="mt-5 flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
-          <span className="min-w-[64px] text-right tabular-nums text-slate">
-            <b className="text-[20px] text-ink">{String(index + 1).padStart(2, "0")}</b> / {String(cards.length).padStart(2, "0")}
-          </span>
-          <button type="button" onClick={() => scrollByDir(-1)} aria-label={labels.prev} className="paper-round">
-            <ArrowLeft aria-hidden />
-          </button>
-          <div className="hidden sm:flex" role="group" aria-label={labels.region}>
-            {cards.map((m, i) => (
-              <button key={m.id} type="button" data-hit-area aria-current={i === index ? "true" : undefined} aria-label={`${i + 1}: ${m.title}`} onClick={() => railRef.current?.children[i]?.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "nearest", inline: "start" })} className="grid h-11 w-6 place-items-center">
-                <span className={cn("block h-2.5 rounded-full transition-all duration-300", i === index ? "w-7 bg-orange" : "w-2.5 bg-ink/20")} />
-              </button>
-            ))}
-          </div>
-          <button type="button" onClick={() => scrollByDir(1)} aria-label={labels.next} className="paper-round paper-round--dark">
-            <ArrowRight aria-hidden />
-          </button>
-        </div>
+              <Img src={item.image} alt={i === active ? item.alt : ""} sizes="(min-width: 1024px) 420px, (min-width: 640px) 45vw, 65vw" className="h-full w-full object-cover" draggable={false} />
+            </figure>
+          );
+        })}
       </div>
-
+      <div className="mt-5 flex flex-wrap items-center justify-center gap-3 sm:gap-4">
+        <button type="button" onClick={() => move(-1)} aria-label={labels.prev} className="paper-round"><ArrowLeft aria-hidden /></button>
+        <span className="min-w-[78px] text-center font-display text-[17px] font-bold tabular-nums text-ink">
+          {String(active + 1).padStart(2, "0")} <span className="text-slate">/ {String(count).padStart(2, "0")}</span>
+        </span>
+        <button type="button" onClick={() => move(1)} aria-label={labels.next} className="paper-round paper-round--dark"><ArrowRight aria-hidden /></button>
+        <span className="inline-flex items-center gap-1.5 text-[13px] font-medium text-slate sm:ml-3"><Hand aria-hidden className="size-4" /> Trascina per sfogliare</span>
+      </div>
       <ol className="sr-only">
-        {items.map((m) => (
-          <li key={m.id}>
-            {m.year ?? labels.yearUnknown}: {m.title}. {m.caption}
-          </li>
-        ))}
+        {items.map((item) => <li key={item.id}>{item.year ?? labels.yearUnknown}: {item.title}. {item.caption}</li>)}
       </ol>
     </section>
   );

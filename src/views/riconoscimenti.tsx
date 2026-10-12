@@ -1,6 +1,7 @@
 import { Award } from "lucide-react";
 import { getDict } from "@/content/dict";
 import { milestoneItems } from "@/content/milestones";
+import { memoryPhotos } from "@/content/memory-photos";
 import { pageMeta } from "@/lib/meta";
 import { lhref, type Locale } from "@/lib/i18n";
 import { ButtonLink, Eyebrow, Headline, TextLink } from "@/components/ui/primitives";
@@ -102,7 +103,7 @@ export function RiconoscimentiPage({ locale }: { locale: Locale }) {
             </div>
             <div className="mt-8">
               <MemoryRoom
-                items={items}
+                items={[...memoryPhotos]}
                 labels={{ region: r.memory.region, live: r.memory.live, prev: r.memory.prev, next: r.memory.next, open: r.memory.open, loading: r.memory.loading, yearUnknown: r.yearUnknown }}
               />
             </div>

@@ -200,10 +200,12 @@ export const ardake: Dict["ardake"] = {
     tourNext: "Inàcc",
     tourDone: "Ò finìt",
     tourSkip: "Salta ol gir",
-    outroTitle: "Adès te sé töt!",
-    outroBody: "Te pödet fà de per te. Se te ghe n'ét bisògn, te tróet i «i» visì ai paròle.",
+    outroTitle: "A me sa che te sé pròpe intraprendènt!",
+    outroBody: "Te prefere fà ol gir de per te? Brao! Se te gh'ét bisògn, te sa indo tróam: tóca öna «i» e rìe.",
     skipTitle: "A me sa che te sé pròpe intraprendènt!",
-    skipBody: "Se te gh'ét amò bisògn, te sa bé indrìg troàm: sót chì, visì ai «i» in del pàgina.",
+    skipBody: "Te prefere fà ol gir de per te? Brao! Se te gh'ét bisògn, te sa indo tróam: tóca öna «i» e rìe.",
+    doneTitle: "Ü bel gir, véra?",
+    doneBody: "Adès te conósset i baze. Se te gh'ét amò di domande, tóca öna «i» e so chè.",
     topics: {
       ardake: { title: "Cos'è Ardaké?", body: "L'è la piataforma che m'à fàcc töta in SUN-FAI. La te mòstra in tép reàl quanta energia la vé prodòta in de la tò configurassiù e quanta ghe n'è de spartì, quart d'ura per quart d'ura." },
       configurazione: {

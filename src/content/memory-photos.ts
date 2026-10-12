@@ -1,0 +1,21 @@
+/** Photographs supplied by SUN-FAI for the manual memory gallery. */
+export const memoryPhotos = [
+  { id: "archivio-01", year: null, label: "", title: "Fotografia 1 dell'archivio", caption: "", image: "/memory/archivio-01.webp", alt: "Presentazione pubblica sulle comunità energetiche", href: null },
+  { id: "archivio-02", year: null, label: "", title: "Fotografia 2 dell'archivio", caption: "", image: "/memory/archivio-02.webp", alt: "Tavolo di relatori durante un incontro", href: null },
+  { id: "archivio-03", year: null, label: "", title: "Fotografia 3 dell'archivio", caption: "", image: "/memory/archivio-03.webp", alt: "Primo piano di un relatore seduto", href: null },
+  { id: "archivio-04", year: null, label: "", title: "Fotografia 4 dell'archivio", caption: "", image: "/memory/archivio-04.webp", alt: "Persona durante una conversazione", href: null },
+  { id: "archivio-05", year: null, label: "", title: "Fotografia 5 dell'archivio", caption: "", image: "/memory/archivio-05.webp", alt: "Incontro attorno a una scrivania", href: null },
+  { id: "archivio-06", year: null, label: "", title: "Fotografia 6 dell'archivio", caption: "", image: "/memory/archivio-06.webp", alt: "Confronto tra partecipanti in un ufficio", href: null },
+  { id: "archivio-07", year: null, label: "", title: "Fotografia 7 dell'archivio", caption: "", image: "/memory/archivio-07.webp", alt: "Presentazione serale in una sala", href: null },
+  { id: "archivio-08", year: null, label: "", title: "Fotografia 8 dell'archivio", caption: "", image: "/memory/archivio-08.webp", alt: "Due persone durante un incontro pubblico", href: null },
+  { id: "archivio-09", year: null, label: "", title: "Fotografia 9 dell'archivio", caption: "", image: "/memory/archivio-09.webp", alt: "Relatori durante una conversazione pubblica", href: null },
+  { id: "archivio-10", year: null, label: "", title: "Fotografia 10 dell'archivio", caption: "", image: "/memory/archivio-10.webp", alt: "Incontro pubblico con proiezione e partecipanti", href: null },
+  { id: "archivio-11", year: null, label: "", title: "Fotografia 11 dell'archivio", caption: "", image: "/memory/archivio-11.webp", alt: "Pubblico durante una presentazione", href: null },
+  { id: "archivio-12", year: null, label: "", title: "Fotografia 12 dell'archivio", caption: "", image: "/memory/archivio-12.webp", alt: "Relatore davanti a una proiezione", href: null },
+  { id: "archivio-13", year: null, label: "", title: "Fotografia 13 dell'archivio", caption: "", image: "/memory/archivio-13.webp", alt: "Intervento durante un incontro sul territorio", href: null },
+  { id: "archivio-14", year: null, label: "", title: "Fotografia 14 dell'archivio", caption: "", image: "/memory/archivio-14.webp", alt: "Relatore illustra un progetto energetico", href: null },
+  { id: "archivio-15", year: null, label: "", title: "Fotografia 15 dell'archivio", caption: "", image: "/memory/archivio-15.webp", alt: "Incontro con il pubblico e presentazione", href: null },
+  { id: "archivio-16", year: null, label: "", title: "Fotografia 16 dell'archivio", caption: "", image: "/memory/archivio-16.webp", alt: "Partecipanti durante una serata informativa", href: null },
+  { id: "archivio-17", year: null, label: "", title: "Fotografia 17 dell'archivio", caption: "", image: "/memory/archivio-17.webp", alt: "Relatori seduti davanti al pubblico", href: null },
+  { id: "archivio-18", year: null, label: "", title: "Fotografia 18 dell'archivio", caption: "", image: "/memory/archivio-18.webp", alt: "Incontro con slide illustrate", href: null },
+] as const;

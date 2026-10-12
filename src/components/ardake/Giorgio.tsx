@@ -72,11 +72,11 @@ export function GiorgioProvider({ g, locale, tour, children }: { g: G; locale: L
   const outro = useCallback(
     (kind: "done" | "skip" = "done") => {
       if (tour) safeSet(doneKey(tour), "1");
-      const title = kind === "skip" ? (g.skipTitle ?? g.outroTitle) : g.outroTitle;
-      const body = kind === "skip" ? (g.skipBody ?? g.outroBody) : g.outroBody;
+      const title = kind === "skip" ? g.skipTitle : g.doneTitle;
+      const body = kind === "skip" ? g.skipBody : g.doneBody;
       setS((cur) => ({ ...cur, mode: "outro", step: -1, topic: { title, body }, topicKey: kind === "skip" ? "outro-skip" : "outro" }));
       window.clearTimeout(outroTimer.current);
-      outroTimer.current = window.setTimeout(() => setS(IDLE), reduce ? 1400 : 3200);
+      outroTimer.current = window.setTimeout(() => setS(IDLE), reduce ? 3500 : 5500);
     },
     [g, tour, reduce],
   );
