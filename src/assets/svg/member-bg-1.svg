@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500" role="img" aria-label="Sfondo membro 1"><title>Sfondo membro 1</title>
+<rect width="400" height="500" fill="var(--geo-peach, #FBD9C0)"/>
+<path d="M0 0 H300 C270 140 190 250 0 300 Z" fill="var(--geo-orange, #F26722)"/><circle cx="420" cy="430" r="230" fill="var(--geo-yellow, #FAC23B)"/><circle cx="330" cy="110" r="52" fill="var(--geo-cream, #FFF8EC)"/>
+</svg>

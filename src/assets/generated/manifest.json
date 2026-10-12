@@ -1,0 +1,612 @@
+[
+ {
+  "id": "ripple-hero-desktop-1",
+  "panel": null,
+  "layout": "hero",
+  "seed": 1,
+  "family": "seeded",
+  "size": "desktop"
+ },
+ {
+  "id": "ripple-hero-desktop-2",
+  "panel": null,
+  "layout": "hero",
+  "seed": 2,
+  "family": "seeded",
+  "size": "desktop"
+ },
+ {
+  "id": "ripple-hero-tall-1",
+  "panel": null,
+  "layout": "hero",
+  "seed": 1,
+  "family": "seeded",
+  "size": "tall"
+ },
+ {
+  "id": "ripple-hero-tall-2",
+  "panel": null,
+  "layout": "hero",
+  "seed": 2,
+  "family": "seeded",
+  "size": "tall"
+ },
+ {
+  "id": "ripple-hero-mobile-1",
+  "panel": null,
+  "layout": "hero",
+  "seed": 1,
+  "family": "seeded",
+  "size": "mobile"
+ },
+ {
+  "id": "ripple-hero-mobile-2",
+  "panel": null,
+  "layout": "hero",
+  "seed": 2,
+  "family": "seeded",
+  "size": "mobile"
+ },
+ {
+  "id": "ripple-content-desktop-1",
+  "panel": null,
+  "layout": "content",
+  "seed": 1,
+  "family": "seeded",
+  "size": "desktop"
+ },
+ {
+  "id": "ripple-content-desktop-2",
+  "panel": null,
+  "layout": "content",
+  "seed": 2,
+  "family": "seeded",
+  "size": "desktop"
+ },
+ {
+  "id": "ripple-content-tall-1",
+  "panel": null,
+  "layout": "content",
+  "seed": 1,
+  "family": "seeded",
+  "size": "tall"
+ },
+ {
+  "id": "ripple-content-tall-2",
+  "panel": null,
+  "layout": "content",
+  "seed": 2,
+  "family": "seeded",
+  "size": "tall"
+ },
+ {
+  "id": "ripple-content-mobile-1",
+  "panel": null,
+  "layout": "content",
+  "seed": 1,
+  "family": "seeded",
+  "size": "mobile"
+ },
+ {
+  "id": "ripple-content-mobile-2",
+  "panel": null,
+  "layout": "content",
+  "seed": 2,
+  "family": "seeded",
+  "size": "mobile"
+ },
+ {
+  "id": "ripple-presenter-desktop-1",
+  "panel": null,
+  "layout": "presenter",
+  "seed": 1,
+  "family": "seeded",
+  "size": "desktop"
+ },
+ {
+  "id": "ripple-presenter-desktop-2",
+  "panel": null,
+  "layout": "presenter",
+  "seed": 2,
+  "family": "seeded",
+  "size": "desktop"
+ },
+ {
+  "id": "ripple-presenter-tall-1",
+  "panel": null,
+  "layout": "presenter",
+  "seed": 1,
+  "family": "seeded",
+  "size": "tall"
+ },
+ {
+  "id": "ripple-presenter-tall-2",
+  "panel": null,
+  "layout": "presenter",
+  "seed": 2,
+  "family": "seeded",
+  "size": "tall"
+ },
+ {
+  "id": "ripple-presenter-mobile-1",
+  "panel": null,
+  "layout": "presenter",
+  "seed": 1,
+  "family": "seeded",
+  "size": "mobile"
+ },
+ {
+  "id": "ripple-presenter-mobile-2",
+  "panel": null,
+  "layout": "presenter",
+  "seed": 2,
+  "family": "seeded",
+  "size": "mobile"
+ },
+ {
+  "id": "ripple-frame-desktop-1",
+  "panel": null,
+  "layout": "frame",
+  "seed": 1,
+  "family": "seeded",
+  "size": "desktop"
+ },
+ {
+  "id": "ripple-frame-desktop-2",
+  "panel": null,
+  "layout": "frame",
+  "seed": 2,
+  "family": "seeded",
+  "size": "desktop"
+ },
+ {
+  "id": "ripple-frame-tall-1",
+  "panel": null,
+  "layout": "frame",
+  "seed": 1,
+  "family": "seeded",
+  "size": "tall"
+ },
+ {
+  "id": "ripple-frame-tall-2",
+  "panel": null,
+  "layout": "frame",
+  "seed": 2,
+  "family": "seeded",
+  "size": "tall"
+ },
+ {
+  "id": "ripple-frame-mobile-1",
+  "panel": null,
+  "layout": "frame",
+  "seed": 1,
+  "family": "seeded",
+  "size": "mobile"
+ },
+ {
+  "id": "ripple-frame-mobile-2",
+  "panel": null,
+  "layout": "frame",
+  "seed": 2,
+  "family": "seeded",
+  "size": "mobile"
+ },
+ {
+  "id": "ripple-soft-desktop-1",
+  "panel": null,
+  "layout": "soft",
+  "seed": 1,
+  "family": "seeded",
+  "size": "desktop"
+ },
+ {
+  "id": "ripple-soft-desktop-2",
+  "panel": null,
+  "layout": "soft",
+  "seed": 2,
+  "family": "seeded",
+  "size": "desktop"
+ },
+ {
+  "id": "ripple-soft-tall-1",
+  "panel": null,
+  "layout": "soft",
+  "seed": 1,
+  "family": "seeded",
+  "size": "tall"
+ },
+ {
+  "id": "ripple-soft-tall-2",
+  "panel": null,
+  "layout": "soft",
+  "seed": 2,
+  "family": "seeded",
+  "size": "tall"
+ },
+ {
+  "id": "ripple-soft-mobile-1",
+  "panel": null,
+  "layout": "soft",
+  "seed": 1,
+  "family": "seeded",
+  "size": "mobile"
+ },
+ {
+  "id": "ripple-soft-mobile-2",
+  "panel": null,
+  "layout": "soft",
+  "seed": 2,
+  "family": "seeded",
+  "size": "mobile"
+ },
+ {
+  "id": "ripple-footer-desktop-1",
+  "panel": null,
+  "layout": "footer",
+  "seed": 1,
+  "family": "seeded",
+  "size": "desktop"
+ },
+ {
+  "id": "ripple-footer-desktop-2",
+  "panel": null,
+  "layout": "footer",
+  "seed": 2,
+  "family": "seeded",
+  "size": "desktop"
+ },
+ {
+  "id": "ripple-footer-tall-1",
+  "panel": null,
+  "layout": "footer",
+  "seed": 1,
+  "family": "seeded",
+  "size": "tall"
+ },
+ {
+  "id": "ripple-footer-tall-2",
+  "panel": null,
+  "layout": "footer",
+  "seed": 2,
+  "family": "seeded",
+  "size": "tall"
+ },
+ {
+  "id": "ripple-footer-mobile-1",
+  "panel": null,
+  "layout": "footer",
+  "seed": 1,
+  "family": "seeded",
+  "size": "mobile"
+ },
+ {
+  "id": "ripple-footer-mobile-2",
+  "panel": null,
+  "layout": "footer",
+  "seed": 2,
+  "family": "seeded",
+  "size": "mobile"
+ },
+ {
+  "id": "panel-home-00-hero",
+  "panel": "home/hero",
+  "layout": "hero",
+  "seed": 299864970,
+  "family": "paper"
+ },
+ {
+  "id": "panel-home-01-numbers",
+  "panel": "home/numbers",
+  "layout": "content",
+  "seed": 299864971,
+  "family": "solar"
+ },
+ {
+  "id": "panel-home-02-per-chi",
+  "panel": "home/per-chi",
+  "layout": "presenter",
+  "seed": 299864972,
+  "family": "mint"
+ },
+ {
+  "id": "panel-home-03-about",
+  "panel": "home/about",
+  "layout": "frame",
+  "seed": 299864973,
+  "family": "cream"
+ },
+ {
+  "id": "panel-home-04-tre-passaggi",
+  "panel": "home/tre-passaggi",
+  "layout": "soft",
+  "seed": 299864974,
+  "family": "mint"
+ },
+ {
+  "id": "panel-home-05-ardake",
+  "panel": "home/ardake",
+  "layout": "footer",
+  "seed": 299864975,
+  "family": "mint"
+ },
+ {
+  "id": "panel-home-06-verifica",
+  "panel": "home/verifica",
+  "layout": "hero",
+  "seed": 299864976,
+  "family": "peach"
+ },
+ {
+  "id": "panel-home-07-map",
+  "panel": "home/map",
+  "layout": "content",
+  "seed": 299864977,
+  "family": "mint"
+ },
+ {
+  "id": "panel-home-08-team",
+  "panel": "home/team",
+  "layout": "presenter",
+  "seed": 299864978,
+  "family": "paper"
+ },
+ {
+  "id": "panel-home-09-riconoscimenti",
+  "panel": "home/riconoscimenti",
+  "layout": "frame",
+  "seed": 299864979,
+  "family": "cream"
+ },
+ {
+  "id": "panel-home-10-press",
+  "panel": "home/press",
+  "layout": "footer",
+  "seed": 705879557,
+  "family": "paper"
+ },
+ {
+  "id": "panel-home-11-social",
+  "panel": "home/social",
+  "layout": "hero",
+  "seed": 705879558,
+  "family": "mint"
+ },
+ {
+  "id": "panel-home-12-faq",
+  "panel": "home/faq",
+  "layout": "content",
+  "seed": 705879559,
+  "family": "cream"
+ },
+ {
+  "id": "panel-home-13-eventi",
+  "panel": "home/eventi",
+  "layout": "presenter",
+  "seed": 705879560,
+  "family": "paper"
+ },
+ {
+  "id": "panel-home-14-join",
+  "panel": "home/join",
+  "layout": "frame",
+  "seed": 705879561,
+  "family": "peach"
+ },
+ {
+  "id": "panel-home-15-contact",
+  "panel": "home/contact",
+  "layout": "soft",
+  "seed": 705879562,
+  "family": "mint"
+ },
+ {
+  "id": "panel-chi-siamo-00-hero",
+  "panel": "chi-siamo/hero",
+  "layout": "content",
+  "seed": 2021342899,
+  "family": "mint"
+ },
+ {
+  "id": "panel-chi-siamo-01-in-breve",
+  "panel": "chi-siamo/in-breve",
+  "layout": "presenter",
+  "seed": 2021342900,
+  "family": "paper"
+ },
+ {
+  "id": "panel-chi-siamo-02-storia",
+  "panel": "chi-siamo/storia",
+  "layout": "frame",
+  "seed": 2021342901,
+  "family": "cream"
+ },
+ {
+  "id": "panel-chi-siamo-03-principi",
+  "panel": "chi-siamo/principi",
+  "layout": "soft",
+  "seed": 2021342902,
+  "family": "mint"
+ },
+ {
+  "id": "panel-chi-siamo-04-perche",
+  "panel": "chi-siamo/perche",
+  "layout": "footer",
+  "seed": 2021342903,
+  "family": "paper"
+ },
+ {
+  "id": "panel-chi-siamo-05-territorio",
+  "panel": "chi-siamo/territorio",
+  "layout": "hero",
+  "seed": 2021342904,
+  "family": "cream"
+ },
+ {
+  "id": "panel-chi-siamo-06-team",
+  "panel": "chi-siamo/team",
+  "layout": "content",
+  "seed": 2021342905,
+  "family": "mint"
+ },
+ {
+  "id": "panel-chi-siamo-07-premio",
+  "panel": "chi-siamo/premio",
+  "layout": "presenter",
+  "seed": 2021342906,
+  "family": "paper"
+ },
+ {
+  "id": "panel-cosa-facciamo-00-hero",
+  "panel": "cosa-facciamo/hero",
+  "layout": "content",
+  "seed": 2625037999,
+  "family": "cream"
+ },
+ {
+  "id": "panel-cosa-facciamo-01-sito",
+  "panel": "cosa-facciamo/sito",
+  "layout": "presenter",
+  "seed": 2625038000,
+  "family": "paper"
+ },
+ {
+  "id": "panel-cosa-facciamo-02-servizi",
+  "panel": "cosa-facciamo/servizi",
+  "layout": "frame",
+  "seed": 2625038001,
+  "family": "mint"
+ },
+ {
+  "id": "panel-cosa-facciamo-03-comuni",
+  "panel": "cosa-facciamo/comuni",
+  "layout": "soft",
+  "seed": 2625038002,
+  "family": "peach"
+ },
+ {
+  "id": "panel-cosa-facciamo-04-produttori-dati",
+  "panel": "cosa-facciamo/produttori-dati",
+  "layout": "footer",
+  "seed": 2625038003,
+  "family": "paper"
+ },
+ {
+  "id": "panel-cosa-facciamo-05-percorso",
+  "panel": "cosa-facciamo/percorso",
+  "layout": "hero",
+  "seed": 2625038004,
+  "family": "cream"
+ },
+ {
+  "id": "panel-cosa-facciamo-06-oltre",
+  "panel": "cosa-facciamo/oltre",
+  "layout": "content",
+  "seed": 2625038005,
+  "family": "mint"
+ },
+ {
+  "id": "panel-le-cer-00-hero",
+  "panel": "le-cer/hero",
+  "layout": "content",
+  "seed": 3612040141,
+  "family": "paper"
+ },
+ {
+  "id": "panel-le-cer-01-in-sunfai",
+  "panel": "le-cer/in-sunfai",
+  "layout": "presenter",
+  "seed": 3612040142,
+  "family": "mint"
+ },
+ {
+  "id": "panel-le-cer-02-cosa-sono",
+  "panel": "le-cer/cosa-sono",
+  "layout": "frame",
+  "seed": 3612040143,
+  "family": "cream"
+ },
+ {
+  "id": "panel-le-cer-03-come",
+  "panel": "le-cer/come",
+  "layout": "soft",
+  "seed": 3612040144,
+  "family": "paper"
+ },
+ {
+  "id": "panel-le-cer-04-explainer",
+  "panel": "le-cer/explainer",
+  "layout": "footer",
+  "seed": 3612040145,
+  "family": "mint"
+ },
+ {
+  "id": "panel-le-cer-05-chi",
+  "panel": "le-cer/chi",
+  "layout": "hero",
+  "seed": 3612040146,
+  "family": "cream"
+ },
+ {
+  "id": "panel-le-cer-06-non-cambia",
+  "panel": "le-cer/non-cambia",
+  "layout": "content",
+  "seed": 3612040147,
+  "family": "peach"
+ },
+ {
+  "id": "panel-le-cer-07-norme",
+  "panel": "le-cer/norme",
+  "layout": "presenter",
+  "seed": 3612040148,
+  "family": "paper"
+ },
+ {
+  "id": "panel-le-cer-08-faq",
+  "panel": "le-cer/faq",
+  "layout": "frame",
+  "seed": 3612040149,
+  "family": "mint"
+ },
+ {
+  "id": "panel-ardake-00-hero",
+  "panel": "ardake/hero",
+  "layout": "frame",
+  "seed": 2862352641,
+  "family": "paper"
+ },
+ {
+  "id": "panel-ardake-01-cosa-fa",
+  "panel": "ardake/cosa-fa",
+  "layout": "soft",
+  "seed": 2862352642,
+  "family": "mint"
+ },
+ {
+  "id": "panel-ardake-02-come-funziona",
+  "panel": "ardake/come-funziona",
+  "layout": "footer",
+  "seed": 2862352643,
+  "family": "paper"
+ },
+ {
+  "id": "panel-ardake-03-seleziona",
+  "panel": "ardake/seleziona",
+  "layout": "hero",
+  "seed": 2862352644,
+  "family": "cream"
+ },
+ {
+  "id": "panel-ardake-04-demo",
+  "panel": "ardake/demo",
+  "layout": "content",
+  "seed": 2862352645,
+  "family": "paper"
+ },
+ {
+  "id": "panel-ardake-05-fatta-in-casa",
+  "panel": "ardake/fatta-in-casa",
+  "layout": "presenter",
+  "seed": 2862352646,
+  "family": "peach"
+ }
+]

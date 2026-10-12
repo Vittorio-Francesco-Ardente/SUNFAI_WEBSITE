@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 400" aria-hidden="true" focusable="false">
+<!-- Large rising sun + ground arc. Position it so its baseline sits ON the boundary between two sections; the upper half belongs to section A, the lower part is hidden behind section B content card. Never let the section overflow clip it in half. -->
+<path d="M1440.0 700.0A640.0 640.0 0 0 0 160.0 700.0L280.0 700.0A520.0 520.0 0 0 1 1320.0 700.0Z" fill="var(--geo-yellow, #FAC23B)"/><path d="M800.0 700.0L1100.0 700.0A300.0 300.0 0 0 0 500.0 700.0Z" fill="var(--geo-orange-soft, #FE9845)"/>
+</svg>

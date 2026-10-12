@@ -1,0 +1,402 @@
+@import "tailwindcss";
+/* the vendored prompt packs contain the old demo source: never generate CSS from it */
+@source not "../../prompt-packs";
+@source not "../../reports";
+@import "../styles/tokens.css";
+@import "../styles/mobile.css" layer(components);
+
+/* =====================================================================
+   SUN-FAI V2 — site layer on top of tokens.css (pack 01) and mobile.css (pack 15).
+   Rules: flat fills only (no gradient() except invisible masks), paper buttons,
+   hover effects gated behind (hover:hover) and (pointer:fine), end states visible by default.
+   ===================================================================== */
+
+@theme {
+  /* Accessible text variants added for V2 (never rename tokens.css ones) */
+  --color-leaf-text: #3b6a22;      /* small green text on paper / mint (≥ 4.5:1) */
+  --color-leaf-display: #478a2b;   /* green accent word in display headlines (≥ 3:1 large text) */
+  --color-dock: #fbf8f1;
+  --color-dock-item: #f3ede4;
+  --color-dock-item-hover: #ece4d8;
+  --color-floor: #eef4e6;
+  --breakpoint-sm: 400px;          /* pack 15 breakpoints: sm 400 · md 768 · lg 1024 · xl 1280 */
+}
+
+@layer base {
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body { font-feature-settings: "cv11", "ss01"; }
+  h1, h2, h3, h4 { font-family: var(--font-display); }
+  h3, h4 { font-weight: 800; letter-spacing: var(--tracking-tight); line-height: 1.12; text-wrap: balance; }
+  p { text-wrap: pretty; }
+  img { max-width: 100%; }
+  [hidden] { display: none !important; }
+  .num, [data-num] { font-variant-numeric: tabular-nums; }
+}
+
+/* ---------- Layout ---------- */
+@utility container-x {
+  width: 100%;
+  max-width: calc(var(--container) + var(--gutter) * 2);
+  margin-inline: auto;
+  padding-inline: max(var(--gutter), var(--safe-l)) max(var(--gutter), var(--safe-r));
+}
+@utility section-y { padding-block: clamp(56px, 9vw, 150px); }
+@utility section-y-sm { padding-block: clamp(40px, 6vw, 96px); }
+
+/* ---------- Display type (concept scale; min at 320 px) ---------- */
+@layer components {
+  .t-hero, .t-h1, .t-h2, .t-h3 {
+    font-family: var(--font-display); font-weight: 800; color: var(--color-ink);
+    letter-spacing: var(--tracking-display); line-height: var(--leading-display);
+    padding-block: .04em; text-wrap: balance; hyphens: manual;
+  }
+  .t-hero { font-size: clamp(2.75rem, .9rem + 6.1vw, 7.4rem); }
+  .t-h1 { font-size: clamp(2.5rem, 1.25rem + 4.9vw, 6.2rem); }
+  .t-h2 { font-size: clamp(2rem, 1.35rem + 3vw, 4.6rem); }
+  .t-h2s { font-family: var(--font-display); font-weight: 800; letter-spacing: -0.035em; line-height: 1; padding-block: .04em; text-wrap: balance;
+    font-size: clamp(1.75rem, 1.3rem + 1.9vw, 3rem); color: var(--color-ink); }
+  .t-h3 { font-size: clamp(1.1875rem, 1.05rem + .55vw, 1.5rem); letter-spacing: -0.025em; line-height: 1.12; }
+  .t-sub { font-family: var(--font-display); font-weight: 700; letter-spacing: -0.035em; line-height: 1.02;
+    font-size: clamp(1.75rem, 1.15rem + 2.6vw, 3.9rem); color: var(--color-ink); }
+  .t-lead { font-size: var(--fs-lead); line-height: 1.55; color: var(--color-slate); }
+  .t-body { font-size: var(--fs-body); line-height: 1.6; color: var(--color-slate); }
+  .t-small { font-size: max(13px, .875rem); line-height: 1.5; color: var(--color-slate); }
+  .t-meta { font-size: 13px; line-height: 1.45; color: var(--color-slate); }
+
+  .accent { color: var(--accent-display); }
+  .accent--leaf { color: var(--color-leaf-display); }
+  .accent--solar { color: #c78a00; }
+  .dot { color: var(--color-dot); display: inline-block; }
+
+  /* Eyebrow: 2 px line + label (uppercase on Home, sentence case elsewhere) */
+  .eyebrow { display: flex; align-items: center; gap: 12px; font-size: var(--fs-eyebrow); font-weight: 600; color: var(--accent-text); line-height: 1.3; }
+  .eyebrow::before { content: ""; flex: none; width: clamp(28px, 4vw, 64px); height: 2px; border-radius: 2px; background: var(--color-orange); }
+  .eyebrow--upper { text-transform: uppercase; letter-spacing: .02em; }
+  .eyebrow--leaf { color: var(--color-leaf-text); }
+  .eyebrow--leaf::before { background: var(--color-leaf); }
+
+  /* Cards & pills */
+  .card { background: var(--color-card); border-radius: var(--radius-card); box-shadow: 0 0 0 1px var(--color-hairline), var(--shadow-soft); }
+  .card-warm { background: var(--color-card-warm); border-radius: var(--radius-card); box-shadow: 0 0 0 1px var(--color-hairline), var(--shadow-soft); }
+  .pill { display: inline-flex; align-items: center; min-height: 28px; padding: 4px 12px; border-radius: 999px; background: var(--color-pill);
+    font-size: 13px; font-weight: 500; color: rgb(5 42 34 / .78); line-height: 1.3; white-space: nowrap; }
+  .chip { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 16px; border-radius: 999px;
+    background: var(--color-card-warm); box-shadow: inset 0 0 0 1px rgb(5 42 34 / .12); font-size: 15px; font-weight: 600; color: var(--color-ink);
+    transition: background-color .2s, color .2s, box-shadow .2s; }
+  .chip[aria-pressed="true"], .chip[aria-selected="true"], .chip[aria-current="true"] { background: var(--color-ink); color: #fff; box-shadow: none; }
+
+  /* Ghost numeral behind headlines (never pushes layout) */
+  .ghost-num { position: absolute; pointer-events: none; user-select: none; font-family: var(--font-display); font-weight: 800;
+    font-size: clamp(6rem, 3rem + 10vw, 14rem); line-height: .8; letter-spacing: -0.06em; color: rgb(5 42 34 / .045); }
+
+  /* Text link with arrow (underline grows 60 % → 100 %) */
+  /* Text link (16.8 G6): a real text-decoration on the text span (wraps correctly on phones), arrow inline after it */
+  .tlink { display: inline-flex; align-items: center; gap: .5em; min-height: 44px; padding-block: 8px; font-weight: 600; color: var(--color-ink); }
+  .tlink > span:first-child { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 6px;
+    text-decoration-color: var(--tlink-line, #478A2B); transition: text-decoration-color .2s; }
+  .tlink svg { width: 1.1em; height: 1.1em; flex: none; transition: transform .25s var(--ease-out-soft); }
+  .tlink--ink { --tlink-line: var(--color-ink); }
+  .tlink--orange { --tlink-line: var(--color-orange); }
+  @media (hover: hover) and (pointer: fine) {
+    .tlink:hover > span:first-child { text-decoration-color: var(--color-orange); }
+    .tlink:hover svg { transform: translateX(3px); }
+  }
+
+  /* Paper round buttons (prev/next, arrows) — same finish as .btn, never glowing */
+  .paper-round { display: inline-grid; place-items: center; flex: none; width: 48px; height: 48px; border-radius: 999px;
+    background: var(--color-card-warm); color: var(--color-ink); box-shadow: inset 0 0 0 1.5px rgb(5 42 34 / .14), 0 1px 1px rgb(5 42 34 / .06);
+    transition: transform .18s var(--ease-out-soft), background-color .18s, box-shadow .18s; touch-action: manipulation; }
+  .paper-round svg { width: 20px; height: 20px; }
+  .paper-round--dark { background: var(--color-ink-900); color: #fff; box-shadow: inset 0 -2px 0 rgb(0 0 0 / .25), var(--shadow-paper); }
+  .paper-round--peach { background: var(--color-peach-light); box-shadow: inset 0 -2px 0 rgb(0 0 0 / .06); }
+  .paper-round--sm { width: 32px; height: 32px; }
+  .paper-round--sm svg { width: 16px; height: 16px; }
+  .paper-round:active { transform: translateY(1px); }
+  .paper-round:disabled { opacity: .4; pointer-events: none; }
+  @media (hover: hover) and (pointer: fine) {
+    .paper-round:hover { transform: translateY(-1px); background: #fff; }
+    .paper-round--dark:hover { background: #17382b; }
+    .paper-round--peach:hover { background: var(--color-peach); }
+  }
+  .btn { touch-action: manipulation; }
+  .btn--light { background: var(--color-card-warm); color: var(--color-ink); box-shadow: var(--paper-edge), var(--shadow-paper); }
+  .btn--light:hover { background: #fff; }
+  .btn--dark:hover { background: #17382b; }
+  .btn--block { width: 100%; }
+  .btn--sm.btn--outline, .btn--sm.btn--light { font-weight: 650; }
+
+  /* Hover lab: cards lift, inner geometry drifts, people rise (pack 01.3) */
+  .hover-card { transition: transform .3s var(--ease-out-soft), box-shadow .3s var(--ease-out-soft); }
+  .hover-card .hc-person { transform-origin: 50% 100%; transition: transform .32s var(--ease-out-soft); }
+  .hover-card .hc-geo { transition: transform .32s var(--ease-out-soft); }
+  .hover-card .hc-scene { transition: transform .5s var(--ease-out-soft); }
+  .hover-card .hc-arrow { transition: transform .25s var(--ease-out-soft), background-color .2s, color .2s; }
+  .hover-card .hc-name { background-image: none; }
+  @media (hover: hover) and (pointer: fine) {
+    .hover-card:hover, .hover-card:focus-visible, .hover-card:focus-within { transform: translateY(-4px); box-shadow: 0 0 0 1px rgb(5 42 34 / .1), var(--shadow-lift); }
+    .hover-card:hover .hc-person, .hover-card:focus-visible .hc-person { transform: scale(1.03); /* grows from the card edge: never lifts off it (16.2) */ }
+    .hover-card:hover .hc-geo, .hover-card:focus-visible .hc-geo { transform: translateY(4px); }
+    .hover-card:hover .hc-scene { transform: scale(1.03); }
+    .hover-card:hover .hc-arrow { transform: translateX(3px); background: var(--color-ink); color: #fff; }
+    .hover-card:hover .hc-name { text-decoration: underline; text-decoration-color: var(--color-orange); text-decoration-thickness: 2px; text-underline-offset: 5px; }
+  }
+
+  /* Speech bubble (mascot & Giorgio) */
+  .speech { position: relative; background: #fff; border-radius: 20px; padding: 14px 18px; font-size: 16px; line-height: 1.4; font-weight: 500;
+    color: var(--color-ink); box-shadow: 0 0 0 1px var(--color-hairline), var(--shadow-soft); }
+  .speech::after { content: ""; position: absolute; width: 16px; height: 16px; background: #fff; transform: rotate(45deg);
+    box-shadow: 1px 1px 0 0 var(--color-hairline); }
+  .speech--tail-right::after { right: -7px; top: 50%; margin-top: -8px; box-shadow: 1px -1px 0 0 var(--color-hairline); }
+  .speech--tail-bottom::after { bottom: -7px; right: 38px; }
+  .speech--tail-left::after { left: -7px; top: 50%; margin-top: -8px; box-shadow: -1px 1px 0 0 var(--color-hairline); }
+
+  /* Visually hidden */
+  .sr-only-focusable:not(:focus):not(:focus-within) { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+  /* Native details accordion (FAQ) */
+  .faq summary { list-style: none; }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq details[open] .faq-icon { transform: rotate(45deg); background: var(--color-solar); }
+  .faq details > div { animation: faq-open .35s var(--ease-out-soft); }
+  @keyframes faq-open { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
+
+  /* Scrollbar-less horizontal scrollers */
+  .no-scrollbar { scrollbar-width: none; }
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+}
+
+/* =====================================================================
+   Scroll motion system (pack 01.4 / 15.3). End state = default. Only transform/opacity/clip-path.
+   ===================================================================== */
+:root { --reveal-distance: 16px; --reveal-duration: 500ms; --reveal-stagger: 60ms; }
+
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .reveal { animation: sf-reveal linear both; animation-timeline: view(); animation-range: entry 0% cover 26%; }
+    .reveal-stagger > * { animation: sf-reveal linear both; animation-timeline: view(); animation-range: entry 0% cover 26%; }
+    .reveal-stagger > *:nth-child(2) { animation-range: entry 6% cover 30%; }
+    .reveal-stagger > *:nth-child(3) { animation-range: entry 12% cover 34%; }
+    .reveal-stagger > *:nth-child(n+4) { animation-range: entry 16% cover 38%; }
+    .rise { animation: sf-rise linear both; animation-timeline: view(); animation-range: entry 0% cover 30%; }
+    .grow-geo { animation: sf-grow linear both; animation-timeline: view(); animation-range: entry 0% cover 35%; }
+    /* parallax drift of geometry layers (desktop only, ≤ 40 px) */
+    @media (min-width: 768px) {
+      [data-parallax="slow"] { animation: sf-drift-slow linear both; animation-timeline: view(); }
+      [data-parallax="fast"] { animation: sf-drift-fast linear both; animation-timeline: view(); }
+      [data-parallax="spin"] { animation: sf-spin linear both; animation-timeline: view(); }
+    }
+  }
+  /* JS fallback (Firefox): elements are hidden only once JS has confirmed no scroll-timeline support */
+  html.no-sda .reveal:not(.is-in), html.no-sda .reveal-stagger:not(.is-in) > *, html.no-sda .rise:not(.is-in) { opacity: 0; transform: translateY(var(--reveal-distance)); }
+  html.no-sda .reveal, html.no-sda .reveal-stagger > *, html.no-sda .rise { transition: opacity var(--reveal-duration) var(--ease-out-soft), transform var(--reveal-duration) var(--ease-out-soft); }
+  html.no-sda .reveal-stagger > *:nth-child(2) { transition-delay: var(--reveal-stagger); }
+  html.no-sda .reveal-stagger > *:nth-child(3) { transition-delay: calc(var(--reveal-stagger) * 2); }
+
+  /* Headline line reveal (mask), accent lands last, the yellow dot pops */
+  .hl-anim .hl-line { display: block; clip-path: inset(-0.2em -0.2em -0.25em -0.2em); }
+  .hl-anim .hl-line > span { display: inline-block; animation: sf-line .6s var(--ease-out-soft) both; animation-delay: calc(var(--i, 0) * 80ms + var(--hl-delay, 0ms) + var(--hd, 0ms)); }
+  .hl-anim .dot { animation: sf-dot .28s var(--ease-out-soft) both; animation-delay: calc(var(--n, 1) * 80ms + 420ms + var(--hl-delay, 0ms) + var(--hd, 0ms)); }
+  html.js .hl-anim:not(.is-in) .hl-line > span, html.js .hl-anim:not(.is-in) .dot { animation-play-state: paused; }
+
+  /* above-the-fold entrance (plain CSS, runs on first paint) */
+  .enter { animation: sf-enter .76s var(--ease-out-soft) both; animation-delay: calc(var(--d, 0ms) + var(--hd, 0ms)); }
+  .enter-rise { animation: sf-enter-rise .9s var(--ease-out-soft) both; animation-delay: calc(var(--d, 0ms) + var(--hd, 0ms)); }
+  .enter-scale { animation: sf-enter-scale .9s cubic-bezier(.34, 1.3, .64, 1) both; animation-delay: calc(var(--d, 0ms) + var(--hd, 0ms)); transform-box: fill-box; transform-origin: center; }
+  .enter-seg { animation: sf-seg .6s var(--ease-out-soft) both; animation-delay: calc(var(--d, 0ms) + var(--hd, 0ms)); transform-box: view-box; }
+}
+
+@keyframes sf-reveal { from { opacity: 0; transform: translateY(var(--reveal-distance)); } to { opacity: 1; transform: none; } }
+@keyframes sf-rise { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+@keyframes sf-grow { from { opacity: .0; transform: scale(.96); } to { opacity: 1; transform: none; } }
+@keyframes sf-drift-slow { from { transform: translateY(-20px); } to { transform: translateY(20px); } }
+@keyframes sf-drift-fast { from { transform: translateY(24px); } to { transform: translateY(-24px); } }
+@keyframes sf-spin { from { transform: rotate(-3deg); } to { transform: rotate(3deg); } }
+@keyframes sf-line { from { transform: translateY(105%); } to { transform: none; } }
+@keyframes sf-dot { from { transform: scale(0); } to { transform: scale(1); } }
+@keyframes sf-enter { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+@keyframes sf-enter-rise { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+@keyframes sf-enter-scale { from { opacity: 0; transform: scale(.82); } to { opacity: 1; transform: none; } }
+@keyframes sf-seg { from { opacity: 0; transform: scale(.92); } to { opacity: 1; transform: none; } }
+
+@media (max-width: 767.98px) {
+  .hl-anim .hl-line > span { animation-duration: .42s; }
+}
+
+/* =====================================================================
+   Continuous backgrounds (pack 01.2): sections clip only horizontally.
+   ===================================================================== */
+.sf-section { position: relative; overflow-x: clip; overflow-y: visible; }
+.sf-section > .sf-bg { position: absolute; inset: 0; z-index: -1; }
+.inset-panel { border-radius: 48px; margin-inline: var(--gutter); }
+@media (max-width: 767.98px) { .inset-panel { border-radius: 32px; margin-inline: 12px; } }
+
+/* Seam ornaments: absolute, centred on the boundary, drawn whole */
+.seam { position: absolute; left: 0; right: 0; pointer-events: none; z-index: 0; }
+.seam-hills { height: clamp(56px, 12vw, 200px); }
+.seam svg, .stage svg, .geo svg { display: block; }
+
+/* People presenter stages */
+.stage { position: relative; isolation: isolate; }
+.stage > .stage-bg { position: absolute; inset: 0; z-index: -1; }
+.stage > img.stage-person { position: absolute; left: 50%; bottom: 0; transform: translateX(-50%); height: 92%; width: auto; max-width: none; }
+
+/* Live dot (Ardaké) */
+.live-dot { position: relative; display: inline-block; width: 10px; height: 10px; border-radius: 999px; background: var(--color-leaf); }
+@media (prefers-reduced-motion: no-preference) {
+  .live-dot::after { content: ""; position: absolute; inset: 0; border-radius: inherit; background: var(--color-leaf); animation: sf-pulse 2s ease-out infinite; }
+}
+@keyframes sf-pulse { from { transform: scale(1); opacity: .6; } to { transform: scale(2.6); opacity: 0; } }
+
+/* Skip link */
+.skip-link { position: fixed; left: 16px; top: 12px; z-index: 120; transform: translateY(-160%); border-radius: 999px; background: var(--color-ink);
+  color: #fff; padding: 12px 18px; font-weight: 600; transition: transform .2s; }
+.skip-link:focus { transform: none; }
+
+/* Print: hide chrome */
+@media print { [data-topbar], [data-dock], #sf-loader, footer .seam { display: none !important; } }
+
+/* =====================================================================
+   Intro loader (pack 09) — ≈ 2.2 s, CSS only. Skipped via html.sf-noloader (preflight script).
+   ===================================================================== */
+#sf-loader { position: fixed; inset: 0; z-index: 100; background: var(--color-paper); overflow: hidden;
+  animation: sf-ld-out .5s var(--ease-in-out-soft) 1.7s forwards; }
+.sf-noloader #sf-loader, .sf-loader-done #sf-loader { display: none; }
+#sf-loader .ld-corner { position: absolute; width: min(22vw, 300px); height: min(22vw, 300px); opacity: 0;
+  animation: sf-ld-corner .6s var(--ease-out-soft) var(--d, 0ms) forwards, sf-ld-corner-out .5s var(--ease-in-out-soft) 1.7s forwards; }
+@media (max-width: 767.98px) { #sf-loader .ld-corner { width: 34vw; height: 34vw; } }
+#sf-loader .ld-tl { left: 0; top: 0; --x: -24px; --y: -24px; }
+#sf-loader .ld-tr { right: 0; top: 0; --x: 24px; --y: -24px; }
+#sf-loader .ld-bl { left: 0; bottom: 0; --x: -24px; --y: 24px; }
+#sf-loader .ld-br { right: 0; bottom: 0; --x: 24px; --y: 24px; }
+#sf-loader .ld-center { position: absolute; inset: 0; display: grid; place-content: center; justify-items: center; gap: 14px;
+  animation: sf-ld-center-out .5s var(--ease-in-out-soft) 1.7s forwards; }
+#sf-loader .ld-mark { width: 96px; height: 96px; overflow: visible; }
+@media (max-width: 767.98px) { #sf-loader .ld-mark { width: 72px; height: 72px; } }
+#sf-loader .mark-ground { opacity: 0; animation: sf-ld-fade-up .3s var(--ease-out-soft) .2s forwards; }
+#sf-loader .mark-sun { transform-box: fill-box; transform-origin: center; transform: scale(.8); opacity: 0;
+  animation: sf-ld-sun .3s var(--ease-out-soft) .3s forwards; }
+#sf-loader .mark-rays path { opacity: 0; transform-box: fill-box; transform-origin: center; transform: scale(.94);
+  animation: sf-ld-ray .25s var(--ease-out-soft) calc(.55s + var(--i) * 35ms) forwards; }
+#sf-loader .ld-word { display: block; width: min(220px, 56vw); aspect-ratio: 594 / 270; overflow: hidden; opacity: 0; filter: blur(6px);
+  animation: sf-ld-word .6s var(--ease-out-soft) .7s forwards; }
+#sf-loader .ld-word img { width: calc(100% * 939 / 594); max-width: none; height: auto; margin-left: calc(-100% * 345 / 594); }
+#sf-loader .ld-tag { font: 500 13px/1 var(--font-sans); letter-spacing: .2em; text-transform: uppercase; color: var(--color-slate);
+  opacity: 0; animation: sf-ld-fade-up .5s var(--ease-out-soft) 1s forwards; }
+@keyframes sf-ld-corner { from { opacity: 0; transform: translate(var(--x), var(--y)); } to { opacity: 1; transform: none; } }
+@keyframes sf-ld-corner-out { from { opacity: 1; transform: none; } to { opacity: 0; transform: translate(calc(var(--x) * .66), calc(var(--y) * .66)); } }
+@keyframes sf-ld-center-out { to { opacity: 0; transform: scale(1.04); } }
+@keyframes sf-ld-out { to { opacity: 0; visibility: hidden; pointer-events: none; } }
+@keyframes sf-ld-fade-up { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@keyframes sf-ld-sun { to { opacity: 1; transform: scale(1); } }
+@keyframes sf-ld-ray { to { opacity: 1; transform: scale(1); } }
+@keyframes sf-ld-word { to { opacity: 1; filter: blur(0); } }
+@media (prefers-reduced-motion: reduce) { #sf-loader { display: none; } }
+
+/* ---------- small extras ---------- */
+.btn .btn-arrow { transition: transform .25s var(--ease-out-soft); }
+@media (hover: hover) and (pointer: fine) { .btn:hover .btn-arrow { transform: translateX(3px); } }
+@media (prefers-reduced-motion: no-preference) {
+  .mascot-pop { animation: sf-pop .3s var(--ease-out-soft) both; animation-timeline: view(); animation-range: entry 10% cover 30%; }
+  @supports not (animation-timeline: view()) { .mascot-pop { animation: none; } }
+}
+@keyframes sf-pop { from { opacity: 0; transform: scale(.9); } to { opacity: 1; transform: none; } }
+
+/* Member backdrop counter-move on hover (depth) */
+.backdrop-svg .bd-a, .backdrop-svg .bd-b, .backdrop-svg .bd-c { transition: transform .4s var(--ease-out-soft); }
+@media (hover: hover) and (pointer: fine) {
+  .hover-card:hover .backdrop-svg .bd-a { transform: translate(-8px, -6px); }
+  .hover-card:hover .backdrop-svg .bd-b { transform: translate(8px, 6px); }
+  .hover-card:hover .backdrop-svg .bd-c { transform: translate(-6px, 8px); }
+  .hover-card:hover .stage-rays { transform: rotate(4deg); }
+}
+.stage-rays { transform-box: view-box; transform-origin: 50% 80%; transition: transform .5s var(--ease-out-soft); }
+
+/* Seam continuity: hills slide 8 px as you cross them (pack 01.4 §9) */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .seam-anim { animation: sf-seam linear both; animation-timeline: view(); animation-range: entry 0% exit 100%; }
+  }
+}
+@keyframes sf-seam { from { transform: translateX(-8px); } to { transform: translateX(8px); } }
+
+/* Hero entrance waits for the intro loader when it is showing (Loader → hero entrance, pack 03.1) */
+html.js:not(.sf-noloader) .hero-scope { --hd: 1550ms; }
+
+/* Giorgio idle breathing (desktop only, off with reduced motion through the global rule) */
+@keyframes sf-breathe { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.006); } }
+.giorgio-breathe { transform-origin: 50% 100%; }
+
+/* Range input: 48 px thumb on touch, paper finish */
+.sf-range { -webkit-appearance: none; appearance: none; width: 100%; height: 48px; background: transparent; touch-action: pan-y; }
+.sf-range::-webkit-slider-runnable-track { height: 8px; border-radius: 999px; background: var(--color-paper-2); box-shadow: inset 0 0 0 1px var(--color-hairline); }
+.sf-range::-moz-range-track { height: 8px; border-radius: 999px; background: var(--color-paper-2); }
+.sf-range::-webkit-slider-thumb { -webkit-appearance: none; width: 32px; height: 32px; margin-top: -12px; border-radius: 999px; background: var(--color-orange-btn);
+  box-shadow: inset 0 -2px 0 rgb(0 0 0 / .15), var(--shadow-paper); border: 3px solid #fff; cursor: grab; }
+.sf-range::-moz-range-thumb { width: 28px; height: 28px; border-radius: 999px; background: var(--color-orange-btn); border: 3px solid #fff; box-shadow: var(--shadow-paper); }
+@media (pointer: coarse) { .sf-range::-webkit-slider-thumb { width: 44px; height: 44px; margin-top: -18px; } }
+
+/* Phones: long button labels (Bergamasque included) wrap instead of overflowing their card (pack 15.1) */
+@media (max-width: 767.98px) {
+  .btn { white-space: normal; text-align: center; height: auto; min-height: 48px; padding-block: 10px; line-height: 1.2; }
+}
+/* Screen-reader-only data tables (charts): kept off-screen inside a scroller so they never widen the layout */
+.sr-table { position: absolute; width: 1px; height: 1px; overflow: auto; clip-path: inset(50%); white-space: nowrap; }
+.hl-line { display: block; }
+.hl-line > span { max-width: 100%; }
+.t-hero, .t-h1, .t-h2, .t-h2s { overflow-wrap: break-word; }
+
+/* =====================================================================
+   V3 canvas panels (pack 16.1): every main section is a slide-like panel inset from the viewport.
+   The panel frame is the only thing that crops ripples and people. The paper gap between panels is the seam.
+   ===================================================================== */
+.canvas-panel {
+  --u: 100cqw;
+  position: relative; isolation: isolate; overflow: hidden; container-type: inline-size;
+  background: var(--panel-bg); border-radius: clamp(28px, 3vw, 44px);
+  margin: 0 clamp(8px, 1.2vw, 16px) clamp(10px, 1.2vw, 16px);
+}
+@media (max-width: 767px) { .canvas-panel { --u: var(--u-sm, 190cqw); border-radius: 28px; } }
+.canvas-panel--leafDeep { color: #fff; }
+.cp-bg { position: absolute; inset: 0; z-index: -1; pointer-events: none; }
+.rp { position: absolute; left: var(--x); top: var(--y); width: calc(var(--u) * var(--d)); height: auto; aspect-ratio: 1; max-width: none; translate: -50% -50%; overflow: visible; }
+@media (max-width: 767px) { .rp { left: var(--xs, var(--x)); top: var(--ys, var(--y)); width: calc(var(--u) * var(--d) * var(--ks, 1)); } }
+.rp-abs { position: absolute; max-width: none; }
+.cp-person { position: absolute; bottom: 0; z-index: 1; width: auto; max-width: none; pointer-events: none; user-select: none; }
+.cp-mascot { position: absolute; z-index: 1; display: block; pointer-events: none; }
+/* ripple entrance (once, when the panel first enters the view; JS adds .is-in): bands scale .94 → 1 from the core
+   outward (60 ms stagger), fan rays grow from the core, then people rise 24 px. No JS / reduced motion = final state. */
+@media (prefers-reduced-motion: no-preference) {
+  html.js .rp > path { transform-box: fill-box; transform-origin: center; animation: rp-in .6s var(--ease-out-soft) both; animation-delay: calc(var(--i, 0) * 60ms); }
+  html.js .rp > .rp-fan { transform-box: fill-box; transform-origin: center; animation: rp-fan .6s var(--ease-out-soft) both; animation-delay: 120ms; }
+  html.js .cp-person { animation: rp-person .5s var(--ease-out-soft) both; animation-delay: 380ms; }
+  html.js .canvas-panel:not(.is-in) :is(.rp > path, .rp > .rp-fan, .cp-person) { animation-play-state: paused; }
+  /* hover: fan rays turn 2° (people stay grounded: lifting them would open a gap above the panel edge) */
+  @media (hover: hover) and (pointer: fine) {
+    .canvas-panel .rp-fan { transition: rotate .6s var(--ease-out-soft); }
+    .canvas-panel:hover .rp-fan { rotate: 2deg; }
+  }
+  .cp-mascot { animation: cp-bob 3s ease-in-out infinite; }
+}
+@keyframes rp-in { from { transform: scale(.94); } to { transform: none; } }
+@keyframes rp-fan { from { transform: scale(.72); opacity: 0; } to { transform: none; opacity: 1; } }
+@keyframes rp-person { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+@keyframes cp-bob { 0%, 100% { transform: none; } 50% { transform: translateY(-4px); } }
+/* the first panel of a page slides under the (transparent-at-top) top bar, like the mockups */
+:root { --tb: calc(var(--topbar-h, 64px) + var(--safe-t, 0px)); }
+@media (min-width: 1024px) { :root { --tb: calc(76px + var(--safe-t, 0px)); } }
+.cp-first { margin-top: calc(var(--tb) * -1 + clamp(8px, 1.2vw, 16px)); padding-top: var(--tb); }
+/* statement panels (16.1 §3b): solar = ink text, accents #A83000, white full stop; leafDeep = white text, yellow display accents */
+.canvas-panel--solar .accent { color: #A83000; }
+.canvas-panel--solar .dot { color: #fff; }
+.canvas-panel--solar .eyebrow { color: var(--color-ink); }
+.canvas-panel--solar .eyebrow::before { background: #A83000; }
+.canvas-panel--leafDeep .accent { color: #FECF49; }
+.canvas-panel--leafDeep .dot { color: #FE9845; }
+/* a card image that is itself a small canvas (door cards, team cards, gallery tiles): own unit = 2 × its width */
+.mini-canvas { container-type: inline-size; --u: 200cqw; isolation: isolate; }
+.mini-canvas > .rp { z-index: -1; }
+.cp-stage { height: var(--sm-h); }
+@media (min-width: 1024px) { .cp-stage { height: auto; } }
+/* memory room reflection (16.9): the mask is the only functional fade allowed; it is not a colour gradient */
+.mr-refl { transform: scaleY(-1); opacity: .18; filter: blur(1.5px); -webkit-mask-image: linear-gradient(to top, #000 0%, transparent 38%); mask-image: linear-gradient(to top, #000 0%, transparent 38%); }

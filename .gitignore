@@ -1,0 +1,25 @@
+node_modules/
+.next/
+out/
+next-env.d.ts
+*.tsbuildinfo
+.env*
+!.env.example
+
+# generated at build time by scripts/optimize-images.mjs
+public/img/
+
+# test output
+reports/mobile/artifacts/
+reports/mobile/html/
+reports/mobile/screens/
+reports/fidelity/
+test-results/
+playwright-report/
+
+.DS_Store
+Thumbs.db
+public/vendor/
+reports/v3/shots/
+reports/v3/videos/
+reports/v3/compare/

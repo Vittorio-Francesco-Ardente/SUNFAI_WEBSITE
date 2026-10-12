@@ -1,0 +1,3660 @@
+{
+ "common.meta.siteTitle": {
+  "reviewed": false
+ },
+ "common.meta.titleTemplate": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "common.meta.description": {
+  "reviewed": false
+ },
+ "common.meta.ogLocale": {
+  "reviewed": false
+ },
+ "common.nav.home": {
+  "reviewed": false
+ },
+ "common.nav.chiSiamo": {
+  "reviewed": false
+ },
+ "common.nav.cosaFacciamo": {
+  "reviewed": false
+ },
+ "common.nav.team": {
+  "reviewed": false
+ },
+ "common.nav.leCer": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "common.nav.riconoscimenti": {
+  "reviewed": false
+ },
+ "common.nav.notizie": {
+  "reviewed": false
+ },
+ "common.nav.ardake": {
+  "reviewed": false
+ },
+ "common.nav.contattaci": {
+  "reviewed": false
+ },
+ "common.nav.diventaSocio": {
+  "reviewed": false
+ },
+ "common.nav.socio": {
+  "reviewed": false
+ },
+ "common.nav.altro": {
+  "reviewed": false
+ },
+ "common.nav.menu": {
+  "reviewed": false
+ },
+ "common.nav.chiudi": {
+  "reviewed": false
+ },
+ "common.nav.navMain": {
+  "reviewed": false
+ },
+ "common.nav.navQuick": {
+  "reviewed": false
+ },
+ "common.nav.navFull": {
+  "reviewed": false
+ },
+ "common.nav.logoAria": {
+  "reviewed": false
+ },
+ "common.nav.skip": {
+  "reviewed": false
+ },
+ "common.nav.language": {
+  "reviewed": false
+ },
+ "common.nav.languageHint": {
+  "reviewed": false
+ },
+ "common.nav.sheetContacts": {
+  "reviewed": false
+ },
+ "common.footer.claim": {
+  "reviewed": false
+ },
+ "common.footer.siteClaim": {
+  "reviewed": false
+ },
+ "common.footer.cols.cooperativa": {
+  "reviewed": false
+ },
+ "common.footer.cols.cer": {
+  "reviewed": false
+ },
+ "common.footer.cols.partecipa": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "common.footer.cols.contatti": {
+  "reviewed": false
+ },
+ "common.footer.compilazione": {
+  "reviewed": false
+ },
+ "common.footer.demoArdake": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "common.footer.monitoraggio": {
+  "reviewed": false
+ },
+ "common.footer.statuto": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "common.footer.regolamento": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "common.footer.legal": {
+  "reviewed": false
+ },
+ "common.footer.areaRiservata": {
+  "reviewed": false
+ },
+ "common.footer.faq": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "common.footer.configurazioni": {
+  "reviewed": false
+ },
+ "common.footer.eventi": {
+  "reviewed": false
+ },
+ "common.footer.vat": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "common.footer.rights": {
+  "reviewed": false
+ },
+ "common.footer.facebookPaused": {
+  "reviewed": false
+ },
+ "common.footer.reviewNote": {
+  "reviewed": false
+ },
+ "common.footer.italianOnly": {
+  "reviewed": false
+ },
+ "common.ui.prev": {
+  "reviewed": false
+ },
+ "common.ui.next": {
+  "reviewed": false
+ },
+ "common.ui.readMore": {
+  "reviewed": false
+ },
+ "common.ui.discover": {
+  "reviewed": false
+ },
+ "common.ui.openPost": {
+  "reviewed": false
+ },
+ "common.ui.all": {
+  "reviewed": false
+ },
+ "common.ui.close": {
+  "reviewed": false
+ },
+ "common.ui.externalNote": {
+  "reviewed": false
+ },
+ "common.ui.carousel": {
+  "reviewed": false
+ },
+ "common.ui.slide": {
+  "reviewed": false
+ },
+ "common.ui.ofTemplate": {
+  "reviewed": false
+ },
+ "common.ui.demoData": {
+  "reviewed": false
+ },
+ "common.ui.updated": {
+  "reviewed": false
+ },
+ "common.ui.live": {
+  "reviewed": false
+ },
+ "common.ui.snapshot": {
+  "reviewed": false
+ },
+ "common.ui.replay": {
+  "reviewed": false
+ },
+ "common.ui.pdf": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "common.ui.download": {
+  "reviewed": false
+ },
+ "common.ui.pages1": {
+  "reviewed": false
+ },
+ "common.ui.pagesN": {
+  "reviewed": false
+ },
+ "common.ui.backTop": {
+  "reviewed": false
+ },
+ "common.ui.mascotAlt": {
+  "reviewed": false
+ },
+ "common.ui.personAlt": {
+  "reviewed": false
+ },
+ "common.ui.sourceLabel": {
+  "reviewed": false
+ },
+ "common.ui.inItalian": {
+  "reviewed": false
+ },
+ "common.localeChip.text": {
+  "reviewed": false
+ },
+ "common.localeChip.cta": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "common.localeChip.dismiss": {
+  "reviewed": false
+ },
+ "common.joinContact.joinEyebrow": {
+  "reviewed": false
+ },
+ "common.joinContact.joinTitle": {
+  "reviewed": false
+ },
+ "common.joinContact.joinText": {
+  "reviewed": false
+ },
+ "common.joinContact.joinCta": {
+  "reviewed": false
+ },
+ "common.joinContact.joinSecondary": {
+  "reviewed": false
+ },
+ "common.joinContact.steps.0": {
+  "reviewed": false
+ },
+ "common.joinContact.steps.1": {
+  "reviewed": false
+ },
+ "common.joinContact.steps.2": {
+  "reviewed": false
+ },
+ "common.joinContact.contactEyebrow": {
+  "reviewed": false
+ },
+ "common.joinContact.contactTitle": {
+  "reviewed": false
+ },
+ "common.joinContact.contactText": {
+  "reviewed": false
+ },
+ "common.joinContact.contactCta": {
+  "reviewed": false
+ },
+ "common.joinContact.email": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "common.joinContact.address": {
+  "reviewed": false
+ },
+ "common.joinContact.sceneAlt": {
+  "reviewed": false
+ },
+ "common.faq.all": {
+  "reviewed": false
+ },
+ "common.loader": {
+  "reviewed": false
+ },
+ "home.meta.title": {
+  "reviewed": false
+ },
+ "home.meta.description": {
+  "reviewed": false
+ },
+ "home.hero.eyebrow": {
+  "reviewed": false
+ },
+ "home.hero.title": {
+  "reviewed": false
+ },
+ "home.hero.sub": {
+  "reviewed": false
+ },
+ "home.hero.body": {
+  "reviewed": false
+ },
+ "home.hero.cta": {
+  "reviewed": false
+ },
+ "home.hero.secondary": {
+  "reviewed": false
+ },
+ "home.hero.peopleAlt": {
+  "reviewed": false
+ },
+ "home.numbers.eyebrow": {
+  "reviewed": false
+ },
+ "home.numbers.title": {
+  "reviewed": false
+ },
+ "home.numbers.lead": {
+  "reviewed": false
+ },
+ "home.numbers.items.cer.value": {
+  "reviewed": false
+ },
+ "home.numbers.items.cer.label": {
+  "reviewed": false
+ },
+ "home.numbers.items.kwp.value": {
+  "reviewed": false
+ },
+ "home.numbers.items.kwp.unit": {
+  "reviewed": false
+ },
+ "home.numbers.items.kwp.label": {
+  "reviewed": false
+ },
+ "home.numbers.items.energy.unit": {
+  "reviewed": false
+ },
+ "home.numbers.items.energy.label": {
+  "reviewed": false
+ },
+ "home.numbers.items.soci.value": {
+  "reviewed": false
+ },
+ "home.numbers.items.soci.label": {
+  "reviewed": false
+ },
+ "home.numbers.items.comuni.value": {
+  "reviewed": false
+ },
+ "home.numbers.items.comuni.label": {
+  "reviewed": false
+ },
+ "home.numbers.items.anni.value": {
+  "reviewed": false
+ },
+ "home.numbers.items.anni.unit": {
+  "reviewed": false
+ },
+ "home.numbers.items.anni.label": {
+  "reviewed": false
+ },
+ "home.numbers.items.anni.note": {
+  "reviewed": false
+ },
+ "home.numbers.liveLabel": {
+  "reviewed": false
+ },
+ "home.numbers.presenterAlt": {
+  "reviewed": false
+ },
+ "home.perChi.eyebrow": {
+  "reviewed": false
+ },
+ "home.perChi.title": {
+  "reviewed": false
+ },
+ "home.perChi.lead": {
+  "reviewed": false
+ },
+ "home.perChi.doors.0.title": {
+  "reviewed": false
+ },
+ "home.perChi.doors.0.text": {
+  "reviewed": false
+ },
+ "home.perChi.doors.0.cta": {
+  "reviewed": false
+ },
+ "home.perChi.doors.1.title": {
+  "reviewed": false
+ },
+ "home.perChi.doors.1.text": {
+  "reviewed": false
+ },
+ "home.perChi.doors.1.cta": {
+  "reviewed": false
+ },
+ "home.perChi.doors.2.title": {
+  "reviewed": false
+ },
+ "home.perChi.doors.2.text": {
+  "reviewed": false
+ },
+ "home.perChi.doors.2.cta": {
+  "reviewed": false
+ },
+ "home.perChi.doors.3.title": {
+  "reviewed": false
+ },
+ "home.perChi.doors.3.text": {
+  "reviewed": false
+ },
+ "home.perChi.doors.3.cta": {
+  "reviewed": false
+ },
+ "home.about.eyebrow": {
+  "reviewed": false
+ },
+ "home.about.title": {
+  "reviewed": false
+ },
+ "home.about.lead": {
+  "reviewed": false
+ },
+ "home.about.welcome": {
+  "reviewed": false
+ },
+ "home.about.caption": {
+  "reviewed": false
+ },
+ "home.about.rows.0.title": {
+  "reviewed": false
+ },
+ "home.about.rows.0.text": {
+  "reviewed": false
+ },
+ "home.about.rows.1.title": {
+  "reviewed": false
+ },
+ "home.about.rows.1.text": {
+  "reviewed": false
+ },
+ "home.about.rows.2.title": {
+  "reviewed": false
+ },
+ "home.about.rows.2.text": {
+  "reviewed": false
+ },
+ "home.about.rows.3.title": {
+  "reviewed": false
+ },
+ "home.about.rows.3.text": {
+  "reviewed": false
+ },
+ "home.about.cta": {
+  "reviewed": false
+ },
+ "home.about.secondary": {
+  "reviewed": false
+ },
+ "home.about.landscapeAlt": {
+  "reviewed": false
+ },
+ "home.about.presenterAlt": {
+  "reviewed": false
+ },
+ "home.passaggi.eyebrow": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "home.passaggi.title": {
+  "reviewed": false
+ },
+ "home.passaggi.bubble": {
+  "reviewed": false
+ },
+ "home.passaggi.steps.0.title": {
+  "reviewed": false
+ },
+ "home.passaggi.steps.0.text": {
+  "reviewed": false
+ },
+ "home.passaggi.steps.0.alt": {
+  "reviewed": false
+ },
+ "home.passaggi.steps.1.title": {
+  "reviewed": false
+ },
+ "home.passaggi.steps.1.text": {
+  "reviewed": false
+ },
+ "home.passaggi.steps.1.alt": {
+  "reviewed": false
+ },
+ "home.passaggi.steps.2.title": {
+  "reviewed": false
+ },
+ "home.passaggi.steps.2.text": {
+  "reviewed": false
+ },
+ "home.passaggi.steps.2.alt": {
+  "reviewed": false
+ },
+ "home.passaggi.cta": {
+  "reviewed": false
+ },
+ "home.passaggi.secondary": {
+  "reviewed": false
+ },
+ "home.ardake.srTitle": {
+  "reviewed": false
+ },
+ "home.ardake.eyebrow": {
+  "reviewed": false
+ },
+ "home.ardake.lead": {
+  "reviewed": false
+ },
+ "home.ardake.text": {
+  "reviewed": false
+ },
+ "home.ardake.features.0.title": {
+  "reviewed": false
+ },
+ "home.ardake.features.0.text": {
+  "reviewed": false
+ },
+ "home.ardake.features.1.title": {
+  "reviewed": false
+ },
+ "home.ardake.features.1.text": {
+  "reviewed": false
+ },
+ "home.ardake.features.2.title": {
+  "reviewed": false
+ },
+ "home.ardake.features.2.text": {
+  "reviewed": false
+ },
+ "home.ardake.features.3.title": {
+  "reviewed": false
+ },
+ "home.ardake.features.3.text": {
+  "reviewed": false
+ },
+ "home.ardake.cta": {
+  "reviewed": false
+ },
+ "home.ardake.demo": {
+  "reviewed": false
+ },
+ "home.ardake.madeBy": {
+  "reviewed": false
+ },
+ "home.ardake.giorgioAlt": {
+  "reviewed": false
+ },
+ "home.verifica.eyebrow": {
+  "reviewed": false
+ },
+ "home.verifica.title": {
+  "reviewed": false
+ },
+ "home.verifica.text": {
+  "reviewed": false
+ },
+ "home.verifica.label": {
+  "reviewed": false
+ },
+ "home.verifica.placeholder": {
+  "reviewed": false
+ },
+ "home.verifica.button": {
+  "reviewed": false
+ },
+ "home.verifica.found": {
+  "reviewed": false
+ },
+ "home.verifica.foundCta": {
+  "reviewed": false
+ },
+ "home.verifica.foundMonitor": {
+  "reviewed": false
+ },
+ "home.verifica.notFoundTitle": {
+  "reviewed": false
+ },
+ "home.verifica.notFoundText": {
+  "reviewed": false
+ },
+ "home.verifica.write": {
+  "reviewed": false
+ },
+ "home.verifica.gseMap": {
+  "reviewed": false
+ },
+ "home.verifica.tooShort": {
+  "reviewed": false
+ },
+ "home.verifica.small": {
+  "reviewed": false
+ },
+ "home.verifica.presenterAlt": {
+  "reviewed": false
+ },
+ "home.map.eyebrow": {
+  "reviewed": false
+ },
+ "home.map.title": {
+  "reviewed": false
+ },
+ "home.map.lead": {
+  "reviewed": false
+ },
+ "home.map.legend.attiva": {
+  "reviewed": false
+ },
+ "home.map.legend.in-valutazione": {
+  "reviewed": false
+ },
+ "home.map.legend.in-progetto": {
+  "reviewed": false
+ },
+ "home.map.open": {
+  "reviewed": false
+ },
+ "home.map.loading": {
+  "reviewed": false
+ },
+ "home.map.staticAlt": {
+  "reviewed": false
+ },
+ "home.map.cta": {
+  "reviewed": false
+ },
+ "home.map.comuni": {
+  "reviewed": false
+ },
+ "home.map.approx": {
+  "reviewed": false
+ },
+ "home.map.attribution": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "home.map.legendLabel": {
+  "reviewed": false
+ },
+ "home.team.eyebrow": {
+  "reviewed": false
+ },
+ "home.team.title": {
+  "reviewed": false
+ },
+ "home.team.body": {
+  "reviewed": false
+ },
+ "home.team.cta": {
+  "reviewed": false
+ },
+ "home.awards.eyebrow": {
+  "reviewed": false
+ },
+ "home.awards.title": {
+  "reviewed": false
+ },
+ "home.awards.cta": {
+  "reviewed": false
+ },
+ "home.awards.memory": {
+  "reviewed": false
+ },
+ "home.press.eyebrow": {
+  "reviewed": false
+ },
+ "home.press.title": {
+  "reviewed": false
+ },
+ "home.press.items.0.title": {
+  "reviewed": false
+ },
+ "home.press.items.0.text": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "home.press.items.0.source": {
+  "reviewed": false
+ },
+ "home.press.items.1.title": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "home.press.items.1.text": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "home.press.items.1.source": {
+  "reviewed": false
+ },
+ "home.press.items.2.title": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "home.press.items.2.text": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "home.press.items.2.source": {
+  "reviewed": false
+ },
+ "home.social.eyebrow": {
+  "reviewed": false
+ },
+ "home.social.title": {
+  "reviewed": false
+ },
+ "home.social.text": {
+  "reviewed": false
+ },
+ "home.social.all": {
+  "reviewed": false
+ },
+ "home.social.follow": {
+  "reviewed": false
+ },
+ "home.social.fallback": {
+  "reviewed": false
+ },
+ "home.social.region": {
+  "reviewed": false
+ },
+ "home.faq.eyebrow": {
+  "reviewed": false
+ },
+ "home.faq.title": {
+  "reviewed": false
+ },
+ "home.faq.items.0.q": {
+  "reviewed": false
+ },
+ "home.faq.items.0.a": {
+  "reviewed": false
+ },
+ "home.faq.items.1.q": {
+  "reviewed": false
+ },
+ "home.faq.items.1.a": {
+  "reviewed": false
+ },
+ "home.faq.items.2.q": {
+  "reviewed": false
+ },
+ "home.faq.items.2.a": {
+  "reviewed": false
+ },
+ "home.faq.items.3.q": {
+  "reviewed": false
+ },
+ "home.faq.items.3.a": {
+  "reviewed": false
+ },
+ "home.faq.items.4.q": {
+  "reviewed": false
+ },
+ "home.faq.items.4.a": {
+  "reviewed": false
+ },
+ "home.faq.all": {
+  "reviewed": false
+ },
+ "home.faq.presenterAlt": {
+  "reviewed": false
+ },
+ "home.events.eyebrow": {
+  "reviewed": false
+ },
+ "home.events.title": {
+  "reviewed": false
+ },
+ "home.events.empty": {
+  "reviewed": false
+ },
+ "home.events.follow": {
+  "reviewed": false
+ },
+ "home.events.sceneAlt": {
+  "reviewed": false
+ },
+ "home.joinPresenterAlt": {
+  "reviewed": false
+ },
+ "team.roles.presidente": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "team.roles.vicepresidente": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "team.roles.consigliere": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "team.roles.operativo": {
+  "reviewed": false
+ },
+ "team.groups.board.label": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "team.groups.board.summary": {
+  "reviewed": false
+ },
+ "team.groups.board.tags.0": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "team.groups.board.tags.1": {
+  "reviewed": false
+ },
+ "team.groups.board.tags.2": {
+  "reviewed": false
+ },
+ "team.groups.board.lead": {
+  "reviewed": false
+ },
+ "team.groups.team.label": {
+  "reviewed": false
+ },
+ "team.groups.team.summary": {
+  "reviewed": false
+ },
+ "team.groups.team.tags.0": {
+  "reviewed": false
+ },
+ "team.groups.team.tags.1": {
+  "reviewed": false
+ },
+ "team.groups.team.tags.2": {
+  "reviewed": false
+ },
+ "team.groups.team.lead": {
+  "reviewed": false
+ },
+ "team.section.eyebrow": {
+  "reviewed": false
+ },
+ "team.section.title": {
+  "reviewed": false
+ },
+ "team.section.body": {
+  "reviewed": false
+ },
+ "team.section.cta": {
+  "reviewed": false
+ },
+ "team.section.prev": {
+  "reviewed": false
+ },
+ "team.section.next": {
+  "reviewed": false
+ },
+ "team.section.live": {
+  "reviewed": false
+ },
+ "team.section.open": {
+  "reviewed": false
+ },
+ "team.section.region": {
+  "reviewed": false
+ },
+ "team.section.photoComing": {
+  "reviewed": false
+ },
+ "team.page.metaTitle": {
+  "reviewed": false
+ },
+ "team.page.metaDescription": {
+  "reviewed": false
+ },
+ "team.page.boardEyebrow": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "team.page.teamEyebrow": {
+  "reviewed": false
+ },
+ "team.page.railLabel": {
+  "reviewed": false
+ },
+ "team.page.railPrev": {
+  "reviewed": false
+ },
+ "team.page.railNext": {
+  "reviewed": false
+ },
+ "team.page.dodiciEyebrow": {
+  "reviewed": false
+ },
+ "team.page.dodiciTitle": {
+  "reviewed": false
+ },
+ "team.page.dodiciLead": {
+  "reviewed": false
+ },
+ "team.page.visitEyebrow": {
+  "reviewed": false
+ },
+ "team.page.visitTitle": {
+  "reviewed": false
+ },
+ "team.page.visitText": {
+  "reviewed": false
+ },
+ "team.page.visitCta": {
+  "reviewed": false
+ },
+ "team.page.visitAlt": {
+  "reviewed": false
+ },
+ "team.page.filtersLabel": {
+  "reviewed": false
+ },
+ "team.profile.metaDescription": {
+  "reviewed": false
+ },
+ "team.profile.back": {
+  "reviewed": false
+ },
+ "team.profile.eyebrow": {
+  "reviewed": false
+ },
+ "team.profile.oneLiner": {
+  "reviewed": false
+ },
+ "team.profile.write": {
+  "reviewed": false
+ },
+ "team.profile.writeSub": {
+  "reviewed": false
+ },
+ "team.profile.gallery": {
+  "reviewed": false
+ },
+ "team.profile.galleryPrev": {
+  "reviewed": false
+ },
+ "team.profile.galleryNext": {
+  "reviewed": false
+ },
+ "team.profile.slides.pose": {
+  "reviewed": false
+ },
+ "team.profile.slides.initials": {
+  "reviewed": false
+ },
+ "team.profile.slides.cosaFaccio": {
+  "reviewed": false
+ },
+ "team.profile.slides.progetti": {
+  "reviewed": false
+ },
+ "team.profile.slides.puntoDiVista": {
+  "reviewed": false
+ },
+ "team.profile.slides.quotidiano": {
+  "reviewed": false
+ },
+ "team.profile.slides.assemblee": {
+  "reviewed": false
+ },
+ "team.profile.projects.0": {
+  "reviewed": false
+ },
+ "team.profile.projects.1": {
+  "reviewed": false
+ },
+ "team.profile.projects.2": {
+  "reviewed": false
+ },
+ "team.profile.blocks.cosaFaccio": {
+  "reviewed": false
+ },
+ "team.profile.blocks.progetti": {
+  "reviewed": false
+ },
+ "team.profile.blocks.ambiti": {
+  "reviewed": false
+ },
+ "team.profile.blocks.quotidiano": {
+  "reviewed": false
+ },
+ "team.profile.blocks.quotidianoText": {
+  "reviewed": false
+ },
+ "team.profile.blocks.assemblee": {
+  "reviewed": false
+ },
+ "team.profile.blocks.assembleeText": {
+  "reviewed": false
+ },
+ "team.profile.sameGroup": {
+  "reviewed": false
+ },
+ "team.profile.otherProfiles": {
+  "reviewed": false
+ },
+ "team.profile.prevPerson": {
+  "reviewed": false
+ },
+ "team.profile.nextPerson": {
+  "reviewed": false
+ },
+ "team.profile.backAll": {
+  "reviewed": false
+ },
+ "team.profile.closingTitle": {
+  "reviewed": false
+ },
+ "team.profile.closingText": {
+  "reviewed": false
+ },
+ "team.profile.closingCta": {
+  "reviewed": false
+ },
+ "team.profile.sceneBoardAlt": {
+  "reviewed": false
+ },
+ "team.profile.sceneTeamAlt": {
+  "reviewed": false
+ },
+ "ardake.meta.title": {
+  "reviewed": false
+ },
+ "ardake.meta.description": {
+  "reviewed": false
+ },
+ "ardake.hero.eyebrow": {
+  "reviewed": false
+ },
+ "ardake.hero.title": {
+  "reviewed": false
+ },
+ "ardake.hero.body": {
+  "reviewed": false
+ },
+ "ardake.hero.cta": {
+  "reviewed": false
+ },
+ "ardake.hero.secondary": {
+  "reviewed": false
+ },
+ "ardake.hero.giorgioAlt": {
+  "reviewed": false
+ },
+ "ardake.hero.phoneAlt": {
+  "reviewed": false
+ },
+ "ardake.phone.demo": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "ardake.phone.today": {
+  "reviewed": false
+ },
+ "ardake.phone.shared": {
+  "reviewed": false
+ },
+ "ardake.phone.produced": {
+  "reviewed": false
+ },
+ "ardake.phone.consumed": {
+  "reviewed": false
+ },
+ "ardake.phone.tipLabel": {
+  "reviewed": false
+ },
+ "ardake.phone.tip": {
+  "reviewed": false
+ },
+ "ardake.phone.splashWith": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "ardake.cosaFa.eyebrow": {
+  "reviewed": false
+ },
+ "ardake.cosaFa.title": {
+  "reviewed": false
+ },
+ "ardake.cosaFa.lead": {
+  "reviewed": false
+ },
+ "ardake.cosaFa.features.0.title": {
+  "reviewed": false
+ },
+ "ardake.cosaFa.features.0.text": {
+  "reviewed": false
+ },
+ "ardake.cosaFa.features.1.title": {
+  "reviewed": false
+ },
+ "ardake.cosaFa.features.1.text": {
+  "reviewed": false
+ },
+ "ardake.cosaFa.features.2.title": {
+  "reviewed": false
+ },
+ "ardake.cosaFa.features.2.text": {
+  "reviewed": false
+ },
+ "ardake.cosaFa.features.3.title": {
+  "reviewed": false
+ },
+ "ardake.cosaFa.features.3.text": {
+  "reviewed": false
+ },
+ "ardake.comeFunziona.eyebrow": {
+  "reviewed": false
+ },
+ "ardake.comeFunziona.title": {
+  "reviewed": false
+ },
+ "ardake.comeFunziona.steps.0.title": {
+  "reviewed": false
+ },
+ "ardake.comeFunziona.steps.0.text": {
+  "reviewed": false
+ },
+ "ardake.comeFunziona.steps.0.info": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "ardake.comeFunziona.steps.1.title": {
+  "reviewed": false
+ },
+ "ardake.comeFunziona.steps.1.text": {
+  "reviewed": false
+ },
+ "ardake.comeFunziona.steps.1.info": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "ardake.comeFunziona.steps.2.title": {
+  "reviewed": false
+ },
+ "ardake.comeFunziona.steps.2.text": {
+  "reviewed": false
+ },
+ "ardake.comeFunziona.steps.2.info": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "ardake.comeFunziona.sceneAlts.0": {
+  "reviewed": false
+ },
+ "ardake.comeFunziona.sceneAlts.1": {
+  "reviewed": false
+ },
+ "ardake.comeFunziona.sceneAlts.2": {
+  "reviewed": false
+ },
+ "ardake.seleziona.eyebrow": {
+  "reviewed": false
+ },
+ "ardake.seleziona.title": {
+  "reviewed": false
+ },
+ "ardake.seleziona.text": {
+  "reviewed": false
+ },
+ "ardake.seleziona.view": {
+  "reviewed": false
+ },
+ "ardake.seleziona.active": {
+  "reviewed": false
+ },
+ "ardake.seleziona.findTitle": {
+  "reviewed": false
+ },
+ "ardake.seleziona.findButton": {
+  "reviewed": false
+ },
+ "ardake.seleziona.findLabel": {
+  "reviewed": false
+ },
+ "ardake.seleziona.findPlaceholder": {
+  "reviewed": false
+ },
+ "ardake.demoTeaser.eyebrow": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "ardake.demoTeaser.title": {
+  "reviewed": false
+ },
+ "ardake.demoTeaser.open": {
+  "reviewed": false
+ },
+ "ardake.fattaInCasa.eyebrow": {
+  "reviewed": false
+ },
+ "ardake.fattaInCasa.title": {
+  "reviewed": false
+ },
+ "ardake.fattaInCasa.text": {
+  "reviewed": false
+ },
+ "ardake.fattaInCasa.cta": {
+  "reviewed": false
+ },
+ "ardake.fattaInCasa.peopleAlt.0": {
+  "reviewed": false
+ },
+ "ardake.fattaInCasa.peopleAlt.1": {
+  "reviewed": false
+ },
+ "ardake.monitor.metaTitle": {
+  "reviewed": false
+ },
+ "ardake.monitor.metaDescription": {
+  "reviewed": false
+ },
+ "ardake.monitor.title": {
+  "reviewed": false
+ },
+ "ardake.monitor.sub": {
+  "reviewed": false
+ },
+ "ardake.monitor.selector": {
+  "reviewed": false
+ },
+ "ardake.monitor.tabs.0": {
+  "reviewed": false
+ },
+ "ardake.monitor.tabs.1": {
+  "reviewed": false
+ },
+ "ardake.monitor.tabs.2": {
+  "reviewed": false
+ },
+ "ardake.monitor.tabs.3": {
+  "reviewed": false
+ },
+ "ardake.monitor.tabs.4": {
+  "reviewed": false
+ },
+ "ardake.monitor.kpiLast15": {
+  "reviewed": false
+ },
+ "ardake.monitor.kpiTotal": {
+  "reviewed": false
+ },
+ "ardake.monitor.kpiMembers": {
+  "reviewed": false
+ },
+ "ardake.monitor.kpiPower": {
+  "reviewed": false
+ },
+ "ardake.monitor.updated": {
+  "reviewed": false
+ },
+ "ardake.monitor.filter": {
+  "reviewed": false
+ },
+ "ardake.monitor.periods.0": {
+  "reviewed": false
+ },
+ "ardake.monitor.periods.1": {
+  "reviewed": false
+ },
+ "ardake.monitor.periods.2": {
+  "reviewed": false
+ },
+ "ardake.monitor.chartPower": {
+  "reviewed": false
+ },
+ "ardake.monitor.liveNote": {
+  "reviewed": false
+ },
+ "ardake.monitor.snapshotNote": {
+  "reviewed": false
+ },
+ "ardake.monitor.demoCurve": {
+  "reviewed": false
+ },
+ "ardake.monitor.communes": {
+  "reviewed": false
+ },
+ "ardake.monitor.seeDemo": {
+  "reviewed": false
+ },
+ "ardake.monitor.cabinaRedirect": {
+  "reviewed": false
+ },
+ "ardake.monitor.soon": {
+  "reviewed": false
+ },
+ "ardake.dashboard.metaTitle": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "ardake.dashboard.metaDescription": {
+  "reviewed": false
+ },
+ "ardake.dashboard.eyebrow": {
+  "reviewed": false
+ },
+ "ardake.dashboard.title": {
+  "reviewed": false
+ },
+ "ardake.dashboard.cta": {
+  "reviewed": false
+ },
+ "ardake.dashboard.config": {
+  "reviewed": false
+ },
+ "ardake.dashboard.configSub": {
+  "reviewed": false
+ },
+ "ardake.dashboard.today": {
+  "reviewed": false
+ },
+ "ardake.dashboard.badge": {
+  "reviewed": false
+ },
+ "ardake.dashboard.kpi.produced": {
+  "reviewed": false
+ },
+ "ardake.dashboard.kpi.consumed": {
+  "reviewed": false
+ },
+ "ardake.dashboard.kpi.shared": {
+  "reviewed": false
+ },
+ "ardake.dashboard.kpi.incentive": {
+  "reviewed": false
+ },
+ "ardake.dashboard.kpi.plants": {
+  "reviewed": false
+ },
+ "ardake.dashboard.kpi.utenze": {
+  "reviewed": false
+ },
+ "ardake.dashboard.kpi.ofProduction": {
+  "reviewed": false
+ },
+ "ardake.dashboard.kpi.estimate": {
+  "reviewed": false
+ },
+ "ardake.dashboard.disclaimer": {
+  "reviewed": false
+ },
+ "ardake.dashboard.tipTitle": {
+  "reviewed": false
+ },
+ "ardake.dashboard.tipText": {
+  "reviewed": false
+ },
+ "ardake.dashboard.members.title": {
+  "reviewed": false
+ },
+ "ardake.dashboard.members.member": {
+  "reviewed": false
+ },
+ "ardake.dashboard.members.role": {
+  "reviewed": false
+ },
+ "ardake.dashboard.members.share": {
+  "reviewed": false
+ },
+ "ardake.dashboard.members.producer": {
+  "reviewed": false
+ },
+ "ardake.dashboard.members.consumer": {
+  "reviewed": false
+ },
+ "ardake.dashboard.members.kinds.PMI": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "ardake.dashboard.members.kinds.Famiglia": {
+  "reviewed": false
+ },
+ "ardake.dashboard.members.kinds.Ente": {
+  "reviewed": false
+ },
+ "ardake.dashboard.members.donutLabel": {
+  "reviewed": false
+ },
+ "ardake.dashboard.members.types.consumer": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "ardake.dashboard.members.types.prosumer": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "ardake.dashboard.members.types.enti": {
+  "reviewed": false
+ },
+ "ardake.charts.hourly.title": {
+  "reviewed": false
+ },
+ "ardake.charts.hourly.aria": {
+  "reviewed": false
+ },
+ "ardake.charts.hourly.production": {
+  "reviewed": false
+ },
+ "ardake.charts.hourly.consumption": {
+  "reviewed": false
+ },
+ "ardake.charts.hourly.shared": {
+  "reviewed": false
+ },
+ "ardake.charts.monthly.title": {
+  "reviewed": false
+ },
+ "ardake.charts.monthly.produced": {
+  "reviewed": false
+ },
+ "ardake.charts.monthly.shared": {
+  "reviewed": false
+ },
+ "ardake.charts.monthly.aria": {
+  "reviewed": false
+ },
+ "ardake.charts.months.0": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "ardake.charts.months.1": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "ardake.charts.months.2": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "ardake.charts.months.3": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "ardake.charts.months.4": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "ardake.charts.months.5": {
+  "reviewed": false
+ },
+ "ardake.charts.months.6": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "ardake.charts.months.7": {
+  "reviewed": false
+ },
+ "ardake.charts.months.8": {
+  "reviewed": false
+ },
+ "ardake.charts.months.9": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "ardake.charts.months.10": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "ardake.charts.months.11": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "ardake.charts.gauge.title": {
+  "reviewed": false
+ },
+ "ardake.charts.gauge.caption": {
+  "reviewed": false
+ },
+ "ardake.charts.gauge.aria": {
+  "reviewed": false
+ },
+ "ardake.charts.power.title": {
+  "reviewed": false
+ },
+ "ardake.charts.power.aria": {
+  "reviewed": false
+ },
+ "ardake.charts.power.unit": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "ardake.charts.power.now": {
+  "reviewed": false
+ },
+ "ardake.charts.best.title": {
+  "reviewed": false
+ },
+ "ardake.charts.best.aria": {
+  "reviewed": false
+ },
+ "ardake.charts.best.low": {
+  "reviewed": false
+ },
+ "ardake.charts.best.high": {
+  "reviewed": false
+ },
+ "ardake.charts.best.tipTitle": {
+  "reviewed": false
+ },
+ "ardake.charts.best.tip": {
+  "reviewed": false
+ },
+ "ardake.charts.best.hour": {
+  "reviewed": false
+ },
+ "ardake.charts.calendar.title": {
+  "reviewed": false
+ },
+ "ardake.charts.calendar.aria": {
+  "reviewed": false
+ },
+ "ardake.charts.calendar.days.0": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "ardake.charts.calendar.days.1": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "ardake.charts.calendar.days.2": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "ardake.charts.calendar.days.3": {
+  "reviewed": false
+ },
+ "ardake.charts.calendar.days.4": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "ardake.charts.calendar.days.5": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "ardake.charts.calendar.days.6": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "ardake.charts.calendar.less": {
+  "reviewed": false
+ },
+ "ardake.charts.calendar.more": {
+  "reviewed": false
+ },
+ "ardake.charts.calendar.day": {
+  "reviewed": false
+ },
+ "ardake.charts.where.title": {
+  "reviewed": false
+ },
+ "ardake.charts.where.shared": {
+  "reviewed": false
+ },
+ "ardake.charts.where.grid": {
+  "reviewed": false
+ },
+ "ardake.charts.weekly.title": {
+  "reviewed": false
+ },
+ "ardake.charts.weekly.thisWeek": {
+  "reviewed": false
+ },
+ "ardake.charts.weekly.lastWeek": {
+  "reviewed": false
+ },
+ "ardake.charts.weekly.days.0": {
+  "reviewed": false
+ },
+ "ardake.charts.weekly.days.1": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "ardake.charts.weekly.days.2": {
+  "reviewed": false
+ },
+ "ardake.charts.weekly.days.3": {
+  "reviewed": false
+ },
+ "ardake.charts.weekly.days.4": {
+  "reviewed": false
+ },
+ "ardake.charts.weekly.days.5": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "ardake.charts.weekly.days.6": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "ardake.charts.weekly.aria": {
+  "reviewed": false
+ },
+ "ardake.charts.incentive.title": {
+  "reviewed": false
+ },
+ "ardake.charts.incentive.note": {
+  "reviewed": false
+ },
+ "ardake.charts.table": {
+  "reviewed": false
+ },
+ "ardake.charts.hourCol": {
+  "reviewed": false
+ },
+ "ardake.charts.valueCol": {
+  "reviewed": false
+ },
+ "ardake.charts.scrubHint": {
+  "reviewed": false
+ },
+ "ardake.charts.keyHint": {
+  "reviewed": false
+ },
+ "ardake.giorgio.name": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "ardake.giorgio.role": {
+  "reviewed": false
+ },
+ "ardake.giorgio.eyebrow": {
+  "reviewed": false
+ },
+ "ardake.giorgio.greetingTitle": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "ardake.giorgio.greeting": {
+  "reviewed": false
+ },
+ "ardake.giorgio.close": {
+  "reviewed": false
+ },
+ "ardake.giorgio.closeAria": {
+  "reviewed": false
+ },
+ "ardake.giorgio.more": {
+  "reviewed": false
+ },
+ "ardake.giorgio.prev": {
+  "reviewed": false
+ },
+ "ardake.giorgio.next": {
+  "reviewed": false
+ },
+ "ardake.giorgio.open": {
+  "reviewed": false
+ },
+ "ardake.giorgio.alt": {
+  "reviewed": false
+ },
+ "ardake.giorgio.topics.ardake.title": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "ardake.giorgio.topics.ardake.body": {
+  "reviewed": false
+ },
+ "ardake.giorgio.topics.configurazione.title": {
+  "reviewed": false
+ },
+ "ardake.giorgio.topics.configurazione.body": {
+  "reviewed": false
+ },
+ "ardake.giorgio.topics.configurazione.more": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "ardake.giorgio.topics.cabina-primaria.title": {
+  "reviewed": false
+ },
+ "ardake.giorgio.topics.cabina-primaria.body": {
+  "reviewed": false
+ },
+ "ardake.giorgio.topics.quarto-orario.title": {
+  "reviewed": false
+ },
+ "ardake.giorgio.topics.quarto-orario.body": {
+  "reviewed": false
+ },
+ "ardake.giorgio.topics.ultimi-15-minuti.title": {
+  "reviewed": false
+ },
+ "ardake.giorgio.topics.ultimi-15-minuti.body": {
+  "reviewed": false
+ },
+ "ardake.giorgio.topics.totale-periodo.title": {
+  "reviewed": false
+ },
+ "ardake.giorgio.topics.totale-periodo.body": {
+  "reviewed": false
+ },
+ "ardake.giorgio.topics.potenza-istantanea.title": {
+  "reviewed": false
+ },
+ "ardake.giorgio.topics.potenza-istantanea.body": {
+  "reviewed": false
+ },
+ "ardake.giorgio.topics.energia-condivisa.title": {
+  "reviewed": false
+ },
+ "ardake.giorgio.topics.energia-condivisa.body": {
+  "reviewed": false
+ },
+ "ardake.giorgio.topics.incentivi.title": {
+  "reviewed": false
+ },
+ "ardake.giorgio.topics.incentivi.body": {
+  "reviewed": false
+ },
+ "ardake.giorgio.topics.prosumer-consumer.title": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "ardake.giorgio.topics.prosumer-consumer.body": {
+  "reviewed": false
+ },
+ "ardake.giorgio.topics.kwp.title": {
+  "reviewed": false
+ },
+ "ardake.giorgio.topics.kwp.body": {
+  "reviewed": false
+ },
+ "ardake.giorgio.topics.kwh.title": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "ardake.giorgio.topics.kwh.body": {
+  "reviewed": false
+ },
+ "ardake.giorgio.topics.stato-configurazione.title": {
+  "reviewed": false
+ },
+ "ardake.giorgio.topics.stato-configurazione.body": {
+  "reviewed": false
+ },
+ "ardake.giorgio.topics.stato-configurazione.more": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "pages.chiSiamo.meta.title": {
+  "reviewed": false
+ },
+ "pages.chiSiamo.meta.description": {
+  "reviewed": false
+ },
+ "pages.chiSiamo.hero.eyebrow": {
+  "reviewed": false
+ },
+ "pages.chiSiamo.hero.title": {
+  "reviewed": false
+ },
+ "pages.chiSiamo.hero.lead": {
+  "reviewed": false
+ },
+ "pages.chiSiamo.hero.cta": {
+  "reviewed": false
+ },
+ "pages.chiSiamo.hero.secondary": {
+  "reviewed": false
+ },
+ "pages.chiSiamo.hero.presenterAlt": {
+  "reviewed": false
+ },
+ "pages.chiSiamo.inBreve.eyebrow": {
+  "reviewed": false
+ },
+ "pages.chiSiamo.inBreve.title": {
+  "reviewed": false
+ },
+ "pages.chiSiamo.inBreve.text": {
+  "reviewed": false
+ },
+ "pages.chiSiamo.inBreve.facts.0.k": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "pages.chiSiamo.inBreve.facts.0.v": {
+  "reviewed": false
+ },
+ "pages.chiSiamo.inBreve.facts.1.k": {
+  "reviewed": false
+ },
+ "pages.chiSiamo.inBreve.facts.1.v": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "pages.chiSiamo.inBreve.facts.2.k": {
+  "reviewed": false
+ },
+ "pages.chiSiamo.inBreve.facts.2.v": {
+  "reviewed": false
+ },
+ "pages.chiSiamo.inBreve.facts.3.k": {
+  "reviewed": false
+ },
+ "pages.chiSiamo.inBreve.facts.3.v": {
+  "reviewed": false
+ },
+ "pages.chiSiamo.inBreve.facts.4.k": {
+  "reviewed": false
+ },
+ "pages.chiSiamo.inBreve.facts.4.v": {
+  "reviewed": false
+ },
+ "pages.chiSiamo.inBreve.facts.5.k": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "pages.chiSiamo.inBreve.facts.5.v": {
+  "reviewed": false
+ },
+ "pages.chiSiamo.sito.eyebrow": {
+  "reviewed": false
+ },
+ "pages.chiSiamo.sito.title": {
+  "reviewed": false
+ },
+ "pages.chiSiamo.sito.text": {
+  "reviewed": false
+ },
+ "pages.chiSiamo.sito.statuto": {
+  "reviewed": false
+ },
+ "pages.chiSiamo.sito.regolamento": {
+  "reviewed": false
+ },
+ "pages.chiSiamo.principi.eyebrow": {
+  "reviewed": false
+ },
+ "pages.chiSiamo.principi.title": {
+  "reviewed": false
+ },
+ "pages.chiSiamo.principi.lead": {
+  "reviewed": false
+ },
+ "pages.chiSiamo.principi.items.0.title": {
+  "reviewed": false
+ },
+ "pages.chiSiamo.principi.items.0.text": {
+  "reviewed": false
+ },
+ "pages.chiSiamo.principi.items.1.title": {
+  "reviewed": false
+ },
+ "pages.chiSiamo.principi.items.1.text": {
+  "reviewed": false
+ },
+ "pages.chiSiamo.principi.items.2.title": {
+  "reviewed": false
+ },
+ "pages.chiSiamo.principi.items.2.text": {
+  "reviewed": false
+ },
+ "pages.chiSiamo.principi.items.3.title": {
+  "reviewed": false
+ },
+ "pages.chiSiamo.principi.items.3.text": {
+  "reviewed": false
+ },
+ "pages.chiSiamo.principi.sceneAlt": {
+  "reviewed": false
+ },
+ "pages.chiSiamo.perche.eyebrow": {
+  "reviewed": false
+ },
+ "pages.chiSiamo.perche.title": {
+  "reviewed": false
+ },
+ "pages.chiSiamo.perche.items.0.title": {
+  "reviewed": false
+ },
+ "pages.chiSiamo.perche.items.0.text": {
+  "reviewed": false
+ },
+ "pages.chiSiamo.perche.items.1.title": {
+  "reviewed": false
+ },
+ "pages.chiSiamo.perche.items.1.text": {
+  "reviewed": false
+ },
+ "pages.chiSiamo.perche.items.2.title": {
+  "reviewed": false
+ },
+ "pages.chiSiamo.perche.items.2.text": {
+  "reviewed": false
+ },
+ "pages.chiSiamo.territorio.eyebrow": {
+  "reviewed": false
+ },
+ "pages.chiSiamo.territorio.title": {
+  "reviewed": false
+ },
+ "pages.chiSiamo.territorio.landscapeAlt": {
+  "reviewed": false
+ },
+ "pages.chiSiamo.territorio.mapCta": {
+  "reviewed": false
+ },
+ "pages.chiSiamo.team.eyebrow": {
+  "reviewed": false
+ },
+ "pages.chiSiamo.team.title": {
+  "reviewed": false
+ },
+ "pages.chiSiamo.team.lead": {
+  "reviewed": false
+ },
+ "pages.chiSiamo.team.cta": {
+  "reviewed": false
+ },
+ "pages.chiSiamo.premio.badge": {
+  "reviewed": false
+ },
+ "pages.chiSiamo.premio.title": {
+  "reviewed": false
+ },
+ "pages.chiSiamo.premio.text": {
+  "reviewed": false
+ },
+ "pages.chiSiamo.premio.cta": {
+  "reviewed": false
+ },
+ "pages.cosaFacciamo.meta.title": {
+  "reviewed": false
+ },
+ "pages.cosaFacciamo.meta.description": {
+  "reviewed": false
+ },
+ "pages.cosaFacciamo.hero.eyebrow": {
+  "reviewed": false
+ },
+ "pages.cosaFacciamo.hero.title": {
+  "reviewed": false
+ },
+ "pages.cosaFacciamo.hero.lead": {
+  "reviewed": false
+ },
+ "pages.cosaFacciamo.hero.cta": {
+  "reviewed": false
+ },
+ "pages.cosaFacciamo.hero.sceneAlt": {
+  "reviewed": false
+ },
+ "pages.cosaFacciamo.hero.presenterAlt": {
+  "reviewed": false
+ },
+ "pages.cosaFacciamo.sito.title": {
+  "reviewed": false
+ },
+ "pages.cosaFacciamo.sito.text": {
+  "reviewed": false
+ },
+ "pages.cosaFacciamo.sito.leadIn": {
+  "reviewed": false
+ },
+ "pages.cosaFacciamo.sito.list.0": {
+  "reviewed": false
+ },
+ "pages.cosaFacciamo.sito.list.1": {
+  "reviewed": false
+ },
+ "pages.cosaFacciamo.sito.list.2": {
+  "reviewed": false
+ },
+ "pages.cosaFacciamo.sito.list.3": {
+  "reviewed": false
+ },
+ "pages.cosaFacciamo.sito.list.4": {
+  "reviewed": false
+ },
+ "pages.cosaFacciamo.sito.list.5": {
+  "reviewed": false
+ },
+ "pages.cosaFacciamo.sito.closing": {
+  "reviewed": false
+ },
+ "pages.cosaFacciamo.services.0.eyebrow": {
+  "reviewed": false
+ },
+ "pages.cosaFacciamo.services.0.title": {
+  "reviewed": false
+ },
+ "pages.cosaFacciamo.services.0.text": {
+  "reviewed": false
+ },
+ "pages.cosaFacciamo.services.0.points.0": {
+  "reviewed": false
+ },
+ "pages.cosaFacciamo.services.0.points.1": {
+  "reviewed": false
+ },
+ "pages.cosaFacciamo.services.0.points.2": {
+  "reviewed": false
+ },
+ "pages.cosaFacciamo.services.0.alt": {
+  "reviewed": false
+ },
+ "pages.cosaFacciamo.services.1.eyebrow": {
+  "reviewed": false
+ },
+ "pages.cosaFacciamo.services.1.title": {
+  "reviewed": false
+ },
+ "pages.cosaFacciamo.services.1.text": {
+  "reviewed": false
+ },
+ "pages.cosaFacciamo.services.1.points.0": {
+  "reviewed": false
+ },
+ "pages.cosaFacciamo.services.1.points.1": {
+  "reviewed": false
+ },
+ "pages.cosaFacciamo.services.1.points.2": {
+  "reviewed": false
+ },
+ "pages.cosaFacciamo.services.1.alt": {
+  "reviewed": false
+ },
+ "pages.cosaFacciamo.services.2.eyebrow": {
+  "reviewed": false
+ },
+ "pages.cosaFacciamo.services.2.title": {
+  "reviewed": false
+ },
+ "pages.cosaFacciamo.services.2.text": {
+  "reviewed": false
+ },
+ "pages.cosaFacciamo.services.2.points.0": {
+  "reviewed": false
+ },
+ "pages.cosaFacciamo.services.2.points.1": {
+  "reviewed": false
+ },
+ "pages.cosaFacciamo.services.2.points.2": {
+  "reviewed": false
+ },
+ "pages.cosaFacciamo.services.2.alt": {
+  "reviewed": false
+ },
+ "pages.cosaFacciamo.comuni.eyebrow": {
+  "reviewed": false
+ },
+ "pages.cosaFacciamo.comuni.title": {
+  "reviewed": false
+ },
+ "pages.cosaFacciamo.comuni.text": {
+  "reviewed": false
+ },
+ "pages.cosaFacciamo.comuni.points.0": {
+  "reviewed": false
+ },
+ "pages.cosaFacciamo.comuni.points.1": {
+  "reviewed": false
+ },
+ "pages.cosaFacciamo.comuni.points.2": {
+  "reviewed": false
+ },
+ "pages.cosaFacciamo.comuni.points.3": {
+  "reviewed": false
+ },
+ "pages.cosaFacciamo.comuni.cta": {
+  "reviewed": false
+ },
+ "pages.cosaFacciamo.comuni.landscapeAlt": {
+  "reviewed": false
+ },
+ "pages.cosaFacciamo.comuni.presenterAlt": {
+  "reviewed": false
+ },
+ "pages.cosaFacciamo.produttori.eyebrow": {
+  "reviewed": false
+ },
+ "pages.cosaFacciamo.produttori.title": {
+  "reviewed": false
+ },
+ "pages.cosaFacciamo.produttori.text": {
+  "reviewed": false
+ },
+ "pages.cosaFacciamo.produttori.sceneAlt": {
+  "reviewed": false
+ },
+ "pages.cosaFacciamo.produttori.cta": {
+  "reviewed": false
+ },
+ "pages.cosaFacciamo.dati.eyebrow": {
+  "reviewed": false
+ },
+ "pages.cosaFacciamo.dati.title": {
+  "reviewed": false
+ },
+ "pages.cosaFacciamo.dati.text": {
+  "reviewed": false
+ },
+ "pages.cosaFacciamo.dati.cta": {
+  "reviewed": false
+ },
+ "pages.cosaFacciamo.dati.sceneAlt": {
+  "reviewed": false
+ },
+ "pages.cosaFacciamo.percorso.eyebrow": {
+  "reviewed": false
+ },
+ "pages.cosaFacciamo.percorso.title": {
+  "reviewed": false
+ },
+ "pages.cosaFacciamo.percorso.steps.0.t": {
+  "reviewed": false
+ },
+ "pages.cosaFacciamo.percorso.steps.0.d": {
+  "reviewed": false
+ },
+ "pages.cosaFacciamo.percorso.steps.1.t": {
+  "reviewed": false
+ },
+ "pages.cosaFacciamo.percorso.steps.1.d": {
+  "reviewed": false
+ },
+ "pages.cosaFacciamo.percorso.steps.2.t": {
+  "reviewed": false
+ },
+ "pages.cosaFacciamo.percorso.steps.2.d": {
+  "reviewed": false
+ },
+ "pages.cosaFacciamo.percorso.steps.3.t": {
+  "reviewed": false
+ },
+ "pages.cosaFacciamo.percorso.steps.3.d": {
+  "reviewed": false
+ },
+ "pages.cosaFacciamo.percorso.steps.4.t": {
+  "reviewed": false
+ },
+ "pages.cosaFacciamo.percorso.steps.4.d": {
+  "reviewed": false
+ },
+ "pages.cosaFacciamo.percorso.progress": {
+  "reviewed": false
+ },
+ "pages.cosaFacciamo.oltre.eyebrow": {
+  "reviewed": false
+ },
+ "pages.cosaFacciamo.oltre.title": {
+  "reviewed": false
+ },
+ "pages.cosaFacciamo.oltre.items.0.text": {
+  "reviewed": false
+ },
+ "pages.cosaFacciamo.oltre.items.0.alt": {
+  "reviewed": false
+ },
+ "pages.cosaFacciamo.oltre.items.1.text": {
+  "reviewed": false
+ },
+ "pages.cosaFacciamo.oltre.items.1.alt": {
+  "reviewed": false
+ },
+ "pages.cosaFacciamo.oltre.items.2.text": {
+  "reviewed": false
+ },
+ "pages.cosaFacciamo.oltre.items.2.alt": {
+  "reviewed": false
+ },
+ "pages.cosaFacciamo.oltre.items.3.text": {
+  "reviewed": false
+ },
+ "pages.cosaFacciamo.oltre.items.3.alt": {
+  "reviewed": false
+ },
+ "pages.cosaFacciamo.oltre.items.4.text": {
+  "reviewed": false
+ },
+ "pages.cosaFacciamo.oltre.items.4.alt": {
+  "reviewed": false
+ },
+ "pages.cosaFacciamo.oltre.general": {
+  "reviewed": false
+ },
+ "pages.cosaFacciamo.oltre.closing": {
+  "reviewed": false
+ },
+ "pages.cosaFacciamo.oltre.cta": {
+  "reviewed": false
+ },
+ "pages.leCer.meta.title": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "pages.leCer.meta.description": {
+  "reviewed": false
+ },
+ "pages.leCer.hero.eyebrow": {
+  "reviewed": false
+ },
+ "pages.leCer.hero.title": {
+  "reviewed": false
+ },
+ "pages.leCer.hero.lead": {
+  "reviewed": false
+ },
+ "pages.leCer.hero.cta": {
+  "reviewed": false
+ },
+ "pages.leCer.hero.secondary": {
+  "reviewed": false
+ },
+ "pages.leCer.hero.landscapeAlt": {
+  "reviewed": false
+ },
+ "pages.leCer.hero.presenterAlt": {
+  "reviewed": false
+ },
+ "pages.leCer.inSunfai.eyebrow": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "pages.leCer.inSunfai.paragraphs.0": {
+  "reviewed": false
+ },
+ "pages.leCer.inSunfai.paragraphs.1": {
+  "reviewed": false
+ },
+ "pages.leCer.inSunfai.paragraphs.2": {
+  "reviewed": false
+ },
+ "pages.leCer.inSunfai.paragraphs.3": {
+  "reviewed": false
+ },
+ "pages.leCer.inSunfai.soggetto": {
+  "reviewed": false
+ },
+ "pages.leCer.cosaSono.eyebrow": {
+  "reviewed": false
+ },
+ "pages.leCer.cosaSono.title": {
+  "reviewed": false
+ },
+ "pages.leCer.cosaSono.intro": {
+  "reviewed": false
+ },
+ "pages.leCer.cosaSono.quote.0": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "pages.leCer.cosaSono.quote.1": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "pages.leCer.cosaSono.source": {
+  "reviewed": false
+ },
+ "pages.leCer.cosaSono.after.0": {
+  "reviewed": false
+ },
+ "pages.leCer.cosaSono.after.1": {
+  "reviewed": false
+ },
+ "pages.leCer.cosaSono.after.2": {
+  "reviewed": false
+ },
+ "pages.leCer.come.eyebrow": {
+  "reviewed": false
+ },
+ "pages.leCer.come.title": {
+  "reviewed": false
+ },
+ "pages.leCer.come.steps.0.title": {
+  "reviewed": false
+ },
+ "pages.leCer.come.steps.0.text": {
+  "reviewed": false
+ },
+ "pages.leCer.come.steps.0.role": {
+  "reviewed": false
+ },
+ "pages.leCer.come.steps.0.alt": {
+  "reviewed": false
+ },
+ "pages.leCer.come.steps.1.title": {
+  "reviewed": false
+ },
+ "pages.leCer.come.steps.1.text": {
+  "reviewed": false
+ },
+ "pages.leCer.come.steps.1.role": {
+  "reviewed": false
+ },
+ "pages.leCer.come.steps.1.alt": {
+  "reviewed": false
+ },
+ "pages.leCer.come.steps.2.title": {
+  "reviewed": false
+ },
+ "pages.leCer.come.steps.2.text": {
+  "reviewed": false
+ },
+ "pages.leCer.come.steps.2.role": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "pages.leCer.come.steps.2.alt": {
+  "reviewed": false
+ },
+ "pages.leCer.explainer.eyebrow": {
+  "reviewed": false
+ },
+ "pages.leCer.explainer.title": {
+  "reviewed": false
+ },
+ "pages.leCer.explainer.hint": {
+  "reviewed": false
+ },
+ "pages.leCer.explainer.production": {
+  "reviewed": false
+ },
+ "pages.leCer.explainer.consumption": {
+  "reviewed": false
+ },
+ "pages.leCer.explainer.shared": {
+  "reviewed": false
+ },
+ "pages.leCer.explainer.sliderLabel": {
+  "reviewed": false
+ },
+ "pages.leCer.explainer.sliderText": {
+  "reviewed": false
+ },
+ "pages.leCer.explainer.asToday": {
+  "reviewed": false
+ },
+ "pages.leCer.explainer.moved": {
+  "reviewed": false
+ },
+ "pages.leCer.explainer.valueText": {
+  "reviewed": false
+ },
+ "pages.leCer.explainer.produced": {
+  "reviewed": false
+ },
+ "pages.leCer.explainer.consumed": {
+  "reviewed": false
+ },
+ "pages.leCer.explainer.disclaimer": {
+  "reviewed": false
+ },
+ "pages.leCer.explainer.chartTitle": {
+  "reviewed": false
+ },
+ "pages.leCer.explainer.actors.0": {
+  "reviewed": false
+ },
+ "pages.leCer.explainer.actors.1": {
+  "reviewed": false
+ },
+ "pages.leCer.explainer.actors.2": {
+  "reviewed": false
+ },
+ "pages.leCer.chi.eyebrow": {
+  "reviewed": false
+ },
+ "pages.leCer.chi.title": {
+  "reviewed": false
+ },
+ "pages.leCer.chi.lead": {
+  "reviewed": false
+ },
+ "pages.leCer.chi.items.0.title": {
+  "reviewed": false
+ },
+ "pages.leCer.chi.items.0.text": {
+  "reviewed": false
+ },
+ "pages.leCer.chi.items.1.title": {
+  "reviewed": false
+ },
+ "pages.leCer.chi.items.1.text": {
+  "reviewed": false
+ },
+ "pages.leCer.chi.items.2.title": {
+  "reviewed": false
+ },
+ "pages.leCer.chi.items.2.text": {
+  "reviewed": false
+ },
+ "pages.leCer.chi.items.3.title": {
+  "reviewed": false
+ },
+ "pages.leCer.chi.items.3.text": {
+  "reviewed": false
+ },
+ "pages.leCer.nonCambia.eyebrow": {
+  "reviewed": false
+ },
+ "pages.leCer.nonCambia.title": {
+  "reviewed": false
+ },
+ "pages.leCer.nonCambia.items.0.title": {
+  "reviewed": false
+ },
+ "pages.leCer.nonCambia.items.0.text": {
+  "reviewed": false
+ },
+ "pages.leCer.nonCambia.items.1.title": {
+  "reviewed": false
+ },
+ "pages.leCer.nonCambia.items.1.text": {
+  "reviewed": false
+ },
+ "pages.leCer.nonCambia.items.2.title": {
+  "reviewed": false
+ },
+ "pages.leCer.nonCambia.items.2.text": {
+  "reviewed": false
+ },
+ "pages.leCer.norme.title": {
+  "reviewed": false
+ },
+ "pages.leCer.norme.text": {
+  "reviewed": false
+ },
+ "pages.leCer.tip.eyebrow": {
+  "reviewed": false
+ },
+ "pages.leCer.tip.text": {
+  "reviewed": false
+ },
+ "pages.leCer.faq.eyebrow": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "pages.leCer.faq.title": {
+  "reviewed": false
+ },
+ "pages.leCer.faq.text": {
+  "reviewed": false
+ },
+ "pages.leCer.faq.cta": {
+  "reviewed": false
+ },
+ "pages.leCer.faq.items.0.q": {
+  "reviewed": false
+ },
+ "pages.leCer.faq.items.0.a": {
+  "reviewed": false
+ },
+ "pages.leCer.faq.items.1.q": {
+  "reviewed": false
+ },
+ "pages.leCer.faq.items.1.a": {
+  "reviewed": false
+ },
+ "pages.leCer.faq.items.2.q": {
+  "reviewed": false
+ },
+ "pages.leCer.faq.items.2.a": {
+  "reviewed": false
+ },
+ "pages.leCer.faq.items.3.q": {
+  "reviewed": false
+ },
+ "pages.leCer.faq.items.3.a": {
+  "reviewed": false
+ },
+ "pages.leCer.faq.items.4.q": {
+  "reviewed": false
+ },
+ "pages.leCer.faq.items.4.a": {
+  "reviewed": false
+ },
+ "pages.leCer.faq.items.5.q": {
+  "reviewed": false
+ },
+ "pages.leCer.faq.items.5.a": {
+  "reviewed": false
+ },
+ "pages.leCer.ctaBand.title": {
+  "reviewed": false
+ },
+ "pages.leCer.ctaBand.cta": {
+  "reviewed": false
+ },
+ "pages.notizie.meta.title": {
+  "reviewed": false
+ },
+ "pages.notizie.meta.description": {
+  "reviewed": false
+ },
+ "pages.notizie.hero.eyebrow": {
+  "reviewed": false
+ },
+ "pages.notizie.hero.title": {
+  "reviewed": false
+ },
+ "pages.notizie.hero.lead": {
+  "reviewed": false
+ },
+ "pages.notizie.hero.presenterAlt": {
+  "reviewed": false
+ },
+ "pages.notizie.featured": {
+  "reviewed": false
+ },
+ "pages.notizie.readMore": {
+  "reviewed": false
+ },
+ "pages.notizie.back": {
+  "reviewed": false
+ },
+ "pages.notizie.all": {
+  "reviewed": false
+ },
+ "pages.notizie.awards": {
+  "reviewed": false
+ },
+ "pages.notizie.related": {
+  "reviewed": false
+ },
+ "pages.notizie.share": {
+  "reviewed": false
+ },
+ "pages.notizie.copyLink": {
+  "reviewed": false
+ },
+ "pages.notizie.copied": {
+  "reviewed": false
+ },
+ "pages.notizie.socialEyebrow": {
+  "reviewed": false
+ },
+ "pages.notizie.socialTitle": {
+  "reviewed": false
+ },
+ "pages.notizie.redirect": {
+  "reviewed": false
+ },
+ "pages.notizie.redirectCta": {
+  "reviewed": false
+ },
+ "pages.contatti.meta.title": {
+  "reviewed": false
+ },
+ "pages.contatti.meta.description": {
+  "reviewed": false
+ },
+ "pages.contatti.hero.eyebrow": {
+  "reviewed": false
+ },
+ "pages.contatti.hero.title": {
+  "reviewed": false
+ },
+ "pages.contatti.hero.lead": {
+  "reviewed": false
+ },
+ "pages.contatti.hero.presenterAlt": {
+  "reviewed": false
+ },
+ "pages.contatti.quick.email": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "pages.contatti.quick.sede": {
+  "reviewed": false
+ },
+ "pages.contatti.quick.map": {
+  "reviewed": false
+ },
+ "pages.contatti.quick.vat": {
+  "reviewed": false
+ },
+ "pages.contatti.quick.social": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "pages.contatti.instagramAria": {
+  "reviewed": false
+ },
+ "pages.contatti.linkedinAria": {
+  "reviewed": false
+ },
+ "pages.contatti.form.title": {
+  "reviewed": false
+ },
+ "pages.contatti.form.text": {
+  "reviewed": false
+ },
+ "pages.contatti.form.topic": {
+  "reviewed": false
+ },
+ "pages.contatti.form.topics.0": {
+  "reviewed": false
+ },
+ "pages.contatti.form.topics.1": {
+  "reviewed": false
+ },
+ "pages.contatti.form.topics.2": {
+  "reviewed": false
+ },
+ "pages.contatti.form.name": {
+  "reviewed": false
+ },
+ "pages.contatti.form.email": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "pages.contatti.form.comune": {
+  "reviewed": false
+ },
+ "pages.contatti.form.optional": {
+  "reviewed": false
+ },
+ "pages.contatti.form.message": {
+  "reviewed": false
+ },
+ "pages.contatti.form.namePh": {
+  "reviewed": false
+ },
+ "pages.contatti.form.emailPh": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "pages.contatti.form.comunePh": {
+  "reviewed": false
+ },
+ "pages.contatti.form.messagePh": {
+  "reviewed": false
+ },
+ "pages.contatti.form.privacy": {
+  "reviewed": false
+ },
+ "pages.contatti.form.privacyLink": {
+  "reviewed": false
+ },
+ "pages.contatti.form.submit": {
+  "reviewed": false
+ },
+ "pages.contatti.form.sending": {
+  "reviewed": false
+ },
+ "pages.contatti.form.success": {
+  "reviewed": false
+ },
+ "pages.contatti.form.fallback": {
+  "reviewed": false
+ },
+ "pages.contatti.form.errors.name": {
+  "reviewed": false
+ },
+ "pages.contatti.form.errors.email": {
+  "reviewed": false
+ },
+ "pages.contatti.form.errors.message": {
+  "reviewed": false
+ },
+ "pages.contatti.form.errors.privacy": {
+  "reviewed": false
+ },
+ "pages.contatti.form.mailSubject": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "pages.contatti.prima.title": {
+  "reviewed": false
+ },
+ "pages.contatti.prima.links.0.href": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "pages.contatti.prima.links.0.t": {
+  "reviewed": false
+ },
+ "pages.contatti.prima.links.0.d": {
+  "reviewed": false
+ },
+ "pages.contatti.prima.links.1.href": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "pages.contatti.prima.links.1.t": {
+  "reviewed": false
+ },
+ "pages.contatti.prima.links.1.d": {
+  "reviewed": false
+ },
+ "pages.contatti.prima.links.2.href": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "pages.contatti.prima.links.2.t": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "pages.contatti.prima.links.2.d": {
+  "reviewed": false
+ },
+ "pages.contatti.prima.sceneAlt": {
+  "reviewed": false
+ },
+ "pages.legal.meta.title": {
+  "reviewed": false
+ },
+ "pages.legal.meta.description": {
+  "reviewed": false
+ },
+ "pages.legal.eyebrow": {
+  "reviewed": false
+ },
+ "pages.legal.title": {
+  "reviewed": false
+ },
+ "pages.legal.company": {
+  "reviewed": false
+ },
+ "pages.legal.labels.name": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "pages.legal.labels.seat": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "pages.legal.labels.vat": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "pages.legal.labels.contact": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "pages.legal.privacy": {
+  "reviewed": false
+ },
+ "pages.legal.paragraphs.0.b": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "pages.legal.paragraphs.0.t": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "pages.legal.paragraphs.1.b": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "pages.legal.paragraphs.1.t": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "pages.legal.paragraphs.2.b": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "pages.legal.paragraphs.2.t": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "pages.legal.paragraphs.3.b": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "pages.legal.paragraphs.3.t": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "pages.legal.paragraphs.4.b": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "pages.legal.paragraphs.4.t": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "pages.legal.paragraphs.5.b": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "pages.legal.paragraphs.5.t": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "pages.legal.adhesion": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "pages.legal.pending": {
+  "reviewed": false
+ },
+ "pages.notFound.eyebrow": {
+  "reviewed": false
+ },
+ "pages.notFound.title": {
+  "reviewed": false
+ },
+ "pages.notFound.text": {
+  "reviewed": false
+ },
+ "pages.notFound.cta": {
+  "reviewed": false
+ },
+ "pages.notFound.secondary": {
+  "reviewed": false
+ },
+ "pages.notFound.mascotLine": {
+  "reviewed": false
+ },
+ "riconoscimenti.meta.title": {
+  "reviewed": false
+ },
+ "riconoscimenti.meta.description": {
+  "reviewed": false
+ },
+ "riconoscimenti.hero.eyebrow": {
+  "reviewed": false
+ },
+ "riconoscimenti.hero.title": {
+  "reviewed": false
+ },
+ "riconoscimenti.hero.lead": {
+  "reviewed": false
+ },
+ "riconoscimenti.hero.presenterAlt": {
+  "reviewed": false
+ },
+ "riconoscimenti.hero.cta": {
+  "reviewed": false
+ },
+ "riconoscimenti.premio.badge": {
+  "reviewed": false
+ },
+ "riconoscimenti.premio.big.0": {
+  "reviewed": false
+ },
+ "riconoscimenti.premio.big.1": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "riconoscimenti.premio.big.2": {
+  "reviewed": false
+ },
+ "riconoscimenti.premio.eyebrow": {
+  "reviewed": false
+ },
+ "riconoscimenti.premio.title": {
+  "reviewed": false
+ },
+ "riconoscimenti.premio.paragraphs.0": {
+  "reviewed": false
+ },
+ "riconoscimenti.premio.paragraphs.1": {
+  "reviewed": false
+ },
+ "riconoscimenti.premio.paragraphs.2": {
+  "reviewed": false
+ },
+ "riconoscimenti.premio.facts.0.k": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "riconoscimenti.premio.facts.0.v": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "riconoscimenti.premio.facts.1.k": {
+  "reviewed": false
+ },
+ "riconoscimenti.premio.facts.1.v": {
+  "reviewed": false
+ },
+ "riconoscimenti.premio.facts.2.k": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "riconoscimenti.premio.facts.2.v": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "riconoscimenti.premio.imageAlt": {
+  "reviewed": false
+ },
+ "riconoscimenti.premio.readNews": {
+  "reviewed": false
+ },
+ "riconoscimenti.memory.eyebrow": {
+  "reviewed": false
+ },
+ "riconoscimenti.memory.title": {
+  "reviewed": false
+ },
+ "riconoscimenti.memory.lead": {
+  "reviewed": false
+ },
+ "riconoscimenti.memory.region": {
+  "reviewed": false
+ },
+ "riconoscimenti.memory.live": {
+  "reviewed": false
+ },
+ "riconoscimenti.memory.prev": {
+  "reviewed": false
+ },
+ "riconoscimenti.memory.next": {
+  "reviewed": false
+ },
+ "riconoscimenti.memory.open": {
+  "reviewed": false
+ },
+ "riconoscimenti.memory.placeholderNote": {
+  "reviewed": false
+ },
+ "riconoscimenti.memory.loading": {
+  "reviewed": false
+ },
+ "riconoscimenti.traguardi.eyebrow": {
+  "reviewed": false
+ },
+ "riconoscimenti.traguardi.title": {
+  "reviewed": false
+ },
+ "riconoscimenti.traguardi.lead": {
+  "reviewed": false
+ },
+ "riconoscimenti.traguardi.readArticle": {
+  "reviewed": false
+ },
+ "riconoscimenti.traguardi.source": {
+  "reviewed": false
+ },
+ "riconoscimenti.traguardi.prev": {
+  "reviewed": false
+ },
+ "riconoscimenti.traguardi.next": {
+  "reviewed": false
+ },
+ "riconoscimenti.squeeze.eyebrow": {
+  "reviewed": false
+ },
+ "riconoscimenti.squeeze.title": {
+  "reviewed": false
+ },
+ "riconoscimenti.squeeze.region": {
+  "reviewed": false
+ },
+ "riconoscimenti.squeeze.premio": {
+  "reviewed": false
+ },
+ "riconoscimenti.squeeze.traguardo": {
+  "reviewed": false
+ },
+ "riconoscimenti.squeeze.show": {
+  "reviewed": false
+ },
+ "riconoscimenti.squeeze.more": {
+  "reviewed": false
+ },
+ "riconoscimenti.squeeze.prevLabel": {
+  "reviewed": false
+ },
+ "riconoscimenti.squeeze.nextLabel": {
+  "reviewed": false
+ },
+ "riconoscimenti.milestones.0.id": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "riconoscimenti.milestones.0.year": {
+  "reviewed": false
+ },
+ "riconoscimenti.milestones.0.label": {
+  "reviewed": false
+ },
+ "riconoscimenti.milestones.0.kind": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "riconoscimenti.milestones.0.title": {
+  "reviewed": false
+ },
+ "riconoscimenti.milestones.0.caption": {
+  "reviewed": false
+ },
+ "riconoscimenti.milestones.0.href": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "riconoscimenti.milestones.0.source.label": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "riconoscimenti.milestones.1.id": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "riconoscimenti.milestones.1.year": {
+  "reviewed": false
+ },
+ "riconoscimenti.milestones.1.label": {
+  "reviewed": false
+ },
+ "riconoscimenti.milestones.1.kind": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "riconoscimenti.milestones.1.title": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "riconoscimenti.milestones.1.caption": {
+  "reviewed": false
+ },
+ "riconoscimenti.milestones.1.href": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "riconoscimenti.milestones.2.id": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "riconoscimenti.milestones.2.year": {
+  "reviewed": false
+ },
+ "riconoscimenti.milestones.2.label": {
+  "reviewed": false
+ },
+ "riconoscimenti.milestones.2.kind": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "riconoscimenti.milestones.2.title": {
+  "reviewed": false
+ },
+ "riconoscimenti.milestones.2.caption": {
+  "reviewed": false
+ },
+ "riconoscimenti.milestones.2.href": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "riconoscimenti.milestones.3.id": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "riconoscimenti.milestones.3.label": {
+  "reviewed": false
+ },
+ "riconoscimenti.milestones.3.kind": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "riconoscimenti.milestones.3.title": {
+  "reviewed": false
+ },
+ "riconoscimenti.milestones.3.caption": {
+  "reviewed": false
+ },
+ "riconoscimenti.milestones.3.source.label": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "riconoscimenti.milestones.4.id": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "riconoscimenti.milestones.4.year": {
+  "reviewed": false
+ },
+ "riconoscimenti.milestones.4.label": {
+  "reviewed": false
+ },
+ "riconoscimenti.milestones.4.kind": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "riconoscimenti.milestones.4.title": {
+  "reviewed": false
+ },
+ "riconoscimenti.milestones.4.caption": {
+  "reviewed": false
+ },
+ "riconoscimenti.milestones.4.href": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "riconoscimenti.milestones.5.id": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "riconoscimenti.milestones.5.year": {
+  "reviewed": false
+ },
+ "riconoscimenti.milestones.5.label": {
+  "reviewed": false
+ },
+ "riconoscimenti.milestones.5.kind": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "riconoscimenti.milestones.5.title": {
+  "reviewed": false
+ },
+ "riconoscimenti.milestones.5.caption": {
+  "reviewed": false
+ },
+ "riconoscimenti.milestones.5.href": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "riconoscimenti.milestones.6.id": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "riconoscimenti.milestones.6.year": {
+  "reviewed": false
+ },
+ "riconoscimenti.milestones.6.label": {
+  "reviewed": false
+ },
+ "riconoscimenti.milestones.6.kind": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "riconoscimenti.milestones.6.title": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "riconoscimenti.milestones.6.caption": {
+  "reviewed": false
+ },
+ "riconoscimenti.milestones.6.href": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "riconoscimenti.milestones.7.id": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "riconoscimenti.milestones.7.year": {
+  "reviewed": false
+ },
+ "riconoscimenti.milestones.7.label": {
+  "reviewed": false
+ },
+ "riconoscimenti.milestones.7.kind": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "riconoscimenti.milestones.7.title": {
+  "reviewed": false
+ },
+ "riconoscimenti.milestones.7.caption": {
+  "reviewed": false
+ },
+ "riconoscimenti.milestones.7.href": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "riconoscimenti.milestones.8.id": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "riconoscimenti.milestones.8.year": {
+  "reviewed": false
+ },
+ "riconoscimenti.milestones.8.label": {
+  "reviewed": false
+ },
+ "riconoscimenti.milestones.8.kind": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "riconoscimenti.milestones.8.title": {
+  "reviewed": false
+ },
+ "riconoscimenti.milestones.8.caption": {
+  "reviewed": false
+ },
+ "riconoscimenti.milestones.8.href": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "riconoscimenti.yearUnknown": {
+  "reviewed": false
+ },
+ "riconoscimenti.imageAlts.cer-dell-anno-2024": {
+  "reviewed": false
+ },
+ "riconoscimenti.imageAlts.premio-michele-cali": {
+  "reviewed": false
+ },
+ "riconoscimenti.imageAlts.configurazione-dalmine": {
+  "reviewed": false
+ },
+ "riconoscimenti.imageAlts.progetto-solidale-dalmine": {
+  "reviewed": false
+ },
+ "riconoscimenti.imageAlts.otto-comuni": {
+  "reviewed": false
+ },
+ "riconoscimenti.imageAlts.ardake-in-house": {
+  "reviewed": false
+ },
+ "riconoscimenti.imageAlts.fondazione-boldesico": {
+  "reviewed": false
+ },
+ "riconoscimenti.imageAlts.ciserano-corte-dei-conti": {
+  "reviewed": false
+ },
+ "riconoscimenti.imageAlts.numeri": {
+  "reviewed": false
+ },
+ "socio.meta.title": {
+  "reviewed": false
+ },
+ "socio.meta.description": {
+  "reviewed": false
+ },
+ "socio.hero.eyebrow": {
+  "reviewed": false
+ },
+ "socio.hero.title": {
+  "reviewed": false
+ },
+ "socio.hero.lead": {
+  "reviewed": false
+ },
+ "socio.hero.body": {
+  "reviewed": false
+ },
+ "socio.hero.cta": {
+  "reviewed": false
+ },
+ "socio.hero.pdf": {
+  "reviewed": false
+ },
+ "socio.hero.note": {
+  "reviewed": false
+ },
+ "socio.hero.presenterAlt": {
+  "reviewed": false
+ },
+ "socio.paths.eyebrow": {
+  "reviewed": false
+ },
+ "socio.paths.title": {
+  "reviewed": false
+ },
+ "socio.paths.lead": {
+  "reviewed": false
+ },
+ "socio.paths.docsTitle": {
+  "reviewed": false
+ },
+ "socio.paths.docsSource": {
+  "reviewed": false
+ },
+ "socio.paths.online": {
+  "reviewed": false
+ },
+ "socio.paths.pdf": {
+  "reviewed": false
+ },
+ "socio.paths.fisica.label": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "socio.paths.fisica.who": {
+  "reviewed": false
+ },
+ "socio.paths.fisica.examples.0": {
+  "reviewed": false
+ },
+ "socio.paths.fisica.examples.1": {
+  "reviewed": false
+ },
+ "socio.paths.fisica.docs.0": {
+  "reviewed": false
+ },
+ "socio.paths.fisica.docs.1": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "socio.paths.fisica.docs.2": {
+  "reviewed": false
+ },
+ "socio.paths.fisica.docs.3": {
+  "reviewed": false
+ },
+ "socio.paths.fisica.note": {
+  "reviewed": false
+ },
+ "socio.paths.fisica.presenterAlt": {
+  "reviewed": false
+ },
+ "socio.paths.giuridica.label": {
+  "reviewed": false
+ },
+ "socio.paths.giuridica.who": {
+  "reviewed": false
+ },
+ "socio.paths.giuridica.examples.0": {
+  "reviewed": false
+ },
+ "socio.paths.giuridica.examples.1": {
+  "reviewed": false
+ },
+ "socio.paths.giuridica.docs.0": {
+  "reviewed": false
+ },
+ "socio.paths.giuridica.docs.1": {
+  "reviewed": false
+ },
+ "socio.paths.giuridica.docs.2": {
+  "reviewed": false
+ },
+ "socio.paths.giuridica.docs.3": {
+  "reviewed": false
+ },
+ "socio.paths.giuridica.docs.4": {
+  "reviewed": false
+ },
+ "socio.paths.giuridica.note": {
+  "reviewed": false
+ },
+ "socio.paths.giuridica.presenterAlt": {
+  "reviewed": false
+ },
+ "socio.docs.eyebrow": {
+  "reviewed": false
+ },
+ "socio.docs.title": {
+  "reviewed": false
+ },
+ "socio.docs.lead": {
+  "reviewed": false
+ },
+ "socio.docs.openOnline": {
+  "reviewed": false
+ },
+ "socio.docs.pdf": {
+  "reviewed": false
+ },
+ "socio.docs.openAria": {
+  "reviewed": false
+ },
+ "socio.docs.items.0.code": {
+  "reviewed": false
+ },
+ "socio.docs.items.0.title": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "socio.docs.items.0.short": {
+  "reviewed": false
+ },
+ "socio.docs.items.0.pages": {
+  "reviewed": false
+ },
+ "socio.docs.items.0.text": {
+  "reviewed": false
+ },
+ "socio.docs.items.1.code": {
+  "reviewed": false
+ },
+ "socio.docs.items.1.title": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "socio.docs.items.1.short": {
+  "reviewed": false
+ },
+ "socio.docs.items.1.pages": {
+  "reviewed": false
+ },
+ "socio.docs.items.1.text": {
+  "reviewed": false
+ },
+ "socio.docs.items.2.code": {
+  "reviewed": false
+ },
+ "socio.docs.items.2.title": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "socio.docs.items.2.short": {
+  "reviewed": false
+ },
+ "socio.docs.items.2.pages": {
+  "reviewed": false
+ },
+ "socio.docs.items.2.text": {
+  "reviewed": false
+ },
+ "socio.docs.items.3.code": {
+  "reviewed": false
+ },
+ "socio.docs.items.3.title": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "socio.docs.items.3.short": {
+  "reviewed": false
+ },
+ "socio.docs.items.3.pages": {
+  "reviewed": false
+ },
+ "socio.docs.items.3.text": {
+  "reviewed": false
+ },
+ "socio.docs.italianNote": {
+  "reviewed": false
+ },
+ "socio.steps.eyebrow": {
+  "reviewed": false
+ },
+ "socio.steps.title": {
+  "reviewed": false
+ },
+ "socio.steps.items.0.t": {
+  "reviewed": false
+ },
+ "socio.steps.items.0.d": {
+  "reviewed": false
+ },
+ "socio.steps.items.1.t": {
+  "reviewed": false
+ },
+ "socio.steps.items.1.d": {
+  "reviewed": false
+ },
+ "socio.steps.items.2.t": {
+  "reviewed": false
+ },
+ "socio.steps.items.2.d": {
+  "reviewed": false
+ },
+ "socio.steps.items.3.t": {
+  "reviewed": false
+ },
+ "socio.steps.items.3.d": {
+  "reviewed": false
+ },
+ "socio.steps.prepareTitle": {
+  "reviewed": false
+ },
+ "socio.steps.prepare.0": {
+  "reviewed": false
+ },
+ "socio.steps.prepare.1": {
+  "reviewed": false
+ },
+ "socio.steps.prepare.2": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "socio.steps.prepare.3": {
+  "reviewed": false
+ },
+ "socio.steps.prepareSource": {
+  "reviewed": false
+ },
+ "socio.steps.progress": {
+  "reviewed": false
+ },
+ "socio.faq.eyebrow": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "socio.faq.title": {
+  "reviewed": false
+ },
+ "socio.faq.text": {
+  "reviewed": false
+ },
+ "socio.faq.cta": {
+  "reviewed": false
+ },
+ "socio.faq.items.0.q": {
+  "reviewed": false
+ },
+ "socio.faq.items.0.a": {
+  "reviewed": false
+ },
+ "socio.faq.items.1.q": {
+  "reviewed": false
+ },
+ "socio.faq.items.1.a": {
+  "reviewed": false
+ },
+ "socio.faq.items.2.q": {
+  "reviewed": false
+ },
+ "socio.faq.items.2.a": {
+  "reviewed": false
+ },
+ "socio.faq.items.3.q": {
+  "reviewed": false
+ },
+ "socio.faq.items.3.a": {
+  "reviewed": false
+ },
+ "socio.faq.items.4.q": {
+  "reviewed": false
+ },
+ "socio.faq.items.4.a": {
+  "reviewed": false
+ },
+ "socio.help.bubble": {
+  "reviewed": false
+ },
+ "socio.help.text": {
+  "reviewed": false
+ },
+ "socio.help.cta": {
+  "reviewed": false
+ },
+ "socio.compilazione.metaTitle": {
+  "reviewed": false
+ },
+ "socio.compilazione.metaDescription": {
+  "reviewed": false
+ },
+ "socio.compilazione.back": {
+  "reviewed": false
+ },
+ "socio.compilazione.eyebrow": {
+  "reviewed": false
+ },
+ "socio.compilazione.title": {
+  "reviewed": false
+ },
+ "socio.compilazione.lead": {
+  "reviewed": false
+ },
+ "socio.compilazione.fullscreen": {
+  "reviewed": false
+ },
+ "socio.compilazione.iframeTitle": {
+  "reviewed": false
+ },
+ "socio.compilazione.problem": {
+  "reviewed": false
+ },
+ "socio.compilazione.problemText": {
+  "reviewed": false
+ },
+ "socio.compilazione.write": {
+  "reviewed": false
+ },
+ "socio.compilazione.other": {
+  "reviewed": false
+ },
+ "socio.compilazione.choose": {
+  "reviewed": false
+ },
+ "socio.compilazione.mailSubject": {
+  "reviewed": false,
+  "note": "uguale all'italiano: tradurre o lasciare in italiano (citazione ufficiale / documento legale)?"
+ },
+ "socio.grazie.metaTitle": {
+  "reviewed": false
+ },
+ "socio.grazie.eyebrow": {
+  "reviewed": false
+ },
+ "socio.grazie.title": {
+  "reviewed": false
+ },
+ "socio.grazie.text": {
+  "reviewed": false
+ },
+ "socio.grazie.home": {
+  "reviewed": false
+ },
+ "socio.grazie.ardake": {
+  "reviewed": false
+ },
+ "common.footer.ctaTitle": {
+  "reviewed": false,
+  "note": "V3 footer (nuovo)"
+ },
+ "common.footer.ctaSub": {
+  "reviewed": false
+ },
+ "common.footer.write": {
+  "reviewed": false
+ },
+ "common.footer.colCer": {
+  "reviewed": false
+ },
+ "common.footer.colArdake": {
+  "reviewed": false
+ },
+ "common.footer.cosaSono": {
+  "reviewed": false,
+  "note": "V3 footer (nuovo)"
+ },
+ "common.footer.verifica": {
+  "reviewed": false
+ },
+ "common.footer.accedi": {
+  "reviewed": false,
+  "note": "V3 footer (nuovo)"
+ },
+ "common.footer.demo": {
+  "reviewed": false
+ },
+ "ardake.phone.demoData": {
+  "reviewed": false
+ },
+ "ardake.giorgio.tourStart": {
+  "reviewed": false,
+  "note": "V3 tour di Giorgio (nuovo)"
+ },
+ "ardake.giorgio.tourProgress": {
+  "reviewed": false,
+  "note": "V3 tour di Giorgio (nuovo)"
+ },
+ "ardake.giorgio.tourLive": {
+  "reviewed": false,
+  "note": "V3 tour di Giorgio (nuovo)"
+ },
+ "ardake.giorgio.tourBack": {
+  "reviewed": false,
+  "note": "V3 tour di Giorgio (nuovo)"
+ },
+ "ardake.giorgio.tourNext": {
+  "reviewed": false,
+  "note": "V3 tour di Giorgio (nuovo)"
+ },
+ "ardake.giorgio.tourDone": {
+  "reviewed": false,
+  "note": "V3 tour di Giorgio (nuovo)"
+ },
+ "ardake.giorgio.tourSkip": {
+  "reviewed": false,
+  "note": "V3 tour di Giorgio (nuovo)"
+ },
+ "ardake.giorgio.outroTitle": {
+  "reviewed": false,
+  "note": "V3 tour di Giorgio (nuovo)"
+ },
+ "ardake.giorgio.outroBody": {
+  "reviewed": false,
+  "note": "V3 tour di Giorgio (nuovo)"
+ }
+}

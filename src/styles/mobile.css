@@ -1,0 +1,117 @@
+/* =====================================================================
+   SUN-FAI — small-screen utilities (pack 15). Import after tokens.css.
+   Plain CSS: works with Tailwind v4 (`@import "./mobile.css";`).
+   ===================================================================== */
+
+:root {
+  --gutter: 20px;
+  --topbar-h: 64px;
+  --dock-h: 64px;
+  --dock-gap: 12px;
+  --safe-t: env(safe-area-inset-top, 0px);
+  --safe-b: env(safe-area-inset-bottom, 0px);
+  --safe-l: env(safe-area-inset-left, 0px);
+  --safe-r: env(safe-area-inset-right, 0px);
+  --dock-space: calc(var(--dock-h) + var(--dock-gap) * 2 + var(--safe-b));
+  color-scheme: light;               /* light-only site: keep form controls light in OS dark mode */
+}
+@media (max-width: 359.98px) { :root { --gutter: 16px; } }
+@media (min-width: 400px)    { :root { --gutter: 24px; } }
+@media (max-height: 500px) and (orientation: landscape) { :root { --dock-h: 56px; --topbar-h: 56px; } }
+
+html {
+  background: var(--color-paper, #FAF7F0);   /* overscroll/rubber-band shows paper, not white */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-padding-top: calc(var(--topbar-h) + var(--safe-t) + 12px);
+  scroll-padding-bottom: calc(var(--dock-space) + 12px);
+}
+/* clip (not hidden) keeps position: sticky working. It must be on BOTH html and body:
+   tested in mobile Chromium, clip on body alone (or html alone, or overflow hidden on either)
+   still lets an overflowing decoration widen the layout viewport, so the page zooms out. */
+html, body { overflow-x: clip; }
+body {
+  min-height: 100svh;
+  overscroll-behavior-y: none;       /* no pull-to-refresh glow fighting the dock (Chrome Android) */
+}
+.page-end { padding-bottom: calc(var(--dock-space) + 24px); }   /* put on the footer */
+@media (min-width: 1024px) { .page-end { padding-bottom: calc(96px + var(--safe-b)); } }
+
+/* Sections clip their own decorations horizontally only (pack 01.2: never by top/bottom edge) */
+.section { position: relative; overflow-x: clip; padding-inline: max(var(--gutter), var(--safe-l)) max(var(--gutter), var(--safe-r)); }
+
+/* ---------- Viewport heights ---------- */
+.h-screen-safe { min-height: 100svh; }           /* first-screen layouts */
+.h-sheet       { height: 100dvh; }               /* only while the sheet is open */
+@supports not (height: 100svh) { .h-screen-safe { min-height: 100vh; } .h-sheet { height: 100vh; } }
+
+/* ---------- Fixed layers ---------- */
+.topbar { padding-top: var(--safe-t); height: calc(var(--topbar-h) + var(--safe-t)); }
+.dock-mobile {
+  position: fixed; z-index: 50;
+  left: calc(var(--dock-gap) + var(--safe-l));
+  right: calc(var(--dock-gap) + var(--safe-r));
+  bottom: calc(var(--dock-gap) + var(--safe-b));
+  height: var(--dock-h);
+}
+@media (max-height: 500px) and (orientation: landscape) { .dock-mobile { max-width: 480px; margin-inline: auto; } }
+[data-keyboard-open="true"] .dock-mobile,
+[data-sheet-open="true"] .dock-mobile { opacity: 0; pointer-events: none; transform: translateY(12px); }
+.above-dock { bottom: calc(var(--dock-space) + 8px); }   /* Giorgio stage, toasts, cookie notice */
+
+/* ---------- Tap targets ---------- */
+.tap { min-width: 44px; min-height: 44px; touch-action: manipulation; }
+.tap-48 { min-width: 48px; min-height: 48px; touch-action: manipulation; }
+/* Small visual, big hit area (InfoDot 28 px, carousel dots) */
+[data-hit-area] { position: relative; }
+[data-hit-area]::after { content: ""; position: absolute; inset: 50% auto auto 50%; width: 44px; height: 44px; translate: -50% -50%; }
+a, button, [role="button"], summary, label { -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
+
+/* Paper press feedback on touch (hover effects live only in the hover media query) */
+.btn:active { transform: translateY(1px); box-shadow: inset 0 -1px 0 rgb(0 0 0 / .12), 0 1px 1px rgb(5 42 34 / .08); }
+@media (hover: none) { .hover-only { display: none !important; } }
+/* Example: wrap ALL hover styles like this
+@media (hover: hover) and (pointer: fine) { .door-card:hover .person { translate: 0 -8px; } } */
+
+/* ---------- Type helpers ---------- */
+.display { text-wrap: balance; padding-block: .04em; }  /* line-height .95 must not clip é, è, ö, ü */
+.prose-mobile p { text-wrap: pretty; hyphens: auto; }
+.prose-mobile :is(h1, h2, h3) { hyphens: manual; }
+.br-sm { display: none; }  @media (min-width: 400px) { .br-sm { display: inline; } }   /* <br class="br-sm"> */
+
+/* ---------- Forms (no iOS zoom) ---------- */
+input:not([type="checkbox"]):not([type="radio"]):not([type="range"]), select, textarea {
+  font-size: max(16px, 1rem);
+  min-height: 48px;
+}
+
+/* ---------- Snap rails (cards, people, press, posts) ---------- */
+.rail {
+  display: grid; grid-auto-flow: column; gap: 12px;
+  grid-auto-columns: var(--rail-item, 84%);
+  overflow-x: auto; overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory; scroll-padding-inline: var(--gutter);
+  padding-inline: var(--gutter); margin-inline: calc(var(--gutter) * -1);
+  scrollbar-width: none; touch-action: pan-x pan-y;
+}
+.rail::-webkit-scrollbar { display: none; }
+.rail > * { scroll-snap-align: start; }
+.rail--small { --rail-item: calc((100% - var(--gutter) * 2) / 2.2); }
+@media (min-width: 768px) { .rail--to-grid { grid-auto-flow: row; grid-template-columns: repeat(var(--cols, 3), minmax(0, 1fr)); overflow: visible; margin-inline: 0; padding-inline: 0; } }
+
+/* ---------- Charts in narrow cards ---------- */
+.chart-scroll { overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x proximity; }
+.chart-scroll > svg { min-width: 560px; }   /* 12-month bars, weekly comparison */
+
+/* ---------- Motion on phones ---------- */
+@media (max-width: 767.98px) {
+  :root { --reveal-distance: 14px; --reveal-duration: 400ms; --reveal-stagger: 60ms; }
+  [data-parallax] { transform: none !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+}
+
+/* ---------- Expensive effects ---------- */
+@media (prefers-reduced-transparency: reduce) { .topbar[data-solid=true] { backdrop-filter: none; background: var(--color-paper, #FAF7F0); } }
+.low-end .topbar[data-solid=true] { backdrop-filter: none; background: rgb(250 247 240 / .96); }   /* set .low-end on <html> when hardwareConcurrency <= 4 */

@@ -1,0 +1,303 @@
+"use client";
+
+import Link from "next/link";
+import { createContext, useCallback, useContext, useEffect, useRef, useState, type ReactNode } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { ArrowLeft, ArrowRight, Route, X } from "lucide-react";
+import { Img } from "@/components/ui/Img";
+import { lhref, type Locale } from "@/lib/i18n";
+import { EASE_OUT_SOFT } from "@/lib/motion";
+import { presenters } from "@/content/team";
+import type { Dict } from "@/content/dict";
+
+type G = Dict["ardake"]["giorgio"];
+type TopicKey = keyof G["topics"];
+type Topic = { title: string; body: string; more?: string };
+type Mode = "idle" | "tour" | "single" | "outro";
+type State = { mode: Mode; step: number; total: number; topic: Topic | null; topicKey: string; side: "left" | "right"; el: HTMLElement | null };
+type Ctx = { explain: (topic: TopicKey, el: HTMLElement | null) => void; start: () => void; label: (topic: TopicKey) => string; startLabel: string; tour: boolean };
+
+const GiorgioCtx = createContext<Ctx | null>(null);
+const IDLE: State = { mode: "idle", step: -1, total: 0, topic: null, topicKey: "", side: "right", el: null };
+const doneKey = (page: string) => `sf-tour-done:${page}`;
+const safeGet = (k: string) => {
+  try {
+    return localStorage.getItem(k);
+  } catch {
+    return null;
+  }
+};
+const safeSet = (k: string, v: string) => {
+  try {
+    localStorage.setItem(k, v);
+  } catch {}
+};
+const STAGE = { w: 260, h: 346 };
+
+/**
+ * Giorgio, V3 (pack 16.6 — controller from prompt-packs/16_FIX_VISUAL_OVERHAUL/code/giorgio-tour.ts).
+ * TOUR: sections marked `data-tour-step="<topic>" data-tour-order="n"`; on the first visit (after the hero has scrolled
+ * out) or from the "Fammi fare un giro" pill, Giorgio WALKS to each section in turn (spring + 2° lean), explains it,
+ * follows it while the user scrolls; Indietro / Avanti / Salta il giro. At the end: "Ora sai tutto!", he waves twice
+ * and LEAVES. Stored as done → it never auto-starts again (only the pill restarts it).
+ * SINGLE: an InfoDot opens Giorgio next to that element with ONLY that topic ([Ho capito, grazie] and ✕, no cycling).
+ * Stage: a complete ground pill under him (never cut flat). Phones: 180 × 240 above the dock, panel above, he slides.
+ * Non-modal dialog, focus to the title on each step, Esc closes, ← / → in the tour, live region "Passo 2 di 6".
+ * Reduced motion: no walking/tilt/waving, opacity only, instant scroll.
+ */
+export function GiorgioProvider({ g, locale, tour, children }: { g: G; locale: Locale; /** enables the guided tour on this page */ tour?: string; topics?: TopicKey[]; greeting?: boolean; children: ReactNode }) {
+  const [s, setS] = useState<State>(IDLE);
+  const [rect, setRect] = useState<DOMRect | null>(null);
+  const [vw, setVw] = useState({ w: 1440, h: 900 });
+  const reduce = useReducedMotion();
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  const outroTimer = useRef(0);
+  const topics = g.topics as Record<string, Topic>;
+
+  const steps = useCallback(
+    () =>
+      [...document.querySelectorAll<HTMLElement>("[data-tour-step]")]
+        .sort((a, b) => Number(a.dataset.tourOrder ?? 0) - Number(b.dataset.tourOrder ?? 0))
+        .filter((el) => topics[el.dataset.tourStep!]),
+    [topics],
+  );
+
+  const scrollTo = useCallback(
+    (el: HTMLElement) => {
+      const top = el.getBoundingClientRect().top + scrollY - Math.max(96, innerHeight * 0.14);
+      window.scrollTo({ top, behavior: reduce ? "auto" : "smooth" });
+    },
+    [reduce],
+  );
+
+  const outro = useCallback(() => {
+    if (tour) safeSet(doneKey(tour), "1");
+    setS((cur) => ({ ...cur, mode: "outro", step: -1, topic: { title: g.outroTitle, body: g.outroBody }, topicKey: "outro" }));
+    window.clearTimeout(outroTimer.current);
+    outroTimer.current = window.setTimeout(() => setS(IDLE), reduce ? 1400 : 3200);
+  }, [g, tour, reduce]);
+
+  const go = useCallback(
+    (i: number) => {
+      const list = steps();
+      if (i >= list.length) return outro();
+      const el = list[i];
+      const key = el.dataset.tourStep!;
+      setS({ mode: "tour", step: i, total: list.length, topic: topics[key], topicKey: key, side: (el.dataset.tourSide as "left" | "right") ?? (i % 2 === 0 ? "right" : "left"), el });
+      scrollTo(el);
+    },
+    [steps, topics, scrollTo, outro],
+  );
+
+  const sRef = useRef(s);
+  sRef.current = s;
+  /** ✕ / Esc / "Ho capito": in the tour it ends with the outro; in single mode it just closes (focus back to the "i"). */
+  const close = useCallback(() => {
+    const cur = sRef.current;
+    if (cur.mode === "tour") return outro();
+    if (cur.mode === "single") {
+      cur.el?.focus?.();
+      setS(IDLE);
+    }
+  }, [outro]);
+
+  const explain = useCallback((topic: TopicKey, el: HTMLElement | null) => {
+    if (el) {
+      const r = el.getBoundingClientRect();
+      if (r.top > innerHeight * 0.6) window.scrollBy({ top: r.top - innerHeight * 0.3, behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+    }
+    const r = el?.getBoundingClientRect();
+    setS({ mode: "single", step: -1, total: 1, topic: g.topics[topic] as Topic, topicKey: String(topic), side: r && r.left + r.width / 2 > innerWidth / 2 ? "left" : "right", el });
+  }, [g]);
+
+  // auto-start once per browser, after the hero has scrolled out (never in ?test, never again once done)
+  useEffect(() => {
+    if (!tour || safeGet(doneKey(tour)) || /[?&]test/.test(location.search)) return;
+    const onScroll = () => {
+      if (scrollY > innerHeight * 0.9) {
+        window.removeEventListener("scroll", onScroll);
+        if (sRef.current.mode === "idle") go(0);
+      }
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [tour, go]);
+
+  // follow the anchor while open (Giorgio stays next to his section when the user scrolls)
+  useEffect(() => {
+    const size = () => setVw({ w: innerWidth, h: innerHeight });
+    size();
+    window.addEventListener("resize", size);
+    return () => window.removeEventListener("resize", size);
+  }, []);
+  useEffect(() => {
+    if (!s.el || (s.mode !== "tour" && s.mode !== "single")) return;
+    let raf = 0;
+    const loop = () => {
+      setRect(s.el!.getBoundingClientRect());
+      raf = requestAnimationFrame(loop);
+    };
+    loop();
+    return () => cancelAnimationFrame(raf);
+  }, [s.el, s.mode]);
+
+  // focus + keys
+  useEffect(() => {
+    if (s.mode === "idle") return;
+    const id = requestAnimationFrame(() => titleRef.current?.focus({ preventScroll: true }));
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") close();
+      if (s.mode === "tour" && e.key === "ArrowRight") go(s.step + 1);
+      if (s.mode === "tour" && e.key === "ArrowLeft" && s.step > 0) go(s.step - 1);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => (cancelAnimationFrame(id), window.removeEventListener("keydown", onKey));
+  }, [s.mode, s.step, s.topicKey, close, go]);
+
+  useEffect(() => () => window.clearTimeout(outroTimer.current), []);
+
+  const phone = vw.w < 768;
+  const dock = phone ? 96 : 112;
+  const stage = phone ? { w: 180, h: 240 } : STAGE;
+  const right = s.side === "right";
+  const x = phone ? vw.w - stage.w - 8 : right ? vw.w - stage.w - 24 : 24;
+  const anchorTop = rect ? rect.top + 40 : vw.h - stage.h - dock;
+  const y = phone ? vw.h - stage.h - dock : Math.max(96, Math.min(anchorTop, vw.h - stage.h - dock));
+  const open = s.mode !== "idle" && s.topic;
+  const ctx: Ctx = { explain, start: () => go(0), label: (t) => g.open.replace("{topic}", g.topics[t].title), startLabel: g.tourStart, tour: !!tour };
+
+  return (
+    <GiorgioCtx.Provider value={ctx}>
+      {children}
+      <p className="sr-only" aria-live="polite">
+        {s.mode === "tour" ? g.tourLive.replace("{n}", String(s.step + 1)).replace("{total}", String(s.total)) : ""}
+      </p>
+      <AnimatePresence>
+        {open ? (
+          <motion.div
+            key="giorgio"
+            className="pointer-events-none fixed left-0 top-0 z-[45]"
+            initial={reduce ? { opacity: 0, x, y } : { opacity: 1, x, y: vw.h }}
+            animate={{ opacity: 1, x, y, rotate: 0 }}
+            exit={reduce ? { opacity: 0 } : { y: vw.h + 40, transition: { duration: 0.4, ease: EASE_OUT_SOFT } }}
+            transition={reduce ? { duration: 0.15 } : { type: "spring", stiffness: 170, damping: 24 }}
+            style={{ width: stage.w, height: stage.h }}
+          >
+            {/* the speech panel sits on the inner side (phones: above him) and never on top of him */}
+            <motion.div
+              role="dialog"
+              aria-modal="false"
+              aria-labelledby="giorgio-title"
+              key={s.topicKey}
+              initial={{ opacity: 0, scale: reduce ? 1 : 0.94 }}
+              animate={{ opacity: 1, scale: 1, transition: { delay: reduce ? 0 : 0.2, duration: 0.26 } }}
+              className={
+                phone
+                  ? "pointer-events-auto absolute bottom-[calc(100%+8px)] right-0 w-[min(calc(100vw-24px),380px)] rounded-[24px] bg-card p-5 shadow-[0_0_0_1px_var(--color-hairline),var(--shadow-lift)]"
+                  : `pointer-events-auto absolute top-4 w-[380px] rounded-[24px] bg-card p-5 shadow-[0_0_0_1px_var(--color-hairline),var(--shadow-lift)] ${right ? "right-[calc(100%-8px)]" : "left-[calc(100%-8px)]"}`
+              }
+            >
+              <span aria-hidden className={phone ? "absolute -bottom-[7px] right-[70px] size-4 rotate-45 bg-card" : `absolute top-10 size-4 rotate-45 bg-card ${right ? "-right-[7px]" : "-left-[7px]"}`} />
+              <p className="text-[13px] font-semibold text-leaf-text">{g.eyebrow}</p>
+              <h2 id="giorgio-title" ref={titleRef} tabIndex={-1} className="mt-1 font-display text-[1.3rem] font-extrabold tracking-[-0.025em] text-ink outline-none">
+                {s.topic!.title}
+              </h2>
+              <p className="mt-2 text-[16px] leading-relaxed text-ink/85">{s.topic!.body}</p>
+              {s.topic!.more ? (
+                <Link href={lhref(locale, s.topic!.more)} className="tlink text-[15px]">
+                  <span>{g.more}</span>
+                  <ArrowRight aria-hidden />
+                </Link>
+              ) : null}
+
+              {s.mode === "tour" ? (
+                <div className="mt-4">
+                  <div className="flex items-center gap-3">
+                    <span className="text-[14px] font-semibold text-slate">{g.tourProgress.replace("{n}", String(s.step + 1)).replace("{total}", String(s.total))}</span>
+                    <span aria-hidden className="flex gap-1.5">
+                      {Array.from({ length: s.total }, (_, k) => (
+                        <span key={k} className={k === s.step ? "h-2 w-5 rounded-full bg-orange" : "size-2 rounded-full bg-ink/15"} />
+                      ))}
+                    </span>
+                  </div>
+                  <div className="mt-3 flex items-center gap-2">
+                    <button type="button" onClick={() => go(s.step - 1)} disabled={s.step === 0} className="btn btn--outline btn--sm disabled:opacity-40">
+                      <ArrowLeft aria-hidden strokeWidth={2.2} />
+                      {g.tourBack}
+                    </button>
+                    <button type="button" onClick={() => go(s.step + 1)} className="btn btn--dark btn--sm flex-1">
+                      {s.step + 1 === s.total ? g.tourDone : g.tourNext}
+                      <ArrowRight aria-hidden strokeWidth={2.2} />
+                    </button>
+                  </div>
+                  <button type="button" onClick={outro} className="mt-1 inline-flex min-h-11 items-center text-[14px] font-semibold text-slate underline underline-offset-4 hover:text-ink">
+                    {g.tourSkip}
+                  </button>
+                </div>
+              ) : s.mode === "single" ? (
+                <div className="mt-4 flex items-center gap-2">
+                  <button type="button" onClick={close} className="btn btn--outline btn--sm flex-1">
+                    {g.close}
+                  </button>
+                  <button type="button" onClick={close} className="paper-round" aria-label={g.closeAria}>
+                    <X aria-hidden />
+                  </button>
+                </div>
+              ) : null}
+            </motion.div>
+
+            {/* stage: a sun disc behind him and a COMPLETE ground pill in front of the photo's bottom edge */}
+            <div aria-hidden className="absolute inset-0">
+              <svg viewBox="0 0 260 346" className="absolute inset-0 h-full w-full">
+                <circle cx="130" cy="150" r="112" fill="#FDEFC4" />
+                <circle cx="130" cy="150" r="70" fill="#FE9845" />
+              </svg>
+              <motion.div
+                className="absolute inset-x-0 bottom-[22px] h-[90%] origin-bottom"
+                animate={reduce ? {} : s.mode === "outro" ? { rotate: [0, -6, 6, -6, 6, 0] } : { rotate: [right ? -2 : 2, 0] }}
+                transition={s.mode === "outro" ? { duration: 1.2, delay: 0.3 } : { duration: 0.5 }}
+                key={s.mode === "outro" ? "wave" : s.topicKey}
+              >
+                <Img src={presenters.giorgioGuide} alt={g.alt} sizes="(max-width: 767px) 180px, 260px" className="absolute bottom-0 left-1/2 h-full w-auto max-w-none -translate-x-1/2" />
+              </motion.div>
+              <span className="absolute inset-x-[4%] bottom-0 h-[34px] rounded-full bg-[#4B8B2F]" />
+              <span className="absolute inset-x-[16%] bottom-[10px] h-[10px] rounded-full bg-[#B9D68F]" />
+            </div>
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
+    </GiorgioCtx.Provider>
+  );
+}
+
+/** "Fammi fare un giro con Giorgio" — the only way to restart the tour once it is done. */
+export function TourStart({ className }: { className?: string }) {
+  const ctx = useContext(GiorgioCtx);
+  if (!ctx?.tour) return null;
+  return (
+    <button type="button" onClick={ctx.start} className={`inline-flex min-h-11 items-center gap-2 rounded-full bg-mint px-4 text-[15px] font-semibold text-leaf-text shadow-[inset_0_0_0_1.5px_rgb(71_138_43/.35)] hover:bg-sage ${className ?? ""}`}>
+      <Route className="size-4" aria-hidden />
+      {ctx.startLabel}
+    </button>
+  );
+}
+
+/** InfoDot (16.5): sits INLINE right after the title text, centred on the cap height; 22 px visual, 44 px hit area, leaf outline. */
+export function InfoDot({ topic, className }: { topic: TopicKey; className?: string }) {
+  const ctx = useContext(GiorgioCtx);
+  const ref = useRef<HTMLButtonElement>(null);
+  if (!ctx) return null;
+  return (
+    <button
+      ref={ref}
+      type="button"
+      data-hit-area
+      aria-haspopup="dialog"
+      aria-label={ctx.label(topic)}
+      onClick={() => ctx.explain(topic, ref.current)}
+      className={`relative ml-1.5 inline-grid size-[22px] shrink-0 place-items-center rounded-full bg-card align-[0.12em] font-display text-[13px] font-extrabold italic leading-none text-leaf-text shadow-[inset_0_0_0_1.5px_rgb(71_138_43/.6)] transition-colors before:absolute before:-inset-[11px] before:content-[''] hover:bg-mint ${className ?? ""}`}
+    >
+      i
+    </button>
+  );
+}

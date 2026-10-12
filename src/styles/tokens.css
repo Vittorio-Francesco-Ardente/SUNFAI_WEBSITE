@@ -1,0 +1,167 @@
+/* =====================================================================
+   SUN-FAI design tokens — sampled from the approved concepts.
+   Tailwind v4: import this file from app/globals.css AFTER `@import "tailwindcss";`
+   V2: no seasonal theming. No gradients. Paper buttons (no coloured glow).
+   ===================================================================== */
+@theme {
+  /* Surfaces */
+  --color-paper: #FAF7F0;          /* page background */
+  --color-paper-2: #F4EFE6;        /* alternate section */
+  --color-card: #FFFFFF;
+  --color-card-warm: #FFFDF8;
+  --color-hairline: rgb(5 42 34 / 0.07);
+
+  /* Ink */
+  --color-ink: #052A22;            /* headlines, dark buttons */
+  --color-ink-900: #0F2A1F;        /* dark pill "Scopri il team" */
+  --color-slate: #4C5F66;          /* body */
+  --color-slate-400: #7C8A8F;      /* meta */
+
+  /* Brand (official logo) */
+  --color-logo-green: #478A2B;
+  --color-logo-sun: #FE5F00;
+  --color-logo-ground: #F3C300;
+
+  /* Accent (concept) */
+  --color-orange: #FD4A00;         /* display words + large CTAs (≥19px/700 → large text, 3.2:1 OK) */
+  --color-orange-text: #CF3D00;    /* small orange text/links on paper (4.58:1) */
+  --color-orange-btn: #D43E00;     /* small buttons with white label (4.68:1) */
+  --color-dot: #FEBF02;            /* the yellow full stop */
+
+  /* Geometry palette */
+  --color-solar: #FECF49;
+  --color-yellow: #FAC23B;
+  --color-sage: #C9E1A0;
+  --color-sage-light: #DEE9BF;
+  --color-leaf: #79AD4B;
+  --color-orange-geo: #F26722;
+  --color-orange-soft: #FE9845;
+  --color-peach: #FBD9C0;
+  --color-peach-light: #FCE7D6;
+  --color-mint: #F2F8EC;
+  --color-cream: #FFF8EC;
+  --color-pill: #EFF3E8;
+
+  /* Radii */
+  --radius-pill: 999px;
+  --radius-sm: 14px;
+  --radius-card: 24px;
+  --radius-feature: 40px;
+
+  /* Shadows (quiet, never coloured except the primary CTA) */
+  --shadow-soft: 0 1px 2px rgb(5 42 34 / .05), 0 12px 28px -20px rgb(5 42 34 / .28);
+  --shadow-lift: 0 2px 4px rgb(5 42 34 / .06), 0 24px 48px -28px rgb(5 42 34 / .38);
+  /* Paper finish for buttons: darker bottom edge + neutral soft shadow. NEVER a coloured glow. */
+  --paper-edge: inset 0 -2px 0 rgb(0 0 0 / .12);
+  --shadow-paper: 0 1px 1px rgb(5 42 34 / .08), 0 8px 18px -12px rgb(5 42 34 / .35);
+  --shadow-paper-pressed: 0 1px 1px rgb(5 42 34 / .08);
+
+  /* Motion */
+  --ease-out-soft: cubic-bezier(.22, 1, .36, 1);
+  --ease-in-out-soft: cubic-bezier(.65, 0, .35, 1);
+
+  /* Fonts (wired by next/font/local variables) */
+  --font-display: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+}
+
+:root {
+  color-scheme: light;
+
+  /* Fluid type scale (min @360px → max @1672px) */
+  --fs-hero: clamp(2.75rem, 1.2rem + 6.2vw, 7.4rem);     /* 44 → 118 px */
+  --fs-h1: clamp(2.5rem, 1.3rem + 5vw, 6.2rem);           /* 40 → 99 px  */
+  --fs-h2: clamp(2rem, 1.2rem + 3.4vw, 4.6rem);           /* 32 → 74 px  */
+  --fs-h3: clamp(1.375rem, 1.1rem + 1vw, 2rem);
+  --fs-sub: clamp(1.75rem, 1rem + 2.6vw, 3.9rem);          /* "La tua. La nostra." */
+  --fs-lead: clamp(1.0625rem, .95rem + .5vw, 1.5rem);      /* 17 → 24 px */
+  --fs-body: clamp(1rem, .96rem + .2vw, 1.125rem);
+  --fs-small: .875rem;
+  --fs-eyebrow: clamp(.8125rem, .76rem + .25vw, 1.0625rem);
+  --fs-ghost: clamp(6rem, 3rem + 10vw, 14rem);
+
+  --tracking-display: -0.045em;
+  --tracking-tight: -0.02em;
+  --leading-display: .95;
+
+  /* Layout */
+  --container: 1440px;
+  --gutter: clamp(20px, 4.4vw, 80px);
+  --section-y: clamp(72px, 9vw, 160px);
+
+  /* Accent roles (fixed, no theming) */
+  --theme-sun: var(--color-logo-sun);
+  --theme-ray-a: var(--color-logo-green);
+  --theme-ray-b: var(--color-sage);
+  --theme-ground: var(--color-logo-ground);
+  --accent-display: var(--color-orange);
+  --accent-text: var(--color-orange-text);
+  --cta-bg: var(--color-orange);
+  --cta-bg-small: var(--color-orange-btn);
+  --cta-bg-hover: #E64300;  /* hover = slightly darker flat fill, no glow */
+  --tint-soft: #F1F4E8;
+  --tint-warm: #FBF2DA;
+  --focus-ring: #CF3D00;
+
+  /* Geometry colours: components read ONLY these */
+  --geo-solar: var(--color-solar);
+  --geo-yellow: var(--color-yellow);
+  --geo-sage: var(--color-sage);
+  --geo-leaf: var(--color-leaf);
+  --geo-orange: var(--color-orange-geo);
+  --geo-orange-soft: var(--color-orange-soft);
+  --geo-peach: var(--color-peach);
+  --geo-mint: var(--color-mint);
+  --geo-cream: var(--color-cream);
+  --geo-sage-light: var(--color-sage-light);
+  --geo-green: var(--color-logo-green);
+  --seam-to: var(--color-paper-2);   /* set per seam: background colour of the NEXT section */
+}
+
+@layer base {
+  html { -webkit-text-size-adjust: 100%; text-rendering: optimizeLegibility; }
+  body {
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: var(--fs-body);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, .display {
+    font-family: var(--font-display);
+    font-weight: 800;
+    letter-spacing: var(--tracking-display);
+    line-height: var(--leading-display);
+    text-wrap: balance;
+  }
+  :focus-visible { outline: 3px solid var(--focus-ring); outline-offset: 3px; border-radius: 8px; }
+  ::selection { background: var(--color-solar); color: var(--color-ink); }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; scroll-behavior: auto !important; }
+  }
+}
+
+/* V2 build note: wrapped in @layer components so Tailwind utilities (e.g. lg:hidden) can override component display. */
+@layer components {
+/* The headline accent pattern: <span class="accent">energia</span><span class="dot">.</span> */
+.accent { color: var(--accent-display); }
+.dot { color: var(--color-dot); }
+
+/* ---------- Paper buttons (V2) ---------- */
+.btn { display:inline-flex; align-items:center; justify-content:center; gap:.6em; white-space:nowrap; border-radius:var(--radius-pill);
+  font-family:var(--font-sans); font-weight:700; line-height:1; transition: transform .18s var(--ease-out-soft), background-color .18s, box-shadow .18s; }
+.btn svg { flex:none; width:1.1em; height:1.1em; }            /* icons INLINE with the label, never stacked */
+.btn:hover { transform: translateY(-1px); }
+.btn:active { transform: translateY(1px); box-shadow: var(--paper-edge), var(--shadow-paper-pressed); }
+.btn--primary { background:var(--cta-bg); color:#fff; box-shadow: var(--paper-edge), var(--shadow-paper); }
+.btn--primary:hover { background:var(--cta-bg-hover); }
+.btn--dark { background:var(--color-ink-900); color:#fff; box-shadow: inset 0 -2px 0 rgb(0 0 0 / .25), var(--shadow-paper); }
+.btn--outline { background:var(--color-card-warm); color:var(--color-ink); box-shadow: inset 0 0 0 1.5px rgb(253 74 0 / .55), 0 1px 1px rgb(5 42 34 / .06); }
+.btn--outline:hover { box-shadow: inset 0 0 0 1.5px var(--accent-display), 0 6px 14px -12px rgb(5 42 34 / .35); }
+.btn--lg { height:clamp(56px, 3.2rem + .6vw, 72px); padding-inline:clamp(24px, 1.2rem + 1vw, 36px); font-size:clamp(17px, 1rem + .25vw, 21px); }
+.btn--md { height:52px; padding-inline:24px; font-size:17px; }
+.btn--sm { height:44px; padding-inline:18px; font-size:15px; }
+.btn--sm.btn--primary { background:var(--cta-bg-small); }
+@media (prefers-reduced-motion: reduce) { .btn, .btn:hover, .btn:active { transform:none; } }
+}

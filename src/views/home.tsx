@@ -1,0 +1,275 @@
+import { CalendarDays } from "lucide-react";
+import { getDict } from "@/content/dict";
+import { teamLite } from "@/content/team-lite";
+import { milestoneItems } from "@/content/milestones";
+import { pageMeta } from "@/lib/meta";
+import type { Locale } from "@/lib/i18n";
+import { ButtonLink, Eyebrow, Headline, TextLink } from "@/components/ui/primitives";
+import { Badge } from "@/components/geometry/shapes";
+import { CanvasPanel, Confetto, HalfDisc, PanelPerson, QuarterDisc, Ripple } from "@/components/canvas/Canvas";
+import { Img } from "@/components/ui/Img";
+import { HomeHero } from "@/components/home/HomeHero";
+import { Numbers } from "@/components/home/Numbers";
+import { PerChi } from "@/components/home/PerChi";
+import { About } from "@/components/home/About";
+import { TrePassaggi } from "@/components/home/TrePassaggi";
+import { ArdakeHome } from "@/components/home/ArdakeHome";
+import { VerificaForm } from "@/components/home/Verifica";
+import { ConfigMap } from "@/components/home/ConfigMap";
+import { TeamShowcase } from "@/components/team/TeamShowcase";
+import { AwardsSqueeze } from "@/components/awards/AwardsSqueeze";
+import { SocialFeed } from "@/components/social/SocialFeed";
+import { Faq } from "@/components/sections/Faq";
+import { JoinContact } from "@/components/sections/JoinContact";
+
+export const homeMeta = (locale: Locale) => {
+  const d = getDict(locale);
+  return { ...pageMeta(locale, "/", null, d.home.meta.description), title: { absolute: d.home.meta.title } };
+};
+
+const PAD = "py-[clamp(48px,6vw,88px)]";
+
+/**
+ * Home, V3 (pack 16): a deck of canvas panels separated by paper gaps (no hills strips). Rhythm: paper hero →
+ * solar numbers → mint per chi è → cream about → mint tre passaggi → paper Ardaké → peach verifica → mint map →
+ * paper team → cream awards → paper press → mint social → cream FAQ → paper events → peach + mint join/contact →
+ * leafDeep footer. People: hero group (Nicholas, Chiara, Simone) + 4 doors + Beatrice + Giorgio + Lorenzo + Alceste
+ * + Andrea Belotti + Simone. Mascot ×3: numbers (cheering), tre passaggi (waving), footer (waving).
+ */
+export function HomePage({ locale }: { locale: Locale }) {
+  const d = getDict(locale);
+  const h = d.home;
+  const members = teamLite(d, locale);
+  const items = milestoneItems(d);
+  const alt = (name: string) => d.common.ui.personAlt.replace("{name}", name);
+
+  return (
+    <>
+      <HomeHero d={h.hero} locale={locale} />
+      <Numbers d={h.numbers} ui={d.common.ui} mascotAlt={d.common.ui.mascotAlt} />
+      <PerChi d={h.perChi} locale={locale} personAlt={d.common.ui.personAlt} />
+      <About d={h.about} locale={locale} />
+      <TrePassaggi d={h.passaggi} locale={locale} mascotAlt={d.common.ui.mascotAlt} />
+      <ArdakeHome d={h.ardake} phone={d.ardake.phone} phoneAlt={d.ardake.hero.phoneAlt} replay={d.common.ui.replay} locale={locale} />
+
+      {/* 7 · Verifica se puoi aderire — peach, peach fan bottom-left, Lorenzo on the right facing the form */}
+      <CanvasPanel
+        tone="peach"
+        data-section="verifica"
+        id="verifica"
+        phoneUnit={1.5}
+        bg={
+          <>
+            <Ripple at={{ x: 0, y: 1 }} family="peach" core={0.06} widths={[0.09, 0.07, 0.07, 0.08]} fan={{ count: 7, from: 2, to: 88 }} />
+            <Ripple at={{ x: 1, y: 0 }} family="leaf" core={0.035} widths={[0.03, 0.035]} bands={2} />
+            <Ripple at={{ x: 1, y: 1 }} hideSm family="sun" core={0.07} widths={[0.07, 0.05, 0.05]} bands={3} />
+          </>
+        }
+      >
+        <div className={`container-x relative z-[2] ${PAD}`}>
+          <div className="lg:w-[64%]">
+            <Eyebrow upper>{h.verifica.eyebrow}</Eyebrow>
+            <Headline text={h.verifica.title} className="mt-5" />
+            <p className="t-lead mt-5 max-w-[40rem]">{h.verifica.text}</p>
+            <div className="card mt-8 p-5 sm:p-7">
+              <VerificaForm t={h.verifica} legend={h.map.legend} locale={locale} />
+            </div>
+          </div>
+        </div>
+        <PanelPerson src="/people/lorenzo-ciresa.webp" alt={alt("Lorenzo Ciresa")} sizes="(max-width: 1023px) 80vw, 30vw" smClass="left-1/2 h-[130%] -translate-x-1/2 translate-y-[31%]" lgClass="lg:left-auto lg:right-[2%] lg:h-[min(100%,820px)] lg:translate-y-[31%]" />
+      </CanvasPanel>
+
+      {/* 8 · Le nostre configurazioni (map) — mint, leaf ripple on the top-left corner */}
+      <CanvasPanel
+        tone="mint"
+        data-section="map"
+        id="configurazioni"
+        phoneUnit={1.4}
+        bg={
+          <>
+            <Ripple at={{ x: 0, y: 0 }} family="leaf" core={0.05} widths={[0.06, 0.05, 0.06, 0.06]} fan={{ count: 6, from: 272, to: 358 }} />
+            <Ripple at={{ x: 1, y: 1 }} family="sunPale" core={0.07} widths={[0.04, 0.04]} />
+            <HalfDisc at={{ x: 0.42, y: 1 }} r={0.026} edge="bottom" fill="#F26A1B" hideSm />
+          </>
+        }
+      >
+        <div className={`container-x relative z-[2] grid gap-10 lg:grid-cols-12 lg:items-center ${PAD}`}>
+          <div className="lg:col-span-5">
+            <Eyebrow upper tone="leaf">
+              {h.map.eyebrow}
+            </Eyebrow>
+            <Headline text={h.map.title} className="mt-5" />
+            <p className="t-lead mt-5">{h.map.lead}</p>
+            <ButtonLink href="/ardake/" locale={locale} variant="dark" className="mt-8 h-auto min-h-[52px] max-w-full !whitespace-normal py-3 text-left max-sm:w-full">
+              {h.map.cta}
+            </ButtonLink>
+          </div>
+          <div className="lg:col-span-7">
+            <ConfigMap t={h.map} />
+          </div>
+        </div>
+      </CanvasPanel>
+
+      {/* 9 · Team (CONCEPT_3) — paper, a small leaf ripple top-right */}
+      <CanvasPanel tone="paper" data-section="team" bg={<Ripple at={{ x: 1, y: 0 }} family="leaf" core={0.03} widths={[0.03, 0.03]} bands={2} />}>
+        <div className={`container-x relative z-[2] ${PAD}`}>
+          <TeamShowcase members={members} t={{ ...d.team.section, title: h.team.title, body: h.team.body }} locale={locale} />
+        </div>
+      </CanvasPanel>
+
+      {/* 10 · Riconoscimenti — cream, sun fan on the bottom-right corner */}
+      <CanvasPanel
+        tone="cream"
+        data-section="riconoscimenti"
+        phoneUnit={1.3}
+        bg={
+          <>
+            <Ripple at={{ x: 1, y: 1 }} family="sun" core={0.06} widths={[0.09, 0.07, 0.07, 0.07]} fan={{ count: 7, from: 92, to: 178 }} />
+            <Ripple at={{ x: 0, y: 0 }} family="leaf" core={0.03} widths={[0.03, 0.03]} bands={2} />
+          </>
+        }
+      >
+        <div className={`container-x relative z-[2] ${PAD}`}>
+          <div className="mb-10 grid gap-6 lg:grid-cols-12 lg:items-end">
+            <div className="lg:col-span-8">
+              <Eyebrow upper>{h.awards.eyebrow}</Eyebrow>
+              <Headline text={h.awards.title} className="mt-5" />
+            </div>
+            <div className="flex flex-wrap gap-x-6 gap-y-3 lg:col-span-4 lg:justify-end">
+              <ButtonLink href="/riconoscimenti/" locale={locale} variant="outline">
+                {h.awards.cta}
+              </ButtonLink>
+              <TextLink href="/riconoscimenti/#stanza-dei-ricordi" locale={locale}>
+                {h.awards.memory}
+              </TextLink>
+            </div>
+          </div>
+          <AwardsSqueeze items={items} t={d.riconoscimenti.squeeze} locale={locale} yearUnknown={d.riconoscimenti.yearUnknown} height="h-[520px]" phoneLimit={3} />
+        </div>
+      </CanvasPanel>
+
+      {/* 11 · Dicono di noi — paper, peach top-right, pale leaf bottom-left */}
+      <CanvasPanel
+        tone="paper"
+        data-section="press"
+        bg={
+          <>
+            <Ripple at={{ x: 1, y: 0 }} family="peach" core={0.05} widths={[0.05, 0.05, 0.05]} bands={3} />
+            <Ripple at={{ x: 0, y: 1 }} family="leafPale" core={0.06} widths={[0.04, 0.04]} />
+            <Confetto at={{ x: 0.55, y: 0.1 }} r={0.01} fill="#4B8B2F" ring hideSm />
+          </>
+        }
+      >
+        <div className={`container-x relative z-[2] ${PAD}`}>
+          <Eyebrow upper>{h.press.eyebrow}</Eyebrow>
+          <Headline text={h.press.title} className="mt-5" />
+          <ul className="rail rail--to-grid mt-10 pb-2 md:gap-4" style={{ ["--cols" as string]: 3 }}>
+            {h.press.items.map((p, i) => (
+              <li key={p.title} className="reveal">
+                <article className="card hover-card relative flex h-full flex-col overflow-hidden p-6 sm:p-7">
+                  <Badge n={([1, 2, 4] as const)[i]} className="absolute right-0 top-0 w-24 rounded-tr-[var(--radius-card)]" />
+                  <h3 lang="it" className="t-h3 pr-16">
+                    {p.title}
+                  </h3>
+                  <p lang="it" className="t-body mt-3 flex-1 !text-[16px]">
+                    {p.text}
+                  </p>
+                  <p className="mt-5 text-[14px] font-semibold text-orange-text">{p.source}</p>
+                </article>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </CanvasPanel>
+
+      {/* 12 · Dalla comunità (social) — mint, leaf fan bottom-right */}
+      <CanvasPanel
+        tone="mint"
+        data-section="social"
+        phoneUnit={1.3}
+        bg={
+          <>
+            <Ripple at={{ x: 1, y: 1 }} family="leaf" core={0.05} widths={[0.08, 0.06, 0.06, 0.07]} fan={{ count: 7, from: 92, to: 178 }} />
+            <Ripple at={{ x: 0, y: 0 }} family="sunPale" core={0.05} widths={[0.03, 0.03]} />
+            <QuarterDisc corner="bl" r={0.04} fill="#F5C335" className="max-md:hidden" />
+          </>
+        }
+      >
+        <div className={`container-x relative z-[2] ${PAD}`}>
+          <div className="mb-10 grid gap-6 lg:grid-cols-12 lg:items-end">
+            <div className="lg:col-span-7">
+              <Eyebrow upper tone="leaf">
+                {h.social.eyebrow}
+              </Eyebrow>
+              <Headline text={h.social.title} className="mt-5" />
+              <p className="t-lead mt-5">{h.social.text}</p>
+            </div>
+            <div className="lg:col-span-5 lg:text-right">
+              <TextLink href="/notizie/" locale={locale}>
+                {h.social.all}
+              </TextLink>
+            </div>
+          </div>
+          <SocialFeed t={h.social} ui={d.common.ui} locale={locale} />
+        </div>
+      </CanvasPanel>
+
+      {/* 13 · Domande rapide — cream, leaf fan on the right edge, Alceste (open hand) towards the answers */}
+      <CanvasPanel
+        tone="cream"
+        data-section="faq"
+        phoneUnit={1.5}
+        bg={
+          <>
+            <Ripple at={{ x: 1, y: 0.55 }} atSm={{ x: 1, y: 1 }} family="leaf" core={0.06} widths={[0.09, 0.07, 0.07, 0.08]} fan={{ count: 8, from: 95, to: 265 }} />
+            <Ripple at={{ x: 0, y: 0 }} family="peach" core={0.035} widths={[0.03, 0.03]} bands={2} />
+            <HalfDisc at={{ x: 0.3, y: 1 }} r={0.026} edge="bottom" fill="#F5C335" hideSm />
+          </>
+        }
+      >
+        <div className={`container-x relative z-[2] grid gap-10 lg:grid-cols-12 ${PAD}`}>
+          <div className="lg:col-span-7">
+            <Eyebrow upper>{h.faq.eyebrow}</Eyebrow>
+            <Headline text={h.faq.title} className="mt-5" />
+            <div className="mt-8">
+              <Faq items={h.faq.items} />
+            </div>
+            <TextLink href="/le-cer/#faq" locale={locale} className="mt-6">
+              {h.faq.all}
+            </TextLink>
+          </div>
+        </div>
+        <PanelPerson src="/people/poses/alceste-persico--pose-open-hand.webp" alt={alt("Alceste Persico")} sizes="(max-width: 1023px) 80vw, 32vw" lgClass="lg:left-auto lg:right-[3%] lg:h-[min(74%,640px)]" />
+      </CanvasPanel>
+
+      {/* 14 · I prossimi eventi — paper, sun fan bottom-left, the Memphis scene */}
+      <CanvasPanel
+        tone="paper"
+        data-section="eventi"
+        id="eventi"
+        phoneUnit={1.3}
+        bg={
+          <>
+            <Ripple at={{ x: 0, y: 1 }} family="sun" core={0.04} widths={[0.09, 0.08, 0.07, 0.07]} fan={{ count: 6, from: 2, to: 88 }} />
+            <Ripple at={{ x: 1, y: 0 }} family="peach" core={0.022} widths={[0.05, 0.05]} bands={2} />
+          </>
+        }
+      >
+        <div className={`container-x relative z-[2] grid items-center gap-8 md:grid-cols-2 ${PAD}`}>
+          <Img src="/scenes/scene-10-workshop-energia-solare.webp" alt={h.events.sceneAlt} sizes="(max-width: 767px) 90vw, 40vw" className="aspect-[4/3] h-auto w-full rounded-[28px] bg-white object-contain p-4" />
+          <div>
+            <Eyebrow upper>{h.events.eyebrow}</Eyebrow>
+            <Headline text={h.events.title} size="h2s" className="mt-5" />
+            <p className="mt-5 flex items-center gap-3 font-display text-[1.2rem] font-bold tracking-[-0.02em] text-ink">
+              <CalendarDays className="size-6 text-orange-text" aria-hidden />
+              {h.events.empty}
+            </p>
+            <p className="t-body mt-3">{h.events.follow}</p>
+          </div>
+        </div>
+      </CanvasPanel>
+
+      <JoinContact d={d.common.joinContact} locale={locale} personAlt={d.common.ui.personAlt} />
+    </>
+  );
+}
