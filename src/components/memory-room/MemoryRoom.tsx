@@ -2,7 +2,6 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import { asset } from "@/lib/asset";
 import { Img } from "@/components/ui/Img";
 import { cn } from "@/lib/cn";
 
@@ -36,7 +35,7 @@ export function MemoryRoom({ items, labels }: { items: Memory[]; labels: Labels 
   const railRef = useRef<HTMLDivElement>(null);
   const [index, setIndex] = useState(0);
   const cards = useMemo(
-    () => items.map((m) => ({ ...m, src: asset(m.image), yearLabel: m.year ?? labels.yearUnknown })),
+    () => items.map((m) => ({ ...m, src: m.image, yearLabel: m.year ?? labels.yearUnknown })),
     [items, labels.yearUnknown],
   );
 
