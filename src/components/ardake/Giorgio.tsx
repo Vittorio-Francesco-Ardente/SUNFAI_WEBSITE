@@ -38,8 +38,7 @@ const STAGE = { w: 260, h: 346 };
  * Giorgio, V3 (pack 16.6 — controller from prompt-packs/16_FIX_VISUAL_OVERHAUL/code/giorgio-tour.ts).
  * TOUR: sections marked `data-tour-step="<topic>" data-tour-order="n"`; on the first visit (after the hero has scrolled
  * out) or from the "Fammi fare un giro" pill, Giorgio WALKS to each section in turn (spring + 2° lean), explains it,
- * follows it while the user scrolls; Indietro / Avanti / Salta il giro. At the end: "Ora sai tutto!", he waves twice
- * and LEAVES. Stored as done → it never auto-starts again (only the pill restarts it).
+ * follows it while the user scrolls; Indietro / Avanti / Salta il giro. At the end he leaves with a friendly final message; if the user skips early, he uses a lighter skip message. Stored as done → it never auto-starts again (only the pill restarts it).
  * SINGLE: an InfoDot opens Giorgio next to that element with ONLY that topic ([Ho capito, grazie] and ✕, no cycling).
  * Stage: a complete ground pill under him (never cut flat). Phones: 180 × 240 above the dock, panel above, he slides.
  * Non-modal dialog, focus to the title on each step, Esc closes, ← / → in the tour, live region "Passo 2 di 6".
@@ -70,12 +69,17 @@ export function GiorgioProvider({ g, locale, tour, children }: { g: G; locale: L
     [reduce],
   );
 
-  const outro = useCallback(() => {
-    if (tour) safeSet(doneKey(tour), "1");
-    setS((cur) => ({ ...cur, mode: "outro", step: -1, topic: { title: g.outroTitle, body: g.outroBody }, topicKey: "outro" }));
-    window.clearTimeout(outroTimer.current);
-    outroTimer.current = window.setTimeout(() => setS(IDLE), reduce ? 1400 : 3200);
-  }, [g, tour, reduce]);
+  const outro = useCallback(
+    (kind: "done" | "skip" = "done") => {
+      if (tour) safeSet(doneKey(tour), "1");
+      const title = kind === "skip" ? (g.skipTitle ?? g.outroTitle) : g.outroTitle;
+      const body = kind === "skip" ? (g.skipBody ?? g.outroBody) : g.outroBody;
+      setS((cur) => ({ ...cur, mode: "outro", step: -1, topic: { title, body }, topicKey: kind === "skip" ? "outro-skip" : "outro" }));
+      window.clearTimeout(outroTimer.current);
+      outroTimer.current = window.setTimeout(() => setS(IDLE), reduce ? 1400 : 3200);
+    },
+    [g, tour, reduce],
+  );
 
   const go = useCallback(
     (i: number) => {
@@ -94,7 +98,7 @@ export function GiorgioProvider({ g, locale, tour, children }: { g: G; locale: L
   /** ✕ / Esc / "Ho capito": in the tour it ends with the outro; in single mode it just closes (focus back to the "i"). */
   const close = useCallback(() => {
     const cur = sRef.current;
-    if (cur.mode === "tour") return outro();
+    if (cur.mode === "tour") return outro("skip");
     if (cur.mode === "single") {
       cur.el?.focus?.();
       setS(IDLE);
@@ -230,7 +234,7 @@ export function GiorgioProvider({ g, locale, tour, children }: { g: G; locale: L
                       <ArrowRight aria-hidden strokeWidth={2.2} />
                     </button>
                   </div>
-                  <button type="button" onClick={outro} className="mt-1 inline-flex min-h-11 items-center text-[14px] font-semibold text-slate underline underline-offset-4 hover:text-ink">
+                  <button type="button" onClick={() => outro("skip")} className="mt-1 inline-flex min-h-11 items-center text-[14px] font-semibold text-slate underline underline-offset-4 hover:text-ink">
                     {g.tourSkip}
                   </button>
                 </div>

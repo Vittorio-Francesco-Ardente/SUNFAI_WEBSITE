@@ -1,15 +1,15 @@
 /**
- * Placeholder images for milestones & memories (approved landscapes, pack 07 assets/placeholder-memories).
- * TODO_SUNFAI: real event photos for "La stanza dei ricordi". Never the old demo group photos.
+ * Real event photos supplied by SUN-FAI for milestones & memories.
+ * Used by: /riconoscimenti (memory room + achievements carousel).
  */
 export const milestoneImage: Record<string, string> = {
-  "cer-dell-anno-2024": "/landscapes/landscape-rooftop-solar-mountains.webp",
-  "premio-michele-cali": "/landscapes/landscape-green-hills-valley.webp",
-  "configurazione-dalmine": "/landscapes/landscape-solar-panels-tiles-closeup.webp",
-  "progetto-solidale-dalmine": "/landscapes/landscape-village-street-houses.webp",
-  "otto-comuni": "/landscapes/landscape-piazza-courtyard-tree.webp",
-  "ardake-in-house": "/landscapes/landscape-plain-mountains-wide.webp",
-  "fondazione-boldesico": "/landscapes/landscape-olive-hills-panorama.webp",
-  "ciserano-corte-dei-conti": "/landscapes/landscape-country-road-village.webp",
-  numeri: "/landscapes/landscape-country-road-trees.webp",
+  "cer-dell-anno-2024": "/memory/cer-dell-anno-2024.webp",
+  "premio-michele-cali": "/memory/premio-michele-cali.webp",
+  "configurazione-dalmine": "/memory/configurazione-dalmine.webp",
+  "progetto-solidale-dalmine": "/memory/progetto-solidale-dalmine.webp",
+  "otto-comuni": "/memory/otto-comuni.webp",
+  "ardake-in-house": "/memory/ardake-in-house.webp",
+  "fondazione-boldesico": "/memory/fondazione-boldesico.webp",
+  "ciserano-corte-dei-conti": "/memory/ciserano-corte-dei-conti.webp",
+  numeri: "/memory/numeri.webp",
 };

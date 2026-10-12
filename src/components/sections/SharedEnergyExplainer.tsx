@@ -21,6 +21,26 @@ function profile(shift: number) {
   return pts;
 }
 
+function withIntersections(pts: { h: number; p: number; c: number }[]) {
+  const out: { h: number; p: number; c: number; shared: number; crossing?: boolean }[] = [];
+  for (let i = 0; i < pts.length - 1; i++) {
+    const a = pts[i];
+    const b = pts[i + 1];
+    out.push({ ...a, shared: Math.min(a.p, a.c) });
+    const da = a.p - a.c;
+    const db = b.p - b.c;
+    if (da !== 0 && db !== 0 && Math.sign(da) !== Math.sign(db)) {
+      const t = da / (da - db);
+      const h = a.h + (b.h - a.h) * t;
+      const p = a.p + (b.p - a.p) * t;
+      const c = a.c + (b.c - a.c) * t;
+      out.push({ h, p, c, shared: p, crossing: true });
+    }
+  }
+  const last = pts[pts.length - 1];
+  out.push({ ...last, shared: Math.min(last.p, last.c) });
+  return out;
+}
 const C = { prod: "#E3A400", prodTint: "#FECF49", cons: "#478A2B", shared: "#F26722" };
 
 /**
@@ -32,14 +52,16 @@ export function SharedEnergyExplainer({ t }: { t: Dict["pages"]["leCer"]["explai
   const [shift, setShift] = useState(0.15);
   const id = useId();
   const pts = useMemo(() => profile(shift), [shift]);
+  const graph = useMemo(() => withIntersections(pts), [pts]);
   const W = 720, H = 300, P = { l: 36, r: 12, t: 16, b: 30 };
   const x = scaleLinear().domain([0, 24]).range([P.l, W - P.r]);
   const y = scaleLinear().domain([0, 11]).range([H - P.b, P.t]);
-  const shared = pts.map((d) => Math.min(d.p, d.c));
-  const lineP = d3line<(typeof pts)[number]>().x((d) => x(d.h)).y((d) => y(d.p)).curve(curveMonotoneX)(pts)!;
-  const lineC = d3line<(typeof pts)[number]>().x((d) => x(d.h)).y((d) => y(d.c)).curve(curveMonotoneX)(pts)!;
-  const areaP = d3area<(typeof pts)[number]>().x((d) => x(d.h)).y0(y(0)).y1((d) => y(d.p)).curve(curveMonotoneX)(pts)!;
-  const areaS = d3area<number>().x((_, i) => x(pts[i].h)).y0(y(0)).y1((v) => y(v)).curve(curveMonotoneX)(shared)!;
+  const shared = graph.map((d) => d.shared);
+  const crossings = graph.filter((d) => d.crossing);
+  const lineP = d3line<(typeof graph)[number]>().x((d) => x(d.h)).y((d) => y(d.p)).curve(curveMonotoneX)(graph)!;
+  const lineC = d3line<(typeof graph)[number]>().x((d) => x(d.h)).y((d) => y(d.c)).curve(curveMonotoneX)(graph)!;
+  const areaP = d3area<(typeof graph)[number]>().x((d) => x(d.h)).y0(y(0)).y1((d) => y(d.p)).curve(curveMonotoneX)(graph)!;
+  const areaS = d3area<(typeof graph)[number]>().x((d) => x(d.h)).y0(y(0)).y1((d) => y(d.shared)).curve(curveMonotoneX)(graph)!;
   const totP = pts.reduce((s, d) => s + d.p * STEP, 0);
   const totC = pts.reduce((s, d) => s + d.c * STEP, 0);
   const totS = shared.reduce((s, v) => s + v * STEP, 0);
@@ -91,9 +113,15 @@ export function SharedEnergyExplainer({ t }: { t: Dict["pages"]["leCer"]["explai
               </text>
             ))}
             <path d={areaP} fill={C.prodTint} fillOpacity={0.18} />
-            <path d={areaS} fill={C.shared} fillOpacity={0.3} />
+            <path d={areaS} fill={C.shared} fillOpacity={0.26} />
             <path d={lineC} fill="none" stroke={C.cons} strokeWidth={2.75} strokeLinejoin="round" strokeLinecap="round" />
             <path d={lineP} fill="none" stroke={C.prod} strokeWidth={3} strokeLinejoin="round" strokeLinecap="round" />
+            {crossings.map((d, i) => (
+              <g key={i}>
+                <circle cx={x(d.h)} cy={y(d.p)} r={4.5} fill="#fff" />
+                <circle cx={x(d.h)} cy={y(d.p)} r={3} fill={C.shared} />
+              </g>
+            ))}
           </svg>
         </div>
         <div className="flex flex-col lg:col-span-4">

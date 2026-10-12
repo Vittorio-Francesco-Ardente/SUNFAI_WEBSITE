@@ -96,6 +96,16 @@ export function NavShell({ t, locale }: { t: NavLabels; locale: Locale }) {
     document.documentElement.dataset.sheetOpen = String(sheet);
   }, [sheet]);
 
+  const firstPath = useRef(true);
+  useEffect(() => {
+    if (firstPath.current) {
+      firstPath.current = false;
+      return;
+    }
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+    document.getElementById("contenuto")?.focus?.({ preventScroll: true });
+  }, [pathname]);
+
   const close = useCallback(() => setSheet(false), []);
 
   return (
@@ -112,7 +122,7 @@ export function NavShell({ t, locale }: { t: NavLabels; locale: Locale }) {
 function Logo({ locale, t, onClick, className }: { locale: Locale; t: NavLabels; onClick?: () => void; className?: string }) {
   return (
     <Link href={lhref(locale, "/")} aria-label={t.logoAria} onClick={onClick} className={cn("inline-flex min-h-11 shrink-0 items-center", className)}>
-      <Img src="/brand/sunfai-logo.png" alt="" sizes="200px" priority className="h-[34px] w-auto lg:h-[44px] xl:h-[48px]" />
+      <Img src="/brand/sunfai-logo.png" alt="" sizes="200px" priority className="h-[30px] w-auto md:h-[34px] lg:h-[38px] xl:h-[42px] 2xl:h-[46px]" />
     </Link>
   );
 }
@@ -207,9 +217,9 @@ function TopBar({
       data-hidden={hidden}
       data-solid={solid}
       className={cn(
-        "topbar sticky top-0 z-40 transition-[opacity,transform,background-color,box-shadow] duration-300 ease-[cubic-bezier(.22,1,.36,1)] lg:h-[calc(76px+var(--safe-t))]",
+        "topbar sticky top-0 z-40 transition-[opacity,transform,background-color,box-shadow] duration-300 ease-[cubic-bezier(.22,1,.36,1)] lg:h-[calc(76px+var(--safe-t))] lg:bg-paper/84 lg:backdrop-blur-[12px] lg:shadow-[0_1px_0_var(--color-hairline)]",
         "data-[hidden=true]:pointer-events-none data-[hidden=true]:-translate-y-3 data-[hidden=true]:opacity-0 motion-reduce:data-[hidden=true]:translate-y-0",
-        solid && "bg-paper/85 shadow-[0_1px_0_var(--color-hairline)] backdrop-blur-[10px]",
+        solid && "bg-paper/92 shadow-[0_1px_0_var(--color-hairline),0_14px_32px_-28px_rgb(5_42_34/.45)] backdrop-blur-[14px]",
       )}
     >
       <div className="container-x flex h-full items-center gap-4 xl:gap-6">
@@ -225,7 +235,7 @@ function TopBar({
                     aria-current={active ? "page" : undefined}
                     className={cn(
                       "relative inline-flex h-11 items-center whitespace-nowrap text-[15px] transition-colors xl:text-[16px] 2xl:text-[17px]",
-                      active ? "font-semibold text-orange-text" : "text-ink/85 hover:text-ink",
+                      active ? "font-semibold text-orange-text" : "font-medium text-ink/92 hover:text-ink",
                       "after:absolute after:inset-x-0 after:bottom-[3px] after:h-[2px] after:origin-left after:rounded-full after:bg-orange after:transition-transform after:duration-300",
                       active ? "after:scale-x-100" : "after:scale-x-0 hover:after:scale-x-100",
                     )}

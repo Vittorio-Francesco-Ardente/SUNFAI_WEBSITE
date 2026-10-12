@@ -81,7 +81,7 @@ export function PageHero({
 
       {mascot ? (
         <div className="cp-stage relative lg:static" style={{ "--sm-h": "clamp(220px, 60cqw, 300px)" } as CSSProperties}>
-          <PanelMascot src={mascot.src} alt={mascot.alt} className={cn("bottom-[24px] left-1/2 w-[clamp(180px,52cqw,240px)] -translate-x-1/2 lg:translate-x-0 lg:bottom-[12%] lg:w-[clamp(240px,24cqw,340px)]", left ? "lg:left-[10%]" : "lg:left-auto lg:right-[12%]")} />
+          <PanelMascot src={mascot.src} alt={mascot.alt} className={cn("bottom-[24px] left-1/2 w-[clamp(180px,52cqw,240px)] -translate-x-1/2 lg:bottom-[11%] lg:w-[clamp(240px,24cqw,340px)]", left ? "lg:left-1/2" : "lg:left-1/2")} />
         </div>
       ) : null}
     </CanvasPanel>

@@ -30,7 +30,7 @@ export function ArdakeHero({ a, locale }: { a: Dict["ardake"]; locale: Locale })
         <Ripple at={{ x: 1, y: 0.33 }} atSm={{ x: 1, y: 0.7 }} scaleSm={1.1} family="sunPale" core={0.115} coreColor="#FE9845" widths={[0.05]} bands={1} gap={0.01} seg={{ r0: 0.185, r1: 0.245, from: 92, to: 268, count: 14, colors: ["#FECF49", "#FE9845", "#C9E1A0", "#FECF49", "#F26A1B", "#DEE9BF"] }} />
         <Ripple at={{ x: 0.83, y: 1 }} hideSm family="sunPale" core={0.09} widths={[0.05, 0.05]} />
         <Ripple at={{ x: 0, y: 1 }} family="leaf" core={0.04} widths={[0.04, 0.04, 0.035]} fan={{ count: 6, from: 2, to: 88 }} />
-        <Confetto at={{ x: 0.06, y: 0.02 }} r={0.03} fill="#F8B98A" hideSm />
+        <Confetto at={{ x: 0.08, y: 0.08 }} r={0.02 } fill="#F8B98A" hideSm />
       </>
     }
   >
@@ -55,18 +55,11 @@ export function ArdakeHero({ a, locale }: { a: Dict["ardake"]; locale: Locale })
       </div>
     </div>
     {/* phone + Giorgio: desktop on the panel (phone x 52→72 %, +8°; Giorgio on the bottom edge, hand at the phone) · phones: a stage */}
-    <div className="relative h-[clamp(460px,128cqw,600px)] lg:static lg:h-auto">
-      <svg viewBox="0 0 60 60" aria-hidden className="absolute left-[8%] top-[2%] z-[1] w-12 lg:left-[49.5%] lg:top-[10%] lg:w-14">
-        <g stroke="#FAC23B" strokeWidth="5" strokeLinecap="round">
-          <path d="M14 30 4 22" />
-          <path d="M26 22 22 8" />
-          <path d="M38 24 44 12" />
-        </g>
-      </svg>
-      <div data-bleed className="enter absolute left-[12%] top-[6%] z-[1] origin-top-left rotate-[8deg] scale-[.78] sm:left-[20%] lg:left-[53%] lg:top-[12%] lg:scale-[1] xl:scale-[1.06]" style={{ "--d": "200ms" } as CSSProperties}>
+    <div className="relative h-[clamp(360px,102cqw,520px)] lg:static lg:h-auto">
+      <div data-bleed className="enter absolute left-[8%] top-[14%] z-[1] origin-top-left rotate-[8deg] scale-[.72] sm:left-[16%] sm:top-[12%] lg:left-[53%] lg:top-[12%] lg:scale-[1] xl:scale-[1.06]" style={{ "--d": "200ms" } as CSSProperties}>
         <PhoneMockup t={a.phone} label={a.hero.phoneAlt} variant="app" />
       </div>
-      <Person src={presenters.giorgioPalmUp} alt={a.hero.giorgioAlt} priority sizes="(max-width: 1023px) 60vw, 34vw" className="right-[-4%] z-[2] h-[62%] lg:right-[1%] lg:h-[68%]" />
+      <Person src={presenters.giorgioPalmUp} alt={a.hero.giorgioAlt} priority sizes="(max-width: 1023px) 60vw, 34vw" className="right-[-3%] z-[2] h-[58%] sm:h-[60%] lg:right-[1%] lg:h-[68%]" />
     </div>
   </CanvasPanel>
   );

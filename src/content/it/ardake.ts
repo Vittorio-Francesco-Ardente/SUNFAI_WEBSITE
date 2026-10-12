@@ -202,6 +202,8 @@ export const ardake = {
     tourSkip: "Salta il giro",
     outroTitle: "Ora sai tutto!",
     outroBody: "Puoi fare da te. Se ti serve, trovi le «i» accanto ai termini.",
+    skipTitle: "Vedo che sei bello intraprendente!",
+    skipBody: "Se hai comunque bisogno, sai dove trovarmi: mi trovi sempre qui nelle «i» accanto ai termini.",
     topics: {
       ardake: {
         title: "Cos'è Ardaké?",

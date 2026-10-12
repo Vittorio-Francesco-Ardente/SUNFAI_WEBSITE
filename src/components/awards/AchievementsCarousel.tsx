@@ -54,15 +54,15 @@ export function AchievementsCarousel({ items, labels, className }: { items: Achi
     );
 
   return (
-    <div tabIndex={0} role="region" aria-roledescription="carousel" aria-label={labels.region} onKeyDown={onKey} className={cn("mx-auto w-full max-w-[1120px] outline-none", className)}>
+    <div tabIndex={0} role="region" aria-roledescription="carousel" aria-label={labels.region} onKeyDown={onKey} className={cn("mx-auto w-full max-w-[1180px] outline-none", className)}>
       <p className="sr-only" aria-live="polite">
         {labels.live.replace("{n}", String(index + 1)).replace("{total}", String(total)).replace("{title}", item.title)}
       </p>
 
       {/* Desktop: image tile left, overlapping card right */}
-      <div className="relative hidden items-center md:flex">
+      <div className="relative hidden items-center gap-6 md:grid md:grid-cols-[minmax(0,500px)_minmax(0,1fr)] xl:flex xl:gap-0">
         <motion.div
-          className="relative aspect-square w-[min(46vw,500px)] shrink-0 overflow-hidden rounded-[40px]"
+          className="relative aspect-square w-full max-w-[500px] shrink-0 overflow-hidden rounded-[40px]"
           drag={reduce ? false : "x"}
           dragConstraints={{ left: 0, right: 0 }}
           dragElastic={0.12}
@@ -78,7 +78,7 @@ export function AchievementsCarousel({ items, labels, className }: { items: Achi
             </motion.div>
           </AnimatePresence>
         </motion.div>
-        <div className="z-10 -ml-20 max-w-xl flex-1 rounded-[28px] bg-card-warm p-9 shadow-[0_0_0_1px_var(--color-hairline),var(--shadow-lift)]">
+        <div className="z-10 max-w-xl flex-1 rounded-[28px] bg-card-warm p-8 shadow-[0_0_0_1px_var(--color-hairline),var(--shadow-lift)] lg:p-9 xl:-ml-16">
           <AnimatePresence mode="wait">
             <motion.div key={item.id} {...fade}>
               <div className="mb-5 flex flex-wrap items-center gap-2">
