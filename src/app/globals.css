@@ -519,29 +519,19 @@ html[data-giorgio-open="true"] { overflow-x: clip; }
   .ardake-wordmark-letter { opacity: 1 !important; animation: none !important; transform: none !important; }
 }
 
-/* Logo → Home: a restrained press and a gentle 360ms entrance, only on this navigation. */
-.sf-home-logo::after {
-  content: "";
-  position: absolute;
-  bottom: 1px;
-  left: 12%;
-  width: 76%;
-  height: 2px;
-  border-radius: 999px;
-  background: #FE5F00;
-  opacity: 0;
-  transform: scaleX(0);
-  transform-origin: 50% 50%;
-  transition: transform 180ms ease-out, opacity 180ms ease-out;
-  pointer-events: none;
+/* Brand link remains underline-free in every interaction state. */
+.sf-home-logo, .sf-home-logo:hover, .sf-home-logo:focus-visible {
+  text-decoration: none !important;
+  text-decoration-line: none !important;
 }
+.sf-home-logo::before, .sf-home-logo::after { content: none !important; display: none !important; }
+/* Logo → Home: subtle press and entrance, without any underline. */
 .sf-home-logo img {
   transition: transform 180ms cubic-bezier(.22,1,.36,1);
   transform-origin: center;
 }
 .sf-home-logo:hover img { transform: translateY(-1px); }
 .sf-home-logo[data-returning="true"] img { transform: translateY(1px) scale(.975); }
-.sf-home-logo[data-returning="true"]::after { transform: scaleX(1); opacity: .9; }
 html.sf-logo-nav-home [data-home-hero] {
   animation: sf-home-return-appear 360ms cubic-bezier(.22,1,.36,1) both;
 }
@@ -550,6 +540,6 @@ html.sf-logo-nav-home [data-home-hero] {
   to { opacity: 1; transform: translateY(0); }
 }
 @media (prefers-reduced-motion: reduce) {
-  .sf-home-logo img, .sf-home-logo::after { transition: none !important; }
+  .sf-home-logo img { transition: none !important; }
   html.sf-logo-nav-home [data-home-hero] { animation: none !important; }
 }

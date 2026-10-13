@@ -48,7 +48,7 @@ export function RootDocument({ locale, children }: { locale: Locale; children: R
           {d.common.nav.skip}
         </a>
         <NavShell t={d.common.nav} locale={locale} />
-        <main id="contenuto" data-sunfai-version="v36-loader-precisione-events" tabIndex={-1} className="relative isolate outline-none">
+        <main id="contenuto" data-sunfai-version="v38-loader-events-mobile" tabIndex={-1} className="relative isolate outline-none">
           {children}
         </main>
         <Footer d={d} locale={locale} />

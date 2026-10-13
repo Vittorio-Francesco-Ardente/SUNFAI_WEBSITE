@@ -23,7 +23,7 @@ const PAD = "py-[clamp(48px,6vw,88px)]";
 
 /**
  * Home, V3 (pack 16): a deck of canvas panels separated by paper gaps (no hills strips). Rhythm: paper hero →
- * solar numbers → per chi → about → tre passaggi → Ardaké → mappa delle configurazioni →
+ * eventi → solar numbers → per chi → about → tre passaggi → Ardaké → mappa delle configurazioni →
  * social → join/contact. Le verifiche personali sono disponibili nella pagina Ardaké,
  * nella quale resta il form dedicato, evitando un secondo pannello ridondante in home.
  */
@@ -35,6 +35,22 @@ export function HomePage({ locale }: { locale: Locale }) {
   return (
     <>
       <HomeHero d={h.hero} locale={locale} />
+      {/* Eventi reali SUN-FAI: anteprima essenziale, con link alle pagine dedicate. */}
+      <CanvasPanel
+        tone="cream"
+        data-section="eventi"
+        bg={<><Ripple at={{ x: 1, y: 0 }} family="sunPale" core={0.04} widths={[0.05, 0.05]} /><Ripple at={{ x: 0, y: 1 }} family="leafPale" core={0.04} widths={[0.045]} /></>}
+      >
+        <div className="container-x relative z-[2] py-10 md:py-14">
+          <div className="mb-7 text-center md:mb-9">
+            <Eyebrow className="justify-center">Eventi SUN-FAI</Eyebrow>
+            <Headline text="Ci incontriamo sul *territorio*." className="mx-auto mt-3" />
+            <p className="t-lead mx-auto mt-3 max-w-[42rem]">Serate aperte per conoscerci, parlare di energia condivisa e rispondere alle domande di chi vive nei nostri Comuni.</p>
+          </div>
+          <HomeEvents locale={locale} />
+        </div>
+      </CanvasPanel>
+
       <Numbers d={h.numbers} ui={d.common.ui} mascotAlt={d.common.ui.mascotAlt} />
       <PerChi d={h.perChi} locale={locale} personAlt={d.common.ui.personAlt} />
       <About d={h.about} locale={locale} />
@@ -96,22 +112,6 @@ export function HomePage({ locale }: { locale: Locale }) {
           <div className="mt-7 flex justify-center">
             <TextLink href="/notizie/" locale={locale}>{h.social.all}</TextLink>
           </div>
-        </div>
-      </CanvasPanel>
-
-      {/* Eventi reali SUN-FAI: anteprima essenziale, con link alle pagine dedicate. */}
-      <CanvasPanel
-        tone="cream"
-        data-section="eventi"
-        bg={<><Ripple at={{ x: 1, y: 0 }} family="sunPale" core={0.04} widths={[0.05, 0.05]} /><Ripple at={{ x: 0, y: 1 }} family="leafPale" core={0.04} widths={[0.045]} /></>}
-      >
-        <div className={`container-x relative z-[2] ${PAD}`}>
-          <div className="mb-9 text-center">
-            <Eyebrow className="justify-center">Eventi SUN-FAI</Eyebrow>
-            <Headline text="Ci incontriamo sul *territorio*." className="mx-auto mt-5" />
-            <p className="t-lead mx-auto mt-4 max-w-[42rem]">Serate aperte per conoscerci, parlare di energia condivisa e rispondere alle domande di chi vive nei nostri Comuni.</p>
-          </div>
-          <HomeEvents locale={locale} />
         </div>
       </CanvasPanel>
 

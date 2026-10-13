@@ -70,12 +70,13 @@ export function ArdakeHome({ d, phone, phoneAlt, replay, locale }: { d: Dict["ho
         </div>
       </div>
 
-      {/* Mobile: phone and presenter share ONE stage. No empty block between them. */}
-      <div className="relative mx-auto mt-3 h-[clamp(350px,108vw,480px)] w-full max-w-[550px] overflow-hidden lg:hidden">
-        <div className="absolute left-[4%] top-[0%] z-[1] w-[270px] origin-top-left -rotate-[7deg] scale-[.58] min-[400px]:scale-[.67] sm:left-[9%] sm:scale-[.75]">
+      {/* Mobile: reserve the FULL phone height. The panel frame, not the stage, owns the crop.
+          The previous 350px stage clipped the 270x570px phone after rotation/scale. */}
+      <div className="relative mx-auto mt-3 h-[clamp(480px,138vw,630px)] w-full max-w-[550px] lg:hidden">
+        <div className="absolute left-[14%] top-[5%] z-[1] w-[270px] origin-top-left -rotate-[5deg] scale-[.66] min-[400px]:left-[16%] min-[400px]:scale-[.73] sm:left-[17%] sm:scale-[.82]">
           <PhoneMockup t={phone} label={phoneAlt} variant="dashboard" />
         </div>
-        <Img src={presenters.giorgioPalmUp} alt={d.giorgioAlt} draggable={false} sizes="(max-width: 639px) 64vw, 48vw" className="pointer-events-none absolute bottom-0 right-[-9%] z-[2] h-[76%] w-auto max-w-none object-contain object-bottom sm:right-[0%] sm:h-[82%]" />
+        <Img src={presenters.giorgioPalmUp} alt={d.giorgioAlt} draggable={false} sizes="(max-width: 639px) 58vw, 46vw" className="pointer-events-none absolute bottom-0 right-[-2%] z-[2] h-[75%] w-auto max-w-none object-contain object-bottom sm:right-[0%] sm:h-[78%]" />
       </div>
       <div className="hidden lg:contents">
         <PanelPerson
