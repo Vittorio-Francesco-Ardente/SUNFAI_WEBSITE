@@ -31,6 +31,21 @@ const PREFLIGHT = `(function(){
   },3200)},{once:true});
 })();`;
 
+// Keep the original Precisione animation intact. Remove only the decorative loader layers.
+const LOADER_ONLY_LOGO = `(function(){
+  function hideDecorations(){
+    var host=document.getElementById('sf-loader');
+    var shadow=host&&host.shadowRoot;
+    if(!shadow || shadow.getElementById('sf-loader-only-logo-style')) return;
+    var css=document.createElement('style');
+    css.id='sf-loader-only-logo-style';
+    css.textContent='.background,.side,.side-extra{display:none!important;}#intro::before,#intro::after{display:none!important;}#intro{background:#FBF8F1!important;}';
+    shadow.appendChild(css);
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',hideDecorations,{once:true});
+  else hideDecorations();
+})();`;
+
 export function RootDocument({ locale, children }: { locale: Locale; children: ReactNode }) {
   const d = getDict(locale);
   return (
@@ -38,6 +53,7 @@ export function RootDocument({ locale, children }: { locale: Locale; children: R
       <head>
         <script dangerouslySetInnerHTML={{ __html: PREFLIGHT }} />
         <script dangerouslySetInnerHTML={{ __html: LOADER_PRECISION_INLINE }} />
+        <script dangerouslySetInnerHTML={{ __html: LOADER_ONLY_LOGO }} />
         <noscript>
           <style>{"#sf-loader{display:none!important}"}</style>
         </noscript>

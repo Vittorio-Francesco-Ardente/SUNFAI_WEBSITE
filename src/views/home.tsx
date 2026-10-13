@@ -14,7 +14,6 @@ import { SocialFeed } from "@/components/social/SocialFeed";
 import { JoinContact } from "@/components/sections/JoinContact";
 import { HomeEvents } from "@/components/events/HomeEvents";
 import { Img } from "@/components/ui/Img";
-import { presenters } from "@/content/team";
 
 export const homeMeta = (locale: Locale) => {
   const d = getDict(locale);
@@ -51,13 +50,12 @@ export function HomePage({ locale }: { locale: Locale }) {
               <p className="t-lead mt-4 max-w-[42rem]">Serate aperte per conoscerci, parlare di energia condivisa e rispondere alle domande di chi vive nei nostri Comuni.</p>
               <p className="sf-events-home-kicker mt-5">Le comunità energetiche cominciano dalle persone.</p>
             </div>
-            <div className="sf-events-home-visual" aria-label="Giorgio presenta gli incontri SUN-FAI">
-              <span className="sf-events-portrait-label">Ci vediamo dal vivo!</span>
+            <div className="sf-events-home-visual" aria-label="Mascotte SUN-FAI presenta gli incontri">
               <Img
-                src={presenters.giorgioPalmUp}
-                alt="Giorgio di SUN-FAI presenta gli incontri sul territorio"
+                src="/mascot/mascot-02-presenting.webp"
+                alt="Mascotte SUN-FAI che presenta gli incontri sul territorio"
                 sizes="(max-width: 767px) 80vw, (max-width: 1100px) 40vw, 29vw"
-                className="sf-events-giorgio"
+                className="sf-events-giorgio !h-[82%] !right-[9%] !bottom-[1%] object-contain"
               />
             </div>
           </div>
