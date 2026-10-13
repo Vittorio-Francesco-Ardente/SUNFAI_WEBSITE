@@ -18,7 +18,7 @@ export type SqueezeItem = { id: string; year: string | null; label: string; kind
  * the others compressed into paper-2 strips with a vertical label and a small geometry badge.
  * Arrows, keyboard, drag; no autoplay. Phones: vertical list (pack 15.2).
  */
-export function AwardsSqueeze({ items, t, locale, yearUnknown, height = "h-[560px]", phoneLimit }: { items: SqueezeItem[]; t: Dict["riconoscimenti"]["squeeze"]; locale: Locale; yearUnknown: string; height?: string; phoneLimit?: number }) {
+export function AwardsSqueeze({ items, t, locale, yearUnknown, height = "h-[548px]", phoneLimit }: { items: SqueezeItem[]; t: Dict["riconoscimenti"]["squeeze"]; locale: Locale; yearUnknown: string; height?: string; phoneLimit?: number }) {
   const [index, setIndex] = useState(0);
   const reduce = useReducedMotion();
   const go = useCallback((i: number) => setIndex((i + items.length) % items.length), [items.length]);
@@ -57,7 +57,7 @@ export function AwardsSqueeze({ items, t, locale, yearUnknown, height = "h-[560p
         onPointerDown={onDown}
         onPointerUp={onUp}
         onPointerLeave={cancelHover}
-        className={cn("hidden touch-pan-y select-none gap-2.5 rounded-[var(--radius-feature)] md:flex lg:gap-3", height)}
+        className={cn("hidden touch-pan-y select-none gap-2.5 rounded-[var(--radius-feature)] lg:flex lg:gap-3", height)}
       >
         {items.map((m, i) => {
           const active = i === index;
@@ -74,30 +74,22 @@ export function AwardsSqueeze({ items, t, locale, yearUnknown, height = "h-[560p
               aria-label={`${i + 1} / ${items.length}: ${m.title}`}
             >
               {active ? (
-                <div className="flex h-full">
-                  <div className="relative h-full w-[46%] shrink-0 overflow-hidden p-3">
-                    <Img src={m.image} alt={m.alt} sizes="(min-width: 1280px) 420px, 34vw" className="h-full w-full rounded-[20px] object-cover" draggable={false} />
+                <div className="flex h-full min-w-0 flex-col bg-white">
+                  <div className="relative h-[49%] min-h-0 shrink-0 overflow-hidden bg-paper-2 p-2.5">
+                    <Img src={m.image} alt={m.alt} sizes="(min-width: 1280px) 520px, 42vw" className="h-full w-full rounded-[19px] object-cover" draggable={false} />
                   </div>
-                  <motion.div key={`c-${m.id}`} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.16, duration: 0.42 }} className="relative flex min-w-[17rem] flex-1 flex-col justify-between p-7 lg:p-9">
-                    <Badge n={m.kind === "premio" ? 1 : 3} className="absolute right-0 top-0 w-24 rounded-tr-[28px]" />
-                    <p className="flex flex-wrap items-center gap-2.5 pr-20 text-[14px] font-medium text-slate">
-                      <span className={cn("inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[13px] font-bold uppercase tracking-[0.06em]", m.kind === "premio" ? "bg-solar text-ink" : "bg-sage text-leaf-text")}>
-                        {m.kind === "premio" ? <Trophy className="size-3.5" aria-hidden /> : null}
+                  <motion.div key={`c-${m.id}`} initial={{ opacity: 0, y: 9 }} animate={{ opacity: 1, y: 0 }} transition={reduce ? { duration: 0 } : { duration: 0.28 }} className="flex min-h-0 flex-1 flex-col overflow-hidden px-5 pb-5 pt-4 lg:px-6 lg:pb-6">
+                    <p className="flex flex-wrap items-center gap-2 text-[12px] font-semibold leading-tight text-slate">
+                      <span className={cn("rounded-full px-3 py-1 text-[11px] font-bold uppercase tracking-[0.04em]", m.kind === "premio" ? "bg-solar text-ink" : "bg-sage text-leaf-text")}>
                         {kindLabel(m.kind)}
                       </span>
-                      {m.label}
+                      <span>{m.label}</span>
                     </p>
-                    <div>
-                      <p className="font-display text-[clamp(3rem,2rem+2.4vw,4.6rem)] font-extrabold leading-none tracking-[-0.05em] text-orange">{year(m.year)}</p>
-                      <h3 className="mt-3 max-w-[18ch] font-display text-[clamp(1.6rem,1.1rem+1.2vw,2.4rem)] font-extrabold leading-[1.04] tracking-[-0.035em] text-ink">{m.title}</h3>
-                      <p className="t-body mt-3 max-w-[42ch]">{m.caption}</p>
-                      {m.href ? (
-                        <Link href={lhref(locale, m.href)} className="tlink mt-3">
-                          <span>{t.more}</span>
-                          <ArrowUpRight aria-hidden />
-                        </Link>
-                      ) : null}
-                    </div>
+                    <h3 className="mt-2 break-words font-display text-[clamp(1.1rem,1rem+0.75vw,1.65rem)] font-extrabold leading-[1.12] tracking-[-0.03em] text-ink">
+                      <span className="text-orange">{year(m.year)} · </span>{m.title}
+                    </h3>
+                    <p className="mt-2 line-clamp-4 text-[14px] leading-[1.45] text-slate lg:text-[15px]">{m.caption}</p>
+                    {m.href ? <Link href={lhref(locale, m.href)} className="tlink mt-4 self-start text-[14px]"><span>{t.more}</span><ArrowUpRight aria-hidden /></Link> : null}
                   </motion.div>
                 </div>
               ) : (
@@ -112,7 +104,7 @@ export function AwardsSqueeze({ items, t, locale, yearUnknown, height = "h-[560p
         })}
       </div>
 
-      <div className="mt-5 hidden items-center justify-between md:flex">
+      <div className="mt-5 hidden items-center justify-between lg:flex">
         <p className="text-[15px] text-slate">
           <span className="font-display text-lg font-extrabold text-ink">{pad2(index + 1)}</span> / {pad2(items.length)}
         </p>
@@ -127,7 +119,7 @@ export function AwardsSqueeze({ items, t, locale, yearUnknown, height = "h-[560p
       </div>
 
       {/* Smartphone: photographic milestone cards with separate content; ornaments never cover text. */}
-      <ol className="grid gap-4 pb-3 md:hidden" aria-label={t.region}>
+      <ol className="grid gap-4 pb-3 lg:hidden" aria-label={t.region}>
         {items.slice(0, phoneLimit ?? items.length).map((m, i) => (
           <li key={m.id} className="card min-w-0 overflow-hidden">
             <article className="min-w-0">

@@ -1,9 +1,9 @@
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight, ChevronDown, Mail } from "lucide-react";
-import { CanvasPanel, Confetto, PanelMascot, Ripple } from "@/components/canvas/Canvas";
+import { CanvasPanel, PanelMascot, Ripple } from "@/components/canvas/Canvas";
 import { Headline } from "@/components/ui/primitives";
 import { Img } from "@/components/ui/Img";
-import { InstagramIcon, LinkedinIcon } from "@/components/ui/SocialIcons";
+import { FacebookIcon, InstagramIcon, LinkedinIcon } from "@/components/ui/SocialIcons";
 import { FooterLangSwitch } from "./FooterLangSwitch";
 import { lhref, type Locale } from "@/lib/i18n";
 import { documentUrl, site, social } from "@/lib/site";
@@ -37,6 +37,7 @@ export function Footer({ d, locale }: { d: Dict; locale: Locale }) {
         { label: n.team, href: "/team/" },
         { label: n.riconoscimenti, href: "/riconoscimenti/" },
         { label: n.notizie, href: "/notizie/" },
+        { label: f.eventi, href: "/eventi/" },
       ],
     },
     {
@@ -44,8 +45,7 @@ export function Footer({ d, locale }: { d: Dict; locale: Locale }) {
       links: [
         { label: f.cosaSono, href: "/le-cer/" },
         { label: f.configurazioni, href: "/#configurazioni" },
-        { label: f.verifica, href: "/#verifica" },
-        { label: f.faq, href: "/le-cer/#faq" },
+        { label: f.verifica, href: "/ardake/#verifica" },
       ],
     },
     {
@@ -92,8 +92,8 @@ export function Footer({ d, locale }: { d: Dict; locale: Locale }) {
             <Ripple at={{ x: 1, y: 1 }} family="onLeaf" core={0.05} widths={[0.08, 0.08, 0.08, 0.08]} fan={{ count: 7, from: 92, to: 178, colors: ON_LEAF_FAN, bandColor: "#5E9638" }} />
             <Ripple at={{ x: 0, y: 0 }} family="onLeaf" core={0.03} widths={[0.03, 0.03]} bands={2} />
             <Ripple at={{ x: 1, y: 0 }} hideSm family="onLeaf" core={0.02} widths={[0.01]} bands={1} noCore seg={{ r0: 0.06, r1: 0.1, from: 182, to: 268, count: 7, colors: ["#FECF49", "#C9E1A0", "#FE9845"] }} />
-            <Confetto at={{ x: 0.74, y: 0.02 }} r={0.022} fill="#C9E1A0" hideSm />
-            <Confetto at={{ x: 0, y: 0.6 }} r={0.022} fill="#F26A1B" />
+
+
           </>
         }
       >
@@ -132,6 +132,9 @@ export function Footer({ d, locale }: { d: Dict; locale: Locale }) {
                 </a>
                 <a href={social.linkedin.url} target="_blank" rel="noopener noreferrer" aria-label={social.linkedin.label} className="grid size-11 place-items-center rounded-full text-white shadow-[inset_0_0_0_1.5px_rgb(255_255_255/.6)] hover:bg-white/10">
                   <LinkedinIcon className="size-[18px]" />
+                </a>
+                <a href={social.facebook.url} target="_blank" rel="noopener noreferrer" aria-label={social.facebook.label} className="grid size-11 place-items-center rounded-full text-white shadow-[inset_0_0_0_1.5px_rgb(255_255_255/.6)] hover:bg-white/10">
+                  <FacebookIcon className="size-[18px]" />
                 </a>
                 <a href={`mailto:${site.email}`} aria-label={site.email} className="grid size-11 place-items-center rounded-full text-white shadow-[inset_0_0_0_1.5px_rgb(255_255_255/.6)] hover:bg-white/10">
                   <Mail className="size-[18px]" aria-hidden />

@@ -3,7 +3,7 @@ import { teamLite } from "@/content/team-lite";
 import { pageMeta } from "@/lib/meta";
 import type { Locale } from "@/lib/i18n";
 import { Eyebrow, Headline } from "@/components/ui/primitives";
-import { CanvasPanel, Confetto, HalfDisc, PanelMascot, Ripple } from "@/components/canvas/Canvas";
+import { CanvasPanel, HalfDisc, PanelMascot, Ripple } from "@/components/canvas/Canvas";
 import { TeamShowcase } from "@/components/team/TeamShowcase";
 import { JoinContact } from "@/components/sections/JoinContact";
 
@@ -54,7 +54,7 @@ export function TeamPage({ locale }: { locale: Locale }) {
           <>
             <Ripple at={{ x: 1, y: 1 }} family="leaf" core={0.07} widths={[0.1, 0.07, 0.07, 0.08]} fan={{ count: 8, from: 92, to: 178 }} />
             <Ripple at={{ x: 0, y: 0 }} family="sun" core={0.035} widths={[0.03, 0.03]} bands={2} />
-            <Confetto at={{ x: 0.48, y: 0.08 }} r={0.011} fill="#F26A1B" ring hideSm />
+
           </>
         }
       >

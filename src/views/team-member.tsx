@@ -9,12 +9,13 @@ import { lhref, type Locale } from "@/lib/i18n";
 import { pad2 } from "@/lib/motion";
 import { Eyebrow, GhostNumeral, Headline } from "@/components/ui/primitives";
 import { MemberBackdrop } from "@/components/geometry/shapes";
-import { CanvasPanel, Confetto, HalfDisc, Person, QuarterDisc, Ripple } from "@/components/canvas/Canvas";
+import { CanvasPanel, HalfDisc, Person, QuarterDisc, Ripple } from "@/components/canvas/Canvas";
 import { Img } from "@/components/ui/Img";
 import { MemberVisual } from "@/components/team/MemberVisual";
 import { SIDE_CUT_SINK } from "@/lib/people";
 import { ProfileGallery, type Slide } from "@/components/team/ProfileGallery";
 import { TeamRail } from "@/components/team/TeamRail";
+import { MemberLinkedIn } from "@/components/team/MemberLinkedIn";
 
 export const memberParams = () => team.map((m) => ({ slug: m.slug }));
 
@@ -134,8 +135,8 @@ export function MemberPage({ locale, slug }: { locale: Locale; slug: string }) {
             <Ripple at={{ x: 1, y: 0 }} family="leaf" core={0.035} widths={[0.03, 0.03]} invert bands={2} coreColor="#E7F0D8" />
             <HalfDisc at={{ x: 0.6, y: 1 }} r={0.03} edge="bottom" fill="#F5C335" hideSm />
             <QuarterDisc corner="bl" r={0.06} fill="#4B8B2F" className="max-md:hidden" />
-            <Confetto at={{ x: 0, y: 0.12 }} r={0.03} fill="#4B8B2F" hideSm />
-            <Confetto at={{ x: 0.82, y: 0.06 }} r={0.008} fill="#F5C335" hideSm />
+
+
           </>
         }
       >
@@ -147,7 +148,10 @@ export function MemberPage({ locale, slug }: { locale: Locale; slug: string }) {
             <GhostNumeral n={pad2(i + 1)} className="!right-[-30%] top-14 max-lg:!right-0 !text-[rgb(242_106_27/.1)]" />
             <Eyebrow className="relative mt-5">{g.label}</Eyebrow>
             <Headline text={`${m.firstName}|*${m.lastName}*`} as="h1" size="h1" className="is-in relative mt-4 !text-[clamp(3rem,1rem+6.6vw,7.4rem)] [text-wrap:balance]" />
-            <p className="relative mt-4 font-display text-[clamp(1.15rem,1rem+.5vw,1.45rem)] font-bold tracking-[-0.02em] text-ink">{m.group === "board" ? m.roleLine : g.lead}</p>
+            <div className="relative mt-4 flex min-w-0 flex-wrap items-center gap-3">
+              <p className="font-display text-[clamp(1.15rem,1rem+.5vw,1.45rem)] font-bold tracking-[-0.02em] text-ink">{m.group === "board" ? m.roleLine : g.lead}</p>
+              <MemberLinkedIn href={m.linkedin} name={m.name} />
+            </div>
             <p className="t-lead relative mt-2 max-w-[40rem]">{lead}</p>
             <div className="mt-8 hidden lg:block">{details}</div>
           </div>

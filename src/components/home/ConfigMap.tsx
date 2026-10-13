@@ -27,7 +27,7 @@ const position = ([lng, lat]: [number, number]) => ({ left: `${((lng - west) / (
  */
 export function ConfigMap({ t }: { t: Dict["home"]["map"] }) {
   const [selected, setSelected] = useState(configurations[0]?.code ?? "");
-  const [view, setView] = useState<"overview" | "geographic">("geographic");
+  const [view, setView] = useState<"overview" | "geographic">("overview");
   const [loaded, setLoaded] = useState(false);
   const [failed, setFailed] = useState(false);
   const [townSelected, setTownSelected] = useState<string | null>(null);
@@ -70,9 +70,10 @@ export function ConfigMap({ t }: { t: Dict["home"]["map"] }) {
               <div className="pointer-events-none absolute inset-x-3 top-3 flex justify-center sm:top-5">
                 <span className="rounded-full border border-[#D4E3CA] bg-white/95 px-4 py-2 text-center text-[12px] font-semibold tracking-wide text-leaf-text sm:text-[13px]">{t.approxArea} · {t.approx}</span>
               </div>
-              {/* Coarse georeferenced town positions, without suggesting fake roads or administrative boundaries. */}
+              {/* Numbered approximate town locations. The numbered town directory below
+                  makes every marker identifiable without overlapping map labels. */}
               <div className="absolute inset-x-[8%] bottom-[12%] top-[18%] sm:inset-x-[14%] sm:bottom-[12%] sm:top-[19%]">
-                {towns.map((town) => {
+                {towns.map((town, idx) => {
                   const chosen = selected === town.code;
                   const focus = chosen && townSelected === town.name;
                   const c = GROUP[town.group % GROUP.length];
@@ -81,14 +82,14 @@ export function ConfigMap({ t }: { t: Dict["home"]["map"] }) {
                       aria-label={`${town.name} · ${town.code}`} aria-pressed={focus}
                       className={`group absolute z-10 grid size-7 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border-[3px] border-white shadow-[0_2px_5px_rgb(5_42_34/.24)] transition-[transform,box-shadow] duration-150 hover:z-20 hover:scale-110 focus-visible:z-20 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink sm:size-8 ${chosen ? "opacity-100" : "opacity-55"}`}
                       title={`${town.name} · ${town.code}`}>
-                      <span className="size-full rounded-full" style={{ backgroundColor: c }} aria-hidden />
+                      <span className="absolute inset-0 grid place-items-center rounded-full text-[11px] font-extrabold text-white" style={{ backgroundColor: c }} aria-hidden>{idx + 1}</span>
                       {focus && <span className="pointer-events-none absolute -inset-[6px] rounded-full border-2" style={{ borderColor: c }} />}
                       <span className="pointer-events-none absolute left-1/2 top-[calc(100%+6px)] hidden -translate-x-1/2 whitespace-nowrap rounded-full bg-white px-2.5 py-1 text-[12px] font-semibold text-ink shadow-sm group-hover:block group-focus-visible:block sm:group-aria-pressed:block">{town.name}</span>
                     </button>
                   );
                 })}
               </div>
-              <p className="pointer-events-none absolute bottom-3 left-4 right-4 text-center text-[12px] text-leaf-text sm:bottom-5">{t.comuni}: {towns.length} · {configurations.length} configurazioni · {t.approx}</p>
+              <p className="pointer-events-none absolute bottom-3 left-4 right-4 text-center text-[12px] font-medium text-leaf-text sm:bottom-5">Seleziona un numero e trova il Comune nella legenda qui sotto.</p>
             </div>
           )}
           {geographic && !failed && (
@@ -98,6 +99,31 @@ export function ConfigMap({ t }: { t: Dict["home"]["map"] }) {
           )}
           {geographic && !loaded && !failed && <p role="status" className="pointer-events-none absolute bottom-3 left-3 right-3 z-20 rounded-xl bg-white px-3 py-2 text-center text-[13px] text-ink shadow-sm">{t.loading} La panoramica resta consultabile.</p>}
           {geographic && failed && <div role="status" className="absolute bottom-3 left-3 right-3 z-20 flex flex-wrap items-center justify-between gap-2 rounded-xl bg-white p-3 shadow-sm"><span className="text-[13px] text-ink">{t.tileFailure}</span><div className="flex gap-2"><button type="button" className="inline-flex items-center gap-1 rounded-full bg-paper-2 px-3 py-2 text-[13px] font-semibold text-ink" onClick={() => setView("overview")}>{t.overview}</button><button type="button" className="inline-flex items-center gap-1 rounded-full bg-paper-2 px-3 py-2 text-[13px] font-semibold text-ink" onClick={openGeographic}><RotateCcw className="size-4" aria-hidden />{t.retry}</button></div></div>}
+        </div>
+
+        {/* Every approximate position is explicitly named. This key is part of the map,
+            not a hidden hover tooltip, so touch/tablet users can interpret the dots. */}
+        <div className="grid gap-3 border-t border-[var(--color-hairline)] bg-[#F9FAF5] p-4 sm:grid-cols-2 sm:p-5" aria-label="Legenda dei Comuni sulla mappa">
+          {configurations.map((c, group) => (
+            <div key={c.code} className={`min-w-0 rounded-[20px] border p-3.5 ${selected === c.code ? "border-[#82AB70] bg-white shadow-sm" : "border-[var(--color-hairline)] bg-white/75"}`}>
+              <button type="button" onClick={() => switchGroup(c.code)} aria-pressed={selected === c.code} className="mb-3 flex w-full items-center justify-between gap-2 text-left text-[13px] font-extrabold text-ink">
+                <span>{c.code}</span>
+                <span className="rounded-full px-2.5 py-1 text-[11px] text-white" style={{ backgroundColor: GROUP[group % GROUP.length] }}>{statusText(c.status)}</span>
+              </button>
+              <div className="flex flex-wrap gap-1.5">
+                {c.comuni.map((name) => {
+                  const marker = towns.findIndex((t) => t.code === c.code && t.name === name) + 1;
+                  return (
+                    <button key={name} type="button" onClick={() => { setSelected(c.code); setTownSelected(name); }} aria-pressed={townSelected === name && selected === c.code}
+                      className={`inline-flex min-h-9 items-center gap-1.5 rounded-full border px-2.5 py-1 text-[12px] font-semibold transition-colors ${townSelected === name && selected === c.code ? "border-ink bg-mint text-ink" : "border-[var(--color-hairline)] bg-white text-ink hover:border-[#82AB70]"}`}>
+                      <span className="grid size-5 shrink-0 place-items-center rounded-full text-[10px] font-bold text-white" style={{ backgroundColor: GROUP[group % GROUP.length] }}>{marker}</span>
+                      {name}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          ))}
         </div>
 
         <div className="grid gap-3 bg-white p-4 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-start sm:p-6">

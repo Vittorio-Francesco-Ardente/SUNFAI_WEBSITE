@@ -1,5 +1,5 @@
 import { Eyebrow, Headline } from "@/components/ui/primitives";
-import { CanvasPanel, Confetto, HalfDisc, PanelMascot, Ripple } from "@/components/canvas/Canvas";
+import { CanvasPanel, HalfDisc, PanelMascot, Ripple } from "@/components/canvas/Canvas";
 import { CountUp } from "@/components/ui/CountUp";
 import { CreatorEasterEgg } from "@/components/people/CreatorEasterEgg";
 import { LiveEnergy } from "./LiveEnergy";
@@ -31,7 +31,7 @@ export function Numbers({ d, ui, mascotAlt }: { d: Dict["home"]["numbers"]; ui: 
           <Ripple at={{ x: 0, y: 0 }} family="leaf" core={0.035} widths={[0.03, 0.03]} bands={2} />
           <Ripple at={{ x: 1, y: 0 }} hideSm family="onSolar" core={0.02} widths={[0.012]} bands={1} seg={{ r0: 0.08, r1: 0.12, from: 182, to: 268, count: 8, colors: ["#FFFFFF", "#F26A1B", "#FFF1C2", "#4B8B2F"] }} noCore />
           <HalfDisc at={{ x: 0.55, y: 1 }} r={0.04} edge="bottom" fill="#FFFFFF" hideSm />
-          <Confetto at={{ x: 0.89, y: 0.25 }} r={0.0135} fill="#4B8B2F" ring hideSm />
+
           <HalfDisc at={{ x: 1, y: 0.3 }} r={0.022} edge="right" fill="#FFFFFF" hideSm />
         </>
       }

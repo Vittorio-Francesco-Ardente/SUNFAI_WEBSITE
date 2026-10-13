@@ -8,12 +8,10 @@ import { ButtonLink, Eyebrow, Headline, TextLink } from "@/components/ui/primiti
 import { Badge } from "@/components/geometry/shapes";
 import { Img } from "@/components/ui/Img";
 import { SectionPanel } from "@/components/canvas/presets";
-import { Confetto, HalfDisc, Ripple } from "@/components/canvas/Canvas";
+import { HalfDisc, Ripple } from "@/components/canvas/Canvas";
 import { PageHero } from "@/components/sections/PageHero";
 import { SocialFeed } from "@/components/social/SocialFeed";
 import { JoinContact } from "@/components/sections/JoinContact";
-import { InstagramIcon, LinkedinIcon } from "@/components/ui/SocialIcons";
-import { social } from "@/lib/site";
 
 export const notizieMeta = (locale: Locale) => {
   const p = getDict(locale).pages.notizie;
@@ -37,17 +35,7 @@ export function NotiziePage({ locale }: { locale: Locale }) {
             <HalfDisc at={{ x: 0.62, y: 1 }} r={0.028} edge="bottom" fill="#F5C335" hideSm />
           </>
         }
-        visual={
-          <div className="flex h-full items-center justify-center px-[var(--gutter)] pb-8 pt-3 lg:justify-end lg:pr-[clamp(26px,3vw,42px)] lg:pb-0">
-            <div className="relative aspect-[4/4.2] w-full max-w-[470px] overflow-hidden rounded-[34px] border border-[rgb(5_42_34/.08)] bg-[#F7EAC3] shadow-[0_28px_50px_-34px_rgb(5_42_34/.30)]">
-              <div className="absolute -right-[9%] -top-[10%] h-[58%] w-[58%] rounded-full border-[24px] border-[#F7D04B] opacity-45" />
-              <div className="absolute right-[8%] top-[12%] h-[32%] w-[32%] rounded-full border-[20px] border-[#F6E6B5] opacity-95" />
-              <div className="absolute -left-[18%] bottom-[-22%] h-[64%] w-[64%] rounded-full border-[22px] border-[#FFF8E8] opacity-95" />
-              <div className="absolute left-[9%] top-[12%] rounded-full border border-[#A9C879] bg-[#FFFDF7] px-4 py-2 text-[clamp(14px,1.4vw,18px)] font-semibold text-leafDeep shadow-[0_12px_24px_-20px_rgb(5_42_34/.35)]">La comunità è fatta di persone.</div>
-              <Img src="/mascot/mascot-04-idea-pointing.webp" alt={d.common.ui.mascotAlt} sizes="(max-width: 1023px) 70vw, 28vw" className="absolute bottom-0 right-[4%] z-[2] h-[79%] w-auto max-w-none object-contain object-bottom" />
-            </div>
-          </div>
-        } />
+        person={{ src: "/people/poses/nicholas-previtali--pose-alt.webp", alt: p.hero.presenterAlt, height: "h-[130%] lg:h-[100%]", sink: "translate-y-[33%]" }} />
 
       <SectionPanel data-section="articoli" tone="paper" preset="corner" family="leaf" inner={false}>
         <div className="container-x relative z-[2] py-[clamp(48px,6vw,88px)]">
@@ -95,23 +83,22 @@ export function NotiziePage({ locale }: { locale: Locale }) {
         </div>
       </SectionPanel>
 
+      <SectionPanel data-section="eventi" tone="cream" preset="soft" family="sun" inner={false}>
+        <div className="container-x relative z-[2] flex flex-col gap-5 py-[clamp(42px,5vw,70px)] md:flex-row md:items-center md:justify-between">
+          <div>
+            <Eyebrow>Appuntamenti</Eyebrow>
+            <Headline text="Gli eventi *SUN-FAI*" size="h2s" className="mt-4" />
+            <p className="t-body mt-3 max-w-[60ch]">Due incontri sul territorio con locandine, date, luoghi e approfondimenti. Scopri i prossimi appuntamenti e l’archivio di quelli conclusi.</p>
+          </div>
+          <ButtonLink href="/eventi/" locale={locale} variant="dark" className="shrink-0 self-start">Scopri gli eventi</ButtonLink>
+        </div>
+      </SectionPanel>
+
       <SectionPanel data-section="social" tone="mint" preset="content" family="leaf" mirror inner={false}>
         <div className="container-x relative z-[2] py-[clamp(48px,6vw,88px)]">
-          <div className="reveal mb-10 grid gap-6 lg:grid-cols-12 lg:items-end">
-            <div className="lg:col-span-7">
-              <Eyebrow>{p.socialEyebrow}</Eyebrow>
-              <Headline text={p.socialTitle} className="mt-5" />
-            </div>
-            <div className="flex flex-wrap gap-3 lg:col-span-5 lg:justify-end">
-              <ButtonLink href={social.instagram.url} variant="dark" icon="external">
-                <InstagramIcon className="mr-[-.2em]" />
-                {social.instagram.label}
-              </ButtonLink>
-              <ButtonLink href={social.linkedin.url} variant="outline" icon="external">
-                <LinkedinIcon className="mr-[-.2em]" />
-                {social.linkedin.label}
-              </ButtonLink>
-            </div>
+          <div className="reveal mb-10 text-center">
+            <Eyebrow className="justify-center">{p.socialEyebrow}</Eyebrow>
+            <Headline text={p.socialTitle} className="mx-auto mt-5" />
           </div>
           <SocialFeed t={d.home.social} ui={d.common.ui} locale={locale} mode="latest-per-channel" />
         </div>

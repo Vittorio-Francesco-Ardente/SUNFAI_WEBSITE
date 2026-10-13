@@ -1,3 +1,5 @@
+"use client";
+
 import type { CSSProperties } from "react";
 import manifest from "@/content/media.generated.json";
 import { asset } from "@/lib/asset";
@@ -24,6 +26,7 @@ export function Img({
   className,
   style,
   priority = false,
+  eager = false,
   draggable,
   ...rest
 }: {
@@ -33,13 +36,14 @@ export function Img({
   className?: string;
   style?: CSSProperties;
   priority?: boolean;
+  eager?: boolean;
   draggable?: boolean;
   "aria-hidden"?: boolean;
 }) {
   const m = media[src];
   if (!m) {
     // eslint-disable-next-line @next/next/no-img-element
-    return <img src={asset(src)} alt={alt} className={className} style={style} loading={priority ? "eager" : "lazy"} decoding="async" draggable={draggable} {...rest} />;
+    return <img src={asset(src)} alt={alt} className={className} style={style} loading={priority || eager ? "eager" : "lazy"} decoding="async" draggable={draggable} {...rest} />;
   }
   const srcSet = m.widths.map((w) => `${variant(src, w)} ${w}w`).join(", ");
   const fallbackW = m.widths.filter((w) => w <= 1080).pop() ?? m.widths[0];
@@ -54,9 +58,18 @@ export function Img({
       alt={alt}
       className={className}
       style={style}
-      loading={priority ? "eager" : "lazy"}
+      loading={priority || eager ? "eager" : "lazy"}
       fetchPriority={priority ? "high" : undefined}
       decoding={priority ? "sync" : "async"}
+      onError={(event) => {
+        // If a browser cannot fetch a generated responsive variant, retry the
+        // original public image once instead of leaving the Team photo blank.
+        const img = event.currentTarget;
+        if (img.dataset.fallbackOriginal) return;
+        img.dataset.fallbackOriginal = "1";
+        img.removeAttribute("srcset");
+        img.src = asset(src);
+      }}
       draggable={draggable}
       {...rest}
     />

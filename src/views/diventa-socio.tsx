@@ -8,7 +8,7 @@ import { Badge } from "@/components/geometry/shapes";
 import { Img } from "@/components/ui/Img";
 import { Mascot } from "@/components/people/Mascot";
 import { SectionPanel } from "@/components/canvas/presets";
-import { Confetto, HalfDisc, Ripple } from "@/components/canvas/Canvas";
+import { HalfDisc, Ripple } from "@/components/canvas/Canvas";
 import { PageHero } from "@/components/sections/PageHero";
 import { PinnedSteps } from "@/components/sections/PinnedSteps";
 import { Faq } from "@/components/sections/Faq";

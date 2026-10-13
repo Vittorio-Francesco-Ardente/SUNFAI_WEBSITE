@@ -1,14 +1,17 @@
 "use client";
 
 import Link from "next/link";
-import { useCallback, useRef, useState, type KeyboardEvent, type PointerEvent } from "react";
+import { useCallback, useEffect, useRef, useState, type KeyboardEvent, type PointerEvent } from "react";
 import { AnimatePresence, LayoutGroup, motion, useReducedMotion } from "motion/react";
 import { ArrowLeft, ArrowRight, Quote } from "lucide-react";
 import { Eyebrow, GhostNumeral, Headline, type Tagname } from "@/components/ui/primitives";
 import { lhref, type Locale } from "@/lib/i18n";
 import { EASE_OUT_SOFT, SPRING_LAYOUT, pad2 } from "@/lib/motion";
 import { MemberVisual, type MemberLite } from "./MemberVisual";
+import { MemberLinkedIn } from "./MemberLinkedIn";
 import type { Dict } from "@/content/dict";
+import media from "@/content/media.generated.json";
+import { asset } from "@/lib/asset";
 
 /**
  * "Le persone dietro l'energia." — CONCEPT_3 (target), CONCEPT_2 (art direction), CONCEPT_4 (initials).
@@ -19,6 +22,36 @@ import type { Dict } from "@/content/dict";
  * V3 (16.4): this IS the whole team — no grid of members anywhere. Optional group switch (pills, 44 px) filters what
  * the carousel cycles through: "Tutti · Consiglio di Amministrazione · Team operativo".
  */
+// Small optimized images are fetched in advance, preventing blanks when a member
+// moves from the thumbnails to the featured slot (while keeping the original motion).
+const warmedTeamPhotos = new Set<string>();
+const teamPreloads = new Map<string, HTMLImageElement>();
+function warmTeamPhoto(src?: string) {
+  if (!src || typeof window === "undefined" || warmedTeamPhotos.has(src)) return;
+  warmedTeamPhotos.add(src);
+  const entry = (media as Record<string, { widths: number[] }>)[src];
+  const best = entry?.widths.find((w) => w >= 640) ?? entry?.widths.at(-1);
+  // Giorgio keeps his original cut-outs instead of swapping between generated
+  // responsive variants during the shared-layout animation.
+  const useOriginal = /\/giorgio-venezia(?:--|\.)/.test(src);
+  const url = !useOriginal && best ? `/img${src.replace(/\.[a-z]+$/i, "")}-${best}.webp` : src;
+  const preload = new window.Image();
+  preload.decoding = "async";
+  // Retain the image object to avoid discarding an in-progress decode on rapid changes.
+  teamPreloads.set(src, preload);
+  preload.onerror = () => {
+    teamPreloads.delete(src);
+    warmedTeamPhotos.delete(src);
+  };
+  preload.src = asset(url);
+  if (typeof preload.decode === "function") {
+    void preload.decode().catch(() => {
+      teamPreloads.delete(src);
+      warmedTeamPhotos.delete(src);
+    });
+  }
+}
+
 export function TeamShowcase({
   members: all,
   t,
@@ -46,6 +79,26 @@ export function TeamShowcase({
   const reduce = useReducedMotion();
   const go = useCallback((i: number) => setIndex(((i % total) + total) % total), [total]);
   const startX = useRef<number | null>(null);
+
+  useEffect(() => {
+    // Prepare both original Giorgio cut-outs even when his slide is several
+    // positions away; only his image-loading path is specialized.
+    const giorgio = all.find((member) => member.slug === "giorgio-venezia");
+    if (giorgio) {
+      warmTeamPhoto(giorgio.photo);
+      warmTeamPhoto(giorgio.pose);
+    }
+  }, [all]);
+
+  useEffect(() => {
+    // Warm the people already visible plus upcoming neighbours; the existing
+    // popLayout / layoutId animations and their timings remain unchanged.
+    for (let offset = 0; offset < Math.min(total, 7); offset++) {
+      const member = members[(index + offset) % total];
+      warmTeamPhoto(member.photo);
+      warmTeamPhoto(member.pose);
+    }
+  }, [index, members, total]);
 
   const onKey = (e: KeyboardEvent) => {
     if (e.key === "ArrowRight") (e.preventDefault(), go(index + 1));
@@ -84,11 +137,13 @@ export function TeamShowcase({
         <div className={`min-w-0 lg:col-span-5 lg:row-start-1 ${filters ? "lg:row-span-3" : "lg:row-span-2"}`}>
           <div className="relative" onPointerDown={onDown} onPointerUp={onUp} style={{ touchAction: "pan-y" }}>
             <motion.div
+              key={featured.slug === "giorgio-venezia" ? "giorgio-venezia-featured" : "featured"}
               layoutId={`m-${featured.slug}`}
               transition={reduce ? { duration: 0 } : SPRING_LAYOUT}
               className="hover-card relative aspect-[1/0.92] overflow-hidden rounded-[32px] lg:aspect-[1/0.98] lg:rounded-[var(--radius-feature)]"
             >
-              <MemberVisual m={featured} framing="feature" sizes="(max-width: 1023px) calc(100vw - 40px), 40vw" photoComing={t.photoComing} priority={index === initial} />
+              <MemberVisual m={featured} framing="feature" sizes="(max-width: 1023px) calc(100vw - 40px), 40vw" photoComing={t.photoComing} priority={index === initial} eager />
+              <MemberLinkedIn href={featured.linkedin} name={featured.name} className="absolute right-4 top-4 z-[4]" />
             </motion.div>
             {featured.quote ? (
               <figure className="absolute -left-2 -top-4 max-w-[15rem] rounded-[20px] bg-white/90 p-4 shadow-[var(--shadow-soft)] lg:-left-6 lg:-top-6">
@@ -162,7 +217,7 @@ export function TeamShowcase({
         <ul className={`rail rail--small min-w-0 pb-2 md:[--rail-item:calc((100%-36px)/4)] lg:col-span-7 lg:col-start-6 ${filters ? "lg:row-start-3" : "lg:row-start-2"} lg:mx-0 lg:grid lg:grid-cols-4 lg:gap-3.5 lg:self-end lg:overflow-visible lg:px-0`}>
           <AnimatePresence mode="popLayout" initial={false}>
             {next4.map((m) => (
-              <motion.li key={m.slug} layout={!reduce} initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, scale: 0.96 }} transition={{ duration: 0.35, ease: EASE_OUT_SOFT }}>
+              <motion.li key={m.slug} className="relative" layout={!reduce} initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, scale: 0.96 }} transition={{ duration: 0.35, ease: EASE_OUT_SOFT }}>
                 <button
                   type="button"
                   onClick={() => go(members.indexOf(m))}
@@ -170,7 +225,7 @@ export function TeamShowcase({
                   aria-label={`${m.name}, ${m.group === "board" ? m.roleLine : m.groupLabel}`}
                 >
                   <motion.div layoutId={`m-${m.slug}`} transition={reduce ? { duration: 0 } : SPRING_LAYOUT} className="relative aspect-[1/1.05] w-full overflow-hidden">
-                    <MemberVisual m={m} usePose={!!m.pose} sizes="(max-width: 767px) 40vw, 14vw" photoComing={t.photoComing} />
+                    <MemberVisual m={m} usePose={!!m.pose} sizes="(max-width: 767px) 40vw, 14vw" photoComing={t.photoComing} eager />
                   </motion.div>
                   <span className="flex flex-1 flex-col gap-2 p-3.5">
                     <span className="flex items-start justify-between gap-2">
@@ -186,6 +241,7 @@ export function TeamShowcase({
                     <span className="pill mt-auto self-start !text-[13px]">{m.tags[0]}</span>
                   </span>
                 </button>
+                <MemberLinkedIn href={m.linkedin} name={m.name} className="absolute right-2 top-2 z-[4] !size-9" />
               </motion.li>
             ))}
           </AnimatePresence>

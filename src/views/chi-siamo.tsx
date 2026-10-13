@@ -8,7 +8,7 @@ import { documentUrl } from "@/lib/site";
 import { configurations } from "@/lib/configurations";
 import { ButtonLink, Eyebrow, Headline, Marked, TextLink } from "@/components/ui/primitives";
 import { Badge, CornerSunrise } from "@/components/geometry/shapes";
-import { Confetto, HalfDisc, Ripple } from "@/components/canvas/Canvas";
+import { HalfDisc, Ripple } from "@/components/canvas/Canvas";
 import { Img } from "@/components/ui/Img";
 import { SectionPanel } from "@/components/canvas/presets";
 import { PageHero } from "@/components/sections/PageHero";
@@ -50,7 +50,7 @@ export function ChiSiamoPage({ locale }: { locale: Locale }) {
             <Ripple at={{ x: 1, y: 0.42 }} atSm={{ x: 1, y: 0.7 }} family="leaf" core={0.13} widths={[0.12, 0.06, 0.06, 0.07]} fan={{ count: 11, from: 92, to: 268 }} scaleSm={1.3} />
             <Ripple at={{ x: 0, y: 0 }} family="sun" core={0.035} widths={[0.03, 0.03, 0.025]} bands={3} />
             <HalfDisc at={{ x: 0.5, y: 1 }} r={0.03} edge="bottom" fill="#F26A1B" hideSm />
-            <Confetto at={{ x: 0.56, y: 0.16 }} r={0.011} fill="#F5C335" ring hideSm />
+
           </>
         }
         person={{ src: "/people/poses/francesco-crivena--pose-pointing.webp", alt: p.hero.presenterAlt }}
@@ -87,12 +87,10 @@ export function ChiSiamoPage({ locale }: { locale: Locale }) {
               <Marked text={p.sito.text} />
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-              <ButtonLink href={documentUrl("statuto")} variant="outline" icon="external">
-                <FileText aria-hidden className="mr-[-.2em]" />
+              <ButtonLink href={documentUrl("statuto")} variant="outline" icon={false}>
                 {p.sito.statuto + inIt}
               </ButtonLink>
-              <ButtonLink href={documentUrl("regolamento")} variant="outline" icon="external">
-                <FileText aria-hidden className="mr-[-.2em]" />
+              <ButtonLink href={documentUrl("regolamento")} variant="outline" icon={false}>
                 {p.sito.regolamento + inIt}
               </ButtonLink>
             </div>
@@ -163,19 +161,24 @@ export function ChiSiamoPage({ locale }: { locale: Locale }) {
               <Headline text={p.territorio.title} size="h3" className="mt-4 !text-[clamp(1.35rem,1rem+1.2vw,1.9rem)]" />
             </div>
           </div>
-          <ul className="mt-5 flex flex-wrap gap-2" aria-label={p.territorio.eyebrow}>
-            {configurations.flatMap((c) => c.comuni).map((n) => (
-              <li key={n} className="pill !bg-card !text-[14px] shadow-[inset_0_0_0_1px_var(--color-hairline)]">
-                {n}
-              </li>
+          <div className="mt-5 grid gap-3 sm:grid-cols-2" aria-label={p.territorio.eyebrow}>
+            {configurations.map((config) => (
+              <div key={config.code} className="card min-w-0 p-4 sm:p-5">
+                <p className="font-display text-[15px] font-extrabold text-ink">{config.code}</p>
+                <ul className="mt-3 flex flex-wrap gap-2">
+                  {config.comuni.map((name) => (
+                    <li key={name} className="pill !bg-mint !text-[13px]">{name}</li>
+                  ))}
+                </ul>
+              </div>
             ))}
-            <li>
-              <Link href={lhref(locale, "/#configurazioni")} className="tlink ml-1 text-[15px]">
-                <span>{p.territorio.mapCta}</span>
-                <ArrowRight aria-hidden />
-              </Link>
-            </li>
-          </ul>
+          </div>
+          <div className="mt-5">
+            <Link href={lhref(locale, "/#configurazioni")} className="tlink text-[15px]">
+              <span>{p.territorio.mapCta}</span>
+              <ArrowRight aria-hidden />
+            </Link>
+          </div>
         </div>
       </SectionPanel>
 

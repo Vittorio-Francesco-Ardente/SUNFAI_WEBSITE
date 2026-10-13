@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { CanvasPanel, Confetto, HalfDisc, Ripple } from "./Canvas";
+import { CanvasPanel, HalfDisc, Ripple } from "./Canvas";
 import type { Family, Tone } from "@/lib/ripples";
 import { cn } from "@/lib/cn";
 
@@ -47,7 +47,7 @@ export function PresetBg({ preset, family = "sun", mirror = false }: { preset: P
         <>
           <Ripple at={{ x: X(0), y: 0 }} family={family} core={0.05} widths={[0.06, 0.05, 0.06, 0.06]} fan={{ count: 6, from: mirror ? 182 : 272, to: mirror ? 268 : 358 }} />
           <Ripple at={{ x: X(1), y: 1 }} family={pale[family]} core={0.07} widths={[0.04, 0.04]} />
-          <Confetto at={{ x: X(0.82), y: 0.12 }} r={0.011} fill="#F26A1B" ring hideSm />
+
         </>
       );
     case "frame": // slide 5: a pale concentric frame centre-right + small corners

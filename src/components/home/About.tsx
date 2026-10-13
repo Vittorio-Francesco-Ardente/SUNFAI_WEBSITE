@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { ButtonLink, Eyebrow, Headline, TextLink } from "@/components/ui/primitives";
-import { CanvasPanel, Confetto, HalfDisc, PanelPerson, Ripple } from "@/components/canvas/Canvas";
+import { CanvasPanel, HalfDisc, PanelPerson, Ripple } from "@/components/canvas/Canvas";
 import { Img } from "@/components/ui/Img";
 import { lhref, type Locale } from "@/lib/i18n";
 import type { Dict } from "@/content/dict";
@@ -29,7 +29,7 @@ export function About({ d, locale }: { d: Dict["home"]["about"]; locale: Locale 
           <Ripple at={{ x: 0, y: 0.62 }} atSm={{ x: 0, y: 1 }} family="sun" core={0.07} widths={[0.1, 0.07, 0.07, 0.08]} fan={{ count: 7, from: -84, to: 84 }} />
           <Ripple at={{ x: 1, y: 0 }} family="peach" core={0.03} widths={[0.05, 0.045]} bands={2} />
           <HalfDisc at={{ x: 0.7, y: 1 }} r={0.03} edge="bottom" fill="#4B8B2F" hideSm />
-          <Confetto at={{ x: 0.36, y: 0.12 }} r={0.011} fill="#F26A1B" ring hideSm />
+
         </>
       }
     >

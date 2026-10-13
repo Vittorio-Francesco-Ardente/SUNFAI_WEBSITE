@@ -9,7 +9,7 @@ import { configurations } from "@/lib/configurations";
 import { hourly, monthly, bestHours } from "@/lib/ardake/demo-data";
 import { ButtonLink, Eyebrow, Headline, TextLink } from "@/components/ui/primitives";
 import { Badge } from "@/components/geometry/shapes";
-import { CanvasPanel, Confetto, PanelPerson, Person, RayFan, Ripple } from "@/components/canvas/Canvas";
+import { CanvasPanel, PanelPerson, Person, RayFan, Ripple } from "@/components/canvas/Canvas";
 import { SectionPanel } from "@/components/canvas/presets";
 import { Img } from "@/components/ui/Img";
 import { PhoneMockup } from "@/components/ardake/PhoneMockup";
@@ -159,7 +159,11 @@ export function ArdakePage({ locale }: { locale: Locale }) {
                     <span className="live-dot !size-2" aria-hidden /> {a.seleziona.active}
                   </span>
                   <span className="mt-4 font-display text-[1.6rem] font-extrabold tracking-[-0.03em] text-ink">{c.code}</span>
-                  <span className="mt-2 text-[15px] text-slate">{c.comuni.join(" · ")}</span>
+                  <span className="mt-3 flex flex-wrap gap-2" aria-label={c.comuni.join(", ")}>
+                    {c.comuni.map((comune) => (
+                      <span key={comune} className="rounded-full bg-mint px-3 py-1.5 text-[13px] font-medium leading-snug text-ink">{comune}</span>
+                    ))}
+                  </span>
                   <span className="mt-auto inline-flex min-h-11 items-center gap-2 pt-5 font-semibold text-ink">
                     {a.seleziona.view} <ArrowRight className="hc-arrow size-4" aria-hidden />
                   </span>
@@ -167,7 +171,7 @@ export function ArdakePage({ locale }: { locale: Locale }) {
               </li>
             ))}
           </ul>
-          <div className="card mt-6 p-5 sm:p-7">
+          <div id="verifica" className="card mt-6 scroll-mt-32 p-5 sm:p-7">
             <h3 className="t-h3 flex items-center gap-2">
               {a.seleziona.findTitle} <InfoDot topic="cabina-primaria" />
             </h3>
@@ -196,21 +200,6 @@ export function ArdakePage({ locale }: { locale: Locale }) {
             <Dashboard a={a} preview />
           </div>
         </div>
-      </SectionPanel>
-
-      {/* ---------------- Progettata da chi gestisce le comunità ---------------- */}
-      <SectionPanel data-section="fatta-in-casa" tone="peach" preset="presenter" family="peach" mirror inner={false}>
-        <div className="container-x relative z-[2] py-[clamp(48px,6vw,88px)] grid items-center gap-10 lg:grid-cols-12 lg:gap-16">
-          <div className="reveal lg:col-span-6 lg:col-start-7">
-            <Eyebrow>{a.fattaInCasa.eyebrow}</Eyebrow>
-            <Headline text={a.fattaInCasa.title} className="mt-5" />
-            <p className="t-body mt-6 max-w-[34rem]">{a.fattaInCasa.text}</p>
-            <ButtonLink href="/diventa-socio/" locale={locale} className="mt-8 max-sm:w-full">
-              {a.fattaInCasa.cta}
-            </ButtonLink>
-          </div>
-        </div>
-        <PanelPerson src="/people/poses/lorenzo-ciresa--pose-pointing.webp" alt={a.fattaInCasa.peopleAlt[1]} sizes="(max-width: 1023px) 80vw, 34vw" lgClass="lg:left-[6%] lg:h-[86%]" />
       </SectionPanel>
 
       <JoinContact d={d.common.joinContact} locale={locale} personAlt={d.common.ui.personAlt} />
