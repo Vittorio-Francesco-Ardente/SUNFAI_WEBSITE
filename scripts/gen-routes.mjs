@@ -21,6 +21,8 @@ const routes = [
   ["riconoscimenti", "riconoscimenti", "Riconoscimenti"],
   ["notizie", "notizie", "Notizie"],
   ["notizie/[slug]", "article", "Article", "slug"],
+  ["eventi", "eventi", "Eventi"],
+  ["eventi/[slug]", "evento", "Evento", "slug"],
   ["ardake", "ardake", "Ardake"],
   ["ardake/monitoraggio", "monitoraggio", "Monitoraggio"],
   ["ardake/demo", "ardake-demo", "ArdakeDemo"],

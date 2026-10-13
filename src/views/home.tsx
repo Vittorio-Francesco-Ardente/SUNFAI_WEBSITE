@@ -12,6 +12,7 @@ import { ArdakeHome } from "@/components/home/ArdakeHome";
 import { ConfigMap } from "@/components/home/ConfigMap";
 import { SocialFeed } from "@/components/social/SocialFeed";
 import { JoinContact } from "@/components/sections/JoinContact";
+import { HomeEvents } from "@/components/events/HomeEvents";
 
 export const homeMeta = (locale: Locale) => {
   const d = getDict(locale);
@@ -95,6 +96,22 @@ export function HomePage({ locale }: { locale: Locale }) {
           <div className="mt-7 flex justify-center">
             <TextLink href="/notizie/" locale={locale}>{h.social.all}</TextLink>
           </div>
+        </div>
+      </CanvasPanel>
+
+      {/* Eventi reali SUN-FAI: anteprima essenziale, con link alle pagine dedicate. */}
+      <CanvasPanel
+        tone="cream"
+        data-section="eventi"
+        bg={<><Ripple at={{ x: 1, y: 0 }} family="sunPale" core={0.04} widths={[0.05, 0.05]} /><Ripple at={{ x: 0, y: 1 }} family="leafPale" core={0.04} widths={[0.045]} /></>}
+      >
+        <div className={`container-x relative z-[2] ${PAD}`}>
+          <div className="mb-9 text-center">
+            <Eyebrow className="justify-center">Eventi SUN-FAI</Eyebrow>
+            <Headline text="Ci incontriamo sul *territorio*." className="mx-auto mt-5" />
+            <p className="t-lead mx-auto mt-4 max-w-[42rem]">Serate aperte per conoscerci, parlare di energia condivisa e rispondere alle domande di chi vive nei nostri Comuni.</p>
+          </div>
+          <HomeEvents locale={locale} />
         </div>
       </CanvasPanel>
 

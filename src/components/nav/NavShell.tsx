@@ -653,7 +653,10 @@ function MenuSheet({ t, locale, pathname, items, open, onClose }: { t: NavLabels
     };
   }, [open, onClose]);
 
-  const links = [items.home, ...items.main];
+  // Keep the compact desktop dock unchanged; expose Events in the full menu,
+  // and via homepage, News and footer links without crowding the tablet navbar.
+  const eventLink: Item = { key: "eventi", href: "/eventi/", label: locale === "lmo" ? "Evèncc" : "Eventi", icon: Newspaper };
+  const links = [items.home, ...items.main.slice(0, -1), eventLink, items.main[items.main.length - 1]];
 
   return (
     <AnimatePresence>

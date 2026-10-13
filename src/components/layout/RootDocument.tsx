@@ -3,7 +3,7 @@ import { jakarta, inter, fredoka } from "@/app/fonts";
 import { NavShell } from "@/components/nav/NavShell";
 import { Footer } from "@/components/layout/Footer";
 import { Loader } from "@/components/loader/Loader";
-import { LOADER_ENGINE_INLINE } from "@/components/loader/loader-engine-inline";
+import { LOADER_PRECISION_INLINE } from "@/components/loader/loader-precisione-inline";
 import { MotionObserver } from "@/components/layout/MotionObserver";
 import { getDict } from "@/content/dict";
 import { localeMeta, type Locale } from "@/lib/i18n";
@@ -28,7 +28,7 @@ const PREFLIGHT = `(function(){
       d.classList.add('sf-loader-done');
       var h=document.getElementById('sf-loader');if(h)h.style.display='none';
     }
-  },12000)},{once:true});
+  },8000)},{once:true});
 })();`;
 
 export function RootDocument({ locale, children }: { locale: Locale; children: ReactNode }) {
@@ -37,7 +37,7 @@ export function RootDocument({ locale, children }: { locale: Locale; children: R
     <html lang={localeMeta[locale].htmlLang} className={`${jakarta.variable} ${inter.variable} ${fredoka.variable}`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: PREFLIGHT }} />
-        <script dangerouslySetInnerHTML={{ __html: LOADER_ENGINE_INLINE }} />
+        <script dangerouslySetInnerHTML={{ __html: LOADER_PRECISION_INLINE }} />
         <noscript>
           <style>{"#sf-loader{display:none!important}"}</style>
         </noscript>
@@ -48,7 +48,7 @@ export function RootDocument({ locale, children }: { locale: Locale; children: R
           {d.common.nav.skip}
         </a>
         <NavShell t={d.common.nav} locale={locale} />
-        <main id="contenuto" data-sunfai-version="v34-loader-p02-inline" tabIndex={-1} className="relative isolate outline-none">
+        <main id="contenuto" data-sunfai-version="v36-loader-precisione-events" tabIndex={-1} className="relative isolate outline-none">
           {children}
         </main>
         <Footer d={d} locale={locale} />

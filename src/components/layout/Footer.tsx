@@ -37,6 +37,7 @@ export function Footer({ d, locale }: { d: Dict; locale: Locale }) {
         { label: n.team, href: "/team/" },
         { label: n.riconoscimenti, href: "/riconoscimenti/" },
         { label: n.notizie, href: "/notizie/" },
+        { label: f.eventi, href: "/eventi/" },
       ],
     },
     {

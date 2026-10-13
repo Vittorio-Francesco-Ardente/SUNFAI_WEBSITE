@@ -83,6 +83,17 @@ export function NotiziePage({ locale }: { locale: Locale }) {
         </div>
       </SectionPanel>
 
+      <SectionPanel data-section="eventi" tone="cream" preset="soft" family="sun" inner={false}>
+        <div className="container-x relative z-[2] flex flex-col gap-5 py-[clamp(42px,5vw,70px)] md:flex-row md:items-center md:justify-between">
+          <div>
+            <Eyebrow>Appuntamenti</Eyebrow>
+            <Headline text="Gli eventi *SUN-FAI*" size="h2s" className="mt-4" />
+            <p className="t-body mt-3 max-w-[60ch]">Due incontri sul territorio con locandine, date, luoghi e approfondimenti. Scopri i prossimi appuntamenti e l’archivio di quelli conclusi.</p>
+          </div>
+          <ButtonLink href="/eventi/" locale={locale} variant="dark" className="shrink-0 self-start">Scopri gli eventi</ButtonLink>
+        </div>
+      </SectionPanel>
+
       <SectionPanel data-section="social" tone="mint" preset="content" family="leaf" mirror inner={false}>
         <div className="container-x relative z-[2] py-[clamp(48px,6vw,88px)]">
           <div className="reveal mb-10 text-center">
