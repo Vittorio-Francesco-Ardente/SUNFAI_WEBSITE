@@ -48,7 +48,7 @@ export function RootDocument({ locale, children }: { locale: Locale; children: R
           {d.common.nav.skip}
         </a>
         <NavShell t={d.common.nav} locale={locale} />
-        <main id="contenuto" data-sunfai-version="v42-events-loader-ardake-scroll-dock" tabIndex={-1} className="relative isolate outline-none">
+        <main id="contenuto" data-sunfai-version="v43-loader-geometrico" tabIndex={-1} className="relative isolate outline-none">
           {children}
         </main>
         <Footer d={d} locale={locale} />
