@@ -26,21 +26,9 @@ export function EventiPage({ locale }: { locale: Locale }) {
             {locale === "lmo" && <p className="mt-3 text-[14px] text-slate">Informazioni sugli eventi in italiano.</p>}
             <Link href={lhref(locale, "/notizie/")} className="tlink mt-6">Leggi le notizie <ArrowRight className="size-4" aria-hidden /></Link>
           </div>
-          <div className="sf-events-page-portrait before:!hidden" aria-label="Mascotte SUN-FAI">
-            <Img
-              src="/events/sunfai-eventi-sfondo-mascotte.png"
-              alt=""
-              aria-hidden={true}
-              sizes="(max-width: 767px) 90vw, (max-width: 1023px) 40vw, 440px"
-              className="pointer-events-none absolute left-1/2 top-1/2 z-0 block h-auto w-[min(96%,470px)] max-w-none -translate-x-1/2 -translate-y-1/2 select-none"
-              draggable={false}
-            />
-            <Img
-              src="/mascot/mascot-09-waving-wink.webp"
-              alt="Mascotte SUN-FAI che saluta i visitatori"
-              sizes="(max-width: 767px) 76vw, (max-width: 1023px) 42vw, 31vw"
-              className="sf-events-beatrice !z-[1] !h-[82%] !right-[8%] !bottom-[4%] object-contain"
-            />
+          <div className="sf-events-page-portrait" aria-label="Mascotte SUN-FAI">
+            <Img src="/events/sunfai-events-hero-art-v44.svg" alt="" aria-hidden={true} sizes="(max-width: 767px) 100vw, 55vw" className="sf-events-page-art" draggable={false} />
+            <Img src="/mascot/mascot-09-waving-wink.webp" alt="Mascotte SUN-FAI che saluta i visitatori" sizes="(max-width: 767px) 78vw, (max-width: 1100px) 48vw, 590px" className="sf-events-page-mascot" draggable={false} />
           </div>
         </div>
       </CanvasPanel>
