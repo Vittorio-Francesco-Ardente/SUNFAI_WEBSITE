@@ -24,6 +24,7 @@ import { FacebookIcon, InstagramIcon, LinkedinIcon } from "@/components/ui/Socia
 import { Img } from "@/components/ui/Img";
 import { asset } from "@/lib/asset";
 import { cn } from "@/lib/cn";
+import { ArdakeNavMark } from "./ArdakeNavMark";
 import { lhref, localeMeta, rememberLocale, switchLocalePath, unlocalized, type Locale } from "@/lib/i18n";
 import { useKeyboardFlag, useLowEndFlag } from "@/lib/use-media";
 import { initialDockScrollState, nextDockScrollState } from "@/lib/dock-scroll";
@@ -316,15 +317,17 @@ function TopBar({
                 <li key={it.key}>
                   <Link
                     href={lhref(locale, it.href)}
+                    aria-label={it.key === "ardake" ? "Ardaké" : undefined}
                     aria-current={active ? "page" : undefined}
                     className={cn(
                       "relative inline-flex h-11 items-center whitespace-nowrap text-[12.5px] font-medium transition-colors xl:text-[13.5px] 2xl:text-[16px]",
                       active ? "font-semibold text-orange-text" : "font-medium text-ink/92 hover:text-ink",
+                      it.key === "ardake" && "sf-ardake-link",
                       "after:absolute after:inset-x-0 after:bottom-[3px] after:h-[2px] after:origin-left after:rounded-full after:bg-orange after:transition-transform after:duration-300",
                       active ? "after:scale-x-100" : "after:scale-x-0 hover:after:scale-x-100",
                     )}
                   >
-                    {it.label}
+                    {it.key === "ardake" ? <ArdakeNavMark /> : it.label}
                   </Link>
                 </li>
               );
@@ -366,9 +369,9 @@ function TopBar({
             const active = isActive(pathname, it.href);
             return (
               <li key={it.key} className="min-w-0">
-                <Link href={lhref(locale, it.href)} aria-current={active ? "page" : undefined}
-                  className={cn("relative flex h-11 items-center justify-center whitespace-nowrap px-1 font-medium text-[clamp(11px,1.18vw,15px)] text-ink transition-colors hover:text-orange-text", active && "!font-bold !text-orange-text after:absolute after:bottom-1 after:inset-x-1 after:h-0.5 after:rounded-full after:bg-orange")}>
-                  {it.label}
+                <Link href={lhref(locale, it.href)} aria-label={it.key === "ardake" ? "Ardaké" : undefined} aria-current={active ? "page" : undefined}
+                  className={cn("relative flex h-11 items-center justify-center whitespace-nowrap px-1 font-medium text-[clamp(11px,1.18vw,15px)] text-ink transition-colors hover:text-orange-text", it.key === "ardake" && "sf-ardake-link", active && "!font-bold !text-orange-text after:absolute after:bottom-1 after:inset-x-1 after:h-0.5 after:rounded-full after:bg-orange")}>
+                  {it.key === "ardake" ? <ArdakeNavMark /> : it.label}
                 </Link>
               </li>
             );
@@ -406,7 +409,7 @@ function DesktopDock({ t, locale, pathname, items, visible }: { t: NavLabels; lo
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: reduce ? 0 : 20 }}
           transition={{ duration: 0.28, ease: EASE_OUT_SOFT }}
-          className="pointer-events-none fixed inset-x-0 bottom-[calc(28px+var(--safe-b))] z-50 hidden justify-center 2xl:flex"
+          className="pointer-events-none fixed inset-x-0 bottom-[calc(28px+var(--safe-b))] z-50 hidden justify-center md:flex"
         >
           <div
             onMouseMove={(e) => canHover && !reduce && mouseX.set(e.clientX)}
@@ -690,13 +693,15 @@ function MenuSheet({ t, locale, pathname, items, open, onClose }: { t: NavLabels
                     <Link
                       href={lhref(locale, it.href)}
                       onClick={onClose}
+                      aria-label={it.key === "ardake" ? "Ardaké" : undefined}
                       aria-current={active ? "page" : undefined}
                       className={cn(
                         "flex min-h-[56px] items-center justify-between py-2 font-display text-[clamp(1.6rem,1.2rem+2vw,2.1rem)] font-extrabold tracking-[-0.035em]",
                         active ? "text-orange-text" : "text-ink",
+                        it.key === "ardake" && "sf-ardake-link",
                       )}
                     >
-                      {it.label}
+                      {it.key === "ardake" ? <ArdakeNavMark size="menu" /> : it.label}
                       <ArrowRight className="size-6 text-ink/30" aria-hidden />
                     </Link>
                   </motion.li>
