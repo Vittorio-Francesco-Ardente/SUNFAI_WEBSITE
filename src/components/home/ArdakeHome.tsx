@@ -64,26 +64,25 @@ export function ArdakeHome({ d, phone, phoneAlt, replay, locale }: { d: Dict["ho
         </div>
         {/* Desktop: retain the concept's original floating phone composition. */}
         <div className="relative hidden lg:col-span-6 lg:block">
-          <div className="absolute -left-[12%] top-[3%] w-[270px] origin-top-left -rotate-[6deg] scale-[.82] xl:-left-[6%] xl:scale-[.9] 2xl:left-[8%] 2xl:scale-100">
+          <div className="absolute left-[14%] top-[3%] w-[270px] origin-top-left -rotate-[6deg] scale-[.92] xl:scale-100">
             <PhoneMockup t={phone} label={phoneAlt} variant="dashboard" />
           </div>
         </div>
       </div>
 
-      {/* Mobile: reserve the FULL phone height. The panel frame, not the stage, owns the crop.
-          The previous 350px stage clipped the 270x570px phone after rotation/scale. */}
-      <div className="relative mx-auto mt-3 h-[clamp(480px,138vw,630px)] w-full max-w-[550px] lg:hidden">
-        <div className="absolute left-[14%] top-[5%] z-[1] w-[270px] origin-top-left -rotate-[5deg] scale-[.66] min-[400px]:left-[16%] min-[400px]:scale-[.73] sm:left-[17%] sm:scale-[.82]">
+      {/* Mobile: phone and presenter share ONE stage. No empty block between them. */}
+      <div className="relative mx-auto mt-3 h-[clamp(350px,108vw,480px)] w-full max-w-[550px] overflow-hidden lg:hidden">
+        <div className="absolute left-[4%] top-[0%] z-[1] w-[270px] origin-top-left -rotate-[7deg] scale-[.58] min-[400px]:scale-[.67] sm:left-[9%] sm:scale-[.75]">
           <PhoneMockup t={phone} label={phoneAlt} variant="dashboard" />
         </div>
-        <Img src={presenters.giorgioPalmUp} alt={d.giorgioAlt} draggable={false} sizes="(max-width: 639px) 58vw, 46vw" className="pointer-events-none absolute bottom-0 right-[-2%] z-[2] h-[75%] w-auto max-w-none object-contain object-bottom sm:right-[0%] sm:h-[78%]" />
+        <Img src={presenters.giorgioPalmUp} alt={d.giorgioAlt} draggable={false} sizes="(max-width: 639px) 64vw, 48vw" className="pointer-events-none absolute bottom-0 right-[-9%] z-[2] h-[76%] w-auto max-w-none object-contain object-bottom sm:right-[0%] sm:h-[82%]" />
       </div>
       <div className="hidden lg:contents">
         <PanelPerson
           src={presenters.giorgioPalmUp}
           alt={d.giorgioAlt}
           sizes="32vw"
-          lgClass="lg:left-auto lg:right-[-3%] lg:h-[min(58%,580px)] xl:right-[0%] xl:h-[min(62%,620px)]"
+          lgClass="lg:left-auto lg:right-[1%] lg:h-[min(62%,620px)]"
         />
       </div>
     </CanvasPanel>

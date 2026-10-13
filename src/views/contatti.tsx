@@ -7,7 +7,7 @@ import { site, social } from "@/lib/site";
 import { Eyebrow, Headline, plainHeadline } from "@/components/ui/primitives";
 import { Img } from "@/components/ui/Img";
 import { Badge } from "@/components/geometry/shapes";
-import { FacebookIcon, InstagramIcon, LinkedinIcon } from "@/components/ui/SocialIcons";
+import { InstagramIcon, LinkedinIcon } from "@/components/ui/SocialIcons";
 import { SectionPanel } from "@/components/canvas/presets";
 import { CanvasPanel, HalfDisc, Person, Ripple } from "@/components/canvas/Canvas";
 import { ContactForm } from "@/components/sections/ContactForm";
@@ -108,9 +108,6 @@ export function ContattiPage({ locale }: { locale: Locale }) {
               </a>
               <a href={social.linkedin.url} target="_blank" rel="noopener noreferrer" aria-label={p.linkedinAria} className="paper-round paper-round--dark">
                 <LinkedinIcon className="size-[18px]" />
-              </a>
-              <a href={social.facebook.url} target="_blank" rel="noopener noreferrer" aria-label={social.facebook.label} className="paper-round paper-round--dark">
-                <FacebookIcon className="size-[18px]" />
               </a>
             </div>
             <div className="card mt-8 hidden overflow-hidden bg-[#fcfbf7] p-5 lg:block">

@@ -8,7 +8,7 @@ import { ButtonLink, Eyebrow, Headline, TextLink } from "@/components/ui/primiti
 import { Badge, CornerSunrise } from "@/components/geometry/shapes";
 import { Img } from "@/components/ui/Img";
 import { SectionPanel } from "@/components/canvas/presets";
-import { HalfDisc, Ripple } from "@/components/canvas/Canvas";
+import { Confetto, HalfDisc, Ripple } from "@/components/canvas/Canvas";
 import { PageHero } from "@/components/sections/PageHero";
 import { MemoryRoom } from "@/components/memory-room/MemoryRoom";
 import { AchievementsCarousel } from "@/components/awards/AchievementsCarousel";
@@ -45,7 +45,7 @@ export function RiconoscimentiPage({ locale }: { locale: Locale }) {
           <>
             <Ripple at={{ x: 1, y: 1 }} atSm={{ x: 1, y: 0.82 }} family="sun" core={0.25} widths={[0.17, 0.08, 0.07, 0.07]} fan={{ count: 12, from: 92, to: 178 }} scaleSm={0.8} />
             <Ripple at={{ x: 0, y: 0 }} family="leaf" core={0.035} widths={[0.03, 0.035]} bands={2} />
-
+            <Confetto at={{ x: 0.5, y: 0.14 }} r={0.011} fill="#F26A1B" ring hideSm />
           </>
         }
         person={{ src: "/people/poses/andrea-zonca--pose-three-quarter.webp", alt: r.hero.presenterAlt, height: "lg:h-[88%]" }}
@@ -143,7 +143,7 @@ export function RiconoscimentiPage({ locale }: { locale: Locale }) {
             <Eyebrow>{r.squeeze.eyebrow}</Eyebrow>
             <Headline text={r.squeeze.title} tone="leaf" className="mt-5" />
           </div>
-          <AwardsSqueeze items={milestoneItems(d)} t={r.squeeze} locale={locale} yearUnknown={r.yearUnknown} height="h-[548px]" />
+          <AwardsSqueeze items={milestoneItems(d)} t={r.squeeze} locale={locale} yearUnknown={r.yearUnknown} height="h-[600px]" />
         </div>
       </SectionPanel>
 

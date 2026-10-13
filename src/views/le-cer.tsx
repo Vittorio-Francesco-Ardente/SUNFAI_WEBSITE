@@ -1,13 +1,17 @@
-import { Building2, DoorOpen, Factory, HandHeart, House, PlugZap, Quote, Receipt } from "lucide-react";
+import { Building2, DoorOpen, Factory, HandHeart, House, PlugZap, Quote, Receipt, Scale } from "lucide-react";
 import { getDict } from "@/content/dict";
 import { pageMeta } from "@/lib/meta";
 import type { Locale } from "@/lib/i18n";
 import { ButtonLink, Eyebrow, Headline, TextLink } from "@/components/ui/primitives";
 import { Badge } from "@/components/geometry/shapes";
+import { Img } from "@/components/ui/Img";
+import { Mascot } from "@/components/people/Mascot";
 import { SectionPanel } from "@/components/canvas/presets";
-import { Ripple } from "@/components/canvas/Canvas";
+import { Confetto, HalfDisc, Ripple } from "@/components/canvas/Canvas";
 import { PageHero, CtaBand } from "@/components/sections/PageHero";
 import { PinnedSteps } from "@/components/sections/PinnedSteps";
+import { SharedEnergyExplainer } from "@/components/sections/SharedEnergyExplainer";
+import { Faq } from "@/components/sections/Faq";
 import { GiorgioProvider, InfoDot } from "@/components/ardake/Giorgio";
 
 export const lecerMeta = (locale: Locale) => {
@@ -32,7 +36,7 @@ export function LeCerPage({ locale }: { locale: Locale }) {
         lead={p.hero.lead}
         actions={
           <>
-            <ButtonLink href="/ardake/#verifica" locale={locale} size="lg">
+            <ButtonLink href="/#verifica" locale={locale} size="lg">
               {p.hero.cta}
             </ButtonLink>
             <TextLink href="#come-funziona" className="self-center sm:self-auto">
@@ -50,8 +54,38 @@ export function LeCerPage({ locale }: { locale: Locale }) {
             <Ripple at={{ x: 0, y: 1 }} family="peach" core={0.035} widths={[0.03, 0.03]} bands={2} />
           </>
         }
-        mascot={{ src: "/mascot/mascot-08-laptop.webp", alt: d.common.ui.mascotAlt, centeredInRipple: true }}
+        visual={
+          <div className="flex h-full items-center justify-center px-[var(--gutter)] pb-8 pt-3 lg:justify-end lg:pr-[clamp(22px,3vw,40px)] lg:pb-0">
+            <div className="relative aspect-[4/4.2] w-full max-w-[470px] overflow-hidden rounded-[34px] border border-[rgb(5_42_34/.08)] bg-[#F3E6B8] shadow-[0_28px_50px_-34px_rgb(5_42_34/.30)]">
+              <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,.14),rgba(255,255,255,0))]" />
+              <div className="absolute -right-[18%] top-[4%] h-[78%] w-[78%] rounded-full border-[26px] border-[#DDE8CB] opacity-95" />
+              <div className="absolute -right-[8%] top-[14%] h-[58%] w-[58%] rounded-full border-[22px] border-[#FFF8E8] opacity-95" />
+              <div className="absolute left-[8%] top-[10%] rounded-full border border-[#A9C879] bg-[#FFFDF7] px-4 py-2 text-[clamp(14px,1.4vw,18px)] font-semibold text-leafDeep shadow-[0_12px_24px_-20px_rgb(5_42_34/.35)]">Ci vediamo dal vivo!</div>
+              <div className="absolute inset-x-0 bottom-0 top-[22%] bg-[radial-gradient(circle_at_50%_100%,rgba(255,255,255,.25),rgba(255,255,255,0)_68%)]" />
+              <Img src="/mascot/mascot-08-laptop.webp" alt={d.common.ui.mascotAlt} sizes="(max-width: 1023px) 70vw, 28vw" className="absolute bottom-0 left-1/2 z-[2] h-[78%] w-auto max-w-none -translate-x-1/2 object-contain object-bottom" />
+            </div>
+          </div>
+        }
       />
+
+      {/* Le CER in SUN-FAI [SITO] */}
+      <SectionPanel data-section="in-sunfai" tone="mint" preset="content" family="leaf" inner={false}>
+        <div className="container-x relative z-[2] py-[clamp(48px,6vw,88px)] grid gap-10 lg:grid-cols-12">
+          <div className="reveal lg:col-span-5">
+            <Eyebrow>{p.inSunfai.eyebrow}</Eyebrow>
+            <p className="mt-6 font-display text-[clamp(1.5rem,1.1rem+1.4vw,2.4rem)] font-extrabold leading-[1.1] tracking-[-0.03em] text-ink">{p.inSunfai.soggetto}</p>
+          </div>
+          <div className="reveal grid gap-4 lg:col-span-7">
+            {p.inSunfai.paragraphs.map((t, i) => (
+              <p key={i} className="t-body">
+                {t}
+                {i === 1 ? <InfoDot topic="cabina-primaria" className="ml-2" /> : null}
+                {i === 3 ? <InfoDot topic="quarto-orario" className="ml-2" /> : null}
+              </p>
+            ))}
+          </div>
+        </div>
+      </SectionPanel>
 
       {/* Cosa sono le CER? — GSE definition (official quotation, stays in Italian) */}
       <SectionPanel data-section="cosa-sono" tone="cream" preset="soft" family="sun" inner={false}>
@@ -97,6 +131,20 @@ export function LeCerPage({ locale }: { locale: Locale }) {
           <div className="mt-10">
             <PinnedSteps steps={p.come.steps.map((s, i) => ({ title: s.title, text: s.text, image: STEP_SCENES[i], alt: s.alt, tag: s.role }))} progressLabel={d.pages.cosaFacciamo.percorso.progress} tone="leaf" />
           </div>
+        </div>
+      </SectionPanel>
+
+      {/* Conta l'ora in cui consumi — interactive explainer */}
+      <SectionPanel data-section="explainer" tone="mint" preset="frame" family="leaf" inner={false}>
+        <div className="container-x relative z-[2] py-[clamp(48px,6vw,88px)]">
+          <div className="reveal mb-8 grid gap-6 lg:grid-cols-12 lg:items-end">
+            <div className="lg:col-span-7">
+              <Eyebrow>{p.explainer.eyebrow}</Eyebrow>
+              <Headline text={p.explainer.title} className="mt-5" />
+            </div>
+            <p className="t-lead lg:col-span-5">{p.explainer.hint}</p>
+          </div>
+          <SharedEnergyExplainer t={p.explainer} />
         </div>
       </SectionPanel>
 
@@ -156,8 +204,45 @@ export function LeCerPage({ locale }: { locale: Locale }) {
         </div>
       </SectionPanel>
 
+      {/* Riferimenti normativi + "Lo sapevi?" (the page's one mascot) */}
+      <SectionPanel data-section="norme" tone="paper" preset="soft" family="leaf" mirror inner={false}>
+        <div className="container-x relative z-[2] py-[clamp(48px,6vw,88px)] grid gap-5 lg:grid-cols-12">
+          <div className="reveal card flex gap-4 p-6 sm:p-8 lg:col-span-6">
+            <Scale className="size-7 shrink-0 text-orange-text" aria-hidden />
+            <div>
+              <p className="font-display text-[1.15rem] font-extrabold tracking-[-0.02em] text-ink">{p.norme.title}</p>
+              <p className="t-body mt-2 !text-[16px]">{p.norme.text}</p>
+            </div>
+          </div>
+          <div className="reveal flex items-end gap-4 lg:col-span-6">
+            <Mascot pose="04-idea-pointing" alt={d.common.ui.mascotAlt} className="shrink-0" />
+            <div className="speech speech--tail-left mb-10">
+              <p className="text-[13px] font-semibold uppercase tracking-[0.1em] text-leaf-text">{p.tip.eyebrow}</p>
+              <p className="mt-1">{p.tip.text}</p>
+            </div>
+          </div>
+        </div>
+      </SectionPanel>
+
+      {/* FAQ */}
+      <SectionPanel data-section="faq" tone="mint" preset="corner" family="leaf" id="faq" inner={false}>
+        <div className="container-x relative z-[2] py-[clamp(48px,6vw,88px)] grid gap-10 lg:grid-cols-12">
+          <div className="reveal lg:col-span-4">
+            <Eyebrow>{p.faq.eyebrow}</Eyebrow>
+            <Headline text={p.faq.title} size="h2s" className="mt-5" />
+            <p className="t-body mt-4">{p.faq.text}</p>
+            <ButtonLink href="/contatti/" locale={locale} variant="outline" className="mt-6 max-sm:w-full">
+              {p.faq.cta}
+            </ButtonLink>
+          </div>
+          <div className="reveal lg:col-span-8">
+            <Faq items={p.faq.items} />
+          </div>
+        </div>
+      </SectionPanel>
+
       <CtaBand title={p.ctaBand.title}>
-        <ButtonLink href="/ardake/#verifica" locale={locale} size="lg">
+        <ButtonLink href="/#verifica" locale={locale} size="lg">
           {p.ctaBand.cta}
         </ButtonLink>
       </CtaBand>

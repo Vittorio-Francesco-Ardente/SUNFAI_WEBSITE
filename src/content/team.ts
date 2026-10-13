@@ -21,8 +21,6 @@ export interface Member {
   pose?: string;
   /** Member backdrop variant 1-6 (pack 01). */
   backdrop: Backdrop;
-  /** Public LinkedIn profile (only when explicitly supplied). */
-  linkedin?: string;
   /** Real content only, supplied by the person (TODO_SUNFAI). */
   quote?: { it: string; lmo?: string };
   bio?: { it: string; lmo?: string };
@@ -34,17 +32,17 @@ const Q = (s: string) => `/people/poses/${s}.webp`;
 
 /** Board first, then the team operativo alphabetically. */
 export const team: Member[] = [
-  { slug: "francesco-crivena", firstName: "Francesco", lastName: "Crivena", group: "board", role: "presidente", photo: P("francesco-crivena"), pose: Q("francesco-crivena--pose-pointing"), linkedin: "https://www.linkedin.com/in/francesco-crivena-7453a244/", backdrop: 1 },
-  { slug: "andrea-zonca", firstName: "Andrea", lastName: "Zonca", group: "board", role: "vicepresidente", photo: P("andrea-zonca"), pose: Q("andrea-zonca--pose-three-quarter"), linkedin: "https://www.linkedin.com/in/andrea-zonca-65b126253/", backdrop: 2 },
-  { slug: "stefano-crivena", firstName: "Stefano", lastName: "Crivena", group: "board", role: "consigliere", photo: P("stefano-crivena"), pose: Q("stefano-crivena--pose-gesture"), linkedin: "https://www.linkedin.com/in/stefano-crivena-052662256/", backdrop: 4 },
-  { slug: "alceste-persico", firstName: "Alceste", lastName: "Persico", group: "board", role: "consigliere", photo: P("alceste-persico"), pose: Q("alceste-persico--pose-open-hand"), linkedin: "https://www.linkedin.com/in/alceste-persico/", backdrop: 5 },
-  { slug: "andrea-belotti", firstName: "Andrea", lastName: "Belotti", group: "team", role: "operativo", photo: P("andrea-belotti"), linkedin: "https://www.linkedin.com/in/andrea-belotti-849263293/", backdrop: 3 },
-  { slug: "beatrice-parimbelli", firstName: "Beatrice", lastName: "Parimbelli", group: "team", role: "operativo", photo: P("beatrice-parimbelli"), pose: Q("beatrice-parimbelli--pose-smile"), linkedin: "https://www.linkedin.com/in/beatrice-parimbelli-1a7097245/", backdrop: 6 },
-  { slug: "benedetta-petro", firstName: "Benedetta", lastName: "Petrò", group: "team", role: "operativo", photo: P("benedetta-petro"), linkedin: "https://www.linkedin.com/in/benedetta-petr%C3%B2-1259b8355/", backdrop: 1 },
-  { slug: "chiara-crivena", firstName: "Chiara", lastName: "Crivena", group: "team", role: "operativo", photo: P("chiara-crivena"), pose: Q("chiara-crivena--pose-hand-chin"), linkedin: "https://www.linkedin.com/in/chiara-crivena-1b2062a3/", backdrop: 5 },
-  { slug: "giorgio-venezia", firstName: "Giorgio", lastName: "Venezia", group: "team", role: "operativo", photo: P("giorgio-venezia"), pose: Q("giorgio-venezia--pose-arms-crossed"), linkedin: "https://www.linkedin.com/in/giorgio-venezia-616053356/", backdrop: 2 },
+  { slug: "francesco-crivena", firstName: "Francesco", lastName: "Crivena", group: "board", role: "presidente", photo: P("francesco-crivena"), pose: Q("francesco-crivena--pose-pointing"), backdrop: 1 },
+  { slug: "andrea-zonca", firstName: "Andrea", lastName: "Zonca", group: "board", role: "vicepresidente", photo: P("andrea-zonca"), pose: Q("andrea-zonca--pose-three-quarter"), backdrop: 2 },
+  { slug: "stefano-crivena", firstName: "Stefano", lastName: "Crivena", group: "board", role: "consigliere", photo: P("stefano-crivena"), pose: Q("stefano-crivena--pose-gesture"), backdrop: 4 },
+  { slug: "alceste-persico", firstName: "Alceste", lastName: "Persico", group: "board", role: "consigliere", photo: P("alceste-persico"), pose: Q("alceste-persico--pose-open-hand"), backdrop: 5 },
+  { slug: "andrea-belotti", firstName: "Andrea", lastName: "Belotti", group: "team", role: "operativo", photo: P("andrea-belotti"), backdrop: 3 },
+  { slug: "beatrice-parimbelli", firstName: "Beatrice", lastName: "Parimbelli", group: "team", role: "operativo", photo: P("beatrice-parimbelli"), pose: Q("beatrice-parimbelli--pose-smile"), backdrop: 6 },
+  { slug: "benedetta-petro", firstName: "Benedetta", lastName: "Petro", group: "team", role: "operativo", backdrop: 1 },
+  { slug: "chiara-crivena", firstName: "Chiara", lastName: "Crivena", group: "team", role: "operativo", photo: P("chiara-crivena"), pose: Q("chiara-crivena--pose-hand-chin"), backdrop: 5 },
+  { slug: "giorgio-venezia", firstName: "Giorgio", lastName: "Venezia", group: "team", role: "operativo", photo: P("giorgio-venezia"), pose: Q("giorgio-venezia--pose-arms-crossed"), backdrop: 2 },
   { slug: "lorenzo-ciresa", firstName: "Lorenzo", lastName: "Ciresa", group: "team", role: "operativo", photo: P("lorenzo-ciresa"), pose: Q("lorenzo-ciresa--pose-pointing"), backdrop: 4 },
-  { slug: "nicholas-previtali", firstName: "Nicholas", lastName: "Previtali", group: "team", role: "operativo", photo: P("nicholas-previtali"), pose: Q("nicholas-previtali--pose-alt"), linkedin: "https://www.linkedin.com/in/nicholas-previtali-34a6bb344/", backdrop: 3 },
+  { slug: "nicholas-previtali", firstName: "Nicholas", lastName: "Previtali", group: "team", role: "operativo", photo: P("nicholas-previtali"), pose: Q("nicholas-previtali--pose-alt"), backdrop: 3 },
   { slug: "simone-mazzoleni", firstName: "Simone", lastName: "Mazzoleni", group: "team", role: "operativo", photo: P("simone-mazzoleni"), backdrop: 6 },
 ];
 

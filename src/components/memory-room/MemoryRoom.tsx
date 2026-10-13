@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useRef, useState, type CSSProperties, type KeyboardEvent, type PointerEvent, type WheelEvent } from "react";
-import { Hand } from "lucide-react";
+import { ArrowLeft, ArrowRight, Hand } from "lucide-react";
 import { Img } from "@/components/ui/Img";
 
 export type Memory = {
@@ -30,7 +30,7 @@ type DragStart = { x: number; y: number; pointerId: number };
 /**
  * La stanza dei ricordi: a USER-CONTROLLED curved photography wall.
  * No timers, autoplay, scroll hijack or CSS keyframe movement.
- * Change photos with swipe/drag, horizontal trackpad or keyboard.
+ * Change photos with arrows, swipe/drag, horizontal trackpad or keyboard.
  * Preserve vertical page scrolling on touch devices.
  */
 export function MemoryRoom({ items, labels }: { items: Memory[]; labels: Labels }) {
@@ -96,7 +96,7 @@ export function MemoryRoom({ items, labels }: { items: Memory[]; labels: Labels 
         className="relative isolate mx-auto h-[265px] w-full cursor-grab select-none overflow-hidden rounded-[26px] border border-ink/10 bg-[#f9fbf6] shadow-[0_10px_30px_-26px_rgb(5_42_34/.3)] outline-offset-4 active:cursor-grabbing sm:h-[340px] sm:rounded-[30px] lg:h-[460px] lg:rounded-[36px]"
         style={{ perspective: "1100px", touchAction: "pan-y", ['--memory-step' as string]: "clamp(185px, 26vw, 354px)" }}
       >
-        {/* Manual photo gallery: swipe, drag, trackpad, and keyboard. */}
+        {/* Photo area is intentionally free of buttons. Navigation is in a dedicated row below. */}
         {items.map((item, i) => {
           let distance = i - active;
           if (distance > count / 2) distance -= count;
@@ -127,8 +127,10 @@ export function MemoryRoom({ items, labels }: { items: Memory[]; labels: Labels 
           );
         })}
       </div>
-      <div className="mt-5 flex items-center justify-center pb-2">
-        <span className="inline-flex items-center gap-1.5 text-[13px] font-medium text-slate"><Hand aria-hidden className="size-4" /> Trascina per sfogliare</span>
+      <div className="mt-5 flex flex-wrap items-center justify-center gap-3 pb-2 sm:gap-4">
+        <button type="button" data-memory-prev onClick={() => move(-1)} aria-label={labels.prev} className="paper-round shrink-0"><ArrowLeft aria-hidden /></button>
+        <button type="button" data-memory-next onClick={() => move(1)} aria-label={labels.next} className="paper-round paper-round--dark shrink-0"><ArrowRight aria-hidden /></button>
+        <span className="inline-flex items-center gap-1.5 text-[13px] font-medium text-slate sm:ml-3"><Hand aria-hidden className="size-4" /> Trascina per sfogliare</span>
       </div>
       <ol className="sr-only">
         {items.map((item) => <li key={item.id}>{item.year ?? labels.yearUnknown}: {item.title}. {item.caption}</li>)}

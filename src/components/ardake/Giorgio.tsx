@@ -34,29 +34,6 @@ const safeSet = (k: string, v: string) => {
 };
 const STAGE = { w: 260, h: 346 };
 
-/** Only on smartphones: short, complete explanations; the full text is unchanged on tablets/desktop. */
-function compactTopicBody(topicKey: string, body: string, locale: Locale): string {
-  const italian: Record<string, string> = {
-    ardake: "Ardaké, sviluppata da SUN-FAI, ti mostra produzione, consumi ed energia condivisa della tua comunità.",
-    configurazione: "Ogni configurazione riunisce i soci collegati alla stessa cabina primaria, che condividono energia tra loro.",
-    "cabina-primaria": "È la cabina elettrica della tua zona. Il suo codice identifica la configurazione a cui puoi aderire.",
-    "quarto-orario": "L'energia condivisa viene calcolata ogni 15 minuti, confrontando produzione e consumi nello stesso intervallo.",
-    "ultimi-15-minuti": "Mostra l'energia prodotta nell'ultimo quarto d'ora registrato.",
-    "totale-periodo": "È l'energia prodotta nel periodo scelto. Cambia il filtro per confrontare i risultati.",
-    "potenza-istantanea": "Il grafico mostra quanti kW producono gli impianti nei diversi momenti della giornata.",
-    "energia-condivisa": "È l'energia prodotta da alcuni soci e consumata da altri nella stessa cabina e nello stesso quarto d'ora.",
-    incentivi: "Gli incentivi del GSE arrivano alla cooperativa, che li ripartisce secondo il regolamento dei soci.",
-    "prosumer-consumer": "Il prosumer produce e consuma energia; il consumer la consuma soltanto. Entrambi possono aderire.",
-    kwp: "Il kWp indica la potenza massima teorica di un impianto fotovoltaico in condizioni ideali.",
-    kwh: "I kW misurano la potenza istantanea, i kWh l'energia prodotta o consumata nel tempo.",
-    "stato-configurazione": "La configurazione può essere attiva, in valutazione o ancora in progetto.",
-  };
-  if (locale === "it" && italian[topicKey]) return italian[topicKey];
-  // Preserve the original language for any Bergamasco topic.
-  const firstSentence = body.trim().split(/(?<=[.!?])\s+/)[0] || body;
-  return firstSentence.length <= 155 ? firstSentence : `${firstSentence.slice(0, 152).trimEnd()}…`;
-}
-
 /**
  * Giorgio, V3 (pack 16.6 — controller from prompt-packs/16_FIX_VISUAL_OVERHAUL/code/giorgio-tour.ts).
  * TOUR: sections marked `data-tour-step="<topic>" data-tour-order="n"`; on the first visit (after the hero has scrolled
@@ -241,7 +218,7 @@ export function GiorgioProvider({ g, locale, tour, children }: { g: G; locale: L
               animate={{ opacity: 1, transition: { duration: 0.2 } }}
               className={
                 compact
-                  ? `pointer-events-auto absolute inset-x-3 bottom-0 w-[calc(100%-24px)] overflow-x-clip rounded-[24px] bg-card px-3.5 py-3 shadow-[0_0_0_1px_var(--color-hairline),var(--shadow-lift)] ${mobileMinimized ? "!h-[64px] overflow-hidden" : "max-h-[calc(100dvh-80px)] overflow-y-auto"}`
+                  ? `pointer-events-auto absolute inset-x-3 bottom-0 w-[calc(100%-24px)] overflow-x-clip overflow-y-auto rounded-[24px] bg-card p-4 shadow-[0_0_0_1px_var(--color-hairline),var(--shadow-lift)] ${mobileMinimized ? "!h-[72px] overflow-hidden" : "max-h-[min(37dvh,255px)]"}`
                   : tablet
                     ? "pointer-events-auto absolute right-[calc(100%-10px)] top-0 max-h-[min(60dvh,430px)] w-[min(400px,calc(100vw-240px))] min-w-0 overflow-x-clip overflow-y-auto overscroll-contain rounded-[24px] bg-card p-5 shadow-[0_0_0_1px_var(--color-hairline),var(--shadow-lift)]"
                     : "pointer-events-auto absolute right-[calc(100%-8px)] top-4 max-h-[75vh] w-[min(380px,calc(100vw-310px))] overflow-x-clip overflow-y-auto rounded-[24px] bg-card p-5 shadow-[0_0_0_1px_var(--color-hairline),var(--shadow-lift)]"
@@ -250,7 +227,7 @@ export function GiorgioProvider({ g, locale, tour, children }: { g: G; locale: L
               {!compact ? <span aria-hidden className={phone ? "absolute -bottom-[7px] right-[70px] size-4 rotate-45 bg-card" : "absolute -right-[7px] top-10 size-4 rotate-45 bg-card"} /> : null}
               <div className="mb-1 flex items-center gap-2">
                 {compact ? <Img src={presenters.giorgioGuide} alt="" sizes="42px" className="size-10 shrink-0 rounded-full bg-[#FDEFC4] object-cover object-top" /> : null}
-                <p className={`min-w-0 flex-1 font-semibold text-leaf-text ${compact ? "text-[15px] leading-snug" : "text-[13px]"}`}>{compact ? s.topic!.title : g.eyebrow}</p>
+                <p className="min-w-0 flex-1 text-[13px] font-semibold text-leaf-text">{compact && mobileMinimized ? s.topic!.title : g.eyebrow}</p>
                 {compact && (
                   <button type="button" onClick={() => setMobileMinimized((m) => !m)} aria-label={mobileMinimized ? "Espandi la spiegazione di Giorgio" : "Riduci la spiegazione di Giorgio"} aria-expanded={!mobileMinimized} className="grid size-10 shrink-0 place-items-center rounded-full bg-paper-2 text-ink">
                     {mobileMinimized ? <ChevronUp className="size-5" aria-hidden /> : <ChevronDown className="size-5" aria-hidden />}
@@ -258,10 +235,10 @@ export function GiorgioProvider({ g, locale, tour, children }: { g: G; locale: L
                 )}
               </div>
               <div hidden={compact && mobileMinimized}>
-              <h2 id="giorgio-title" ref={titleRef} tabIndex={-1} className={compact ? "sr-only" : "mt-1 font-display text-[1.3rem] font-extrabold tracking-[-0.025em] text-ink outline-none"}>
+              <h2 id="giorgio-title" ref={titleRef} tabIndex={-1} className="mt-1 font-display text-[1.3rem] font-extrabold tracking-[-0.025em] text-ink outline-none">
                 {s.topic!.title}
               </h2>
-              <p className={compact ? "mt-2 text-[14px] leading-[1.4] text-ink/85" : "mt-2 text-[15px] leading-relaxed text-ink/85 sm:text-[16px]"}>{compact ? compactTopicBody(s.topicKey, s.topic!.body, locale) : s.topic!.body}</p>
+              <p className="mt-2 text-[15px] leading-relaxed text-ink/85 sm:text-[16px]">{s.topic!.body}</p>
               {s.topic!.more ? (
                 <Link href={lhref(locale, s.topic!.more)} className="tlink text-[15px]">
                   <span>{g.more}</span>
@@ -270,7 +247,7 @@ export function GiorgioProvider({ g, locale, tour, children }: { g: G; locale: L
               ) : null}
 
               {s.mode === "tour" ? (
-                <div className={compact ? "mt-2" : "mt-4"}>
+                <div className="mt-4">
                   <div className="flex items-center gap-3">
                     <span className="text-[14px] font-semibold text-slate">{g.tourProgress.replace("{n}", String(s.step + 1)).replace("{total}", String(s.total))}</span>
                     <span aria-hidden className="flex gap-1.5">
@@ -279,7 +256,7 @@ export function GiorgioProvider({ g, locale, tour, children }: { g: G; locale: L
                       ))}
                     </span>
                   </div>
-                  <div className={compact ? "mt-2 flex min-w-0 flex-wrap items-center gap-2" : "mt-3 flex min-w-0 flex-wrap items-center gap-2"}>
+                  <div className="mt-3 flex min-w-0 flex-wrap items-center gap-2">
                     <button type="button" onClick={() => go(s.step - 1)} disabled={s.step === 0} className="btn btn--outline btn--sm disabled:opacity-40">
                       <ArrowLeft aria-hidden strokeWidth={2.2} />
                       {g.tourBack}
@@ -289,7 +266,7 @@ export function GiorgioProvider({ g, locale, tour, children }: { g: G; locale: L
                       <ArrowRight aria-hidden strokeWidth={2.2} />
                     </button>
                   </div>
-                  <button type="button" onClick={() => outro("skip")} className={`${compact ? "mt-0.5 min-h-9" : "mt-1 min-h-11"} inline-flex items-center text-[14px] font-semibold text-slate underline underline-offset-4 hover:text-ink`}>
+                  <button type="button" onClick={() => outro("skip")} className="mt-1 inline-flex min-h-11 items-center text-[14px] font-semibold text-slate underline underline-offset-4 hover:text-ink">
                     {g.tourSkip}
                   </button>
                 </div>

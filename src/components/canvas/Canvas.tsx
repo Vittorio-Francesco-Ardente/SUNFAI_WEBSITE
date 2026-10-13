@@ -34,7 +34,6 @@ export function CanvasPanel({
   id?: string;
   "data-section"?: string;
   "data-tour-step"?: string;
-  "data-home-hero"?: boolean;
   "data-tour-order"?: number;
   "aria-label"?: string;
   "aria-labelledby"?: string;
@@ -125,11 +124,14 @@ export function QuarterDisc({ corner, r, fill, className }: { corner: "tl" | "tr
   );
 }
 
-/** Decorative stray dots and tiny floating rings are disabled globally.
- *  Deliberately preserve brand ripples, large circle motifs, social icons and
- *  interactive status indicators. Existing callsites can stay unchanged. */
-export function Confetto(_props: { at: At; r: number; fill: string; ring?: boolean; hideSm?: boolean; className?: string }) {
-  return null;
+/** Confetti: a small complete dot or ring in free space (r in units). */
+export function Confetto({ at, r, fill, ring, hideSm, className }: { at: At; r: number; fill: string; ring?: boolean; hideSm?: boolean; className?: string }) {
+  const R = r * 1000;
+  return (
+    <svg className={cn("rp", hideSm && "max-md:hidden", className)} viewBox={`${-R} ${-R} ${2 * R} ${2 * R}`} style={{ ...pos(at), "--d": 2 * r } as V} focusable="false">
+      <path d={ringPath(0, 0, ring ? R * 0.55 : 0, R)} fill={fill} fillRule="evenodd" style={{ "--i": 0 } as V} />
+    </svg>
+  );
 }
 
 /** Flat dot grid (max one per page: Home hero). Top-left at `at`, px sizes. */

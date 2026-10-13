@@ -2,7 +2,7 @@ import { ArrowRight, ChevronRight, Mail, MapPin } from "lucide-react";
 import Link from "next/link";
 import { ButtonLink, Eyebrow, Headline, TextLink } from "@/components/ui/primitives";
 import { CanvasPanel, HalfDisc, Ripple } from "@/components/canvas/Canvas";
-import { FacebookIcon, InstagramIcon, LinkedinIcon } from "@/components/ui/SocialIcons";
+import { InstagramIcon, LinkedinIcon } from "@/components/ui/SocialIcons";
 import { asset } from "@/lib/asset";
 import { lhref, type Locale } from "@/lib/i18n";
 import { site, social } from "@/lib/site";
@@ -89,13 +89,6 @@ export function JoinContact({ d, locale, personAlt }: { d: Dict["common"]["joinC
               <a href={social.linkedin.url} target="_blank" rel="noopener noreferrer" className={ROW}>
                 <LinkedinIcon className="size-[18px] shrink-0 text-leaf-text" />
                 <span className="flex-1">{social.linkedin.label}</span>
-                <ChevronRight className="size-4 text-ink/40" aria-hidden />
-              </a>
-            </li>
-            <li>
-              <a href={social.facebook.url} target="_blank" rel="noopener noreferrer" className={ROW}>
-                <FacebookIcon className="size-[18px] shrink-0 text-leaf-text" />
-                <span className="flex-1">{social.facebook.label}</span>
                 <ChevronRight className="size-4 text-ink/40" aria-hidden />
               </a>
             </li>

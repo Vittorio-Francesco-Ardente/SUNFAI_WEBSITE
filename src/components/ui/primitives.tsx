@@ -49,13 +49,9 @@ export function Headline({
   delay?: number;
   id?: string;
 }) {
+  const lines = text.split("|");
   const last = text.trim().slice(-1);
   const showDot = dot && last !== "?" && last !== "!";
-  const sourceLines = text.split("|");
-  // Do not render a literal period as well as the branded yellow period.
-  const lines = sourceLines.map((line, i) =>
-    showDot && i === sourceLines.length - 1 ? line.replace(/\.\s*$/, "") : line,
-  );
   const accentCls = tone === "leaf" ? "accent accent--leaf" : tone === "solar" ? "accent accent--solar" : "accent";
   const sizeCls = { hero: "t-hero", h1: "t-h1", h2: "t-h2", h2s: "t-h2s", h3: "t-h3" }[size];
   const style = delay ? ({ "--hl-delay": `${delay}ms` } as CSSProperties) : undefined;
@@ -64,23 +60,20 @@ export function Headline({
       {lines.map((line, i) => (
         <span key={i} className="hl-line">
           <span style={{ "--i": i } as CSSProperties}>
-            {parseLine(line).map((p, j, parts) => {
-              const finalPart = showDot && i === lines.length - 1 && j === parts.length - 1;
-              const finalWord = finalPart ? p.text.match(/^([\s\S]*?)(\S+)(\s*)$/) : null;
-              return (
-                <span key={j} className={p.accent ? accentCls : undefined}>
-                  {finalWord ? (
-                    <>
-                      {finalWord[1]}
-                      <span className="whitespace-nowrap">
-                        {finalWord[2]}<span className="dot" aria-hidden="true">.</span>
-                      </span>
-                      {finalWord[3]}
-                    </>
-                  ) : p.text}
+            {parseLine(line).map((p, j) =>
+              p.accent ? (
+                <span key={j} className={accentCls}>
+                  {p.text}
                 </span>
-              );
-            })}
+              ) : (
+                <span key={j}>{p.text}</span>
+              ),
+            )}
+            {showDot && i === lines.length - 1 ? (
+              <span className="dot" aria-hidden="true">
+                .
+              </span>
+            ) : null}
           </span>
         </span>
       ))}

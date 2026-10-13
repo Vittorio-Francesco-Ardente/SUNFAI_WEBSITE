@@ -59,10 +59,10 @@ export function AchievementsCarousel({ items, labels, className }: { items: Achi
         {labels.live.replace("{n}", String(index + 1)).replace("{total}", String(total)).replace("{title}", item.title)}
       </p>
 
-      {/* Desktop/tablet: clean two-column composition without text/image collision or negative overlap. */}
-      <div className="relative hidden items-stretch gap-5 md:grid md:grid-cols-2 lg:gap-8">
+      {/* Desktop: image tile left, overlapping card right */}
+      <div className="relative hidden items-center gap-6 md:grid md:grid-cols-[minmax(0,500px)_minmax(0,1fr)] xl:flex xl:gap-0">
         <motion.div
-          className="relative aspect-[4/3] w-full min-w-0 overflow-hidden rounded-[32px] md:aspect-auto md:min-h-[360px] lg:min-h-[420px]"
+          className="relative aspect-square w-full max-w-[500px] shrink-0 overflow-hidden rounded-[40px]"
           drag={reduce ? false : "x"}
           dragConstraints={{ left: 0, right: 0 }}
           dragElastic={0.12}
@@ -78,7 +78,7 @@ export function AchievementsCarousel({ items, labels, className }: { items: Achi
             </motion.div>
           </AnimatePresence>
         </motion.div>
-        <div className="z-10 flex min-w-0 flex-col justify-center rounded-[28px] bg-card-warm p-6 shadow-[0_0_0_1px_var(--color-hairline),var(--shadow-soft)] lg:p-9 xl:p-11">
+        <div className="z-10 max-w-xl flex-1 rounded-[28px] bg-card-warm p-8 shadow-[0_0_0_1px_var(--color-hairline),var(--shadow-lift)] lg:p-9 xl:-ml-16">
           <AnimatePresence mode="wait">
             <motion.div key={item.id} {...fade}>
               <div className="mb-5 flex flex-wrap items-center gap-2">
@@ -133,7 +133,7 @@ export function AchievementsCarousel({ items, labels, className }: { items: Achi
       </div>
 
       {/* Controls: counter · prev · dots · next (paper buttons, no glow) */}
-      <div className="mt-9 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 pb-[90px] md:pb-[100px]">
+      <div className="mt-9 flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
         <span className="min-w-[64px] text-right tabular-nums text-slate">
           <b className="text-[20px] text-ink">{pad2(index + 1)}</b> / {pad2(total)}
         </span>

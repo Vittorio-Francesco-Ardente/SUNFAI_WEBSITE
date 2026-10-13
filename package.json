@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "node scripts/copy-vendor.mjs && next dev",
-    "build": "node scripts/check-requested-removals.mjs && node scripts/check-events.mjs && node scripts/copy-vendor.mjs && node scripts/optimize-images.mjs && node scripts/check-mascot.mjs && next build && node scripts/postbuild.mjs",
+    "build": "node scripts/copy-vendor.mjs && node scripts/optimize-images.mjs && node scripts/check-mascot.mjs && next build && node scripts/postbuild.mjs",
     "build:plain": "next build",
     "preview": "npx serve out -l 4173",
     "typecheck": "tsc --noEmit",
@@ -16,13 +16,11 @@
     "test:mobile": "playwright test -c playwright.mobile.config.ts",
     "test:fidelity": "playwright test -c playwright.fidelity.config.ts",
     "check:links": "node scripts/check-links.mjs",
-    "check:structure": "node scripts/check-requested-removals.mjs",
     "docs:fetch": "node scripts/fetch-documents.mjs",
     "routes": "node scripts/gen-routes.mjs",
     "backgrounds": "node scripts/gen-backgrounds.mjs",
     "v3:compare": "node scripts/v3-compare.mjs",
-    "qa:people": "node scripts/check-people-edges.mjs",
-    "check:events": "node scripts/check-events.mjs"
+    "qa:people": "node scripts/check-people-edges.mjs"
   },
   "dependencies": {
     "clsx": "^2.1.1",

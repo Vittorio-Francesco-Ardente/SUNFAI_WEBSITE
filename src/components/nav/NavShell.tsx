@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
-import { useCallback, useEffect, useRef, useState, type ComponentType, type MouseEvent, type ReactNode } from "react";
+import { usePathname } from "next/navigation";
+import { useCallback, useEffect, useRef, useState, type ComponentType, type ReactNode } from "react";
 import { AnimatePresence, motion, useMotionValue, useSpring, useTransform, type MotionValue } from "motion/react";
 import {
   ArrowRight,
@@ -20,14 +20,12 @@ import {
   type LucideProps,
 } from "lucide-react";
 import { SunMark, CornerSunrise } from "@/components/geometry/shapes";
-import { FacebookIcon, InstagramIcon, LinkedinIcon } from "@/components/ui/SocialIcons";
+import { InstagramIcon, LinkedinIcon } from "@/components/ui/SocialIcons";
 import { Img } from "@/components/ui/Img";
 import { asset } from "@/lib/asset";
 import { cn } from "@/lib/cn";
-import { ArdakeNavMark } from "./ArdakeNavMark";
 import { lhref, localeMeta, rememberLocale, switchLocalePath, unlocalized, type Locale } from "@/lib/i18n";
 import { useKeyboardFlag, useLowEndFlag } from "@/lib/use-media";
-import { initialDockScrollState, nextDockScrollState } from "@/lib/dock-scroll";
 import { EASE_OUT_SOFT } from "@/lib/motion";
 import { site, social } from "@/lib/site";
 import type { Dict } from "@/content/dict";
@@ -83,23 +81,36 @@ export function NavShell({ t, locale }: { t: NavLabels; locale: Locale }) {
   const past = useScrolledPast();
   const [sheet, setSheet] = useState(false);
   const [atTop8, setAtTop8] = useState(true);
-  const [dockVisible, setDockVisible] = useState(false);
-  const dockScroll = useRef(initialDockScrollState());
+  const [dockReading, setDockReading] = useState(false);
+  const lastScrollY = useRef(0);
+  const dockScrollIntent = useRef(0);
   const items = buildItems(t);
   useKeyboardFlag();
   useLowEndFlag();
 
   useEffect(() => {
     let frame = 0;
-    dockScroll.current = initialDockScrollState(window.scrollY);
-    setDockVisible(dockScroll.current.visible);
+    lastScrollY.current = window.scrollY;
     const measure = () => {
       frame = 0;
       const y = window.scrollY;
+      const delta = y - lastScrollY.current;
       setAtTop8(y < 8);
-      const next = nextDockScrollState(dockScroll.current, y);
-      if (next.visible !== dockScroll.current.visible) setDockVisible(next.visible);
-      dockScroll.current = next;
+      if (window.innerWidth < 768) {
+        if (y < 140) {
+          dockScrollIntent.current = 0;
+          setDockReading(false);
+        } else if (Math.abs(delta) > 1) {
+          if (Math.sign(delta) !== Math.sign(dockScrollIntent.current)) dockScrollIntent.current = 0;
+          dockScrollIntent.current = Math.max(-48, Math.min(48, dockScrollIntent.current + delta));
+          if (dockScrollIntent.current < -20) setDockReading(false);
+          else if (y > 230 && dockScrollIntent.current > 30) setDockReading(true);
+        }
+      } else {
+        dockScrollIntent.current = 0;
+        setDockReading(false);
+      }
+      lastScrollY.current = y;
     };
     const onScroll = () => { if (!frame) frame = window.requestAnimationFrame(measure); };
     measure();
@@ -122,17 +133,7 @@ export function NavShell({ t, locale }: { t: NavLabels; locale: Locale }) {
       firstPath.current = false;
       return;
     }
-    dockScroll.current = initialDockScrollState(window.scrollY);
-    setDockVisible(dockScroll.current.visible);
-    if (window.location.hash) {
-      const targetId = decodeURIComponent(window.location.hash.slice(1));
-      window.requestAnimationFrame(() => {
-        window.requestAnimationFrame(() => {
-          document.getElementById(targetId)?.scrollIntoView({ behavior: "auto", block: "start" });
-        });
-      });
-      return;
-    }
+    setDockReading(false);
     window.scrollTo({ top: 0, left: 0, behavior: "auto" });
     document.getElementById("contenuto")?.focus?.({ preventScroll: true });
   }, [pathname]);
@@ -142,8 +143,8 @@ export function NavShell({ t, locale }: { t: NavLabels; locale: Locale }) {
   return (
     <>
       <TopBar t={t} locale={locale} pathname={pathname} items={items} hidden={past} solid={!atTop8} onMenu={() => setSheet(true)} menuOpen={sheet} />
-      <DesktopDock t={t} locale={locale} pathname={pathname} items={items} visible={dockVisible && !sheet} />
-      <MobileDock t={t} locale={locale} pathname={pathname} items={items} visible={dockVisible && !sheet} onMore={() => setSheet(true)} moreOpen={sheet} />
+      <DesktopDock t={t} locale={locale} pathname={pathname} items={items} visible={past && !sheet} />
+      <MobileDock t={t} locale={locale} pathname={pathname} items={items} visible={past && !sheet && !dockReading} onMore={() => setSheet(true)} moreOpen={sheet} />
       <MenuSheet t={t} locale={locale} pathname={pathname} items={items} open={sheet} onClose={close} />
     </>
   );
@@ -151,62 +152,8 @@ export function NavShell({ t, locale }: { t: NavLabels; locale: Locale }) {
 
 /* ---------------------------------------------------------------- Logo */
 function Logo({ locale, t, onClick, className }: { locale: Locale; t: NavLabels; onClick?: () => void; className?: string }) {
-  const router = useRouter();
-  const path = usePathname() ?? "/";
-  const href = lhref(locale, "/");
-  const timer = useRef<number | null>(null);
-  const cleanup = useRef<number | null>(null);
-  const [returning, setReturning] = useState(false);
-
-  useEffect(() => () => {
-    if (timer.current !== null) window.clearTimeout(timer.current);
-    if (cleanup.current !== null) window.clearTimeout(cleanup.current);
-    document.documentElement.classList.remove("sf-logo-nav-home");
-  }, []);
-
-  // Keep the class until the destination has actually rendered, including on slow devices.
-  useEffect(() => {
-    if (!returning || !isActive(path, "/")) return;
-    if (cleanup.current !== null) window.clearTimeout(cleanup.current);
-    cleanup.current = window.setTimeout(() => {
-      setReturning(false);
-      document.documentElement.classList.remove("sf-logo-nav-home");
-      cleanup.current = null;
-    }, 460);
-  }, [path, returning]);
-
-  const goHome = (event: MouseEvent<HTMLAnchorElement>) => {
-    onClick?.();
-    // The same logo also appears in the menu sheet: closing the sheet unmounts
-    // this instance, so that link must use normal immediate navigation.
-    if (onClick) return;
-    // Leave browser-native modified clicks and external new-tab behavior intact.
-    if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduce) return;
-    event.preventDefault();
-    if (timer.current !== null) window.clearTimeout(timer.current);
-    if (cleanup.current !== null) window.clearTimeout(cleanup.current);
-    setReturning(true);
-    const onHome = isActive(path, "/");
-    if (!onHome) document.documentElement.classList.add("sf-logo-nav-home");
-    timer.current = window.setTimeout(() => {
-      if (onHome) {
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      } else {
-        router.push(href);
-      }
-      timer.current = null;
-    }, 160);
-    cleanup.current = window.setTimeout(() => {
-      setReturning(false);
-      document.documentElement.classList.remove("sf-logo-nav-home");
-      cleanup.current = null;
-    }, 2400);
-  };
-
   return (
-    <Link href={href} aria-label={t.logoAria} onClick={goHome} data-returning={returning} className={cn("sf-home-logo relative inline-flex min-h-11 shrink-0 items-center", className)}>
+    <Link href={lhref(locale, "/")} aria-label={t.logoAria} onClick={onClick} className={cn("inline-flex min-h-11 shrink-0 items-center", className)}>
       <Img src="/brand/sunfai-logo.png" alt="" sizes="200px" priority className="h-[30px] w-auto md:h-[34px] lg:h-[38px] xl:h-[42px] 2xl:h-[46px]" />
     </Link>
   );
@@ -307,45 +254,43 @@ function TopBar({
         solid && "bg-paper/92 shadow-[0_1px_0_var(--color-hairline),0_14px_32px_-28px_rgb(5_42_34/.45)] backdrop-blur-[14px]",
       )}
     >
-      <div className="container-x flex h-full items-center gap-2 lg:gap-2.5 xl:gap-3 2xl:gap-5">
+      <div className="container-x flex h-full items-center gap-4 xl:gap-6">
         <Logo locale={locale} t={t} />
-        <nav aria-label={t.navMain} className="sf-nav-main hidden min-w-0 flex-1 justify-center lg:flex">
-          <ul className="flex min-w-0 items-center gap-3 xl:gap-4 2xl:gap-6">
+        <nav aria-label={t.navMain} className="hidden min-w-0 flex-1 justify-center 2xl:flex">
+          <ul className="flex items-center gap-3 xl:gap-7">
             {items.main.map((it) => {
               const active = isActive(pathname, it.href);
               return (
                 <li key={it.key}>
                   <Link
                     href={lhref(locale, it.href)}
-                    aria-label={it.key === "ardake" ? "Ardaké" : undefined}
                     aria-current={active ? "page" : undefined}
                     className={cn(
-                      "relative inline-flex h-11 items-center whitespace-nowrap text-[12.5px] font-medium transition-colors xl:text-[13.5px] 2xl:text-[16px]",
+                      "relative inline-flex h-11 items-center whitespace-nowrap text-[15px] transition-colors xl:text-[16px] 2xl:text-[17px]",
                       active ? "font-semibold text-orange-text" : "font-medium text-ink/92 hover:text-ink",
-                      it.key === "ardake" && "sf-ardake-link",
                       "after:absolute after:inset-x-0 after:bottom-[3px] after:h-[2px] after:origin-left after:rounded-full after:bg-orange after:transition-transform after:duration-300",
                       active ? "after:scale-x-100" : "after:scale-x-0 hover:after:scale-x-100",
                     )}
                   >
-                    {it.key === "ardake" ? <ArdakeNavMark /> : it.label}
+                    {it.label}
                   </Link>
                 </li>
               );
             })}
           </ul>
         </nav>
-        <div className="sf-nav-actions ml-auto flex items-center gap-2 lg:ml-0 xl:gap-2.5">
-          <div className="sf-nav-lang hidden md:block">
+        <div className="ml-auto flex items-center gap-2.5 lg:ml-0">
+          <div className="hidden md:block">
             <LangSwitch locale={locale} pathname={pathname} t={t} />
           </div>
           <Link
             href={lhref(locale, items.contact.href)}
-            className="btn btn--outline btn--sm hidden md:inline-flex lg:hidden 2xl:inline-flex"
+            className="btn btn--outline btn--sm hidden md:inline-flex"
             aria-current={isActive(pathname, items.contact.href) ? "page" : undefined}
           >
             {t.contattaci}
           </Link>
-          <Link href={lhref(locale, items.join.href)} className="sf-nav-join btn btn--primary btn--sm hidden md:inline-flex" aria-current={isActive(pathname, items.join.href) ? "page" : undefined}>
+          <Link href={lhref(locale, items.join.href)} className="btn btn--primary btn--sm hidden md:inline-flex" aria-current={isActive(pathname, items.join.href) ? "page" : undefined}>
             {t.diventaSocio}
             <ArrowRight aria-hidden strokeWidth={2.2} />
           </Link>
@@ -361,17 +306,17 @@ function TopBar({
           </button>
         </div>
       </div>
-      {/* Tablets in portrait retain all seven destinations in a second row when they cannot
-          fit legibly on one line. Landscape tablets use the same one-row navigation as desktop. */}
-      <nav aria-label={t.navMain} className="hidden md:flex lg:hidden min-h-[48px] w-full items-center justify-center border-t border-ink/10 px-4">
+      {/* Tablet navigation uses the same seven destinations as desktop, not a menu-only header.
+          The second row preserves legible spacing from 768 to 1535px. */}
+      <nav aria-label={t.navMain} className="hidden md:flex 2xl:hidden min-h-[48px] w-full items-center justify-center border-t border-ink/10 px-4">
         <ul className="mx-auto flex w-full max-w-[1110px] items-center justify-between gap-2">
           {items.main.map((it) => {
             const active = isActive(pathname, it.href);
             return (
               <li key={it.key} className="min-w-0">
-                <Link href={lhref(locale, it.href)} aria-label={it.key === "ardake" ? "Ardaké" : undefined} aria-current={active ? "page" : undefined}
-                  className={cn("relative flex h-11 items-center justify-center whitespace-nowrap px-1 font-medium text-[clamp(11px,1.18vw,15px)] text-ink transition-colors hover:text-orange-text", it.key === "ardake" && "sf-ardake-link", active && "!font-bold !text-orange-text after:absolute after:bottom-1 after:inset-x-1 after:h-0.5 after:rounded-full after:bg-orange")}>
-                  {it.key === "ardake" ? <ArdakeNavMark /> : it.label}
+                <Link href={lhref(locale, it.href)} aria-current={active ? "page" : undefined}
+                  className={cn("relative flex h-11 items-center justify-center whitespace-nowrap px-1 font-medium text-[clamp(11px,1.18vw,15px)] text-ink transition-colors hover:text-orange-text", active && "!font-bold !text-orange-text after:absolute after:bottom-1 after:inset-x-1 after:h-0.5 after:rounded-full after:bg-orange")}>
+                  {it.label}
                 </Link>
               </li>
             );
@@ -409,12 +354,12 @@ function DesktopDock({ t, locale, pathname, items, visible }: { t: NavLabels; lo
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: reduce ? 0 : 20 }}
           transition={{ duration: 0.28, ease: EASE_OUT_SOFT }}
-          className="pointer-events-none fixed inset-x-0 bottom-[calc(28px+var(--safe-b))] z-50 hidden justify-center md:flex"
+          className="pointer-events-none fixed inset-x-0 bottom-[calc(24px+var(--safe-b))] z-50 hidden justify-center 2xl:flex"
         >
           <div
             onMouseMove={(e) => canHover && !reduce && mouseX.set(e.clientX)}
             onMouseLeave={() => mouseX.set(Infinity)}
-            className="pointer-events-auto flex h-[68px] items-center justify-center gap-1.5 rounded-full bg-dock px-3 py-2 shadow-[0_0_0_1px_var(--color-hairline),var(--shadow-lift)]"
+            className="pointer-events-auto flex h-[64px] items-end gap-1.5 rounded-full bg-dock px-2.5 pb-[10px] shadow-[0_0_0_1px_var(--color-hairline),var(--shadow-lift)]"
           >
             {list.map((it) => (
               <DockItem key={it.key} item={it} locale={locale} active={isActive(pathname, it.href)} mouseX={mouseX} />
@@ -427,7 +372,7 @@ function DesktopDock({ t, locale, pathname, items, visible }: { t: NavLabels; lo
             <Link
               href={lhref(locale, items.join.href)}
               aria-current={isActive(pathname, items.join.href) ? "page" : undefined}
-              className="btn btn--primary btn--sm ml-1 !inline-flex !h-11 shrink-0 items-center justify-center whitespace-nowrap !px-5 !py-0 !leading-none"
+              className="btn btn--primary btn--sm ml-1 self-center"
             >
               {t.diventaSocio}
               <ArrowRight aria-hidden strokeWidth={2.2} />
@@ -513,6 +458,7 @@ function DockItem({ item, locale, active, mouseX }: { item: Item; locale: Locale
         </motion.span>
       </Link>
       <Tooltip show={tip} label={item.label} />
+      {active ? <span aria-hidden className="absolute -bottom-[7px] left-1/2 size-[5px] -translate-x-1/2 rounded-full bg-orange" /> : null}
     </motion.div>
   );
 }
@@ -566,6 +512,7 @@ function MobileDock({
                   >
                     {Icon ? <Icon className="size-[22px]" strokeWidth={1.9} aria-hidden /> : <SunMark className="size-[24px]" />}
                   </Link>
+                  {active ? <span aria-hidden className="absolute -bottom-[6px] left-1/2 size-[5px] -translate-x-1/2 rounded-full bg-orange" /> : null}
                 </span>
               );
             })}
@@ -656,10 +603,7 @@ function MenuSheet({ t, locale, pathname, items, open, onClose }: { t: NavLabels
     };
   }, [open, onClose]);
 
-  // Keep the compact desktop dock unchanged; expose Events in the full menu,
-  // and via homepage, News and footer links without crowding the tablet navbar.
-  const eventLink: Item = { key: "eventi", href: "/eventi/", label: locale === "lmo" ? "Evèncc" : "Eventi", icon: Newspaper };
-  const links = [items.home, ...items.main.slice(0, -1), eventLink, items.main[items.main.length - 1]];
+  const links = [items.home, ...items.main];
 
   return (
     <AnimatePresence>
@@ -693,15 +637,13 @@ function MenuSheet({ t, locale, pathname, items, open, onClose }: { t: NavLabels
                     <Link
                       href={lhref(locale, it.href)}
                       onClick={onClose}
-                      aria-label={it.key === "ardake" ? "Ardaké" : undefined}
                       aria-current={active ? "page" : undefined}
                       className={cn(
                         "flex min-h-[56px] items-center justify-between py-2 font-display text-[clamp(1.6rem,1.2rem+2vw,2.1rem)] font-extrabold tracking-[-0.035em]",
                         active ? "text-orange-text" : "text-ink",
-                        it.key === "ardake" && "sf-ardake-link",
                       )}
                     >
-                      {it.key === "ardake" ? <ArdakeNavMark size="menu" /> : it.label}
+                      {it.label}
                       <ArrowRight className="size-6 text-ink/30" aria-hidden />
                     </Link>
                   </motion.li>
@@ -735,9 +677,6 @@ function MenuSheet({ t, locale, pathname, items, open, onClose }: { t: NavLabels
                 </a>
                 <a href={social.linkedin.url} target="_blank" rel="noopener noreferrer" aria-label={social.linkedin.label} className="paper-round">
                   <LinkedinIcon className="size-[18px]" />
-                </a>
-                <a href={social.facebook.url} target="_blank" rel="noopener noreferrer" aria-label={social.facebook.label} className="paper-round">
-                  <FacebookIcon className="size-[18px]" />
                 </a>
               </div>
             </div>

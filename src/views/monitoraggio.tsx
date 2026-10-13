@@ -5,8 +5,7 @@ import { pageMeta } from "@/lib/meta";
 import { lhref, type Locale } from "@/lib/i18n";
 import { asset } from "@/lib/asset";
 import { configurations } from "@/lib/configurations";
-import { CanvasPanel, Ripple } from "@/components/canvas/Canvas";
-import { Img } from "@/components/ui/Img";
+import { CanvasPanel, PanelMascot, Ripple } from "@/components/canvas/Canvas";
 import { Monitor } from "@/components/ardake/Monitor";
 import { GiorgioProvider } from "@/components/ardake/Giorgio";
 
@@ -30,21 +29,19 @@ export function MonitoraggioPage({ locale }: { locale: Locale }) {
           <Link href={lhref(locale, "/ardake/")} className="inline-flex min-h-11 items-center gap-2 text-[15px] font-semibold text-ink/75 hover:text-ink">
             <ArrowLeft className="size-4" aria-hidden /> Ardaké
           </Link>
-          <div className="mt-4 grid min-w-0 gap-5 xl:grid-cols-[minmax(0,1fr)_210px] xl:items-center xl:gap-10">
-            <div className="min-w-0 max-w-[680px]">
+          <div className="mt-4 flex flex-wrap items-end justify-between gap-4">
+            <div>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={asset("/ardake/ardake-logotype-vector.svg")} alt="Ardaké" width={150} height={45} className="h-auto w-[150px]" />
               <h1 className="t-h2s mt-4">{a.monitor.title.replace("{code}", configurations[0].code)}</h1>
               <p className="t-lead mt-2">{a.monitor.sub}</p>
-            </div>
-            <div className="hidden xl:flex xl:items-center xl:justify-center" aria-hidden="true">
-              <Img src="/mascot/mascot-08-laptop.webp" alt="" sizes="210px" className="h-auto w-full max-w-[210px] object-contain" />
             </div>
           </div>
           <div className="mt-8">
             <Monitor a={a} locale={locale} legend={d.home.map.legend} />
           </div>
         </div>
+          <PanelMascot src="/mascot/mascot-08-laptop.webp" alt={d.common.ui.mascotAlt} sizes="220px" className="right-[8%] top-[clamp(80px,9vw,120px)] w-[clamp(150px,15cqw,220px)] max-lg:hidden" />
       </CanvasPanel>
     </GiorgioProvider>
   );

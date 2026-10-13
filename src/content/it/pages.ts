@@ -313,7 +313,7 @@ export const pages = {
     hero: {
       eyebrow: "Notizie",
       title: "Cosa succede in *cooperativa*", // [DEMO]
-      lead: "Configurazioni, Comuni, riconoscimenti. Le novità più fresche le pubblichiamo ogni settimana su Instagram, LinkedIn e Facebook.", // [DEMO]
+      lead: "Configurazioni, Comuni, riconoscimenti. Le novità più fresche le pubblichiamo ogni settimana su Instagram e LinkedIn.", // [DEMO]
       presenterAlt: "Andrea Belotti del team SUN-FAI",
     },
     featured: "In evidenza",
