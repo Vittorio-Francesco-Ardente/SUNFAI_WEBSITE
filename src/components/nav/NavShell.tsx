@@ -308,8 +308,8 @@ function TopBar({
     >
       <div className="container-x flex h-full items-center gap-2 lg:gap-2.5 xl:gap-3 2xl:gap-5">
         <Logo locale={locale} t={t} />
-        <nav aria-label={t.navMain} className="hidden min-w-0 flex-1 justify-center lg:flex">
-          <ul className="flex min-w-0 items-center gap-2 lg:gap-2 xl:gap-3 2xl:gap-6">
+        <nav aria-label={t.navMain} className="sf-nav-main hidden min-w-0 flex-1 justify-center lg:flex">
+          <ul className="flex min-w-0 items-center gap-3 xl:gap-4 2xl:gap-6">
             {items.main.map((it) => {
               const active = isActive(pathname, it.href);
               return (
@@ -318,7 +318,7 @@ function TopBar({
                     href={lhref(locale, it.href)}
                     aria-current={active ? "page" : undefined}
                     className={cn(
-                      "relative inline-flex h-11 items-center whitespace-nowrap text-[12px] font-medium transition-colors xl:text-[13px] 2xl:text-[16px]",
+                      "relative inline-flex h-11 items-center whitespace-nowrap text-[12.5px] font-medium transition-colors xl:text-[13.5px] 2xl:text-[16px]",
                       active ? "font-semibold text-orange-text" : "font-medium text-ink/92 hover:text-ink",
                       "after:absolute after:inset-x-0 after:bottom-[3px] after:h-[2px] after:origin-left after:rounded-full after:bg-orange after:transition-transform after:duration-300",
                       active ? "after:scale-x-100" : "after:scale-x-0 hover:after:scale-x-100",
@@ -331,18 +331,18 @@ function TopBar({
             })}
           </ul>
         </nav>
-        <div className="ml-auto flex items-center gap-2.5 lg:ml-0">
-          <div className="hidden md:block">
+        <div className="sf-nav-actions ml-auto flex items-center gap-2 lg:ml-0 xl:gap-2.5">
+          <div className="sf-nav-lang hidden md:block">
             <LangSwitch locale={locale} pathname={pathname} t={t} />
           </div>
           <Link
             href={lhref(locale, items.contact.href)}
-            className="btn btn--outline btn--sm hidden md:inline-flex lg:hidden xl:inline-flex"
+            className="btn btn--outline btn--sm hidden md:inline-flex lg:hidden 2xl:inline-flex"
             aria-current={isActive(pathname, items.contact.href) ? "page" : undefined}
           >
             {t.contattaci}
           </Link>
-          <Link href={lhref(locale, items.join.href)} className="btn btn--primary btn--sm hidden md:inline-flex" aria-current={isActive(pathname, items.join.href) ? "page" : undefined}>
+          <Link href={lhref(locale, items.join.href)} className="sf-nav-join btn btn--primary btn--sm hidden md:inline-flex" aria-current={isActive(pathname, items.join.href) ? "page" : undefined}>
             {t.diventaSocio}
             <ArrowRight aria-hidden strokeWidth={2.2} />
           </Link>

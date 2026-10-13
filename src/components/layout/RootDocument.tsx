@@ -28,7 +28,7 @@ const PREFLIGHT = `(function(){
       d.classList.add('sf-loader-done');
       var h=document.getElementById('sf-loader');if(h)h.style.display='none';
     }
-  },8000)},{once:true});
+  },3200)},{once:true});
 })();`;
 
 export function RootDocument({ locale, children }: { locale: Locale; children: ReactNode }) {
@@ -48,7 +48,7 @@ export function RootDocument({ locale, children }: { locale: Locale; children: R
           {d.common.nav.skip}
         </a>
         <NavShell t={d.common.nav} locale={locale} />
-        <main id="contenuto" data-sunfai-version="v38-loader-events-mobile" tabIndex={-1} className="relative isolate outline-none">
+        <main id="contenuto" data-sunfai-version="v39-fast-loader-tablet-nav-headline" tabIndex={-1} className="relative isolate outline-none">
           {children}
         </main>
         <Footer d={d} locale={locale} />

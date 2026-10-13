@@ -543,3 +543,14 @@ html.sf-logo-nav-home [data-home-hero] {
   .sf-home-logo img { transition: none !important; }
   html.sf-logo-nav-home [data-home-hero] { animation: none !important; }
 }
+
+/* SUN-FAI v39: tablet navbar spacing; desktop layout remains in one row. */
+@media (min-width: 1024px) and (max-width: 1279.98px) {
+  .topbar > .container-x { gap: 7px; }
+  .topbar .sf-home-logo img { height: 31px; }
+  .topbar .sf-nav-main > ul { gap: clamp(10px, .95vw, 13px); }
+  .topbar .sf-nav-main a { font-size: clamp(10.5px, .98vw, 12.5px); }
+  .topbar .sf-nav-actions { gap: 6px; }
+  .topbar .sf-nav-lang [role="group"] > a { min-width: 34px; padding-inline: 6px; font-size: 12px; }
+  .topbar .sf-nav-join { padding-inline: 10px; font-size: 12px; }
+}
