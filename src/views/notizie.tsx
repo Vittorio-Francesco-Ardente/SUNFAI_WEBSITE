@@ -40,7 +40,6 @@ export function NotiziePage({ locale }: { locale: Locale }) {
         visual={
           <div className="flex h-full items-center justify-center px-[var(--gutter)] pb-8 pt-3 lg:justify-end lg:pr-[clamp(26px,3vw,42px)] lg:pb-0">
             <div className="relative aspect-[4/4.2] w-full max-w-[470px] overflow-hidden rounded-[34px] border border-[rgb(5_42_34/.08)] bg-[#F7EAC3] shadow-[0_28px_50px_-34px_rgb(5_42_34/.30)]">
-              <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,.18),rgba(255,255,255,0))]" />
               <div className="absolute -right-[9%] -top-[10%] h-[58%] w-[58%] rounded-full border-[24px] border-[#F7D04B] opacity-45" />
               <div className="absolute right-[8%] top-[12%] h-[32%] w-[32%] rounded-full border-[20px] border-[#F6E6B5] opacity-95" />
               <div className="absolute -left-[18%] bottom-[-22%] h-[64%] w-[64%] rounded-full border-[22px] border-[#FFF8E8] opacity-95" />

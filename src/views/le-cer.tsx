@@ -57,11 +57,9 @@ export function LeCerPage({ locale }: { locale: Locale }) {
         visual={
           <div className="flex h-full items-center justify-center px-[var(--gutter)] pb-8 pt-3 lg:justify-end lg:pr-[clamp(22px,3vw,40px)] lg:pb-0">
             <div className="relative aspect-[4/4.2] w-full max-w-[470px] overflow-hidden rounded-[34px] border border-[rgb(5_42_34/.08)] bg-[#F3E6B8] shadow-[0_28px_50px_-34px_rgb(5_42_34/.30)]">
-              <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,.14),rgba(255,255,255,0))]" />
               <div className="absolute -right-[18%] top-[4%] h-[78%] w-[78%] rounded-full border-[26px] border-[#DDE8CB] opacity-95" />
               <div className="absolute -right-[8%] top-[14%] h-[58%] w-[58%] rounded-full border-[22px] border-[#FFF8E8] opacity-95" />
               <div className="absolute left-[8%] top-[10%] rounded-full border border-[#A9C879] bg-[#FFFDF7] px-4 py-2 text-[clamp(14px,1.4vw,18px)] font-semibold text-leafDeep shadow-[0_12px_24px_-20px_rgb(5_42_34/.35)]">Ci vediamo dal vivo!</div>
-              <div className="absolute inset-x-0 bottom-0 top-[22%] bg-[radial-gradient(circle_at_50%_100%,rgba(255,255,255,.25),rgba(255,255,255,0)_68%)]" />
               <Img src="/mascot/mascot-08-laptop.webp" alt={d.common.ui.mascotAlt} sizes="(max-width: 1023px) 70vw, 28vw" className="absolute bottom-0 left-1/2 z-[2] h-[78%] w-auto max-w-none -translate-x-1/2 object-contain object-bottom" />
             </div>
           </div>
