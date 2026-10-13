@@ -25,6 +25,7 @@ import { Img } from "@/components/ui/Img";
 import { asset } from "@/lib/asset";
 import { cn } from "@/lib/cn";
 import { ArdakeNavMark } from "./ArdakeNavMark";
+import { ArdakeNavMark } from "./ArdakeNavMark";
 import { lhref, localeMeta, rememberLocale, switchLocalePath, unlocalized, type Locale } from "@/lib/i18n";
 import { useKeyboardFlag, useLowEndFlag } from "@/lib/use-media";
 import { initialDockScrollState, nextDockScrollState } from "@/lib/dock-scroll";
@@ -322,6 +323,7 @@ function TopBar({
                     className={cn(
                       "relative inline-flex h-11 items-center whitespace-nowrap text-[12.5px] font-medium transition-colors xl:text-[13.5px] 2xl:text-[16px]",
                       active ? "font-semibold text-orange-text" : "font-medium text-ink/92 hover:text-ink",
+                      it.key === "ardake" && "sf-ardake-link",
                       it.key === "ardake" && "sf-ardake-link",
                       "after:absolute after:inset-x-0 after:bottom-[3px] after:h-[2px] after:origin-left after:rounded-full after:bg-orange after:transition-transform after:duration-300",
                       active ? "after:scale-x-100" : "after:scale-x-0 hover:after:scale-x-100",
@@ -698,6 +700,7 @@ function MenuSheet({ t, locale, pathname, items, open, onClose }: { t: NavLabels
                       className={cn(
                         "flex min-h-[56px] items-center justify-between py-2 font-display text-[clamp(1.6rem,1.2rem+2vw,2.1rem)] font-extrabold tracking-[-0.035em]",
                         active ? "text-orange-text" : "text-ink",
+                        it.key === "ardake" && "sf-ardake-link",
                         it.key === "ardake" && "sf-ardake-link",
                       )}
                     >
