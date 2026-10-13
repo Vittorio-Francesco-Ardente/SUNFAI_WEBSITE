@@ -26,13 +26,12 @@ export function EventiPage({ locale }: { locale: Locale }) {
             {locale === "lmo" && <p className="mt-3 text-[14px] text-slate">Informazioni sugli eventi in italiano.</p>}
             <Link href={lhref(locale, "/notizie/")} className="tlink mt-6">Leggi le notizie <ArrowRight className="size-4" aria-hidden /></Link>
           </div>
-          <div className="sf-events-page-portrait" aria-label="Le persone della comunità SUN-FAI">
-            <span className="sf-events-portrait-note">La comunità è fatta di persone.</span>
+          <div className="sf-events-page-portrait sf-events-mascot-stage">
             <Img
-              src="/people/poses/beatrice-parimbelli--pose-smile.webp"
-              alt="Beatrice, membro del team SUN-FAI"
-              sizes="(max-width: 767px) 76vw, (max-width: 1023px) 42vw, 31vw"
-              className="sf-events-beatrice"
+              src="/mascot/mascot-02-presenting.webp"
+              alt="Mascotte SUN-FAI che invita a incontrare la comunità"
+              sizes="(max-width: 767px) 78vw, (max-width: 1023px) 39vw, 34vw"
+              className="sf-events-mascot sf-events-mascot--page"
             />
           </div>
         </div>

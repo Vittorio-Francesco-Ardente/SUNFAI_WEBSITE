@@ -639,3 +639,59 @@ html.sf-logo-nav-home [data-home-hero] {
   }
   [data-dock]:not(.dock-mobile) .btn--sm {padding-inline:12px !important;font-size:13px;}
 }
+
+
+/* SUN-FAI V43 — mascotte Eventi e Notizie, originali trasparenti */
+
+.sf-events-mascot-stage { isolation:isolate; }
+.sf-events-home-visual {
+  background:#fff4d5;
+  border-radius:26px;
+}
+.sf-events-home-visual::before {
+  content:""; position:absolute; inset:12% -34% -46% -15%; border-radius:50%;
+  background:#fce9b7; opacity:.9; z-index:-1;
+}
+.sf-events-home-visual::after {
+  content:""; position:absolute; width:70%; aspect-ratio:1;
+  left:-27%; bottom:-45%; border-radius:50%;
+  border:clamp(9px,1.5vw,23px) solid #fffbef; opacity:.88; pointer-events:none;
+}
+.sf-events-mascot {
+  position:absolute; z-index:2; display:block; width:auto; max-width:94%;
+  object-fit:contain; object-position:center bottom;
+  filter:none; transform:none;
+}
+.sf-events-mascot--home {
+  height:min(94%,480px); right:5%; bottom:0;
+}
+.sf-events-page-portrait {
+  background:transparent; border-radius:40px;
+}
+.sf-events-page-portrait::before {
+  content:""; position:absolute; right:4%; top:12%; width:min(92%,510px); aspect-ratio:1;
+  border-radius:50%; background:#ecf2dc; z-index:-1;
+}
+.sf-events-page-portrait::after {
+  content:"";position:absolute; right:10%;top:18%;width:min(79%,445px);aspect-ratio:1;
+  border-radius:50%; border:clamp(15px,2.3vw,34px) solid #fff9e8; pointer-events:none;
+}
+.sf-events-mascot--page { height:min(90%,480px); right:10%; bottom:0; }
+@media (min-width:768px) and (max-width:1199.98px) {
+  .sf-events-home-visual {min-height:290px;}
+  .sf-events-mascot--home {height:83%;right:0;}
+  .sf-events-page-portrait {min-height:370px;}
+  .sf-events-mascot--page {height:82%;right:2%;}
+}
+@media (max-width:767.98px) {
+  .sf-events-home-visual {min-height:255px;height:255px;width:100%;border-radius:0 0 23px 23px;}
+  .sf-events-home-visual::before {inset:0 -15% -75% 15%;}
+  .sf-events-mascot--home {height:92%;max-width:80%;right:50%;transform:translateX(50%);}
+  .sf-events-page-portrait {height:285px;min-height:285px;margin-top:20px;}
+  .sf-events-page-portrait::before {right:15%;width:75%;top:4%;}
+  .sf-events-mascot--page {height:96%;max-width:76%;right:50%;transform:translateX(50%);}
+}
+@media (max-width:399.98px) {
+  .sf-events-home-visual {height:225px;min-height:225px;}
+  .sf-events-page-portrait {height:245px;min-height:245px;}
+}

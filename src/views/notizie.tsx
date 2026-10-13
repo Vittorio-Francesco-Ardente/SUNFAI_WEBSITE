@@ -27,15 +27,15 @@ export function NotiziePage({ locale }: { locale: Locale }) {
   return (
     <>
       <PageHero eyebrow={p.hero.eyebrow} title={p.hero.title} lead={p.hero.lead} tone="peach"
-        side="left"
+        side="right"
         bg={
           <>
-            <Ripple at={{ x: 0, y: 0.55 }} atSm={{ x: 0, y: 0.72 }} family="peach" core={0.12} widths={[0.11, 0.06, 0.07, 0.08]} fan={{ count: 10, from: -86, to: 86 }} scaleSm={1.3} />
-            <Ripple at={{ x: 1, y: 0 }} family="leaf" core={0.035} widths={[0.03, 0.03]} bands={2} />
+            <Ripple at={{ x: 1, y: 0.56 }} atSm={{ x: 0.5, y: 0.84 }} family="peach" core={0.07} widths={[0.075, 0.055, 0.055, 0.06]} bands={3} scaleSm={1.05} />
+            <Ripple at={{ x: 0, y: 0 }} family="leafPale" core={0.035} widths={[0.03]} bands={1} />
             <HalfDisc at={{ x: 0.62, y: 1 }} r={0.028} edge="bottom" fill="#F5C335" hideSm />
           </>
         }
-        person={{ src: "/people/poses/nicholas-previtali--pose-alt.webp", alt: p.hero.presenterAlt, height: "h-[130%] lg:h-[100%]", sink: "translate-y-[33%]" }} />
+        mascot={{ src: "/mascot/mascot-04-idea-pointing.webp", alt: "Mascotte SUN-FAI che presenta una notizia", centeredInRipple: true }} />
 
       <SectionPanel data-section="articoli" tone="paper" preset="corner" family="leaf" inner={false}>
         <div className="container-x relative z-[2] py-[clamp(48px,6vw,88px)]">
