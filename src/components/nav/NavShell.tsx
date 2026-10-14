@@ -207,10 +207,7 @@ function Logo({ locale, t, onClick, className }: { locale: Locale; t: NavLabels;
 
   return (
     <Link href={href} aria-label={t.logoAria} onClick={goHome} data-returning={returning} className={cn("sf-home-logo relative inline-flex min-h-11 shrink-0 items-center", className)}>
-      <span className="sf-logo-standard"><Img src="/brand/sunfai-logo.png" alt="" sizes="200px" priority className="h-[30px] w-auto md:h-[34px] lg:h-[38px] xl:h-[42px] 2xl:h-[46px]" /></span>
-      <span className="sf-logo-autumn" aria-hidden="true">
-        <Img src="/brand/sunfai-logo-autunno.png" alt="" sizes="80px" className="h-[34px] w-auto md:h-[38px] lg:h-[42px] xl:h-[46px] 2xl:h-[50px]" draggable={false} />
-      </span>
+      <Img src="/brand/sunfai-logo.png" alt="" sizes="200px" priority className="h-[30px] w-auto md:h-[34px] lg:h-[38px] xl:h-[42px] 2xl:h-[46px]" />
     </Link>
   );
 }
