@@ -4,6 +4,7 @@
 @source not "../../reports";
 @import "../styles/tokens.css";
 @import "../styles/mobile.css" layer(components);
+@import "../styles/autumn-preview.css";
 
 /* =====================================================================
    SUN-FAI V2 — site layer on top of tokens.css (pack 01) and mobile.css (pack 15).

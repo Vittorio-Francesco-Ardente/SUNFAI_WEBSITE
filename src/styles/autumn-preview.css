@@ -1,0 +1,270 @@
+/* ===========================================================================
+ * SUN-FAI · Autunno — opt-in preview, never active without a visitor selection.
+ * Warm, restrained palette; existing photographic people, text and mascot stay.
+ * Scoped to html[data-sf-theme="autumn"] to preserve the official standard site.
+ * =========================================================================== */
+
+html[data-sf-theme="autumn"] {
+  --color-paper: #FBF6EC;
+  --color-paper-2: #F1EADD;
+  --color-card: #FFFCF7;
+  --color-card-warm: #FFF9EF;
+  --color-hairline: rgb(52 60 43 / .10);
+  --color-ink: #23392F;
+  --color-ink-900: #23382D;
+  --color-slate: #56645B;
+  --color-slate-400: #768078;
+  --color-orange: #C15A33;
+  --color-orange-text: #AB4927;
+  --color-orange-btn: #B84D28;
+  --color-dot: #DFA73B;
+  --color-solar: #E6BD70;
+  --color-yellow: #DDB45C;
+  --color-sage: #BFCBA7;
+  --color-sage-light: #E1E7D5;
+  --color-leaf: #798653;
+  --color-leaf-text: #526D39;
+  --color-leaf-display: #5B7441;
+  --color-orange-geo: #B9683C;
+  --color-orange-soft: #D68F60;
+  --color-peach: #E9CDBA;
+  --color-peach-light: #F1E1D1;
+  --color-mint: #EEF0E4;
+  --color-cream: #F9F0DE;
+  --color-pill: #EBECDC;
+  --color-dock: #FFFAF1;
+  --color-dock-item: #F2EBDD;
+  --color-dock-item-hover: #E8E0D0;
+  --color-floor: #ECEEDE;
+  --theme-sun: #CC752F;
+  --theme-ray-a: #75824C;
+  --theme-ray-b: #BCC7A3;
+  --theme-ground: #E5B748;
+  --accent-display: #C15A33;
+  --accent-text: #AB4927;
+  --cta-bg: #B84D28;
+  --cta-bg-small: #B84D28;
+  --cta-bg-hover: #963D21;
+  --tint-soft: #EDF0E2;
+  --tint-warm: #F8EDDA;
+  --focus-ring: #AB4927;
+  --geo-solar: #E6BD70;
+  --geo-yellow: #DDB45C;
+  --geo-sage: #BFCBA7;
+  --geo-leaf: #798653;
+  --geo-orange: #B9683C;
+  --geo-orange-soft: #D68F60;
+  --geo-peach: #E9CDBA;
+  --geo-mint: #EEF0E4;
+  --geo-cream: #F9F0DE;
+  --geo-sage-light: #E1E7D5;
+  --geo-green: #5E7346;
+  --shadow-soft: 0 1px 2px rgb(36 55 44 / .04), 0 12px 27px -21px rgb(36 55 44 / .22);
+  --shadow-lift: 0 2px 4px rgb(36 55 44 / .05), 0 24px 46px -30px rgb(36 55 44 / .30);
+}
+
+/* React's CanvasPanel assigns --panel-bg inline; override the visual surface,
+   not the component's geometry or content. Existing people stay unchanged. */
+html[data-sf-theme="autumn"] .canvas-panel[data-tone="paper"] {
+  background: #FBF6EC !important;
+}
+html[data-sf-theme="autumn"] .canvas-panel[data-tone="cream"] {
+  background: #FAF0DC !important;
+}
+html[data-sf-theme="autumn"] .canvas-panel[data-tone="mint"] {
+  background: #EDF0E3 !important;
+}
+html[data-sf-theme="autumn"] .canvas-panel[data-tone="peach"] {
+  background: #F6E4D4 !important;
+}
+html[data-sf-theme="autumn"] .canvas-panel[data-tone="solar"] {
+  background: #E9C67F !important;
+}
+html[data-sf-theme="autumn"] .canvas-panel[data-tone="leafDeep"] {
+  background: #587044 !important;
+}
+
+/* Geometric SVG backdrops are already rendered in the site. A modest seasonal
+   tint and 8% quieter presence soften the palette without hiding illustrations. */
+html[data-sf-theme="autumn"] .canvas-panel .cp-bg .rp,
+html[data-sf-theme="autumn"] .canvas-panel .cp-bg .rp-abs {
+  filter: sepia(.22) saturate(.76) hue-rotate(-12deg);
+  opacity: .92;
+}
+html[data-sf-theme="autumn"] .canvas-panel .rp-fan {
+  opacity: .92;
+}
+html[data-sf-theme="autumn"] .sf-events-home-art,
+html[data-sf-theme="autumn"] .sf-events-page-art {
+  filter: sepia(.18) saturate(.84) hue-rotate(-10deg);
+}
+html[data-sf-theme="autumn"] .sf-events-home-feature {
+  background: #FFFAF3;
+}
+html[data-sf-theme="autumn"] .sf-events-home-kicker {
+  color: #5C7440;
+}
+html[data-sf-theme="autumn"] .sf-events-home-visual::before {
+  background: #F0DFB7;
+}
+html[data-sf-theme="autumn"] .sf-events-page-portrait::before {
+  background: #DCE5CD;
+}
+html[data-sf-theme="autumn"] .accent--solar {
+  color: #987023;
+}
+html[data-sf-theme="autumn"] .tlink {
+  --tlink-line: #798653;
+}
+html[data-sf-theme="autumn"] .eyebrow--leaf::before {
+  background: #798653;
+}
+html[data-sf-theme="autumn"] .btn--primary,
+html[data-sf-theme="autumn"] .btn--sm.btn--primary {
+  background: #B84D28;
+  color: #fff;
+}
+@media (hover: hover) and (pointer: fine) {
+  html[data-sf-theme="autumn"] .btn--primary:hover,
+  html[data-sf-theme="autumn"] .btn--sm.btn--primary:hover {
+    background: #963D21;
+  }
+}
+
+/* Logo swap is scoped to autumn. Standard remains byte-for-byte the same asset. */
+.sf-logo-current { display: inline-flex; align-items: center; }
+.sf-logo-autumn { display: none; }
+html[data-sf-theme="autumn"] .sf-logo-current { display: none; }
+html[data-sf-theme="autumn"] .sf-logo-autumn {
+  display: inline-flex;
+  align-items: center;
+  gap: clamp(4px, .45vw, 7px);
+  white-space: nowrap;
+  line-height: 1;
+}
+.sf-logo-autumn > img {
+  display: block;
+  height: clamp(35px, 3.15vw, 46px);
+  width: auto;
+  max-width: none;
+  object-fit: contain;
+}
+.sf-logo-autumn > span {
+  font-family: var(--font-display);
+  font-size: clamp(15px, 1.25vw, 22px);
+  font-weight: 850;
+  letter-spacing: -.055em;
+  color: #A94324;
+}
+@media (max-width: 767.98px) {
+  .sf-logo-autumn > img { height: 36px; }
+  .sf-logo-autumn > span { font-size: 16px; }
+}
+
+/* The selector stays outside navigation logic to protect responsive nav/dock. */
+.sf-theme-preview {
+  position: fixed;
+  right: max(16px, env(safe-area-inset-right, 0px));
+  bottom: calc(18px + var(--safe-b, 0px));
+  z-index: 55;
+  font-family: var(--font-sans);
+}
+.sf-theme-preview-trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  min-height: 46px;
+  min-width: 90px;
+  padding: 10px 14px;
+  border: 1px solid rgb(35 57 47 / .17);
+  border-radius: 999px;
+  color: #23392F;
+  background: #FFFCF7;
+  font-size: 13px;
+  font-weight: 750;
+  cursor: pointer;
+  box-shadow: 0 3px 12px rgb(35 57 47 / .09);
+}
+.sf-theme-preview-trigger:focus-visible,
+.sf-theme-preview-option:focus-visible,
+.sf-theme-preview-close:focus-visible {
+  outline: 3px solid #B84D28;
+  outline-offset: 3px;
+}
+html[data-sf-theme="autumn"] .sf-theme-preview-trigger {
+  background: #FFF4E5;
+  border-color: rgb(157 91 42 / .28);
+}
+.sf-theme-preview-panel {
+  width: min(288px, calc(100vw - 32px));
+  padding: 16px;
+  margin-bottom: 10px;
+  border: 1px solid rgb(35 57 47 / .14);
+  border-radius: 18px;
+  background: #FFFCF7;
+  color: #23392F;
+  box-shadow: 0 12px 35px rgb(35 57 47 / .15);
+}
+.sf-theme-preview-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 800;
+  font-size: 15px;
+}
+.sf-theme-preview-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  min-height: 32px;
+  padding: 5px;
+  border-radius: 50%;
+  color: #23392F;
+}
+.sf-theme-preview-description {
+  margin: 3px 0 12px;
+  font-size: 12px;
+  line-height: 1.45;
+  color: #56645B;
+}
+.sf-theme-preview-options { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; }
+.sf-theme-preview-option {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 7px;
+  min-height: 43px;
+  padding: 9px;
+  border-radius: 11px;
+  border: 1px solid #D7D8CD;
+  background: #fff;
+  color: #23392F;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.sf-theme-preview-option[aria-pressed="true"] {
+  border-color: #9A4D2A;
+  background: #F5EBDF;
+  box-shadow: inset 0 0 0 1px #9A4D2A;
+}
+.sf-theme-swatch { width: 14px; height: 14px; flex: none; border-radius: 50%; }
+.sf-theme-swatch-standard { background: #F3C300; box-shadow: inset -5px 0 #478A2B; }
+.sf-theme-swatch-autumn { background: #B9653B; box-shadow: inset -5px 0 #75824C; }
+@media (max-width: 767.98px) {
+  .sf-theme-preview { bottom: calc(var(--dock-space, 92px) + 14px); right: 12px; }
+  .sf-theme-preview-trigger { min-width: 46px; height: 46px; padding: 9px; }
+  .sf-theme-preview-trigger span { display: none; }
+}
+@media (max-height: 500px) {
+  .sf-theme-preview-panel { max-height: 63dvh; overflow-y: auto; }
+}
+html[data-sheet-open="true"] .sf-theme-preview,
+html[data-giorgio-open="true"] .sf-theme-preview {
+  display: none !important;
+}
+@media print {
+  .sf-theme-preview { display: none !important; }
+}

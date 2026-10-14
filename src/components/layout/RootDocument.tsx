@@ -5,6 +5,7 @@ import { Footer } from "@/components/layout/Footer";
 import { Loader } from "@/components/loader/Loader";
 import { LOADER_PRECISION_INLINE } from "@/components/loader/loader-precisione-inline";
 import { MotionObserver } from "@/components/layout/MotionObserver";
+import { ThemePreview } from "@/components/theme/ThemePreview";
 import { getDict } from "@/content/dict";
 import { localeMeta, type Locale } from "@/lib/i18n";
 
@@ -46,11 +47,20 @@ const LOADER_ONLY_LOGO = `(function(){
   else hideDecorations();
 })();`;
 
+const THEME_PRELOAD = `(function(){
+  try {
+    var saved = window.localStorage.getItem('sunfai-preview-theme-v1');
+    document.documentElement.dataset.sfTheme = saved === 'autumn' ? 'autumn' : 'standard';
+  } catch (e) {
+    document.documentElement.dataset.sfTheme = 'standard';
+  }
+})();`;
 export function RootDocument({ locale, children }: { locale: Locale; children: ReactNode }) {
   const d = getDict(locale);
   return (
     <html lang={localeMeta[locale].htmlLang} className={`${jakarta.variable} ${inter.variable} ${fredoka.variable}`} suppressHydrationWarning>
       <head>
+        <script dangerouslySetInnerHTML={{ __html: THEME_PRELOAD }} />
         <script dangerouslySetInnerHTML={{ __html: PREFLIGHT }} />
         <script dangerouslySetInnerHTML={{ __html: LOADER_PRECISION_INLINE }} />
         <script dangerouslySetInnerHTML={{ __html: LOADER_ONLY_LOGO }} />
@@ -64,6 +74,7 @@ export function RootDocument({ locale, children }: { locale: Locale; children: R
           {d.common.nav.skip}
         </a>
         <NavShell t={d.common.nav} locale={locale} />
+        <ThemePreview />
         <main id="contenuto" data-sunfai-version="v43-loader-geometrico" tabIndex={-1} className="relative isolate outline-none">
           {children}
         </main>
