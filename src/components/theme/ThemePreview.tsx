@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Leaf, Palette, X } from "lucide-react";
+import { Palette, X } from "lucide-react";
 
 const STORAGE_KEY = "sunfai-preview-theme-v1";
 type Theme = "standard" | "autumn";
@@ -65,14 +65,16 @@ export function ThemePreview() {
             </button>
             <button type="button" aria-pressed={theme === "autumn"} onClick={() => choose("autumn")}
               className="sf-theme-preview-option">
-              <span className="sf-theme-swatch sf-theme-swatch-autumn" aria-hidden="true" /> Autunno
+              <img src="/brand/sunfai-logo-autunno.png" className="sf-theme-preview-mark" alt="" aria-hidden="true" /> Autunno
             </button>
           </div>
         </div>
       )}
       <button type="button" className="sf-theme-preview-trigger" aria-label="Scegli il tema grafico del sito"
         aria-expanded={open} onClick={() => setOpen((old) => !old)}>
-        {theme === "autumn" ? <Leaf size={18} strokeWidth={1.9} aria-hidden="true" /> : <Palette size={18} strokeWidth={1.9} aria-hidden="true" />}
+        {theme === "autumn"
+          ? <img src="/brand/sunfai-logo-autunno.png" className="sf-theme-preview-mark sf-theme-preview-mark--trigger" alt="" aria-hidden="true" />
+          : <Palette size={18} strokeWidth={1.9} aria-hidden="true" />}
         <span>Tema</span>
       </button>
     </div>

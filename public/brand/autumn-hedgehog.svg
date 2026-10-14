@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 250" role="img" aria-labelledby="t d">
+  <title id="t">Riccio autunnale SUN-FAI</title>
+  <desc id="d">Piccolo riccio con foglia autunnale, usato come decorazione del loader.</desc>
+  <g fill="none" fill-rule="evenodd">
+    <ellipse cx="172" cy="145" rx="112" ry="78" fill="#7B4A2B"/>
+    <path d="M82 122c-20-10-36-30-43-57 24 4 45 12 62 24-3-24 1-48 14-69 18 16 31 34 39 56 10-25 28-46 49-60 4 24 1 48-8 70 22-13 46-20 72-21-10 26-24 46-44 61 18 7 34 19 48 37-27 4-50 1-71-7 5 18 6 36 2 55-18-12-32-28-42-47-6 20-16 36-31 50-9-18-14-36-15-56-9 16-24 29-43 39 0-22 4-42 11-61-16 9-34 15-56 16 11-16 26-29 46-40z" fill="#8F5B34"/>
+    <ellipse cx="176" cy="160" rx="96" ry="64" fill="#9A613A"/>
+    <ellipse cx="191" cy="164" rx="82" ry="53" fill="#B97D52"/>
+    <ellipse cx="241" cy="165" rx="56" ry="44" fill="#F6E6CF"/>
+    <ellipse cx="261" cy="159" rx="18" ry="16" fill="#FBEFE1"/>
+    <circle cx="248" cy="153" r="5.5" fill="#203127"/>
+    <circle cx="248" cy="153" r="2.2" fill="#fff" opacity=".8"/>
+    <circle cx="274" cy="168" r="4.7" fill="#513526"/>
+    <path d="M258 175c5 5 13 5 18 0" stroke="#7A4D39" stroke-width="4" stroke-linecap="round"/>
+    <path d="M212 211c12 0 21 7 27 19" stroke="#6F442A" stroke-width="7" stroke-linecap="round"/>
+    <path d="M165 209c10 1 17 8 21 18" stroke="#6F442A" stroke-width="7" stroke-linecap="round"/>
+    <path d="M221 122c11-14 25-19 43-14-8 18-21 29-40 34" fill="#D96B22"/>
+    <path d="M221 122c12-11 25-16 40-12-8 16-20 26-38 31" fill="#F08A2B"/>
+    <path d="M234 113c-4 14-6 26-6 38" stroke="#F8D86B" stroke-width="4" stroke-linecap="round"/>
+    <path d="M245 118c-8 13-14 24-20 35" stroke="#F8D86B" stroke-width="3.4" stroke-linecap="round" opacity=".75"/>
+    <path d="M129 93l16-25M150 84l19-38M177 83l7-43M200 88l18-40M100 104 88 80" stroke="#6A3F23" stroke-width="10" stroke-linecap="round"/>
+    <ellipse cx="159" cy="230" rx="74" ry="9" fill="#D9C7AB" opacity=".75"/>
+    <path d="M188 146c12 10 27 10 38 0" stroke="#C48C63" stroke-width="4" stroke-linecap="round" opacity=".55"/>
+  </g>
+</svg>

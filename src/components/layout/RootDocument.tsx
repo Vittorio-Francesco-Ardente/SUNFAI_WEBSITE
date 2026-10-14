@@ -6,6 +6,7 @@ import { Loader } from "@/components/loader/Loader";
 import { LOADER_PRECISION_INLINE } from "@/components/loader/loader-precisione-inline";
 import { MotionObserver } from "@/components/layout/MotionObserver";
 import { ThemePreview } from "@/components/theme/ThemePreview";
+import { AutumnLoaderBridge } from "@/components/theme/AutumnLoaderBridge";
 import { getDict } from "@/content/dict";
 import { localeMeta, type Locale } from "@/lib/i18n";
 
@@ -75,6 +76,7 @@ export function RootDocument({ locale, children }: { locale: Locale; children: R
         </a>
         <NavShell t={d.common.nav} locale={locale} />
         <ThemePreview />
+        <AutumnLoaderBridge />
         <main id="contenuto" data-sunfai-version="v43-loader-geometrico" tabIndex={-1} className="relative isolate outline-none">
           {children}
         </main>
