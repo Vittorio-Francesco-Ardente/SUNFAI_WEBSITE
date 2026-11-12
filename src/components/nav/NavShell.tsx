@@ -661,6 +661,7 @@ function MenuSheet({ t, locale, pathname, items, open, onClose }: { t: NavLabels
   const eventLink: Item = { key: "eventi", href: "/eventi/", label: locale === "lmo" ? "Evèncc" : "Eventi", icon: Newspaper };
   const links = [items.home, ...items.main.slice(0, -1), eventLink, items.main[items.main.length - 1]];
 
+  const pill = "inline-flex min-h-11 items-center rounded-full px-4 text-[14px] font-semibold text-white shadow-[inset_0_0_0_1.5px_rgb(255_255_255/.35)] transition-colors hover:bg-white hover:text-ink";
   return (
     <AnimatePresence>
       {open ? (
@@ -671,74 +672,78 @@ function MenuSheet({ t, locale, pathname, items, open, onClose }: { t: NavLabels
           aria-modal="true"
           aria-label={t.menu}
           data-menu-sheet
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 24 }}
-          transition={{ duration: 0.26, ease: EASE_OUT_SOFT }}
-          className="h-sheet fixed inset-0 z-[60] flex flex-col overflow-hidden bg-paper pb-[var(--safe-b)] pt-[var(--safe-t)]"
+          initial={{ clipPath: "circle(0px at calc(100% - 44px) 44px)" }}
+          animate={{ clipPath: "circle(150% at calc(100% - 44px) 44px)" }}
+          exit={{ clipPath: "circle(0px at calc(100% - 44px) 44px)", transition: { duration: 0.35, ease: EASE_OUT_SOFT } }}
+          transition={{ duration: 0.6, ease: [0.76, 0, 0.24, 1] }}
+          className="h-sheet fixed inset-0 z-[60] flex flex-col overflow-hidden bg-ink pb-[var(--safe-b)] pt-[var(--safe-t)] text-white"
         >
           <CornerSunrise className="pointer-events-none absolute -bottom-10 -right-14 w-[min(62vw,380px)] opacity-90" />
           <div className="container-x flex h-[var(--topbar-h)] shrink-0 items-center justify-between">
-            <Logo locale={locale} t={t} onClick={onClose} />
+            <span className="rounded-full bg-paper px-3 py-1.5">
+              <Logo locale={locale} t={t} onClick={onClose} />
+            </span>
             <button ref={closeRef} type="button" onClick={onClose} className="paper-round" aria-label={t.chiudi}>
               <X aria-hidden strokeWidth={2.2} />
             </button>
           </div>
-          <nav aria-label={t.navFull} className="container-x relative flex-1 overflow-y-auto overscroll-contain pb-10">
-            <ul className="divide-y divide-ink/10 border-y border-ink/10">
+          <nav aria-label={t.navFull} className="container-x relative flex-1 overflow-y-auto overscroll-contain pb-10 lg:grid lg:grid-cols-12 lg:gap-12 lg:overflow-hidden lg:pt-6">
+            <ul className="lg:col-span-7">
               {links.map((it, i) => {
                 const active = isActive(pathname, it.href);
                 return (
-                  <motion.li key={it.key} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.04 + Math.min(i, 3) * 0.04, duration: 0.3 }}>
+                  <motion.li key={it.key} initial={{ opacity: 0, y: 28 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.25 + i * 0.045, duration: 0.45, ease: EASE_OUT_SOFT }} className="overflow-hidden">
                     <Link
                       href={lhref(locale, it.href)}
                       onClick={onClose}
                       aria-label={it.key === "ardake" ? "Ardaké" : undefined}
                       aria-current={active ? "page" : undefined}
                       className={cn(
-                        "flex min-h-[56px] items-center justify-between py-2 font-display text-[clamp(1.6rem,1.2rem+2vw,2.1rem)] font-extrabold tracking-[-0.035em]",
-                        active ? "text-orange-text" : "text-ink",
+                        "group flex min-h-[52px] items-center gap-4 py-1 font-display text-[clamp(1.9rem,1rem+4.2vw,3.4rem)] font-extrabold uppercase leading-[1.04] tracking-[-0.03em] transition-[transform,color] duration-300 hover:translate-x-2",
+                        active ? "text-[#FE9845]" : "text-white hover:text-[#FDEFC4]",
                         it.key === "ardake" && "sf-ardake-link",
                       )}
                     >
-                      {it.key === "ardake" ? <ArdakeNavMark size="menu" /> : it.label}
-                      <ArrowRight className="size-6 text-ink/30" aria-hidden />
+                      {it.key === "ardake" ? <span className="rounded-full bg-paper px-3 py-1"><ArdakeNavMark size="menu" /></span> : it.label}
+                      <ArrowRight className="size-7 -translate-x-2 text-[#FE9845] opacity-0 transition-[opacity,transform] duration-300 group-hover:translate-x-0 group-hover:opacity-100" aria-hidden />
                     </Link>
                   </motion.li>
                 );
               })}
             </ul>
-            <div className="mt-8 grid gap-3">
-              <Link href={lhref(locale, items.join.href)} onClick={onClose} className="btn btn--primary btn--lg btn--block">
-                {t.diventaSocio}
-                <ArrowRight aria-hidden strokeWidth={2.2} />
-              </Link>
-              <Link href={lhref(locale, items.contact.href)} onClick={onClose} className="btn btn--outline btn--md btn--block">
-                {t.contattaci}
-              </Link>
-            </div>
-            <div className="mt-8">
-              <p className="mb-3 text-[13px] font-semibold uppercase tracking-[0.12em] text-slate">{t.language}</p>
-              <LangSwitch locale={locale} pathname={pathname} t={t} variant="large" />
-            </div>
-            <div className="relative mt-8 grid max-w-[60%] gap-2 text-[15px] text-slate">
-              <p className="text-[13px] font-semibold uppercase tracking-[0.12em]">{t.sheetContacts}</p>
-              <p>
-                {site.address.street}, {site.address.postalCode} {site.address.city} ({site.address.province})
-              </p>
-              <a href={`mailto:${site.email}`} className="inline-flex min-h-11 items-center font-semibold text-ink underline decoration-leaf decoration-2 underline-offset-4">
-                {site.email}
-              </a>
-              <div className="mt-1 flex gap-3">
-                <a href={social.instagram.url} target="_blank" rel="noopener noreferrer" aria-label={social.instagram.label} className="paper-round">
-                  <InstagramIcon className="size-5" />
+            <div className="mt-8 lg:col-span-5 lg:mt-0 lg:flex lg:flex-col lg:justify-end lg:pb-6">
+              <div className="grid gap-3 sm:max-w-sm">
+                <Link href={lhref(locale, items.join.href)} onClick={onClose} className="btn btn--primary btn--lg btn--block">
+                  {t.diventaSocio}
+                  <ArrowRight aria-hidden strokeWidth={2.2} />
+                </Link>
+                <Link href={lhref(locale, items.contact.href)} onClick={onClose} className={cn(pill, "justify-center")}>
+                  {t.contattaci}
+                </Link>
+              </div>
+              <div className="mt-8">
+                <p className="mb-3 text-[13px] font-semibold uppercase tracking-[0.12em] text-white/60">{t.language}</p>
+                <LangSwitch locale={locale} pathname={pathname} t={t} variant="large" />
+              </div>
+              <div className="relative mt-8 grid max-w-[70%] gap-2 text-[15px] text-white/70">
+                <p className="text-[13px] font-semibold uppercase tracking-[0.12em] text-white/60">{t.sheetContacts}</p>
+                <p>
+                  {site.address.street}, {site.address.postalCode} {site.address.city} ({site.address.province})
+                </p>
+                <a href={`mailto:${site.email}`} className="inline-flex min-h-11 items-center font-semibold text-white underline decoration-[#FE9845] decoration-2 underline-offset-4">
+                  {site.email}
                 </a>
-                <a href={social.linkedin.url} target="_blank" rel="noopener noreferrer" aria-label={social.linkedin.label} className="paper-round">
-                  <LinkedinIcon className="size-[18px]" />
-                </a>
-                <a href={social.facebook.url} target="_blank" rel="noopener noreferrer" aria-label={social.facebook.label} className="paper-round">
-                  <FacebookIcon className="size-[18px]" />
-                </a>
+                <div className="mt-1 flex gap-3">
+                  <a href={social.instagram.url} target="_blank" rel="noopener noreferrer" aria-label={social.instagram.label} className="paper-round">
+                    <InstagramIcon className="size-5" />
+                  </a>
+                  <a href={social.linkedin.url} target="_blank" rel="noopener noreferrer" aria-label={social.linkedin.label} className="paper-round">
+                    <LinkedinIcon className="size-[18px]" />
+                  </a>
+                  <a href={social.facebook.url} target="_blank" rel="noopener noreferrer" aria-label={social.facebook.label} className="paper-round">
+                    <FacebookIcon className="size-[18px]" />
+                  </a>
+                </div>
               </div>
             </div>
           </nav>

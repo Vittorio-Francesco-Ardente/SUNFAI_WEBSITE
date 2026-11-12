@@ -9,7 +9,7 @@ import { Img } from "@/components/ui/Img";
 import { Badge } from "@/components/geometry/shapes";
 import { FacebookIcon, InstagramIcon, LinkedinIcon } from "@/components/ui/SocialIcons";
 import { SectionPanel } from "@/components/canvas/presets";
-import { CanvasPanel, HalfDisc, Person, Ripple } from "@/components/canvas/Canvas";
+import { CanvasPanel, HalfDisc, PanelMascot, Ripple } from "@/components/canvas/Canvas";
 import { ContactForm } from "@/components/sections/ContactForm";
 
 export const contattiMeta = (locale: Locale) => {
@@ -56,7 +56,7 @@ export function ContattiPage({ locale }: { locale: Locale }) {
           </div>
         </div>
         <div className="cp-stage relative lg:static" style={{ ["--sm-h" as string]: "clamp(320px, 96cqw, 480px)" }}>
-          <Person src="/people/simone-mazzoleni.webp" alt={d.common.ui.personAlt.replace("{name}", "Simone Mazzoleni")} sizes="(max-width: 1023px) 90vw, 30vw" className="left-1/2 h-[125%] -translate-x-1/2 translate-y-[22%] lg:left-auto lg:right-[0%] lg:h-[82%] lg:translate-x-0" />
+          <PanelMascot src="/mascot/mascot-09-waving-wink.webp" alt="" sizes="(max-width: 1023px) 60vw, 28vw" className="bottom-[3%] left-1/2 w-[min(62%,300px)] -translate-x-1/2 lg:bottom-[5%] lg:left-auto lg:right-[4%] lg:w-[clamp(260px,24cqw,380px)] lg:translate-x-0" />
         </div>
       </CanvasPanel>
 

@@ -1,5 +1,4 @@
-import { ButtonLink, Eyebrow, Headline, TextLink } from "@/components/ui/primitives";
-import { Mascot } from "@/components/people/Mascot";
+import { ButtonLink, Headline, TextLink } from "@/components/ui/primitives";
 import { Img } from "@/components/ui/Img";
 import { CanvasPanel, HalfDisc, Ripple } from "@/components/canvas/Canvas";
 import type { Locale } from "@/lib/i18n";
@@ -12,7 +11,7 @@ const SCENES = ["/scenes/scene-02-consulenza-impianto-solare.webp", "/scenes/sce
  * top-right corner (clipped by the panel radius) behind the waving mascot + speech bubble, pale sun bottom-left,
  * 3 white Memphis cards with numbered steps, dark CTA + text link. NO cursive note, NO doodled arrow.
  */
-export function TrePassaggi({ d, locale, mascotAlt }: { d: Dict["home"]["passaggi"]; locale: Locale; mascotAlt: string }) {
+export function TrePassaggi({ d, locale }: { d: Dict["home"]["passaggi"]; locale: Locale; mascotAlt?: string }) {
   return (
     <CanvasPanel
       tone="mint"
@@ -28,15 +27,11 @@ export function TrePassaggi({ d, locale, mascotAlt }: { d: Dict["home"]["passagg
       }
     >
         <div className="relative mx-auto max-w-[var(--container)]">
-          <div className="grid gap-8 lg:grid-cols-12 lg:items-end">
-            <div className="reveal lg:col-span-6">
-              <Eyebrow tone="leaf">{d.eyebrow}</Eyebrow>
-              <Headline text={d.title} tone="leaf" className="mt-5" />
+          <div className="grid gap-6 lg:grid-cols-12 lg:items-end">
+            <div className="reveal lg:col-span-7">
+              <Headline text={d.title} tone="leaf" />
             </div>
-            <div className="reveal flex items-center justify-between gap-3 lg:col-span-6 lg:justify-end">
-              <p className="speech speech--tail-right max-w-[17rem] !text-[15px] sm:max-w-[19rem] sm:!text-[16px]">{d.bubble}</p>
-              <Mascot pose="09-waving-wink" alt={mascotAlt} className="w-[96px] shrink-0 sm:w-[140px] md:w-[170px]" />
-            </div>
+            <p className="reveal t-lead max-w-[28rem] lg:col-span-5 lg:justify-self-end">{d.bubble}</p>
           </div>
 
           <ol className="rail rail--to-grid mt-10 pb-1 [--rail-item:86%] md:gap-5 lg:mt-12" style={{ ["--cols" as string]: 3 }}>

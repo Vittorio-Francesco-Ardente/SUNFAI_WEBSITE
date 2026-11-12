@@ -2,8 +2,7 @@ import { BarChart3, Clock3, Leaf, Scale } from "lucide-react";
 import { ButtonLink, Eyebrow, TextLink } from "@/components/ui/primitives";
 import { PrecisioneTitle } from "@/components/ardake/PrecisioneTitle";
 import { PhoneMockup } from "@/components/ardake/PhoneMockup";
-import { CanvasPanel, PanelPerson, Ripple } from "@/components/canvas/Canvas";
-import { presenters } from "@/content/team";
+import { CanvasPanel, PanelMascot, Ripple } from "@/components/canvas/Canvas";
 import { Img } from "@/components/ui/Img";
 import type { Locale } from "@/lib/i18n";
 import type { Dict } from "@/content/dict";
@@ -76,15 +75,10 @@ export function ArdakeHome({ d, phone, phoneAlt, replay, locale }: { d: Dict["ho
         <div className="absolute left-[14%] top-[5%] z-[1] w-[270px] origin-top-left -rotate-[5deg] scale-[.66] min-[400px]:left-[16%] min-[400px]:scale-[.73] sm:left-[17%] sm:scale-[.82]">
           <PhoneMockup t={phone} label={phoneAlt} variant="dashboard" />
         </div>
-        <Img src={presenters.giorgioPalmUp} alt={d.giorgioAlt} draggable={false} sizes="(max-width: 639px) 58vw, 46vw" className="pointer-events-none absolute bottom-0 right-[-2%] z-[2] h-[75%] w-auto max-w-none object-contain object-bottom sm:right-[0%] sm:h-[78%]" />
+        <PanelMascot src="/mascot/mascot-04-idea-pointing.webp" alt="" sizes="(max-width: 639px) 46vw, 30vw" className="bottom-0 right-[2%] z-[2] w-[clamp(150px,44cqw,240px)] lg:hidden" />
       </div>
       <div className="hidden lg:contents">
-        <PanelPerson
-          src={presenters.giorgioPalmUp}
-          alt={d.giorgioAlt}
-          sizes="32vw"
-          lgClass="lg:left-auto lg:right-[-3%] lg:h-[min(58%,580px)] xl:right-[0%] xl:h-[min(62%,620px)]"
-        />
+        <PanelMascot src="/mascot/mascot-04-idea-pointing.webp" alt="" sizes="32vw" className="bottom-[3%] right-[3%] w-[clamp(280px,26cqw,420px)]" />
       </div>
     </CanvasPanel>
   );

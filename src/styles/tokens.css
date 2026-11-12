@@ -152,7 +152,10 @@
 .btn { display:inline-flex; align-items:center; justify-content:center; gap:.6em; white-space:nowrap; border-radius:var(--radius-pill);
   font-family:var(--font-sans); font-weight:700; line-height:1; transition: transform .18s var(--ease-out-soft), background-color .18s, box-shadow .18s; }
 .btn svg { flex:none; width:1.1em; height:1.1em; }            /* icons INLINE with the label, never stacked */
+.btn svg { transition: transform .25s var(--ease-out-soft); }
 .btn:hover { transform: translateY(-1px); }
+.btn:hover svg { transform: translateX(3px); }
+.btn:focus-visible { outline:3px solid var(--color-ink); outline-offset:3px; }
 .btn:active { transform: translateY(1px); box-shadow: var(--paper-edge), var(--shadow-paper-pressed); }
 .btn--primary { background:var(--cta-bg); color:#fff; box-shadow: var(--paper-edge), var(--shadow-paper); }
 .btn--primary:hover { background:var(--cta-bg-hover); }
@@ -163,5 +166,5 @@
 .btn--md { height:52px; padding-inline:24px; font-size:17px; }
 .btn--sm { height:44px; padding-inline:18px; font-size:15px; }
 .btn--sm.btn--primary { background:var(--cta-bg-small); }
-@media (prefers-reduced-motion: reduce) { .btn, .btn:hover, .btn:active { transform:none; } }
+@media (prefers-reduced-motion: reduce) { .btn, .btn:hover, .btn:active, .btn:hover svg { transform:none; } }
 }

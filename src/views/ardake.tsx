@@ -9,7 +9,7 @@ import { configurations } from "@/lib/configurations";
 import { hourly, monthly, bestHours } from "@/lib/ardake/demo-data";
 import { ButtonLink, Eyebrow, Headline, TextLink } from "@/components/ui/primitives";
 import { Badge } from "@/components/geometry/shapes";
-import { CanvasPanel, PanelPerson, Person, RayFan, Ripple } from "@/components/canvas/Canvas";
+import { CanvasPanel, MascotSlot, PanelMascot, RayFan, Ripple } from "@/components/canvas/Canvas";
 import { SectionPanel } from "@/components/canvas/presets";
 import { Img } from "@/components/ui/Img";
 import { PhoneMockup } from "@/components/ardake/PhoneMockup";

@@ -48,7 +48,8 @@ export function MemberVisual({
   framing?: "card" | "feature" | "avatar";
   photoComing: string;
 }) {
-  const src = usePose && m.pose ? m.pose : m.photo;
+  void usePose; // faces removed site-wide: always the initials disc
+  const src: string | undefined = undefined;
   const n = backdrop ?? m.backdrop;
   const sink = src ? (SIDE_CUT_SINK[src] ?? 0) : 0;
   const frame = framing === "feature" ? 90 : framing === "avatar" ? 118 : 92;

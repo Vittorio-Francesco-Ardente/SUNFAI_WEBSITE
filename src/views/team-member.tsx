@@ -9,7 +9,7 @@ import { lhref, type Locale } from "@/lib/i18n";
 import { pad2 } from "@/lib/motion";
 import { Eyebrow, GhostNumeral, Headline } from "@/components/ui/primitives";
 import { MemberBackdrop } from "@/components/geometry/shapes";
-import { CanvasPanel, HalfDisc, Person, QuarterDisc, Ripple } from "@/components/canvas/Canvas";
+import { CanvasPanel, HalfDisc, QuarterDisc, Ripple } from "@/components/canvas/Canvas";
 import { Img } from "@/components/ui/Img";
 import { MemberVisual } from "@/components/team/MemberVisual";
 import { SIDE_CUT_SINK } from "@/lib/people";
@@ -49,7 +49,7 @@ export function MemberPage({ locale, slug }: { locale: Locale; slug: string }) {
   const next = toLite(team[(i + 1) % team.length], d, locale);
   const colleagues = team.filter((x) => x.group === raw.group && x.slug !== raw.slug).map((x) => toLite(x, d, locale));
   const g = t.groups[m.group];
-  const big = m.pose ?? m.photo;
+  const big: string | undefined = undefined; // faces removed: initials disc only
   const sink = big ? (SIDE_CUT_SINK[big] ?? 0) : 0;
   const lead = raw.bio ? (locale === "lmo" ? (raw.bio.lmo ?? raw.bio.it) : raw.bio.it) : pr.oneLiner;
   const contactHref = `${lhref(locale, "/contatti/")}?persona=${m.slug}#scrivici`;
@@ -162,14 +162,7 @@ export function MemberPage({ locale, slug }: { locale: Locale; slug: string }) {
           {big ? (
             // non-clipping wrapper: carries the side-cut sink (the person's own transform is used by the entrance)
             <span className="absolute inset-0 [--h:1] lg:[--h:.66] xl:[--h:.7]" style={{ transform: `translateY(calc(var(--h) * ${((sink / (1 - sink)) * 100).toFixed(2)}%))` }}>
-              <Person
-                src={big}
-                alt={d.common.ui.personAlt.replace("{name}", m.name)}
-                priority
-                sizes="(max-width: 1023px) 90vw, 42vw"
-                className="left-1/2 -translate-x-1/2 lg:left-auto lg:right-[3%] lg:translate-x-0"
-                style={{ height: `calc(var(--h) * ${(100 / (1 - sink)).toFixed(2)}%)` }}
-              />
+              null
             </span>
           ) : (
             <span

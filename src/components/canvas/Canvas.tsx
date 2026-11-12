@@ -144,15 +144,6 @@ export function DotGrid({ at, cols = 5, rows = 3, gap = 20, r = 4, fill = "#B9D6
   );
 }
 
-/**
- * A person standing on the panel's bottom edge (16.2): direct child of the panel, bottom 0, never in a clipped box,
- * no opacity/filters/masks, never flipped. Height in % of the panel; responsive classes position it.
- */
-export function Person({ src, alt, className, sizes, priority, style }: { src: string; alt: string; className?: string; sizes: string; priority?: boolean; style?: CSSProperties }) {
-  // data-bleed: a person may extend past the panel edge on purpose — the panel frame is the crop (QA allow-list)
-  return <span data-bleed className="contents"><Img src={src} alt={alt} sizes={sizes} priority={priority} draggable={false} className={cn("cp-person", className)} style={style} /></span>;
-}
-
 /** The mascot standing inside a panel (16.3): a character, feet visible, on a ripple. */
 export function PanelMascot({ src, alt, className, sizes = "(max-width: 767px) 200px, 340px", style }: { src: string; alt: string; className?: string; sizes?: string; style?: CSSProperties }) {
   return (
@@ -163,14 +154,18 @@ export function PanelMascot({ src, alt, className, sizes = "(max-width: 767px) 2
 }
 
 /**
- * Person slot for a section presenter: on phones a stage block (height `smH`) at the END of the panel, so the person
- * stands on the panel's bottom edge after the content; from lg the slot is static and the person is positioned on
- * the panel itself (lgClass: side + height in % of the panel, 62–80 % for section presenters).
+ * Mascot slot (replaces the people presenters): on phones a centred stage under the content, from lg the mascot is
+ * placed on the panel itself with `lgClass` (side, bottom, width). `pose` = "02-presenting", "04-idea-pointing"…
  */
-export function PanelPerson({ src, alt, sizes, lgClass, smClass = "left-1/2 h-full -translate-x-1/2", smH = "clamp(300px, 88cqw, 460px)", priority }: { src: string; alt: string; sizes: string; lgClass: string; smClass?: string; smH?: string; priority?: boolean }) {
+export function MascotSlot({ pose, alt = "", lgClass, className, phoneWidth = "w-[clamp(170px,50cqw,240px)]" }: { pose: string; alt?: string; lgClass: string; className?: string; phoneWidth?: string }) {
   return (
-    <div className="cp-stage relative lg:static" style={{ "--sm-h": smH } as V}>
-      <Person src={src} alt={alt} sizes={sizes} priority={priority} className={cn(smClass, "lg:translate-x-0", lgClass)} />
+    <div className={cn("relative z-[1] flex justify-center px-4 pb-7 pt-2 lg:static lg:block lg:p-0", className)}>
+      <PanelMascot
+        src={`/mascot/mascot-${pose}.webp`}
+        alt={alt}
+        sizes="(max-width: 1023px) 240px, 360px"
+        className={cn("!relative lg:!absolute", phoneWidth, lgClass)}
+      />
     </div>
   );
 }

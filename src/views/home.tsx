@@ -52,7 +52,7 @@ export function HomePage({ locale }: { locale: Locale }) {
             </div>
             <div className="sf-events-home-visual" aria-label="Mascotte SUN-FAI presenta gli incontri">
               <Img src="/events/sunfai-home-events-art-v44.svg" alt="" aria-hidden={true} sizes="(max-width: 767px) 100vw, 48vw" className="sf-events-home-art" draggable={false} />
-              <Img src="/mascot/mascot-02-presenting.webp" alt="Mascotte SUN-FAI che presenta gli incontri sul territorio" sizes="(max-width: 767px) 76vw, (max-width: 1100px) 35vw, 380px" className="sf-events-home-mascot" draggable={false} />
+              <Img src="/mascot/mascot-10-walking-wink.webp" alt="Mascotte SUN-FAI che presenta gli incontri sul territorio" sizes="(max-width: 767px) 76vw, (max-width: 1100px) 35vw, 380px" className="sf-events-home-mascot" draggable={false} />
             </div>
           </div>
           <HomeEvents locale={locale} />

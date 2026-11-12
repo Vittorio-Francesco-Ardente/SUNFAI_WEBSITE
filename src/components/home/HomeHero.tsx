@@ -1,7 +1,6 @@
 import type { CSSProperties } from "react";
-import { ButtonLink, Eyebrow, Headline, TextLink } from "@/components/ui/primitives";
-import { CanvasPanel, HalfDisc, Person, QuarterDisc, Ripple } from "@/components/canvas/Canvas";
-import { presenters } from "@/content/team";
+import { ButtonLink, Headline, TextLink } from "@/components/ui/primitives";
+import { CanvasPanel, HalfDisc, PanelMascot, QuarterDisc, Ripple } from "@/components/canvas/Canvas";
 import type { Dict } from "@/content/dict";
 import type { Locale } from "@/lib/i18n";
 
@@ -11,8 +10,7 @@ const FAN13 = ["#4B8B2F", "#B9D68F", "#F5C335", "#4B8B2F", "#FBE39B", "#B9D68F",
  * Home hero, V3 (CONCEPT_5 layout + mockup 01 background). Paper canvas panel that slides under the top bar.
  * Dominant sun ripple centred on the bottom edge at x≈0.72 (core 0.19, 13-ray fan, segmented ring of CONCEPT_5);
  * inverted leaf top-right, peach bottom-left, yellow quarter top-left, the page's only dot grid, 5 confetti.
- * The 3-people group stands on the panel's bottom edge in front of the sun core. Phones: mockup 06 (text first,
- * then the sun rising behind the faces at the bottom of the panel).
+ * The mascot stands in front of the sun core (no faces on the site). Phones: text first, then the sun rising behind it.
  */
 export function HomeHero({ d, locale }: { d: Dict["home"]["hero"]; locale: Locale }) {
   return (
@@ -43,10 +41,7 @@ export function HomeHero({ d, locale }: { d: Dict["home"]["hero"]; locale: Local
     >
       <div className="container-x relative z-[2] pb-8 pt-6 sm:pt-10 lg:flex lg:min-h-[inherit] lg:items-center lg:pb-16 lg:pt-4">
         <div className="lg:w-[52%]">
-          <Eyebrow upper className="enter">
-            {d.eyebrow}
-          </Eyebrow>
-          <Headline text={d.title} as="h1" size="hero" className="is-in mt-5 lg:mt-6" />
+          <Headline text={d.title} as="h1" size="hero" className="is-in" />
           <p className="t-sub enter mt-3 lg:mt-4" style={{ "--d": "360ms" } as CSSProperties}>
             {d.sub}
           </p>
@@ -64,14 +59,13 @@ export function HomeHero({ d, locale }: { d: Dict["home"]["hero"]; locale: Local
         </div>
       </div>
 
-      {/* phones: the stage is a block after the text, the group stands on the panel's bottom edge */}
-      <div className="relative h-[clamp(340px,100cqw,600px)] lg:static lg:h-auto" aria-hidden={false}>
-        <Person
-          src={presenters.homeHero}
-          alt={d.peopleAlt}
-          priority
-          sizes="(max-width: 1023px) 110vw, 56vw"
-          className="left-1/2 w-[112%] -translate-x-1/2 sm:w-[92%] md:w-[78%] lg:left-[76%] lg:w-[55%]"
+      {/* the mascot stands on the sun: phones = a stage after the text, desktop = on the panel */}
+      <div className="relative h-[clamp(280px,80cqw,520px)] lg:static lg:h-auto">
+        <PanelMascot
+          src="/mascot/mascot-02-presenting.webp"
+          alt=""
+          sizes="(max-width: 1023px) 70vw, 34vw"
+          className="bottom-[4%] left-1/2 w-[min(70%,340px)] -translate-x-1/2 lg:bottom-[5%] lg:left-[78%] lg:w-[clamp(300px,30cqw,470px)]"
         />
       </div>
     </CanvasPanel>

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { ButtonLink, Eyebrow, Headline, TextLink } from "@/components/ui/primitives";
-import { CanvasPanel, HalfDisc, PanelPerson, Ripple } from "@/components/canvas/Canvas";
+import { ButtonLink, Headline, TextLink } from "@/components/ui/primitives";
+import { CanvasPanel, HalfDisc, MascotSlot, Ripple } from "@/components/canvas/Canvas";
 import { Img } from "@/components/ui/Img";
 import { lhref, type Locale } from "@/lib/i18n";
 import type { Dict } from "@/content/dict";
@@ -15,7 +15,7 @@ const SCENES = [
 
 /**
  * "Chi siamo · Cosa facciamo", V3 (16.1 map): cream canvas, sun fan ripple on the LEFT edge (y 0.62), peach corner
- * top-right. Beatrice (smile) stands on the panel's bottom edge on the left, in front of the sun core; the text and
+ * top-right. The mascot stands on the panel's left, in front of the sun core; the text and
  * the 4 service rows sit on the right, on the pale area.
  */
 export function About({ d, locale }: { d: Dict["home"]["about"]; locale: Locale }) {
@@ -35,8 +35,7 @@ export function About({ d, locale }: { d: Dict["home"]["about"]; locale: Locale 
     >
       <div className="container-x relative z-[2] py-[clamp(48px,6vw,88px)] lg:grid lg:grid-cols-12">
         <div className="lg:col-span-7 lg:col-start-6">
-          <Eyebrow upper>{d.eyebrow}</Eyebrow>
-          <Headline text={d.title} className="mt-5" />
+          <Headline text={d.title} />
           <p className="t-lead mt-5 max-w-[38rem]">{d.lead}</p>
           <p className="mt-4 max-w-[38rem] font-display text-[1.15rem] font-bold tracking-[-0.02em] text-ink">{d.welcome}</p>
           <ul className="reveal-stagger mt-8 grid gap-3">
@@ -68,12 +67,7 @@ export function About({ d, locale }: { d: Dict["home"]["about"]; locale: Locale 
           </div>
         </div>
       </div>
-      <PanelPerson
-        src="/people/poses/beatrice-parimbelli--pose-smile.webp"
-        alt={d.presenterAlt}
-        sizes="(max-width: 1023px) 90vw, 36vw"
-        lgClass="lg:left-[2.5%] lg:h-[min(74%,700px)]"
-      />
+      <MascotSlot pose="05-thinking-smile" lgClass="lg:bottom-[7%] lg:left-[5%] lg:w-[clamp(250px,25cqw,380px)]" />
     </CanvasPanel>
   );
 }

@@ -87,7 +87,11 @@ export function GiorgioProvider({ g, locale, tour, children }: { g: G; locale: L
 
   const scrollTo = useCallback(
     (el: HTMLElement) => {
-      const top = el.getBoundingClientRect().top + scrollY - Math.max(96, innerHeight * 0.14);
+      // Never yank the page: only move when the target is not already comfortably on screen.
+      const r = el.getBoundingClientRect();
+      const comfy = r.top >= innerHeight * 0.08 && r.top <= innerHeight * 0.55;
+      if (comfy) return;
+      const top = r.top + scrollY - Math.max(96, innerHeight * 0.16);
       window.scrollTo({ top, behavior: reduce ? "auto" : "smooth" });
     },
     [reduce],
@@ -139,18 +143,7 @@ export function GiorgioProvider({ g, locale, tour, children }: { g: G; locale: L
     setS({ mode: "single", step: -1, total: 1, topic: g.topics[topic] as Topic, topicKey: String(topic), side: r && r.left + r.width / 2 > innerWidth / 2 ? "left" : "right", el });
   }, [g]);
 
-  // auto-start once per browser, after the hero has scrolled out (never in ?test, never again once done)
-  useEffect(() => {
-    if (!tour || safeGet(doneKey(tour)) || /[?&]test/.test(location.search)) return;
-    const onScroll = () => {
-      if (scrollY > innerHeight * 0.9) {
-        window.removeEventListener("scroll", onScroll);
-        if (sRef.current.mode === "idle") go(0);
-      }
-    };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, [tour, go]);
+  // No auto-start: the guide only opens when the visitor asks for it (tour button or an "i" dot).
 
   // A single animation-frame update PER SCROLL/RESIZE event. Never re-render React at 60fps.
   useEffect(() => {
@@ -249,7 +242,7 @@ export function GiorgioProvider({ g, locale, tour, children }: { g: G; locale: L
             >
               {!compact ? <span aria-hidden className={phone ? "absolute -bottom-[7px] right-[70px] size-4 rotate-45 bg-card" : "absolute -right-[7px] top-10 size-4 rotate-45 bg-card"} /> : null}
               <div className="mb-1 flex items-center gap-2">
-                {compact ? <Img src={presenters.giorgioGuide} alt="" sizes="42px" className="size-10 shrink-0 rounded-full bg-[#FDEFC4] object-cover object-top" /> : null}
+                {compact ? <Img src="/mascot/mascot-02-presenting.webp" alt="" sizes="42px" className="size-10 shrink-0 rounded-full bg-[#FDEFC4] object-cover object-top" /> : null}
                 <p className={`min-w-0 flex-1 font-semibold text-leaf-text ${compact ? "text-[15px] leading-snug" : "text-[13px]"}`}>{compact ? s.topic!.title : g.eyebrow}</p>
                 {compact && (
                   <button type="button" onClick={() => setMobileMinimized((m) => !m)} aria-label={mobileMinimized ? "Espandi la spiegazione di Giorgio" : "Riduci la spiegazione di Giorgio"} aria-expanded={!mobileMinimized} className="grid size-10 shrink-0 place-items-center rounded-full bg-paper-2 text-ink">
@@ -320,7 +313,7 @@ export function GiorgioProvider({ g, locale, tour, children }: { g: G; locale: L
                 transition={s.mode === "outro" ? { duration: 1.2, delay: 0.3 } : { duration: 0.5 }}
                 key={s.mode === "outro" ? "wave" : s.topicKey}
               >
-                <Img src={presenters.giorgioGuide} alt={g.alt} sizes="(max-width: 767px) 180px, 260px" className="absolute bottom-0 left-1/2 h-full w-auto max-w-none -translate-x-1/2" />
+                <Img src={s.mode === "outro" ? "/mascot/mascot-09-waving-wink.webp" : "/mascot/mascot-04-idea-pointing.webp"} alt={g.alt} sizes="(max-width: 767px) 180px, 260px" className="absolute bottom-0 left-1/2 h-full w-auto max-w-none -translate-x-1/2" />
               </motion.div>
               <span className="absolute inset-x-[4%] bottom-0 h-[34px] rounded-full bg-[#4B8B2F]" />
               <span className="absolute inset-x-[16%] bottom-[10px] h-[10px] rounded-full bg-[#B9D68F]" />

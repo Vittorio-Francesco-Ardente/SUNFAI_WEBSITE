@@ -1,9 +1,8 @@
 import type { CSSProperties } from "react";
 import { ButtonLink, Eyebrow, Headline, TextLink } from "@/components/ui/primitives";
-import { CanvasPanel, Person, RayFan, Ripple } from "@/components/canvas/Canvas";
+import { CanvasPanel, PanelMascot, RayFan, Ripple } from "@/components/canvas/Canvas";
 import { PhoneMockup } from "./PhoneMockup";
 import { InfoDot, TourStart } from "./Giorgio";
-import { presenters } from "@/content/team";
 import type { Locale } from "@/lib/i18n";
 import type { Dict } from "@/content/dict";
 
@@ -69,7 +68,7 @@ export function ArdakeHero({ a, locale }: { a: Dict["ardake"]; locale: Locale })
         >
           <PhoneMockup t={a.phone} label={a.hero.phoneAlt} variant="app" />
         </div>
-        <Person src={presenters.giorgioPalmUp} alt={a.hero.giorgioAlt} priority sizes="(max-width: 1023px) 60vw, 34vw" className="right-[-4%] z-[2] h-[54%] sm:h-[60%] lg:right-[1%] lg:h-[68%]" />
+        <PanelMascot src="/mascot/mascot-04-idea-pointing.webp" alt="" sizes="(max-width: 1023px) 50vw, 26vw" className="bottom-[2%] right-[2%] z-[2] w-[clamp(150px,42cqw,240px)] lg:bottom-[4%] lg:right-[4%] lg:w-[clamp(240px,24cqw,380px)]" />
       </div>
     </CanvasPanel>
   );

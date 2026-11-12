@@ -8,7 +8,7 @@ import { ButtonLink, Eyebrow, Headline, TextLink } from "@/components/ui/primiti
 import { Badge } from "@/components/geometry/shapes";
 import { Img } from "@/components/ui/Img";
 import { SectionPanel } from "@/components/canvas/presets";
-import { HalfDisc, PanelPerson, Ripple } from "@/components/canvas/Canvas";
+import { HalfDisc, MascotSlot, Ripple } from "@/components/canvas/Canvas";
 import { PageHero } from "@/components/sections/PageHero";
 import { PinnedSteps } from "@/components/sections/PinnedSteps";
 import { JoinContact } from "@/components/sections/JoinContact";
@@ -130,7 +130,7 @@ export function CosaFacciamoPage({ locale }: { locale: Locale }) {
             </div>
           </div>
         </div>
-        <PanelPerson src="/people/poses/andrea-zonca--pose-three-quarter.webp" alt={p.comuni.presenterAlt} sizes="(max-width: 1023px) 80vw, 32vw" lgClass="lg:left-auto lg:right-[5%] lg:h-[88%]" />
+        <MascotSlot pose="08-laptop" lgClass="lg:bottom-[6%] lg:right-[6%] lg:w-[clamp(260px,24cqw,380px)]" />
       </SectionPanel>
 
       {/* 05 Produttori · 06 Dati */}

@@ -105,20 +105,12 @@ export function Marked({ text, className }: { text: string; className?: string }
   );
 }
 
-export function Eyebrow({
-  children,
-  upper = false,
-  tone = "orange",
-  className,
-  as: Tag = "p",
-}: {
-  children: ReactNode;
-  upper?: boolean;
-  tone?: "orange" | "leaf";
-  className?: string;
-  as?: Tagname;
-}) {
-  return <Tag className={cn("eyebrow", upper && "eyebrow--upper", tone === "leaf" && "eyebrow--leaf", className)}>{children}</Tag>;
+/**
+ * Retired: a kicker above a heading adds nothing the heading does not already say. Kept as a no-op so every call
+ * site keeps compiling; the label is simply not rendered.
+ */
+export function Eyebrow(_props: { children?: ReactNode; upper?: boolean; tone?: "orange" | "leaf"; className?: string; as?: Tagname }) {
+  return null;
 }
 
 export function GhostNumeral({ n, className }: { n: string; className?: string }) {

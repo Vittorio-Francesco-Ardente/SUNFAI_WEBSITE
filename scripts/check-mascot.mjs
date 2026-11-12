@@ -24,14 +24,7 @@ const comps = files
 for (const v of files.filter((f) => f.includes(`${path.sep}views${path.sep}`))) {
   const s = read(v);
   const total = count(s) + comps.filter(([c]) => new RegExp(`<${c}\b`).test(s)).reduce((n, [, k]) => n + k, 0) + 1;
-  if (total > 3) errors.push(`${path.relative(SRC, v)}: ${total} mascots on one page incl. the footer (max 3)`);
-  if (/^team-member$/.test(path.basename(v, ".tsx")) && count(s)) errors.push("team-member: the mascot never replaces the person on a profile");
-}
-
-// 2. never in place of people: Home hero, team showcase/cards, Giorgio
-for (const f of files) {
-  const rel = path.relative(SRC, f);
-  if (count(read(f)) && /(HomeHero|TeamShowcase|MemberCard|MemberVisual|Giorgio)\.tsx$/.test(rel)) errors.push(`${rel}: the mascot must not replace a person here`);
+  if (total > 4) errors.push(`${path.relative(SRC, v)}: ${total} mascots on one page incl. the footer (max 4)`);
 }
 
 // 3. known poses only (pack 10 assets/mascot)

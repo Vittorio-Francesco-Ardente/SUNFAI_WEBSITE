@@ -359,7 +359,6 @@ html.js:not(.sf-noloader) .hero-scope { --hd: 1550ms; }
     .canvas-panel .rp-fan { transition: rotate .6s var(--ease-out-soft); }
     .canvas-panel:hover .rp-fan { rotate: 2deg; }
   }
-  .cp-mascot { animation: cp-bob 3s ease-in-out infinite; }
 }
 @keyframes rp-in { from { transform: scale(.94); } to { transform: none; } }
 @keyframes rp-fan { from { transform: scale(.72); opacity: 0; } to { transform: none; opacity: 1; } }

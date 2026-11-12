@@ -1,6 +1,6 @@
 import type { CSSProperties, ReactNode } from "react";
-import { Eyebrow, Headline } from "@/components/ui/primitives";
-import { CanvasPanel, PanelMascot, Person } from "@/components/canvas/Canvas";
+import { Headline } from "@/components/ui/primitives";
+import { CanvasPanel, PanelMascot } from "@/components/canvas/Canvas";
 import { CreatorEasterEgg } from "@/components/people/CreatorEasterEgg";
 import type { Tone } from "@/lib/ripples";
 import { cn } from "@/lib/cn";
@@ -42,12 +42,15 @@ export function PageHero({
   className?: string;
 }) {
   const left = side === "left";
+  // No faces on the site: pages that used a presenter now show the mascot, in a pose chosen from the page title.
+  const POSES = ["02-presenting", "04-idea-pointing", "07-surprised-pointing-up", "03-thinking-look-up", "01-open-arms-wink", "05-thinking-smile"];
+  const pick = POSES[[...title].reduce((n, c) => n + c.charCodeAt(0), 0) % POSES.length];
+  const mascotView: { src: string; alt: string; centeredInRipple?: boolean } | undefined = mascot ?? (person ? { src: `/mascot/mascot-${pick}.webp`, alt: "" } : undefined);
   return (
     <CanvasPanel tone={tone} data-section="hero" phoneUnit={1.6} className={cn("hero-scope cp-first flex flex-col lg:block lg:min-h-[min(820px,max(640px,calc(100svh-24px)))]", className)} bg={bg}>
       <div className={cn("container-x relative z-[2] flex pb-6 pt-6 sm:pt-10 lg:min-h-[inherit] lg:items-center lg:pb-16 lg:pt-4", left && "lg:justify-end")}>
         <div className="min-w-0 lg:w-[54%]">
-          <Eyebrow className="enter">{eyebrow}</Eyebrow>
-          <Headline text={title} as="h1" size="h1" className="is-in mt-5 lg:mt-6" />
+          <Headline text={title} as="h1" size="h1" className="is-in" />
           {lead ? (
             <div className="t-lead enter mt-6 max-w-[36rem]" style={{ "--d": "380ms" } as CSSProperties}>
               {lead}
@@ -68,30 +71,18 @@ export function PageHero({
 
       {visual ? <div className={cn("relative z-[1] px-[var(--gutter)] pb-10 lg:absolute lg:inset-y-0 lg:w-[44%] lg:px-0 lg:pb-0", left ? "lg:left-0" : "lg:right-0")}>{visual}</div> : null}
 
-      {person ? (
-        <div className="cp-stage relative lg:static" style={{ "--sm-h": "clamp(320px, 96cqw, 520px)" } as CSSProperties}>
-          <Person
-            src={person.src}
-            alt={person.alt}
-            priority
-            sizes="(max-width: 1023px) 90vw, 40vw"
-            className={cn("left-1/2 h-full -translate-x-1/2 lg:translate-x-0", person.height ?? "lg:h-[86%]", person.sink, left ? "lg:left-[3%]" : "lg:left-auto lg:right-[4%]")}
-          />
-        </div>
-      ) : null}
-
-      {mascot ? (
+      {mascotView ? (
         <div className="cp-stage relative lg:static" style={{ "--sm-h": "clamp(230px, 65cqw, 320px)" } as CSSProperties}>
           {/* The *wrapper* owns centring; the mascot's bob animation cannot override its translateX. */}
           <div className={cn(
             "absolute bottom-[22px] left-1/2 z-[2] -translate-x-1/2",
-            mascot.centeredInRipple
+            mascotView.centeredInRipple
               ? "lg:bottom-auto lg:top-[56%] lg:-translate-y-1/2 lg:left-[76%]"
               : "lg:bottom-[14%] lg:left-[76%]",
-            !mascot.centeredInRipple && left && "lg:left-[24%]",
+            !mascotView.centeredInRipple && left && "lg:left-[24%]",
           )}>
             <CreatorEasterEgg className="block">
-              <PanelMascot src={mascot.src} alt={mascot.alt} className="!relative !bottom-auto !left-auto block w-[clamp(185px,56cqw,250px)] lg:w-[clamp(245px,24cqw,335px)]" />
+              <PanelMascot src={mascotView.src} alt={mascotView.alt} className="!relative !bottom-auto !left-auto block w-[clamp(185px,56cqw,250px)] lg:w-[clamp(245px,24cqw,335px)]" />
             </CreatorEasterEgg>
           </div>
         </div>
