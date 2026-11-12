@@ -430,9 +430,11 @@ html.js:not(.sf-noloader) .hero-scope { --hd: 1550ms; }
 .canvas-panel .cp-person,
 .canvas-panel .rp > path,
 .canvas-panel .rp > .rp-fan { animation: none !important; animation-play-state: running !important; }
-/* A transparent topbar makes page art overlap the logo and controls. Keep it opaque. */
-.topbar { background: var(--color-paper, #faf7f0) !important; backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important; box-shadow: 0 1px 0 var(--color-hairline) !important; }
+/* Header is part of the page (Glamood-style): same paper as the page, no bar, no line, scrolls away with the content.
+   Once it is gone the dock (desktop) / bottom bar (phone) keeps navigation within reach. */
+.topbar { position: relative !important; background: transparent !important; backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important; box-shadow: none !important; border: 0 !important; }
+.topbar > nav { border-top: 0 !important; }
 @media (max-width: 1023.98px) {
   .cp-first { margin-top: 0 !important; padding-top: 0 !important; }
   .enter, .enter-rise, .enter-scale, .enter-seg { animation: none !important; opacity: 1 !important; transform: none !important; }
